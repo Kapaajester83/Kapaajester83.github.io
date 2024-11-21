@@ -111,11 +111,14 @@ table {
 }
 
 a {
-  color: black;
+  color: whitesmoke;
   text-decoration: none;
 }
 
-a:hover,
+a:hover {
+  color: hotpink;
+}
+
 a:active {
   text-decoration: underline;
   color: white;
