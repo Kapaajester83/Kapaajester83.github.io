@@ -1,5 +1,5 @@
 html {
-  background: url("bg1.jpg") no-repeat center center fixed;
+  background: url('bg1.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -87,11 +87,11 @@ body {
 
 h1 {
   display: inline-block;
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Orbitron', sans-serif;
 }
 
 h2 {
-  font-family: "Rock Salt", cursive;
+  font-family: 'Rock Salt', cursive;
   margin: 0 auto;
   text-align: center;
   font-weight: 500;
@@ -99,7 +99,7 @@ h2 {
 
 h3 {
   display: inline-block;
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Orbitron', sans-serif;
 }
 
 img {
