@@ -115,6 +115,14 @@ a {
   text-decoration: none;
 }
 
+a:link {
+  color: whitesmoke;
+}
+
+a:visited {
+  color: wheat;
+}
+
 a:hover {
   color: hotpink;
 }
