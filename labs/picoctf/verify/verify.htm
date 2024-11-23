@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../,,/favicon.ico">
+  <link rel="shortcut icon" href="../../favicon.ico">
+  <title>PicoCTF | Verify</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>PicoCTF Verify</h3>
+
+        <h4>Description</h4>
+
+        <p>
+          People keep trying to trick my players with imitation flags. I want to make sure they get the real thing! I'm going to provide the SHA-256 hash and a decrypt script to help you know that my flags are legitimate.
+        </p>
+
+        <p>
+          sh -p 54653 ctf-player@rhea.picoctf.net Using the password 83dcefb7. Accept the fingerprint with yes, and ls once connected to begin. Remember, in a shell, passwords are hidden!
+        </p>
+
+        <p>
+          Checksum: 467a10447deb3d4e17634cacc2a68ba6c2bb62a6637dad9145ea673bf0be5e02
+        </p>
+
+        <p>To decrypt the file once you've verified the hash, run ./decrypt.sh files/"file".</p>
+
+        <h4>Hints</h4>
+
+        <p>
+          <ol>
+            <li>Checksums let you tell if a file is complete and from the original distributor. If the hash doesn't match, it's a different file.</li>
+
+            <li>You can create a SHA checksum of a file with sha256sum "file" or all files in a directory with sha256sum "directory"/"/directory".
+            </li>
+
+            <li>Remember you can pipe the output of one command to another with |. Try practicing with the 'First Grep' challenge if you're stuck!</li>
+          </ol>
+        </p>
+
+        <h4>Solution</h4>
+
+        <P>picoCTF{trust_but_verify_c6c8b911}</P>
+
+        <h4>CLI</h4>
+
+        <h5>Kappajester83-picoctf@webshell:~$ ssh -p 49936 ctf-player@rhea.picoctf.net<br><br>
+
+          The authenticity of host '[rhea.picoctf.net]:49936 ([3.136.191.228]:49936)' can't be established. ED25519 key fingerprint is SHA256:QKdv+RGJL0UYRDM66IiGQ5dsXOX7DQFqB7umTylh+IU. This key is not known by any other names.
+          Are you sure you want to continue connecting (yes/no/[fingerprint])? yes<br><br>
+
+          Warning: Permanently added '[rhea.picoctf.net]:49936' (ED25519) to the list of known hosts.<br><br>
+
+          ctf-player@rhea.picoctf.net's password:<br>
+
+          Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 6.5.0-1016-aws x86_64)
+          <ul>
+            <li>* Documentation: https://help.ubuntu.com</li>
+            <li>* Management: https://landscape.canonical.com</li>
+            <li>* Support: https://ubuntu.com/advantage</li>
+          </ul>
+          
+          This system has been minimized by removing packages and content that are not required on a system that users do not log into. To restore this content, you can run the 'unminimize' command.<br>
+
+          The programs included with the Ubuntu system are free software; the exact distribution terms for each program are described in the individual files in /usr/share/doc/*/copyright.<br>
+
+          Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+          applicable law.<br><br>
+
+          ctf-player@pico-chall$ cat checksum.txt<br><br>
+
+          467a10447deb3d4e17634cacc2a68ba6c2bb62a6637dad9145ea673bf0be5e02
+          ctf-player@pico-chall$ sha256sum files/*
+          4666cbea94c25fe9c9f3bf5066a8c911d451a9add3edf33cf0dded9877ea74d0 files/047MJYW7
+          48985dcd07f0571bb58e7c1a78ec18ea53a0d867f4d2e1e45adb8b3467b51a73 files/0CbGv6a3<br>
+          ===<br>
+          582c5612f897614bf196d23001fe6bdf164dd456de1ebc30fe70e4b88d6ac154 files/zUmtlpHw
+          9e35308b50fc97b8ee3181c5213a3f1e2526fda5a4fa2bbeeaf21e62e08f5652 files/zjK7vU2n
+          02992978dd1e83db4b24ecb2c9b73ee1e706e468f1639fb84cf1c82bbc081b95 files/zlkIRSOv<br><br>
+
+          ctf-player@pico-chall$ sha256sum files/* | grep <br>
+
+          "467a10447deb3d4e17634cacc2a68ba6c2bb62a6637dad9145ea673bf0be5e02"
+          467a10447deb3d4e17634cacc2a68ba6c2bb62a6637dad9145ea673bf0be5e02 files/c6c8b911<br><br>
+
+          ctf-player@pico-chall$ file files/c6c8b911<br>
+
+          files/c6c8b911: openssl enc'd data with salted password<br><br>
+
+          ctf-player@pico-chall$ ./decrypt.sh files/c6c8b911<br><br>
+
+          picoCTF{trust_but_verify_c6c8b911}</h5>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
