@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>PicoCTF | Information</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>Information</h3><br>
+        <p>
+          <a href="https://play.picoctf.org/practice/challenge/186?page=1&search=infor">https://play.picoctf.org/practice/challenge/186</a>
+        </p>
+
+        <h4>Description</h4>
+        <p>
+          Files can always be changed in a secret way. Can you find the flag? <a href="cat.jpg"><u>cat.jpg</u></a>
+        </p>
+
+        <h4>Hints</h4>
+        <p>
+        <ol>
+          <li>Look at the details of the file</li>
+          <li>Make sure to submit the flag as picoCTF{XXXXX}</li>
+        </ol>
+        </p>
+
+        <h4>Solution</h4>
+        <p>
+          picoCTF{the_m3tadata_1s_modified}
+        </p>
+
+        <h4>CLI</h4>
+        <h5>
+
+          $ man exiftool<br>
+
+          $ wget "https://mercury.picoctf.net/static/7cf6a33f90deeeac5c73407a1bdc99b6/cat.jpg"<br>
+
+          $ exiftool cat.jpg<br><br>
+
+          Licence looks like base64<br><br>
+
+          cGljb0NURnt0aGVfbTN0YWRhdGFfMXNfbW9kaWZpZWR9<br><br>
+
+          <a href="https://www.base64decode.org/">https://www.base64decode.org</a><br><br>
+
+          picoCTF{the_m3tadata_1s_modified}
+        </h5>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
