@@ -1,0 +1,47 @@
+Table of Contents
+
+  Obedient Cat
+  Mod 26
+  Python Wrangling
+
+Python Wrangling
+
+https://play.picoctf.org/practice/challenge/166
+
+Python scripts are invoked kind of like programs in the Terminal... Can you run this Python script using this password to get the flag?
+
+https://mercury.picoctf.net/static/5c4c0cbfbc149f3b0fc55c26f36ee707/ende.py
+
+https://mercury.picoctf.net/static/5c4c0cbfbc149f3b0fc55c26f36ee707/pw.txt
+
+https://mercury.picoctf.net/static/5c4c0cbfbc149f3b0fc55c26f36ee707/flag.txt.en
+
+CLI
+      
+$ wget "https://mercury.picoctf.net/static/5c4c0cbfbc149f3b0fc55c26f36ee707/ende.py"
+
+$ wget "https://mercury.picoctf.net/static/5c4c0cbfbc149f3b0fc55c26f36ee707/pw.txt"
+
+$ wget "https://mercury.picoctf.net/static/5c4c0cbfbc149f3b0fc55c26f36ee707/flag.txt.en"
+
+$ nano ende.py
+
+$ cat pw.txt
+    192ee2db192ee2db192ee2db192ee2db
+        
+$ python ende.py -d flag.txt.en
+    Please enter the password:
+
+picoCTF{4p0110_1n_7h3_h0us3_192ee2db}
+
+Notes
+
+    $ man wget
+    $ man cat
+    $ man python
+    $ man nano
+    
+Links
+
+  https://rot13.com/
+  
