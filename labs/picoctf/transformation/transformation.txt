@@ -1,0 +1,66 @@
+Table of Contents
+
+  Obedient Cat
+  Mod 26
+  Python Wrangling
+  Wave a Flag
+  Information
+  Nice Netcat
+  Transformation
+
+Transformation
+
+https://play.picoctf.org/practice/challenge/104?page=1&search=trans
+
+Description
+
+I wonder what this really is... enc ''.join([chr((ord(flag[i]) << 8) + ord(flag[i + 1])) for i in range(0, len(flag), 2)])
+
+You may find some decoders online
+
+kalijester68-picoctf@webshell:~$ wget https://mercury.picoctf.net/static/77a2b202236aa741e988581e78d277a6/enc
+--2024-04-13 16:38:39--  https://mercury.picoctf.net/static/77a2b202236aa741e988581e78d277a6/enc
+Resolving mercury.picoctf.net (mercury.picoctf.net)... 18.189.209.142
+Connecting to mercury.picoctf.net (mercury.picoctf.net)|18.189.209.142|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 57 [application/octet-stream]
+Saving to: 'enc'
+
+enc                 100%[==================>]      57  --.-KB/s    in 0s      
+
+2024-04-13 16:38:39 (26.0 MB/s) - 'enc' saved [57/57]
+
+kalijester68-picoctf@webshell:~$ ls
+PicoCTF  README.txt  completed  enc
+kalijester68-picoctf@webshell:~$ cat enc
+kalijester68-picoctf@webshell:~$ 
+kalijester68-picoctf@webshell:~$ python
+Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> enc=open("enc").read()
+>>> print(enc[0])
+灩
+>>> for c in enc:
+...     print(hex(ord(c)).lstrip("0x"),end='')
+... 
+7069636f4354467b31365f626974735f696e73743334645f6f665f385f37356434383938627d>>>
+>>> 
+
+Convert Hex to ASCII online
+
+Notes
+
+    $ man wget
+    $ man cat
+    $ man python
+    $ man nano
+    $ man exiftool
+    $ man nc
+
+Links
+
+  https://rot13.com/
+  https://www.base64decode.org/
+  https://www.duplichecker.com/ascii-to-text.php
+  
+  
