@@ -1,0 +1,88 @@
+
+Krypton Level 0 → Level 1
+Level Info
+
+Welcome to Krypton! The first level is easy. The following string encodes the password using Base64:
+
+S1JZUFRPTklTR1JFQVQ=
+
+Use this password to log in to krypton.labs.overthewire.org with username krypton1 using SSH on port 2231. You can find the files for other levels in /krypton/
+
+www.cyberchef.org
+
+KRYPTONISGREAT
+
+---
+Level 1
+
+ssh krypton1@krypton.labs.overthewire.org -p 2231
+Password: KRYPTONISGREAT
+
+krypton1@bandit:~$ alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
+krypton1@bandit:~$ alias rot5="tr '0-9' '5-90-4'"
+krypton1@bandit:~$ alias rot="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"
+
+krypton1@bandit:~$ ls
+krypton1@bandit:~$ ls -la
+total 20
+drwxr-xr-x  2 root root 4096 Oct  5  2023 .
+drwxr-xr-x 70 root root 4096 Oct  5  2023 ..
+-rw-r--r--  1 root root  220 Jan  6  2022 .bash_logout
+-rw-r--r--  1 root root 3771 Jan  6  2022 .bashrc
+-rw-r--r--  1 root root  807 Jan  6  2022 .profile
+
+krypton1@bandit:~$ cd /krypton
+krypton1@bandit:/krypton$ ls -la
+total 32
+drwxr-xr-x  8 root root 4096 Oct  5  2023 .
+drwxr-xr-x 22 root root 4096 Apr 19 01:25 ..
+drwxr-xr-x  2 root root 4096 Oct  5  2023 krypton1
+drwxr-xr-x  2 root root 4096 Oct  5  2023 krypton2
+drwxr-xr-x  2 root root 4096 Oct  5  2023 krypton3
+drwxr-xr-x  2 root root 4096 Oct  5  2023 krypton4
+drwxr-xr-x  2 root root 4096 Oct  5  2023 krypton5
+drwxr-xr-x  3 root root 4096 Oct  5  2023 krypton6
+
+krypton1@bandit:/krypton$ cd krypton1
+krypton1@bandit:/krypton/krypton1$ ls -la
+total 16
+drwxr-xr-x 2 root     root     4096 Oct  5  2023 .
+drwxr-xr-x 8 root     root     4096 Oct  5  2023 ..
+-rw-r----- 1 krypton1 krypton1   26 Oct  5  2023 krypton2
+-rw-r----- 1 krypton1 krypton1  882 Oct  5  2023 README
+
+krypton1@bandit:/krypton/krypton1$ cat README
+Welcome to Krypton!
+
+This game is intended to give hands on experience with cryptography
+and cryptanalysis.  The levels progress from classic ciphers, to modern,
+easy to harder.
+
+Although there are excellent public tools, like cryptool,to perform
+the simple analysis, we strongly encourage you to try and do these
+without them for now.  We will use them in later excercises.
+
+** Please try these levels without cryptool first **
+
+The first level is easy.  The password for level 2 is in the file 
+'krypton2'.  It is 'encrypted' using a simple rotation called ROT13.  
+It is also in non-standard ciphertext format.  When using alpha characters for
+cipher text it is normal to group the letters into 5 letter clusters, 
+regardless of word boundaries.  This helps obfuscate any patterns.
+
+This file has kept the plain text word boundaries and carried them to
+the cipher text.
+
+Enjoy!
+krypton1@bandit:/krypton/krypton1$ cat krypton2 | rot
+LEVEL TWO PASSWORD ROTTEN
+krypton1@bandit:/krypton/krypton1$
+
+---
+Level 2
+
+SSH: ssh krypton2@krypton.labs.overthewire.org -p 2231
+Password: ROTTEN
+
+
+

@@ -62,45 +62,53 @@
           <hr>
 
           <ul>
-            <li><a href="bandit0.htm">Level 0</a></li>
-            <li><a href="bandit1.htm"><b><em>~ Level 1</em></b></a></li>
-            <li><a href="bandit2.htm">Level 2</a></li>
+            <li><a href="bandit8.htm">Level 8</a></li>
+            <li><a href="bandit9.htm"><b><em>~ Level 9</em></b></a></li>
+            <li><a href="bandit10.htm">Level 10</a></li>
           </ul>
           <hr>
 
         </div>
 
-        <h3>Level 1</h3>
-        <p>
-          <h5>
-            ssh bandit1@bandit.labs.overthewire.org -p 2220<br>
-            password: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
-          </h5>
+        <h3>Level 9</h3>
+
+        <h5>ssh bandit9@bandit.labs.overthewire.org -p 2220<br>
+          password: EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+        </h5>
 
         <h4>Objective:</h4>
 
-          <p>The password for the next level is stored in a file called "-" located in the home directory.
-            <ul>
-             <li>Use flow redirection to read the file.</li>
-            </ul>
+        <p>The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.</p>
 
         <h4>CLI:</h4>
-          <h5>
-            bandit1@bandit:~$ ls<br>
-            -<br>
-            bandit1@bandit:~$ cat < -<br>
-            rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
-          </h5>
+
+        <h5>
+          bandit9@bandit:~$ strings data.txt | grep ===<br>
+          x]T========== theG)"<br>
+          ========== passwordk^<br>
+          ========== is<br>
+          ========== G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s<br>
+          bandit9@bandit:~$
+        </h5>
 
         <div>
           <hr>
           <h4><a href="../overTheWire.htm">Bandit</a></h4>
           <ul>
             <li><a href="bandit0.htm">Level 0</a></li>
-            <li><a href="bandit1.htm"><b><em>~ Level 1</em></b></a></li>
+            <li><a href="bandit1.htm">Level 1</a></li>
             <li><a href="bandit2.htm">Level 2</a></li>
+            <li><a href="bandit3.htm">Level 3</a></li>
+            <li><a href="bandit4.htm">Level 4</a></li>
+            <li><a href="bandit5.htm">Level 5</a></li>
+            <li><a href="bandit6.htm">Level 6</a></li>
+            <li><a href="bandit7.htm">Level 7</a></li>
+            <li><a href="bandit8.htm">Level 8</a></li>
+            <li><a href="bandit9.htm"><b><em>~ Level 9</em></b></a></li>
+            <li><a href="bandit10.htm">Level 10</a></li>
           </ul>
           <hr>
+
         </div>
       </div>
     </div>

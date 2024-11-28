@@ -62,45 +62,63 @@
           <hr>
 
           <ul>
-            <li><a href="bandit0.htm">Level 0</a></li>
-            <li><a href="bandit1.htm"><b><em>~ Level 1</em></b></a></li>
-            <li><a href="bandit2.htm">Level 2</a></li>
+            <li><a href="bandit3.htm">Level 3</a></li>
+            <li><a href="bandit4.htm"><b><em>~ Level 4</em></b></a></li>
+            <li><a href="bandit5.htm">Level 5</a></li>
           </ul>
           <hr>
 
         </div>
 
-        <h3>Level 1</h3>
+        <h3>Level 4</h3>
         <p>
-          <h5>
-            ssh bandit1@bandit.labs.overthewire.org -p 2220<br>
-            password: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
-          </h5>
+        <h5>ssh bandit4@bandit.labs.overthewire.org -p 2220<br>
+          password: 2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+        </h5>
 
         <h4>Objective:</h4>
 
-          <p>The password for the next level is stored in a file called "-" located in the home directory.
-            <ul>
-             <li>Use flow redirection to read the file.</li>
-            </ul>
+        <p>The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+        <ul>
+          <li>ls</li>
+          <li>file ./-file*</li>
+          <li>cat "./-file07"</li>
+        </ul>
 
         <h4>CLI:</h4>
-          <h5>
-            bandit1@bandit:~$ ls<br>
-            -<br>
-            bandit1@bandit:~$ cat < -<br>
-            rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
-          </h5>
+        <h5>
+          bandit4@bandit:~$ ls<br>
+          inhere<br>
+          bandit4@bandit:~$ cd inhere<br>
+          bandit4@bandit:~/inhere$ file ./-file*<br>
+          ./-file00: data<br>
+          ./-file01: data<br>
+          ./-file02: data<br>
+          ./-file03: data<br>
+          ./-file04: data<br>
+          ./-file05: data<br>
+          ./-file06: data<br>
+          ./-file07: ASCII text<br>
+          ./-file08: data<br>
+          ./-file09: data<br>
+          bandit4@bandit:~/inhere$ cat "./-file07"<br>
+          lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR<br>
+          bandit4@bandit:~/inhere$<br>
+        </h5>
 
         <div>
           <hr>
           <h4><a href="../overTheWire.htm">Bandit</a></h4>
           <ul>
             <li><a href="bandit0.htm">Level 0</a></li>
-            <li><a href="bandit1.htm"><b><em>~ Level 1</em></b></a></li>
+            <li><a href="bandit1.htm">Level 1</a></li>
             <li><a href="bandit2.htm">Level 2</a></li>
+            <li><a href="bandit3.htm">Level 3</a></li>
+            <li><a href="bandit4.htm"><b><em>~ Level 4</em></b></a></li>
+            <li><a href="bandit5.htm">Level 5</a></li>
           </ul>
           <hr>
+
         </div>
       </div>
     </div>

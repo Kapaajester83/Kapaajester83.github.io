@@ -62,45 +62,68 @@
           <hr>
 
           <ul>
-            <li><a href="bandit0.htm">Level 0</a></li>
-            <li><a href="bandit1.htm"><b><em>~ Level 1</em></b></a></li>
-            <li><a href="bandit2.htm">Level 2</a></li>
+            <li><a href="bandit4.htm">Level 4</a></li>
+            <li><a href="bandit5.htm"><b><em>~ Level 5</em></b></a></li>
+            <li><a href="bandit6.htm">Level 6</a></li>
           </ul>
           <hr>
 
         </div>
 
-        <h3>Level 1</h3>
+        <h3>Level 5</h3>
         <p>
-          <h5>
-            ssh bandit1@bandit.labs.overthewire.org -p 2220<br>
-            password: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
-          </h5>
+        <h5>ssh bandit5@bandit.labs.overthewire.org -p 2220<br>
+          password: lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+        </h5>
 
         <h4>Objective:</h4>
 
-          <p>The password for the next level is stored in a file called "-" located in the home directory.
-            <ul>
-             <li>Use flow redirection to read the file.</li>
-            </ul>
+        <p>The password for the next level is stored in a file somewhere under the "inhere" directory and has all of the following properties:
+        <ul>
+          <li>human-readable</li>
+          <li>1033 bytes in size</li>
+          <li>not executable</li>
+        </ul>
+
+        <p>$ find -readable -size 1033c ! -executable</p>
+        <p>The find command with some flags
+        <ul>
+          <li>-readable is human-readable</li>
+          <li>-size 1033c means in bytes</li>
+          <li>! -executable means not executable</li>
+        </ul>
 
         <h4>CLI:</h4>
-          <h5>
-            bandit1@bandit:~$ ls<br>
-            -<br>
-            bandit1@bandit:~$ cat < -<br>
-            rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
-          </h5>
+        <h5>
+          bandit5@bandit:~$ ls<br>
+          inhere<br>
+          bandit5@bandit:~$ cd inhere<br>
+          bandit5@bandit:~/inhere$ ls<br>
+          maybehere00 maybehere04 maybehere08 maybehere12 maybehere16<br>
+          maybehere01 maybehere05 maybehere09 maybehere13 maybehere17<br>
+          maybehere02 maybehere06 maybehere10 maybehere14 maybehere18<br>
+          maybehere03 maybehere07 maybehere11 maybehere15 maybehere19<br>
+          bandit5@bandit:~/inhere$ find -readable -size 1033c ! -executable<br>
+          ./maybehere07/.file2<br>
+          bandit5@bandit:~/inhere$ cat ./maybehere07/.file2<br>
+          P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU<br>
+          bandit5@bandit:~/inhere$<br>
+        </h5>
 
         <div>
           <hr>
           <h4><a href="../overTheWire.htm">Bandit</a></h4>
           <ul>
             <li><a href="bandit0.htm">Level 0</a></li>
-            <li><a href="bandit1.htm"><b><em>~ Level 1</em></b></a></li>
+            <li><a href="bandit1.htm">Level 1</a></li>
             <li><a href="bandit2.htm">Level 2</a></li>
+            <li><a href="bandit3.htm">Level 3</a></li>
+            <li><a href="bandit4.htm">Level 4</a></li>
+            <li><a href="bandit5.htm"><b><em>~ Level 5</em></b></a></li>
+            <li><a href="bandit6.htm">Level 6</a></li>
           </ul>
           <hr>
+
         </div>
       </div>
     </div>
