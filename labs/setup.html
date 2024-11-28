@@ -38,7 +38,6 @@
     <div id="logo">
       <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
       <h1>Kappa</h1>
-
       <div>
         <br>
         <br>
@@ -47,93 +46,69 @@
         <br>
         <br>
       </div>
-
     </div>
 
     <div>
       <div id="writeup">
-        <h3>Setup</h3><br>
-        
-        <!--
-          <p>
-            <a href=""></a>
-          </p>
-        -->
+        <hr>
+        <h3>Setup</h3>
+        <hr>
 
         <h4>Open VPN</h4>
-          <dl>
-            <dt>GUI (Graphical User Interface)</dt>
-              <dd>Network Settings > "+" import from file<br>
-                navigate to extracted .opvpn file
-              </dd><br>
-            </dl>
-          <dl>
-            <dt>CLI (Command Line Interface)</dt>
-              <dd>
-                $ cd/ [directory].opvpn<br>
-                $ CTRL+C (to close terminal and end sesstion)
-              </dd>
-          </dl>
+
+        <p>GUI (Graphical User Interface)
+        <ul>
+          <li>Network Settings > "+" import from file</li>
+          <li>navigate to extracted .opvpn file</li>
+        </ul>
+
+        <p>CLI (Command Line Interface)</p>
+
+        <h5>
+          $ cd/ [directory].opvpn<br>
+          $ CTRL+C (to close terminal and end sesstion)
+        </h5>
 
         <h4>Virtualization</h4>
 
-          <p>
-            <ul>
-              <li><a href="https://www.virtualbox.org/">https://www.virtualbox.org</a></li>
-              <li><a href="https://www.vmware.com/">https://www.vmware.com</a></li>
-              <li><a href="https://www.kali.org">https://www.kali.org</a></li>
-              <li><a href="https://www.parrotsec.org/">https://www.parrotsec.org</a></li>
-            </ul>
-          </p>
-          <dl>
-            <dt>VirtualBox vs VMware</dt>
-              <dd>
-                In general they both work the same, VolnHub may have specific requirements
-              </dd>
-
-              <dd>
-                My experience is that VMware is a little more robust and stable, but also requires additional "host computer" resouces.
-              </dd>       
-
-              <dd>
-                VirtualBox seems to be faster with smaller "host computer" resources.
-              </dd>
-          </dl>
-
-          <h4>Git Globals</h4>
         <p>
-          <h5>
-            $ git config --global user.name "kappa"<br>
-            $ git config --global user.email "kappajester83@gmail.com"<br>
-            $ git config --global color.ui auto<br>
-            $ git config --global pull.rebase false<br>
-          </h5>
-        </p>
+        <ul>
+          <li><a href="https://www.virtualbox.org/">https://www.virtualbox.org</a></li>
+          <li><a href="https://www.vmware.com/">https://www.vmware.com</a></li>
+          <li><a href="https://www.kali.org">https://www.kali.org</a></li>
+          <li><a href="https://www.parrotsec.org/">https://www.parrotsec.org</a></li>
+        </ul>
+
+        <h4>Git Globals</h4>
+
+        <h5>
+          $ git config --global user.name "kappa"<br>
+          $ git config --global user.email "kappajester83@gmail.com"<br>
+          $ git config --global color.ui auto<br>
+          $ git config --global pull.rebase false<br>
+        </h5>
 
         <h4>New Repository</h4>
-        <p>
-          <h5>
-            $ echo "# Labs" >> README.md<br>
-            $ git init<br>
-            $ git add . README.md<br>
-            $ git commit -m "first commit"<br>
-            $ git branch -M main<br>
-            $ git remote add origin https://github.com/Kapaajester83/Labs.git<br>
-            $ git push -u origin main<br><br>
 
-            $ user: kappa<br>
-            $ pass: "user key" provided by GitHub
-          </h5>
-        </p>
+        <h5>
+          $ echo "# Labs" >> README.md<br>
+          $ git init<br>
+          $ git add . README.md<br>
+          $ git commit -m "first commit"<br>
+          $ git branch -M main<br>
+          $ git remote add origin https://github.com/Kapaajester83/Labs.git<br>
+          $ git push -u origin main<br><br>
 
-        
-      </div>
+          $ user: kappa<br>
+          $ pass: "user key" provided by GitHub
+        </h5>
 
       </div>
     </div>
   </div>
 
   <div id="footer">
+    <hr>
     <p>
       Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
     </p>
