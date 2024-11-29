@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Over The Wire | Bandit</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>Over The Wire</h3>
+
+        <div id="labs-table">
+          <hr>
+
+          <h3><a href="../overTheWire.htm">Bandit</a></h3>
+          <h4>Host: bandit.labs.overthewire.org</h4>
+          <h4>Port: 2220</h4>
+          <hr>
+
+          <ul>
+            <li><a href="bandit21.htm">Level 21</a></li>
+            <li><a href="bandit22.htm"><b><em>~ Level 22</em></b></a></li>
+            <li><a href="bandit23.htm">Level 23</a></li>
+          </ul>
+          <hr>
+
+        </div>
+
+        <h3>Level 22</h3>
+
+        <h5>ssh bandit22@bandit.labs.overthewire.org -p 2220<br>
+          password: WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
+        </h5>
+
+        <h4>Objective:</h4>
+
+        <p>A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+          <ul>
+            <li>var_name=var_value - declare a variable</li>
+            <li>var_name=$(command) - save output of command as variable</li>
+            <li>$var_name - access existing variable</li>
+          </ul>
+
+        <h4>CLI:</h4>
+
+        <h5>
+          bandit22@bandit:~$ ls -la /etc/cron.d<br>
+          total 56<br>
+          drwxr-xr-x   2 root root  4096 Oct  5 06:20 .<br>
+          drwxr-xr-x 106 root root 12288 Oct  5 06:20 ..<br>
+          -rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit15_root<br>
+          -rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit17_root<br>
+          -rw-r--r--   1 root root   120 Oct  5 06:19 cronjob_bandit22<br>
+          -rw-r--r--   1 root root   122 Oct  5 06:19 cronjob_bandit23<br>
+          -rw-r--r--   1 root root   120 Oct  5 06:19 cronjob_bandit24<br>
+          -rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit25_root<br>
+          -rw-r--r--   1 root root   201 Jan  8  2022 e2scrub_all<br>
+          -rwx------   1 root root    52 Oct  5 06:20 otw-tmp-dir<br>
+          -rw-r--r--   1 root root   102 Mar 23  2022 .placeholder<br>
+          -rw-r--r--   1 root root   396 Feb  2  2021 sysstat<br>
+          <br>
+          bandit22@bandit:~$ cat /etc/cron.d/cronjob_bandit23<br>
+          @reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null<br>
+          * * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null<br>
+          <br>
+          bandit22@bandit:~$ cat /usr/bin/cronjob_bandit23.sh #!/bin/bash myname=$(whoami) mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)<br>
+          echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"<br>
+          cat /etc/bandit_pass/$myname > /tmp/$mytargetz<br>
+          <br>
+          bandit22@bandit:~$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1 8ca319486bfbbc3663ea0fbe81326349<br>
+          <br>
+          bandit22@bandit:~$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349<br>
+          QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G<br>
+          bandit22@bandit:~$
+        </h5>
+
+        <div>
+          <hr>
+          <h4><a href="../overTheWire.htm">Bandit</a></h4>
+          <ul>
+            <li><a href="bandit0.htm">Level 0</a></li>
+            <li><a href="bandit1.htm">Level 1</a></li>
+            <li><a href="bandit2.htm">Level 2</a></li>
+            <li><a href="bandit3.htm">Level 3</a></li>
+            <li><a href="bandit4.htm">Level 4</a></li>
+            <li><a href="bandit5.htm">Level 5</a></li>
+            <li><a href="bandit6.htm">Level 6</a></li>
+            <li><a href="bandit7.htm">Level 7</a></li>
+            <li><a href="bandit8.htm">Level 8</a></li>
+            <li><a href="bandit9.htm">Level 9</a></li>
+            <li><a href="bandit10.htm">Level 10</a></li>
+            <li><a href="bandit11.htm">Level 11</a></li>
+            <li><a href="bandit12.htm">Level 12</a></li>
+            <li><a href="bandit13.htm">Level 13</a></li>
+            <li><a href="bandit14.htm">Level 14</a></li>
+            <li><a href="bandit15.htm">Level 15</a></li>
+            <li><a href="bandit16.htm">Level 16</a></li>
+            <li><a href="bandit17.htm">Level 17</a></li>
+            <li><a href="bandit18.htm">Level 18</a></li>
+            <li><a href="bandit19.htm">Level 19</a></li>
+            <li><a href="bandit20.htm">Level 20</a></li>
+            <li><a href="bandit21.htm">Level 21</a></li>
+            <li><a href="bandit21.htm"><b><em>~ Level 22</em></b></a></li>
+            <li><a href="bandit23.htm">Level 23</a></li>
+          </ul>
+          <hr>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
