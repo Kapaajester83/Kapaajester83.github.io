@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Over The Wire | Bandit</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>Over The Wire</h3>
+
+        <div id="labs-table">
+          <hr>
+
+          <h3><a href="../overTheWire.htm">Bandit</a></h3>
+          <h4>Host: bandit.labs.overthewire.org</h4>
+          <h4>Port: 2220</h4>
+          <hr>
+
+          <ul>
+            <li><a href="bandit27.htm">Level 27</a></li>
+            <li><a href="bandit28.htm"><b><em>~ Level 28</em></b></a></li>
+            <li><a href="bandit29.htm">Level 29</a></li>
+          </ul>
+          <hr>
+
+        </div>
+
+        <h3>Level 28</h3>
+
+        <h5>
+          ssh bandit28@bandit.labs.overthewire.org -p 2220<br>
+          password: AVanL161y9rsbcJIsFHuw35rjaOM19nR
+        </h5>
+
+        <h4>Objective:</h4>
+
+        <p>There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo via the port 2220. The password for the user bandit28-git is the same as for the user bandit28.</p>
+
+        <p>Clone the repository and find the password for the next level.</p>
+
+        <h4>CLI:</h4>
+
+        <h5>
+          bandit28@bandit:~$ mktemp -d<br>
+          /tmp/tmp.KWGAJSSlGx<br>
+          bandit28@bandit:~$ cd /tmp/tmp.KWGAJSSlGx<br>
+          <br>
+          bandit28@bandit:/tmp/tmp.KWGAJSSlGx$ git clone ssh://bandit28-git@localhost:2220/home/bandit28-git/repo<br>
+          Cloning into 'repo'...<br>
+          bandit28-git@localhost's password: <br>
+          remote: Enumerating objects: 9, done.<br>
+          remote: Counting objects: 100% (9/9), done.<br>
+          remote: Compressing objects: 100% (6/6), done.<br>
+          remote: Total 9 (delta 2), reused 0 (delta 0), pack-reused 0<br>
+          Receiving objects: 100% (9/9), done.<br>
+          Resolving deltas: 100% (2/2), done.<br>
+          <br>
+          bandit28@bandit:/tmp/tmp.KWGAJSSlGx$ ls<br>
+          repo<br>
+          bandit28@bandit:/tmp/tmp.KWGAJSSlGx$ cd repo<br>
+          bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$ ls -la<br>
+          total 16<br>
+          drwxrwxr-x 3 bandit28 bandit28 4096 Apr 2 20:04 .<br>
+          drwx------ 3 bandit28 bandit28 4096 Apr 2 20:04 ..<br>
+          drwxrwxr-x 8 bandit28 bandit28 4096 Apr 2 20:04 .git<br>
+          -rw-rw-r-- 1 bandit28 bandit28 111 Apr 2 20:04 README.md<br>
+          <br>
+          bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$ cat README.md<br>
+          <br>
+          # Bandit Notes<br>
+          Some notes for level29 of bandit.<br>
+          <br>
+          ## credentials<br>
+          <br>
+          - username: bandit29<br>
+          - password: xxxxxxxxxx<br>
+          <br>
+          <br>
+          bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$ git log<br>
+          commit 14f754b3ba6531a2b89df6ccae6446e8969a41f3 (HEAD -> master, origin/master, origin/HEAD)<br>
+          Author: Morla Porla <morla@overthewire.org><br>
+            Date: Thu Oct 5 06:19:41 2023 +0000<br>
+            <br>
+            fix info leak<br>
+            <br>
+            commit f08b9cc63fa1a4602fb065257633c2dae6e5651b<br>
+            Author: Morla Porla <morla@overthewire.org><br>
+              Date: Thu Oct 5 06:19:41 2023 +0000<br>
+              <br>
+              add missing data<br>
+              <br>
+              commit a645bcc508c63f081234911d2f631f87cf469258<br>
+              Author: Ben Dover <noone@overthewire.org><br>
+                Date: Thu Oct 5 06:19:41 2023 +0000<br>
+                <br>
+                initial commit of README.md<br>
+                bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$ git show f08b9cc63fa1a4602fb065257633c2dae6e5651b<br>
+                commit f08b9cc63fa1a4602fb065257633c2dae6e5651b<br>
+                Author: Morla Porla <morla@overthewire.org><br>
+                  Date: Thu Oct 5 06:19:41 2023 +0000<br>
+                  <br>
+                  add missing data<br>
+                  <br>
+                  diff --git a/README.md b/README.md<br>
+                  index 7ba2d2f..b302105 100644<br>
+                  --- a/README.md<br>
+                  +++ b/README.md<br>
+                  @@ -4,5 +4,5 @@ Some notes for level29 of bandit.<br>
+                  ## credentials<br>
+                  <br>
+                  - username: bandit29<br>
+                  -- password: <TBD><br>
+                    +- password: tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S<br>
+                    <br>
+                    bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$
+        </h5>
+
+        <div>
+          <hr>
+          <h4><a href="../overTheWire.htm">Bandit</a></h4>
+          <ul>
+            <li><a href="bandit0.htm">Level 0</a></li>
+            <li><a href="bandit1.htm">Level 1</a></li>
+            <li><a href="bandit2.htm">Level 2</a></li>
+            <li><a href="bandit3.htm">Level 3</a></li>
+            <li><a href="bandit4.htm">Level 4</a></li>
+            <li><a href="bandit5.htm">Level 5</a></li>
+            <li><a href="bandit6.htm">Level 6</a></li>
+            <li><a href="bandit7.htm">Level 7</a></li>
+            <li><a href="bandit8.htm">Level 8</a></li>
+            <li><a href="bandit9.htm">Level 9</a></li>
+            <li><a href="bandit10.htm">Level 10</a></li>
+            <li><a href="bandit11.htm">Level 11</a></li>
+            <li><a href="bandit12.htm">Level 12</a></li>
+            <li><a href="bandit13.htm">Level 13</a></li>
+            <li><a href="bandit14.htm">Level 14</a></li>
+            <li><a href="bandit15.htm">Level 15</a></li>
+            <li><a href="bandit16.htm">Level 16</a></li>
+            <li><a href="bandit17.htm">Level 17</a></li>
+            <li><a href="bandit18.htm">Level 18</a></li>
+            <li><a href="bandit19.htm">Level 19</a></li>
+            <li><a href="bandit20.htm">Level 20</a></li>
+            <li><a href="bandit21.htm">Level 21</a></li>
+            <li><a href="bandit22.htm">Level 22</a></li>
+            <li><a href="bandit23.htm">Level 23</a></li>
+            <li><a href="bandit24.htm">Level 24</a></li>
+            <li><a href="bandit25.htm">Level 25</a></li>
+            <li><a href="bandit26.htm">Level 26</a></li>
+            <li><a href="bandit27.htm">Level 27</a></li>
+            <li><a href="bandit28.htm"><b><em>~ Level 28</em></b></a></li>
+            <li><a href="bandit29.htm">Level 29</a></li>
+          </ul>
+          <hr>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
