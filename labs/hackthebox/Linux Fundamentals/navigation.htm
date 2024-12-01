@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Linux Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div>
+
+          <h3>Navigation</h3>
+
+          <p>Navigation is essential, like working with the mouse as a standard Windows user. With it, we move across the system and work in directories and with files, we need and want. Therefore, we use different commands and tools to print out information about a directory or a file and can use advanced options to optimize the output to our needs.</p>
+
+          <p>One of the best ways to learn something new is to experiment with it. Here we cover the sections on navigating through Linux, creating, moving, editing, and deleting files and folders, finding them on the operating system, different types of redirects, and what file descriptors are. We will also find shortcuts to make our work with the shell much easier and more comfortable. We recommend experimenting on our locally hosted VM. Ensure we have created a snapshot for our VM in case our system gets unexpectedly damaged.</p>
+
+          <p>Let us start with the navigation. Before we move through the system, we have to find out in which directory we are. We can find out where we are with the command pwd.</p>
+
+          <h4>Navigation</h4>
+
+          <h5>
+            cry0l1t3@htb[~]$ pwd<br>
+            <br>
+            /home/cry0l1t3
+          </h5>
+
+          <p>Only the ls command is needed to list all the contents inside a directory. It has many additional options that can complement the display of the content in the current folder.</p>
+
+          <h5>
+            cry0l1t3@htb[~]$ ls<br>
+            <br>
+            Desktop Documents Downloads Music Pictures Public Templates Videos<br>
+            <br>
+          </h5>
+
+          <p>Using it without any additional options will display the directories and files only. However, we can also add the -l option to display more information on those directories and files.</p>
+
+          <h5>
+            cry0l1t3@htb[~]$ ls -l<br>
+            <br>
+            total 32<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:37 Desktop<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Documents<br>
+            drwxr-xr-x 3 cry0l1t3 htbacademy 4096 Nov 15 03:26 Downloads<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Music<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Pictures<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Public<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Templates<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Videos
+          </h5>
+
+          <p>First, we see the total amount of blocks (512-byte) used by the files and directories listed in the current directory, which indicates the total size used. That means it used 32 * 512-byte = 16384 bytes of disk space. Next, we see a few columns that are structured as follows:
+
+          <h4>Column Content Description</h4>
+          <ul>
+            <li>drwxr-xr-x - Type and permissions</li>
+            <li>2 - Number of hard links to the file/directory</li>
+            <li>cry0l1t3 - Owner of the file/directory</li>
+            <li>htbacademy - Group owner of the file/directory</li>
+            <li>4096 - Size of the file or the number of blocks used to store the directory information</li>
+            <li>Nov 13 17:37 - Date and time</li>
+            <li>Desktop - Directory name</li>
+          </ul>
+
+          <p>However, we will not see everything that is in this folder. A directory can also have hidden files that start with a dot at the beginning of its name (e.g., .bashrc or .bash_history). Therefore, we need to use the command ls -la to list all files of a directory:</p>
+
+          <h5>
+            cry0l1t3@htb[~]$ ls -la<br>
+            <br>
+            total 403188<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:37 .bash_history<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:37 .bashrc<br>
+            ...SNIP...<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:37 Desktop<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Documents<br>
+            drwxr-xr-x 3 cry0l1t3 htbacademy 4096 Nov 15 03:26 Downloads<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Music<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Pictures<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Public<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Templates<br>
+            drwxr-xr-x 2 cry0l1t3 htbacademy 4096 Nov 13 17:34 Videos
+          </h5>
+
+          <p>To list the contents of a directory, we do not necessarily need to navigate there first. We can also use “ls” to specify the path where we want to know the contents.</p>
+
+          <h5>
+            cry0l1t3@htb[~]$ ls -l /var/<br>
+            <br>
+            total 52<br>
+            drwxr-xr-x 2 root root 4096 Mai 15 18:54 backups<br>
+            drwxr-xr-x 18 root root 4096 Nov 15 16:55 cache<br>
+            drwxrwsrwt 2 root whoopsie 4096 Jul 25 2018 crash<br>
+            drwxr-xr-x 66 root root 4096 Mai 15 03:08 lib<br>
+            drwxrwsr-x 2 root staff 4096 Nov 24 2018 local<br>
+            ---
+          </h5>
+
+          <p>We can do the same thing to navigate to the directory. To move through the directories, we use the command cd. Let us change to the /dev/shm directory. Of course, we can go to the /dev directory first and then /shm. Nevertheless, we can also enter the full path and jump there.</p>
+
+          <h5>
+            cry0l1t3@htb[~]$ cd /dev/shm<br>
+            cry0l1t3@htb[/dev/shm]$
+          </h5>
+
+          <p>Since we were in the home directory before, we can quickly jump back to the directory we were last in.</p>
+
+          <h5>
+            cry0l1t3@htb[/dev/shm]$ cd -<br>
+            cry0l1t3@htb[~]$
+          </h5>
+
+          <p>The shell also offers us the auto-complete function, which makes navigation easier. If we now type cd /dev/s and press [TAB] twice, we will get all entries starting with the letter “s” in the directory of /dev/.</p>
+
+          <h5>
+            cry0l1t3@htb[~]$ cd /dev/s [TAB 2x]<br>
+            shm/ snd/
+          </h5>
+
+          <p>If we add the letter “h” to the letter “s,” the shell will complete the input since otherwise there will be no folders in this directory beginning with the letters “sh”. If we now display all contents of the directory, we will only see the following contents.</p>
+
+          <h5>
+            cry0l1t3@htb[/dev/shm]$ ls -la /dev/shm<br>
+            <br>
+            total 0<br>
+            drwxrwxrwt 2 root root 40 Mai 15 18:31 .<br>
+            drwxr-xr-x 17 root root 4000 Mai 14 20:45 ..
+          </h5>
+
+          <p>The first entry with a single dot (.) indicates the current directory we are currently in. The second entry with two dots (..) represents the parent directory /dev. This means we can jump to the parent directory with the following command.</p>
+
+          <h5>
+            cry0l1t3@htb[/dev/shm]$ cd ..<br>
+            cry0l1t3@htb[/dev]$
+          </h5>
+
+          <p>Since our shell is filled with some records, we can clean the shell with the command clear. First, however, let us return to the directory /dev/shm before and then execute the clear command to clean up our terminal.</p>
+
+          <h5>
+            cry0l1t3@htb[/dev]$ cd shm && clear
+          </h5>
+
+          <p>Another way to clean up our terminal is to use the shortcut [Ctrl] + [L]. We can also use the arrow keys (↑ or ↓) to scroll through the command history, which will show us the commands that we have used before. But we also can search through the command history using the shortcut [Ctrl] + [R] and type some of the text that we are looking for.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../hackTheBox.htm">Linux Fundamentals</a></h4>
+          <ol>
+            <li><a href="linuxStructure.htm">Linux Structure</a></li>
+            <li><a href="linuxDistributions.htm">Linux Distributions</a></li>
+            <li><a href="shell.htm">Introduction to Shell</a></li>
+            <li><a href="promptDescription.htm">Prompt Description</a></li>
+            <li><a href="gettingHelp.htm">Getting Help</a></li>
+            <li><a href="systemInformation.htm">System Information</a></li>
+            <li><a href="navigation.htm">Navigation</a></li>
+            <li><a href="filesDirectories.htm">Working with Files and Directories</a></li>
+          </ol>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

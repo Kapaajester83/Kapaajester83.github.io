@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Linux Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div>
+
+          <h3>Editing Files</h3>
+
+          <p>There are several ways to edit a file. One of the most common text editors for this is Vi and Vim. More rarely, there is the Nano editor. We will first deal with the Nano editor here, as it is a bit easier to understand. We can create a new file directly with the Nano editor by specifying the file's name directly as the first parameter. In this case, we create a new file named notes.txt.</p>
+
+          <h4><a href="nano.pdf">Nano</a></h4>
+
+          <h5>
+            kalijester68@htb[/htb]$ man nano<br>
+            kalijester68@htb[/htb]$ nano notes.txt
+          </h5>
+
+          <p>After we have saved the file, we can leave the editor with [CTRL + X].</p>
+
+          <h4>Back on the Shell</h4>
+
+          <p>To view the contents of the file, we can use the command cat.</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ cat notes.txt
+          </h5>
+
+          <p>Here we can type everything we want and make our notes.</p>
+
+          <p>There are many files on Linux systems that can play an essential role for us as penetration testers whose rights have not been correctly set by the administrators. Such files may include the file "/etc/passwd".</p>
+
+          <h4><a href="vim.pdf">VIM</a></h4>
+
+          <p>Vim is an open-source editor for all kinds of ASCII text, just like Nano. It is an improved clone of the previous Vi. It is an extremely powerful editor that focuses on the essentials, namely editing text. For tasks that go beyond that, Vim provides an interface to external programs, such as grep, awk, sed, etc., which can handle their specific tasks much better than a corresponding function directly implemented in an editor usually can. This makes the editor small and compact, fast, powerful, flexible, and less error-prone.</p>
+
+          <p>Vim follows the Unix principle here: many small specialized programs that are well tested and proven, when combined and communicating with each other, resulting in a flexible and powerful system.</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ sudo apt install vim<br>
+            kalijester68@htb[/htb]$ vim
+          </h5>
+
+          <p>In contrast to Nano, Vim is a modal editor that can distinguish between text and command input. Vim offers a total of six fundamental modes that make our work easier and make this editor so powerful:
+          <ul>
+            <li>Normal In normal mode, all inputs are considered as editor commands. So there is no insertion of the entered characters into the editor buffer, as is the case with most other editors. After starting the editor, we are usually in the normal mode.</li>
+
+            <li>Insert With a few exceptions, all entered characters are inserted into the buffer.</li>
+
+            <li>Visual The visual mode is used to mark a contiguous part of the text, which will be visually highlighted. By positioning the cursor, we change the selected area. The highlighted area can then be edited in various ways, such as deleting, copying, or replacing it.</li>
+
+            <li>Command It allows us to enter single-line commands at the bottom of the editor. This can be used for sorting, replacing text sections, or deleting them, for example.</li>
+
+            <li>Replace In replace mode, the newly entered text will overwrite existing text characters unless there are no more old characters at the current cursor position. Then the newly entered text will be added.</li>
+          </ul>
+
+          <p>Vim offers an excellent opportunity called vimtutor to practice and get familiar with the editor. It may seem very difficult and complicated at first, but it will only feel that way for a short time. The efficiency we gain from Vim once we get used to it is enormous. Entering the tutor mode can be done using the Command mode :Tutor.</p>
+
+          <h4>VimTutor</h4>
+
+          <h5>
+            kalijester68@htb[/htb]$ vimtutor
+          </h5>
+
+          <p>Vim is a very powerful editor that has many commands, too many to explain in a tutor such as this.</p>
+
+          <p>This tutor is designed to describe enough of the commands that you will be able to easily use Vim as
+            an all-purpose editor.</p>
+
+          <p>The approximate time required to complete the tutor is 25-30 minutes, depending upon how much time is spent with experimentation.</p>
+
+          <h4>ATTENTION:</h4>
+
+          <p>The commands in the lessons will modify the text. Make a copy of this file to practice on (if you started "vimtutor" this is already a copy).</p>
+
+          <p>It is important to remember that this tutor is set up to teach by use. That means that you need to execute the commands to learn them properly. If you only read the text, you will forget the commands!
+
+          <p>Now, make sure that your Caps-Lock key is NOT depressed and press the "j" key enough times to move the cursor so that it completely fills the screen.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../hackTheBox.htm">Linux Fundamentals</a></h4>
+          <ol>
+            <li><a href="linuxStructure.htm">Linux Structure</a></li>
+            <li><a href="linuxDistributions.htm">Linux Distributions</a></li>
+            <li><a href="shell.htm">Introduction to Shell</a></li>
+            <li><a href="promptDescription.htm">Prompt Description</a></li>
+            <li><a href="gettingHelp.htm">Getting Help</a></li>
+            <li><a href="systemInformation.htm">System Information</a></li>
+            <li><a href="navigation.htm">Navigation</a></li>
+            <li><a href="filesDirectories.htm">Working with Files and Directories</a></li>
+            <li><a href="editingFiles.htm">Editing Files</a></li>
+            <li><a href="FindfFilesDirectoies.htm">Find Files and Directories</a></li>
+          </ol>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
