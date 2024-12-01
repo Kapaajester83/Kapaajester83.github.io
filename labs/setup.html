@@ -50,59 +50,78 @@
 
     <div>
       <div id="writeup">
+
         <hr>
-        <h3>Setup</h3>
+        <h3><a href="contents.html">Table of Contents</a></h3>
         <hr>
 
-        <h4>Open VPN</h4>
+        <div id="labs-table">
+          <h3>Setup</h3>
 
-        <p>GUI (Graphical User Interface)
-        <ul>
-          <li>Network Settings > "+" import from file</li>
-          <li>navigate to extracted .opvpn file</li>
-        </ul>
+          <h4>Open VPN</h4>
 
-        <p>CLI (Command Line Interface)</p>
+          <p>GUI (Graphical User Interface)
+          <ul>
+            <li>Network Settings > "+" import from file</li>
+            <li>navigate to extracted .opvpn file</li>
+          </ul>
 
-        <h5>
-          $ cd/ [directory].opvpn<br>
-          $ CTRL+C (to close terminal and end sesstion)
-        </h5>
+          <p>CLI (Command Line Interface)</p>
 
-        <h4>Virtualization</h4>
+          <h5>
+            $ cd/ [directory].opvpn<br>
+            $ CTRL+C (to close terminal and end sesstion)
+          </h5>
 
-        <p>
-        <ul>
-          <li><a href="https://www.virtualbox.org/">https://www.virtualbox.org</a></li>
-          <li><a href="https://www.vmware.com/">https://www.vmware.com</a></li>
-          <li><a href="https://www.kali.org">https://www.kali.org</a></li>
-          <li><a href="https://www.parrotsec.org/">https://www.parrotsec.org</a></li>
-        </ul>
+          <h4>Virtualization</h4>
 
-        <h4>Git Globals</h4>
+          <p>
+          <ul>
+            <li><a href="https://www.virtualbox.org/">https://www.virtualbox.org</a></li>
+            <li><a href="https://www.vmware.com/">https://www.vmware.com</a></li>
+            <li><a href="https://www.kali.org">https://www.kali.org</a></li>
+            <li><a href="https://www.parrotsec.org/">https://www.parrotsec.org</a></li>
+          </ul>
 
-        <h5>
-          $ git config --global user.name "kappa"<br>
-          $ git config --global user.email "kappajester83@gmail.com"<br>
-          $ git config --global color.ui auto<br>
-          $ git config --global pull.rebase false<br>
-        </h5>
+          <h4>Git Globals</h4>
 
-        <h4>New Repository</h4>
+          <h5>
+            $ git config --global user.name "kappa"<br>
+            $ git config --global user.email "kappajester83@gmail.com"<br>
+            $ git config --global color.ui auto<br>
+            $ git config --global pull.rebase false<br>
+          </h5>
 
-        <h5>
-          $ echo "# Labs" >> README.md<br>
-          $ git init<br>
-          $ git add . README.md<br>
-          $ git commit -m "first commit"<br>
-          $ git branch -M main<br>
-          $ git remote add origin https://github.com/Kapaajester83/Labs.git<br>
-          $ git push -u origin main<br><br>
+          <h4>Git Repository</h4>
 
-          $ user: kappa<br>
-          $ pass: "user key" provided by GitHub
-        </h5>
+          <h5>
+            $ echo "# Labs" >> README.md<br>
+            $ git init<br>
+            $ git add . README.md<br>
+            $ git commit -m "first commit"<br>
+            $ git branch -M main<br>
+            $ git remote add origin https://github.com/Kapaajester83/Labs.git<br>
+            $ git push -u origin main<br><br>
 
+            $ user: kappa<br>
+            $ pass: "user key" provided by GitHub
+          </h5>
+
+          <h4>Install Files</h4>
+
+          <h5>
+            $ sudo apt get vim
+          </h5>
+
+          <h4>Alias</h4>
+          
+          <h5>
+            $ alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"<br>
+            $ alias rot5="tr '0-9' '5-90-4'"<br>
+            $ alias rot="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"
+          </h5>
+
+        </div>
       </div>
     </div>
   </div>
