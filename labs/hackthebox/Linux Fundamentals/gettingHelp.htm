@@ -60,11 +60,46 @@
 
           <h3>Getting Help</h3>
 
+          <p>We will always stumble across tools whose optional parameters we do not know from memory or tools we have never seen before. Therefore it is vital to know how we can help ourselves to get familiar with those tools. The first two ways are the man pages and the help functions. It is always a good idea to familiarize ourselves with the tool we want to try first. We will also learn some possible tricks with some of the tools that we thought were not possible. In the man pages, we will find the detailed manuals with detailed explanations.</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ man "tool"<br>
+            kalijester68@htb[/htb]$ man curl
+          </h5>
+
+          <p>After looking at some examples, we can also quickly look at the optional parameters without browsing through the complete documentation. We have several ways to do that.</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ "tool" --help<br>
+            kalijester68@htb[/htb]$ curl --help<br>
+            kalijester68@htb[/htb]$ curl -h
+          </h5>
+
+          <p>As we can see, the results from each other do not differ in this example. Another tool that can be useful in the beginning is apropos. Each manual page has a short description available within it. This tool searches the descriptions for instances of a given keyword.</p>
+
+          <h5>kalijester68@htb[/htb]$ apropos "keyword"<br>
+            kalijester68@htb[/htb]$ apropos sudo<br>
+            <br>
+            sudo (8) - execute a command as another user<br>
+            sudo.conf (5) - configuration for sudo front end<br>
+            sudo_plugin (8) - Sudo Plugin API<br>
+            sudo_root (8) - How to run administrative commands<br>
+            sudoedit (8) - execute a command as another user<br>
+            sudoers (5) - default sudo security policy plugin<br>
+            sudoreplay (8) - replay sudo session logs<br>
+            visudo (8) - edit the sudoers file
+          </h5>
+
+          <p>Another useful resource to get help if we have issues to understand a long command is:
+          <ul>
+            <li><a href="https://explainshell.com/">https://explainshell.com/</a></li>
+          </ul>
+
         </div>
         <hr>
 
         <div id="labs-table">
-          <h4><a href="../hackTheBox.htm">Linux Fundamentals</a></h4>
+          <h4><a href="../linuxFundamentals.htm">Linux Fundamentals</a></h4>
           <ol>
             <li><a href="linuxStructure.htm">Linux Structure</a></li>
             <li><a href="linuxDistributions.htm">Linux Distributions</a></li>
