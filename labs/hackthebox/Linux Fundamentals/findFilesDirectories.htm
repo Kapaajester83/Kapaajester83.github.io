@@ -56,9 +56,19 @@
         </h3>
         <hr>
 
+        <div id="labs-table-top">
+          <h4><a href="../linuxFundamentals.htm">Linux Fundamentals</a></h4>
+          <ul>
+            <li><a href="editingFiles.htm">Editing Files</a></li>
+            <li><a href="findFilesDirectories.htm"><b><em>~ Find Files and Directories</em></b></a></li>
+            <li><a href="redirection.htm">File Description and Redirection</a></li>
+          </ul>
+        </div>
+        <hr>
+
         <div>
 
-          <h3>Find Files and Directories</h3>
+          <h3><em>Find Files and Directories</em></h3>
 
           <h4>Importance of the Search</h4>
 
@@ -84,7 +94,7 @@
             kalijester68@htb[/htb]$ find / -type f -name *.conf -user root -size +20k -newermt 2020-03-03 -exec ls -al {} \; 2>/dev/null<br>
             <br>
             -rw-r--r-- 1 root root 136392 Apr 25 20:29 /usr/src/linux-headers-5.5.0-1parrot1-amd64/include/config/auto.conf<br>
-            -rw-r--r-- 1 root root 82290 Apr 25 20:29 /usr/src/linux-headers-5.5.0-1parrot1-amd64/include/config/tristate.conf
+            -rw-r--r-- 1 root root 82290 Apr 25 20:29 /usr/src/linux-headers-5.5.0-1parrot1-amd64/include/config/tristate.conf<br>
             <br>
             -rw-r--r-- 1 root root 95813 May 7 14:33 /usr/share/metasploit-framework/data/jtr/repeats32.conf<br>
             -rw-r--r-- 1 root root 60346 May 7 14:33 /usr/share/metasploit-framework/data/jtr/dynamic.conf<br>
@@ -101,7 +111,9 @@
           <p>Now let us take a closer look at the options we used in the previous command. If we hover the mouse over the respective options, a small window will appear with an explanation. These explanations will also be found in other modules, which should help us if we are not yet familiar with one of the tools.
           </p>
 
-          <p>Option - Description
+          <h4>Options</h4>
+
+          <p>
           <ul>
             <li>-type f - Hereby, we define the type of the searched object. In this case, 'f' stands for 'file'.
             </li>
@@ -171,11 +183,12 @@
             <li><a href="navigation.htm">Navigation</a></li>
             <li><a href="filesDirectories.htm">Working with Files and Directories</a></li>
             <li><a href="editingFiles.htm">Editing Files</a></li>
-            <li><a href="findFilesDirectories.htm">Find Files and Directories</a></li>
+            <li><a href="findFilesDirectories.htm"><b><em>~ Find Files and Directories</em></b></a></li>
             <li><a href="redirection.htm">File Description and Redirection</a></li>
           </ol>
-          <hr>
         </div>
+        <hr>
+
       </div>
     </div>
   </div>

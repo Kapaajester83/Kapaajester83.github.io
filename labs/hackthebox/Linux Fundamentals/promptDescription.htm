@@ -56,9 +56,19 @@
         </h3>
         <hr>
 
+        <div id="labs-table-top">
+          <h4><a href="../linuxFundamentals.htm">Linux Fundamentals</a></h4>
+          <ul>
+            <li><a href="shell.htm">Introduction to Shell</a></li>
+            <li><a href="promptDescription.htm"><b><em>~ Prompt Description</em></b></a></li>
+            <li><a href="gettingHelp.htm">Getting Help</a></li>
+          </ul>
+        </div>
+        <hr>
+
         <div>
 
-          <h3>Prompt Description</h3>
+          <h3><em>Prompt Description</em></h3>
 
           <p>The bash prompt is easy to understand and, by default, includes information such as the user, hostname, and current working directory. It is a string of characters displayed on the terminal screen that indicates that the system is ready for our input. It typically includes information such as the current user, the computer’s hostname, and the current working directory. The prompt is usually displayed on a new line, and the cursor is positioned after the prompt, ready for the user to start typing a command.</p>
 
@@ -66,30 +76,21 @@
           </p>
 
           <h5>
-            <ul>
-              <li>
-                <username>@<hostname>
-                    <current working directory>$
-              </li>
-            </ul>
+            "username" @ "hostname" "current working directory"$<br>
+            kali@Kali:/Linux Fundamentals$
           </h5>
 
-          <p>The home directory for a user is marked with a tilde <~> and is the default folder when we log in.</p>
+          <p>The home directory for a user is marked with a tilde "~" and is the default folder when we log in.</p>
 
           <h5>
-            <ul>
-              <li>
-                <username>@<hostname>[~]$
-              </li>
-            </ul>
+            "username" @ "hostname" [~] $<br>
+            kali@Kali:~$
           </h5>
 
-          <p>The dollar sign, in this case, stands for a user. As soon as we log in as root, the character changes to a hash <#> and looks like this:</p>
+          <p>The dollar sign, in this case, stands for a user. As soon as we log in as root, the character changes to a hash "#" and looks like this:</p>
 
           <h5>
-            <ul>
-              <li>root@htb[/htb]#</li>
-            </ul>
+            root@htb[/htb]#
           </h5>
 
           <p>For example, when we upload and run a shell on the target system, we may not see the username, hostname, and current working directory. This may be due to the PS1 variable in the environment not being set correctly. In this case, we would see the following prompts:</p>
@@ -97,17 +98,13 @@
           <p>Unprivileged - User Shell Prompt</p>
 
           <h5>
-            <ul>
-              <li>$</li>
-            </ul>
+            $
           </h5>
 
           <p>Privileged - Root Shell Prompt</p>
 
           <h5>
-            <ul>
-              <li>#</li>
-            </ul>
+            #
           </h5>
 
           <p>In addition to providing basic information like the current user and working directory, we can customize to display other information in the prompt, such as the IP address, date, time, the exit status of the last command, and more. This is especially useful for us during our penetration tests because we can use various tools and possibilities like script or the .bash_history to filter and print all the commands we used and sort them by date and time. For example, the prompt could be set to display the full path of the current working directory instead of just the current directory name, which can also include the target’s IP address if we work organized.</p>
@@ -116,19 +113,19 @@
 
           <p>Special Character Description
           <ul>
-            <li>\d Date (Mon Feb 6)</li>
-            <li>\D{%Y-%m-%d}  Date (YYYY-MM-DD)</li>
-              <li>\H  Full hostname</li>
-              <li>\j  Number of jobs managed by the shell</li>
-              <li>\n  Newline</li>
-              <li>\r  Carriage return</li>
-              <li>\s  Name of the shell</li>
-              <li>\t  Current time 24-hour (HH:MM:SS)</li>
-              <li>\T  Current time 12-hour (HH:MM:SS)</li>
-              <li>\@  Current time</li>
-              <li>\u  Current username</li>
-              <li>\w  Full path of the current working directory</li>
-            </ul>
+            <li>\d - Date (Mon Feb 6)</li>
+            <li>\D{%Y-%m-%d} - Date (YYYY-MM-DD)</li>
+            <li>\H - Full hostname</li>
+            <li>\j - Number of jobs managed by the shell</li>
+            <li>\n - Newline</li>
+            <li>\r - Carriage return</li>
+            <li>\s - Name of the shell</li>
+            <li>\t - Current time 24-hour (HH:MM:SS)</li>
+            <li>\T - Current time 12-hour (HH:MM:SS)</li>
+            <li>\@ - Current time</li>
+            <li>\u - Current username</li>
+            <li>\w - Full path of the current working directory</li>
+          </ul>
 
           <p>Customizing the prompt can be a useful way to make your terminal experience more personalized and efficient. It can also be a helpful tool for troubleshooting and problem-solving, as it can provide important information about the system’s state at any given time.</p>
 
@@ -145,12 +142,12 @@
             <li><a href="linuxStructure.htm">Linux Structure</a></li>
             <li><a href="linuxDistributions.htm">Linux Distributions</a></li>
             <li><a href="shell.htm">Introduction to Shell</a></li>
-            <li><a href="promptDescription.htm">Prompt Description</a></li>
+            <li><a href="promptDescription.htm"><b><em>~ Prompt Description</em></b></a></li>
             <li><a href="gettingHelp.htm">Getting Help</a></li>
           </ol>
-          <hr>
-          
         </div>
+        <hr>
+
       </div>
     </div>
   </div>
