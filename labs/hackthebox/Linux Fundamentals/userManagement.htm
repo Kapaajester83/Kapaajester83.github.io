@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Linux Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../linuxFundamentals.htm">Linux Fundamentals</a></h4>
+          <ul>
+            <li><a href="permissionManagement.htm">Permission Management</a></li>
+            <li><a href="userManagement.htm"><b><em>~ User Management</em></b></a></li>
+            <li><a href="packageManagement.htm">Package Management</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>User Management</em></h3>
+
+          <p>User management is an essential part of Linux administration. Sometimes we need to create new users or add other users to specific groups. Another possibility is to execute commands as a different user. After all, it is not too rare that users of only one specific group have the permissions to view or edit specific files or directories. This, in turn, allows us to collect more information locally on the machine, which can be very important. Let us take a look at the following example of how to execute code as a different user.</p>
+
+          <h4>Execution as a user</h4>
+
+          <h5>
+            kalijester68@htb[/htb]$ cat /etc/shadow<br>
+            cat: /etc/shadow: Permission denied
+          </h5>
+
+          <h4>Execution as root</h4>
+
+          <h5>
+            kalijester68@htb[/htb]$ sudo cat /etc/shadow<br>
+            root:"SNIP":18395:0:99999:7:::<br>
+            daemon:*:17737:0:99999:7:::<br>
+            bin:*:17737:0:99999:7:::
+          </h5>
+
+          <p>Here is a list that will help us to better understand and deal with user management.
+          <ul>
+            <li>sudo Execute command as a different user.</li>
+
+            <li>su The su utility requests appropriate user credentials via PAM and switches to that user ID (the default user is the superuser). A shell is then executed.
+            </li>
+
+            <li>useradd Creates a new user or update default new user information.</li>
+            <li>userdel Deletes a user account and related files.</li>
+            <li>usermod Modifies a user account.</li>
+            <li>addgroup Adds a group to the system.</li>
+            <li>delgroup Removes a group from the system.</li>
+            <li>passwd Changes user password.</li>
+          </ul>
+
+          <p>User management is essential in any operating system, and the best way to become familiar with it is to try out the individual commands in conjunction with their various options.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../linuxFundamentals.htm">Linux Fundamentals</a></h4>
+          <ol>
+            <li><a href="linuxStructure.htm">Linux Structure</a></li>
+            <li><a href="linuxDistributions.htm">Linux Distributions</a></li>
+            <li><a href="shell.htm">Introduction to Shell</a></li>
+            <li><a href="promptDescription.htm">Prompt Description</a></li>
+            <li><a href="gettingHelp.htm">Getting Help</a></li>
+            <li><a href="systemInformation.htm">System Information</a></li>
+            <li><a href="navigation.htm">Navigation</a></li>
+            <li><a href="filesDirectories.htm">Working with Files and Directories</a></li>
+            <li><a href="editingFiles.htm">Editing Files</a></li>
+            <li><a href="findFilesDirectories.htm">Find Files and Directories</a></li>
+            <li><a href="redirection.htm">File Description and Redirection</a></li>
+            <li><a href="filterContents.htm">Filter Contents</a></li>
+            <li><a href="regularExpressions.htm">Regular Expressions</a></li>
+            <li><a href="permissionManagement.htm">Permission Management</a></li>
+            <li><a href="userManagement.htm"><b><em>~ User Management</em></b></a></li>
+            <li><a href="packageManagement.htm">Package Management</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
