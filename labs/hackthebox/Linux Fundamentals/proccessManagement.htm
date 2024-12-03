@@ -59,257 +59,222 @@
         <div id="labs-table-top">
           <h4><a href="../linuxFundamentals.htm">Linux Fundamentals</a></h4>
           <ul>
-            <li><a href="userManagement.htm">User Management</a></li>
-            <li><a href="packageManagement.htm"><b><em>~ Package Management</em></b></a></li>
-            <li><a href="proccessManagement.htm">Service Proccess Management</a></li>
+            <li><a href="packageManagement.htm">Package Management</a></li>
+            <li><a href="proccessManagement.htm"><b><em>~ Service Proccess Management</em></b></a></li>
+            <li><a href="taskScheduling.htm">Task Scheduling</a></li>
           </ul>
         </div>
         <hr>
 
         <div>
 
-          Service and Process Management
+          <h3><em>Service and Process Management</em></h3>
+
+          <p>In general, there are two types of services: internal, the relevant services that are required at system startup, which for example, perform hardware-related tasks, and services that are installed by the user, which usually include all server services. Such services run in the background without any user interaction. These are also called daemons and are identified by the letter 'd' at the end of the program name, for example, sshd or systemd.</p>
+
+          <p>Most Linux distributions have now switched to systemd. This daemon is an Init process started first and thus has the process ID (PID) 1. This daemon monitors and takes care of the orderly starting and stopping of other services. All processes have an assigned PID that can be viewed under /proc/ with the corresponding number. Such a process can have a parent process ID (PPID), and if so, it is known as the child process.</p>
+
+          <p>Besides systemctl we can also use update-rc.d to manage SysV init script links. Let us have a look at some examples. We will use the OpenSSH server in these examples. If we do not have this installed, please install it before proceeding to this section.</p>
+
+          <h4>Systemctl</h4>
+
+          <p>After installing OpenSSH on our VM, we can start the service with the following command.</p>
+
+          <h5>kalijester68@htb[/htb]$ systemctl start ssh</h5>
+
+          <p>After we have started the service, we can now check if it runs without errors.</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ systemctl status ssh<br>
+            ssh.service - OpenBSD Secure Shell server<br>
+            Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)<br>
+            Active: active (running) since Thu 2020-05-14 15:08:23 CEST; 24h ago<br>
+            Main PID: 846 (sshd)<br>
+            Tasks: 1 (limit: 4681)<br>
+            CGroup: /system.slice/ssh.service<br>
+            └─846 /usr/sbin/sshd -D<br>
+            <br>
+            Mai 14 15:08:22 inlane systemd[1]: Starting OpenBSD Secure Shell server...<br>
+            Mai 14 15:08:23 inlane sshd[846]: Server listening on 0.0.0.0 port 22.<br>
+            Mai 14 15:08:23 inlane sshd[846]: Server listening on :: port 22.<br>
+            Mai 14 15:08:23 inlane systemd[1]: Started OpenBSD Secure Shell server.<br>
+            Mai 14 15:08:30 inlane systemd[1]: Reloading OpenBSD Secure Shell server.<br>
+            Mai 14 15:08:31 inlane sshd[846]: Received SIGHUP; restarting.<br>
+            Mai 14 15:08:31 inlane sshd[846]: Server listening on 0.0.0.0 port 22.<br>
+            Mai 14 15:08:31 inlane sshd[846]: Server listening on :: port 22.
+          </h5>
+
+          <p>To add OpenSSH to the SysV script to tell the system to run this service after startup, we can link it with the following command:</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ systemctl enable ssh<br>
+            Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.<br>
+            Executing: /lib/systemd/systemd-sysv-install enable ssh
+          </h5>
+
+          <p>Once we reboot the system, the OpenSSH server will automatically run. We can check this with a tool called ps.</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ ps -aux | grep ssh<br>
+            root 846 0.0 0.1 72300 5660 ? Ss Mai14 0:00 /usr/sbin/sshd -D
+          </h5>
+
+          <p>We can also use systemctl to list all services.</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ systemctl list-units --type=service<br>
+            <br>
+            UNIT LOAD ACTIVE SUB DESCRIPTION<br>
+            accounts-daemon.service loaded active running Accounts Service<br>
+            acpid.service loaded active running ACPI event daemon<br>
+            apache2.service loaded active running The Apache HTTP Server<br>
+            apparmor.service loaded active exited AppArmor initialization<br>
+            apport.service loaded active exited LSB: automatic crash repor<br>
+            avahi-daemon.service loaded active running Avahi mDNS/DNS-SD Stack<br>
+            bolt.service loaded active running Thunderbolt system service
+          </h5>
+
+          <p>It is quite possible that the services do not start due to an error. To see the problem, we can use the tool journalctl to view the logs.</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ journalctl -u ssh.service --no-pager<br>
+            <br>
+            -- Logs begin at Wed 2020-05-13 17:30:52 CEST, end at Fri 2020-05-15 16:00:14 CEST. --<br>
+            Mai 13 20:38:44 inlane systemd[1]: Starting OpenBSD Secure Shell server...<br>
+            Mai 13 20:38:44 inlane sshd[2722]: Server listening on 0.0.0.0 port 22.<br>
+            Mai 13 20:38:44 inlane sshd[2722]: Server listening on :: port 22.<br>
+            Mai 13 20:38:44 inlane systemd[1]: Started OpenBSD Secure Shell server.<br>
+            Mai 13 20:39:06 inlane sshd[3939]: Connection closed by 10.22.2.1 port 36444 [preauth]<br>
+            Mai 13 20:39:27 inlane sshd[3942]: Accepted password for master from 10.22.2.1 port 36452 ssh2<br>
+            Mai 13 20:39:27 inlane sshd[3942]: pam_unix(sshd:session): session opened for user master by (uid=0)<br>
+            Mai 13 20:39:28 inlane sshd[3942]: pam_unix(sshd:session): session closed for user master<br>
+            Mai 14 02:04:49 inlane sshd[2722]: Received signal 15; terminating.<br>
+            Mai 14 02:04:49 inlane systemd[1]: Stopping OpenBSD Secure Shell server...<br>
+            Mai 14 02:04:49 inlane systemd[1]: Stopped OpenBSD Secure Shell server.<br>
+            -- Reboot --
+          </h5>
+
+          <h4>Kill a Process</h4>
+
+          <p>A process can be in the following states:
+          <ul>
+            <li>Running</li>
+            <li>Waiting (waiting for an event or system resource)</li>
+            <li>Stopped</li>
+            <li>Zombie (stopped but still has an entry in the process table).</li>
+          </ul>
+
+          <p>Processes can be controlled using kill, pkill, pgrep, and killall. To interact with a process, we must send a signal to it. We can view all signals with the following command:</p>
+
+          <h5>
+            kalijester68@htb[/htb]$ kill -l
+          </h5>
 
-In general, there are two types of services: internal, the relevant services that are required at system startup, which for example, perform hardware-related tasks, and services that are installed by the user, which usually include all server services. Such services run in the background without any user interaction. These are also called daemons and are identified by the letter 'd' at the end of the program name, for example, sshd or systemd.
+          <p>The most commonly used are:
+          <ul>
+            <li>1 SIGHUP - This is sent to a process when the terminal that controls it is closed.</li>
+            <li>2 SIGINT - Sent when a user presses [Ctrl] + C in the controlling terminal to interrupt a process.</li>
+            <li>3 SIGQUIT - Sent when a user presses [Ctrl] + D to quit.</li>
+            <li>9 SIGKILL - Immediately kill a process with no clean-up operations.</li>
+            <li>15 SIGTERM - Program termination.</li>
+            <li>19 SIGSTOP - Stop the program. It cannot be handled anymore.</li>
+            <li>20 SIGTSTP - Sent when a user presses [Ctrl] + Z to request for a service to suspend. The user can handle it afterward.</li>
+          </ul>
 
-Most Linux distributions have now switched to systemd. This daemon is an Init process started first and thus has the process ID (PID) 1. This daemon monitors and takes care of the orderly starting and stopping of other services. All processes have an assigned PID that can be viewed under /proc/ with the corresponding number. Such a process can have a parent process ID (PPID), and if so, it is known as the child process.
+          <p>For example, if a program were to freeze, we could force to kill it with the following command:</p>
 
-Besides systemctl we can also use update-rc.d to manage SysV init script links. Let us have a look at some examples. We will use the OpenSSH server in these examples. If we do not have this installed, please install it before proceeding to this section.
-Systemctl
+          <h5>kalijester68@htb[/htb]$ kill 9 "PID"</h5>
 
-After installing OpenSSH on our VM, we can start the service with the following command.
-Service and Process Management
-
-kalijester68@htb[/htb]$ systemctl start ssh
-
-After we have started the service, we can now check if it runs without errors.
-Service and Process Management
-
-kalijester68@htb[/htb]$ systemctl status ssh
-
-● ssh.service - OpenBSD Secure Shell server
-   Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
-   Active: active (running) since Thu 2020-05-14 15:08:23 CEST; 24h ago
-   Main PID: 846 (sshd)
-   Tasks: 1 (limit: 4681)
-   CGroup: /system.slice/ssh.service
-           └─846 /usr/sbin/sshd -D
-
-Mai 14 15:08:22 inlane systemd[1]: Starting OpenBSD Secure Shell server...
-Mai 14 15:08:23 inlane sshd[846]: Server listening on 0.0.0.0 port 22.
-Mai 14 15:08:23 inlane sshd[846]: Server listening on :: port 22.
-Mai 14 15:08:23 inlane systemd[1]: Started OpenBSD Secure Shell server.
-Mai 14 15:08:30 inlane systemd[1]: Reloading OpenBSD Secure Shell server.
-Mai 14 15:08:31 inlane sshd[846]: Received SIGHUP; restarting.
-Mai 14 15:08:31 inlane sshd[846]: Server listening on 0.0.0.0 port 22.
-Mai 14 15:08:31 inlane sshd[846]: Server listening on :: port 22.
+          <h4>Background a Process</h4>
 
-To add OpenSSH to the SysV script to tell the system to run this service after startup, we can link it with the following command:
-Service and Process Management
+          <p>Sometimes it will be necessary to put the scan or process we just started in the background to continue using the current session to interact with the system or start other processes. As we have already seen, we can do this with the shortcut [Ctrl + Z]. As mentioned above, we send the SIGTSTP signal to the kernel, which suspends the process.</p>
 
-kalijester68@htb[/htb]$ systemctl enable ssh
+          <h5>
+            kalijester68@htb[/htb]$ ping -c 10 www.hackthebox.eu<br>
+            kalijester68@htb[/htb]$ vim tmpfile
+          </h5>
 
-Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.
-Executing: /lib/systemd/systemd-sysv-install enable ssh
+          <p>Now all background processes can be displayed with the following command.</p>
 
-Once we reboot the system, the OpenSSH server will automatically run. We can check this with a tool called ps.
-Service and Process Management
+          <h5>kalijester68@htb[/htb]$ jobs</h5>
 
-kalijester68@htb[/htb]$ ps -aux | grep ssh
+          <p>The [Ctrl] + Z shortcut suspends the processes, and they will not be executed further. To keep it running in the background, we have to enter the command bg to put the process in the background.</p>
 
-root       846  0.0  0.1  72300  5660 ?        Ss   Mai14   0:00 /usr/sbin/sshd -D
+          <h5>
+            kalijester68@htb[/htb]$ bg<br>
+            kalijester68@htb[/htb]$ <br>
+            --- www.hackthebox.eu ping statistics ---<br>
+            10 packets transmitted, 0 received, 100% packet loss, time 113482ms
+          </h5>
 
-We can also use systemctl to list all services.
-Service and Process Management
+          <p>Another option is to automatically set the process with an AND sign (&) at the end of the command.</p>
 
-kalijester68@htb[/htb]$ systemctl list-units --type=service
+          <h5>kalijester68@htb[/htb]$ ping -c 10 www.hackthebox.eu &</h5>
 
-UNIT                                                       LOAD   ACTIVE SUB     DESCRIPTION              
-accounts-daemon.service                                    loaded active running Accounts Service         
-acpid.service                                              loaded active running ACPI event daemon        
-apache2.service                                            loaded active running The Apache HTTP Server   
-apparmor.service                                           loaded active exited  AppArmor initialization  
-apport.service                                             loaded active exited  LSB: automatic crash repor
-avahi-daemon.service                                       loaded active running Avahi mDNS/DNS-SD Stack  
-bolt.service                                               loaded active running Thunderbolt system service
+          <p>Once the process finishes, we will see the results.</p>
 
-It is quite possible that the services do not start due to an error. To see the problem, we can use the tool journalctl to view the logs.
-Service and Process Management
+          <h5>
+            kalijester68@htb[/htb]$<br>
+            <br>
+            --- www.hackthebox.eu ping statistics ---<br>
+            10 packets transmitted, 0 received, 100% packet loss, time 9210ms
+          </h5>
 
-kalijester68@htb[/htb]$ journalctl -u ssh.service --no-pager
+          <h4>Foreground a Process</h4>
 
--- Logs begin at Wed 2020-05-13 17:30:52 CEST, end at Fri 2020-05-15 16:00:14 CEST. --
-Mai 13 20:38:44 inlane systemd[1]: Starting OpenBSD Secure Shell server...
-Mai 13 20:38:44 inlane sshd[2722]: Server listening on 0.0.0.0 port 22.
-Mai 13 20:38:44 inlane sshd[2722]: Server listening on :: port 22.
-Mai 13 20:38:44 inlane systemd[1]: Started OpenBSD Secure Shell server.
-Mai 13 20:39:06 inlane sshd[3939]: Connection closed by 10.22.2.1 port 36444 [preauth]
-Mai 13 20:39:27 inlane sshd[3942]: Accepted password for master from 10.22.2.1 port 36452 ssh2
-Mai 13 20:39:27 inlane sshd[3942]: pam_unix(sshd:session): session opened for user master by (uid=0)
-Mai 13 20:39:28 inlane sshd[3942]: pam_unix(sshd:session): session closed for user master
-Mai 14 02:04:49 inlane sshd[2722]: Received signal 15; terminating.
-Mai 14 02:04:49 inlane systemd[1]: Stopping OpenBSD Secure Shell server...
-Mai 14 02:04:49 inlane systemd[1]: Stopped OpenBSD Secure Shell server.
--- Reboot --
+          <p>After that, we can use the jobs command to list all background processes. Backgrounded processes do not require user interaction, and we can use the same shell session without waiting until the process finishes first. Once the scan or process finishes its work, we will get notified by the terminal that the process is finished.</p>
 
-Kill a Process
+          <h5>kalijester68@htb[/htb]$ jobs</h5>
 
-A process can be in the following states:
+          <p>If we want to get the background process into the foreground and interact with it again, we can use the fg "ID" command.</p>
 
-    Running
-    Waiting (waiting for an event or system resource)
-    Stopped
-    Zombie (stopped but still has an entry in the process table).
+          <h5>
+            kalijester68@htb[/htb]$ fg 1<br>
+            ping -c 10 www.hackthebox.eu<br>
+            <br>
+            --- www.hackthebox.eu ping statistics ---<br>
+            10 packets transmitted, 0 received, 100% packet loss, time 9206ms
+          </h5>
 
-Processes can be controlled using kill, pkill, pgrep, and killall. To interact with a process, we must send a signal to it. We can view all signals with the following command:
-Service and Process Management
+          <h4>Execute Multiple Commands</h4>
 
-kalijester68@htb[/htb]$ kill -l
+          <p>There are three possibilities to run several commands, one after the other. These are separated by:
+          <ul>
+            <li>Semicolon (;)</li>
+            <li>Double ampersand characters (&&)</li>
+            <li>Pipes (|)</li>
+          </ul>
 
- 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP
- 6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1
-11) SIGSEGV     12) SIGUSR2     13) SIGPIPE     14) SIGALRM     15) SIGTERM
-16) SIGSTKFLT   17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP
-21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU     25) SIGXFSZ
-26) SIGVTALRM   27) SIGPROF     28) SIGWINCH    29) SIGIO       30) SIGPWR
-31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3
-38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8
-43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13
-48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12
-53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7
-58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2
-63) SIGRTMAX-1  64) SIGRTMAX
+          <p>The difference between them lies in the previous processes' treatment and depends on whether the previous process was completed successfully or with errors. The semicolon (;) is a command separator and executes the commands by ignoring previous commands' results and errors.</p>
 
-The most commonly used are:
-Signal  Description
-1   SIGHUP - This is sent to a process when the terminal that controls it is closed.
-2   SIGINT - Sent when a user presses [Ctrl] + C in the controlling terminal to interrupt a process.
-3   SIGQUIT - Sent when a user presses [Ctrl] + D to quit.
-9   SIGKILL - Immediately kill a process with no clean-up operations.
-15  SIGTERM - Program termination.
-19  SIGSTOP - Stop the program. It cannot be handled anymore.
-20  SIGTSTP - Sent when a user presses [Ctrl] + Z to request for a service to suspend. The user can handle it afterward.
+          <h5>
+            kalijester68@htb[/htb]$ echo '1'; echo '2'; echo '3'<br>
+            <br>
+            1<br>
+            2<br>
+            3
+          </h5>
 
-For example, if a program were to freeze, we could force to kill it with the following command:
-Service and Process Management
+          <p>For example, if we execute the same command but replace it in second place, the command ls with a file that does not exist, we get an error, and the third command will be executed nevertheless.</p>
 
-kalijester68@htb[/htb]$ kill 9 <PID> 
+          <h5>
+            kalijester68@htb[/htb]$ echo '1'; ls MISSING_FILE; echo '3'<br>
+            <br>
+            1<br>
+            ls: cannot access 'MISSING_FILE': No such file or directory<br>
+            3
+          </h5>
 
-Background a Process
+          <p>However, it looks different if we use the double AND characters (&&) to run the commands one after the other. If there is an error in one of the commands, the following ones will not be executed anymore, and the whole process will be stopped.</p>
 
-Sometimes it will be necessary to put the scan or process we just started in the background to continue using the current session to interact with the system or start other processes. As we have already seen, we can do this with the shortcut [Ctrl + Z]. As mentioned above, we send the SIGTSTP signal to the kernel, which suspends the process.
-Service and Process Management
+          <h5>
+            kalijester68@htb[/htb]$ echo '1' && ls MISSING_FILE && echo '3'<br>
+            <br>
+            1<br>
+            ls: cannot access 'MISSING_FILE': No such file or directory
+          </h5>
 
-kalijester68@htb[/htb]$ ping -c 10 www.hackthebox.eu
-
-kalijester68@htb[/htb]$ vim tmpfile
-[Ctrl + Z]
-[2]+  Stopped                 vim tmpfile
-
-Now all background processes can be displayed with the following command.
-Service and Process Management
-
-kalijester68@htb[/htb]$ jobs
-
-[1]+  Stopped                 ping -c 10 www.hackthebox.eu
-[2]+  Stopped                 vim tmpfile
-
-The [Ctrl] + Z shortcut suspends the processes, and they will not be executed further. To keep it running in the background, we have to enter the command bg to put the process in the background.
-Service and Process Management
-
-kalijester68@htb[/htb]$ bg
-
-kalijester68@htb[/htb]$ 
---- www.hackthebox.eu ping statistics ---
-10 packets transmitted, 0 received, 100% packet loss, time 113482ms
-
-[ENTER]
-[1]+  Exit 1                  ping -c 10 www.hackthebox.eu
-
-Another option is to automatically set the process with an AND sign (&) at the end of the command.
-Service and Process Management
-
-kalijester68@htb[/htb]$ ping -c 10 www.hackthebox.eu &
-
-[1] 10825
-PING www.hackthebox.eu (172.67.1.1) 56(84) bytes of data.
-
-Once the process finishes, we will see the results.
-Service and Process Management
-
-kalijester68@htb[/htb]$ 
-
---- www.hackthebox.eu ping statistics ---
-10 packets transmitted, 0 received, 100% packet loss, time 9210ms
-
-[ENTER]
-[1]+  Exit 1                  ping -c 10 www.hackthebox.eu
-
-Foreground a Process
-
-After that, we can use the jobs command to list all background processes. Backgrounded processes do not require user interaction, and we can use the same shell session without waiting until the process finishes first. Once the scan or process finishes its work, we will get notified by the terminal that the process is finished.
-Service and Process Management
-
-kalijester68@htb[/htb]$ jobs
-
-[1]+  Running                 ping -c 10 www.hackthebox.eu &
-
-If we want to get the background process into the foreground and interact with it again, we can use the fg <ID> command.
-Service and Process Management
-
-kalijester68@htb[/htb]$ fg 1
-ping -c 10 www.hackthebox.eu
-
---- www.hackthebox.eu ping statistics ---
-10 packets transmitted, 0 received, 100% packet loss, time 9206ms
-
-Execute Multiple Commands
-
-There are three possibilities to run several commands, one after the other. These are separated by:
-
-    Semicolon (;)
-    Double ampersand characters (&&)
-    Pipes (|)
-
-The difference between them lies in the previous processes' treatment and depends on whether the previous process was completed successfully or with errors. The semicolon (;) is a command separator and executes the commands by ignoring previous commands' results and errors.
-Service and Process Management
-
-kalijester68@htb[/htb]$ echo '1'; echo '2'; echo '3'
-
-1
-2
-3
-
-For example, if we execute the same command but replace it in second place, the command ls with a file that does not exist, we get an error, and the third command will be executed nevertheless.
-Service and Process Management
-
-kalijester68@htb[/htb]$ echo '1'; ls MISSING_FILE; echo '3'
-
-1
-ls: cannot access 'MISSING_FILE': No such file or directory
-3
-
-However, it looks different if we use the double AND characters (&&) to run the commands one after the other. If there is an error in one of the commands, the following ones will not be executed anymore, and the whole process will be stopped.
-Service and Process Management
-
-kalijester68@htb[/htb]$ echo '1' && ls MISSING_FILE && echo '3'
-
-1
-ls: cannot access 'MISSING_FILE': No such file or directory
-
-Pipes (|) depend not only on the correct and error-free operation of the previous processes but also on the previous processes' results.
-
-VPN Servers
-
-Warning: Each time you "Switch", your connection keys are regenerated and you must re-download your VPN connection file.
-
-All VM instances associated with the old VPN Server will be terminated when switching to a new VPN server.
-Existing PwnBox instances will automatically switch to the new VPN server.
-
-PROTOCOL
-UDP 1337
-TCP 443
-
+          <p>Pipes (|) depend not only on the correct and error-free operation of the previous processes but also on the previous processes' results.</p>
 
         </div>
         <hr>
@@ -332,8 +297,9 @@ TCP 443
             <li><a href="regularExpressions.htm">Regular Expressions</a></li>
             <li><a href="permissionManagement.htm">Permission Management</a></li>
             <li><a href="userManagement.htm">User Management</a></li>
-            <li><a href="packageManagement.htm"><b><em>~ Package Management</em></b></a></li>
-            <li><a href="proccessManagement.htm">Service Proccess Management</a></li>
+            <li><a href="packageManagement.htm">Package Management</a></li>
+            <li><a href="proccessManagement.htm"><b><em>~ Service Proccess Management</em></b></a></li>
+            <li><a href="taskScheduling.htm">Task Scheduling</a></li>
           </ol>
         </div>
         <hr>
