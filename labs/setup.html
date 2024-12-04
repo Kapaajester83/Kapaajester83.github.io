@@ -57,21 +57,6 @@
 
         <h3>Setup</h3>
 
-        <h4>Open VPN</h4>
-
-        <p>GUI (Graphical User Interface)
-        <ul>
-          <li>Network Settings > "+" import from file</li>
-          <li>navigate to extracted .opvpn file</li>
-        </ul>
-
-        <p>CLI (Command Line Interface)</p>
-
-        <h5>
-          $ cd/ [directory].opvpn<br>
-          $ CTRL+C (to close terminal and end sesstion)
-        </h5>
-
         <h4>Virtualization</h4>
         <ul>
           <li><a href="https://www.virtualbox.org/">https://www.virtualbox.org</a></li>
@@ -123,26 +108,23 @@
           $ alias rot="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"
         </h5>
 
+        <h4>Open VPN</h4>
+
+        <h5>
+          $ cd/ [directory].opvpn<br>
+          $ CTRL+C (to close terminal and end sesstion)
+        </h5>
+
         <h4>Python3 Server</h4>
+
         <h5>
           kalijester68@htb[/htb]$ sudo apt install python3 -y<br>
           kalijester68@htb[/htb]$ python3 -m http.server<br>
-          CTRL + z (back to terminal)
+          CTRL + z (back to terminal)<br>
+          <br>
+          kalijester68@htb[/htb]$ python3 -m http.server --directory /home/cry0l1t3/target_files<br>
+          kalijester68@htb[/htb]$ python3 -m http.server 443
         </h5>
-
-        <p>Python Web Server will be started on the TCP/8000 port, and access to current folder.<br>
-          We can also host another folder with the following command:</p>
-
-        <h5>kalijester68@htb[/htb]$ python3 -m http.server --directory /home/cry0l1t3/target_files</h5>
-
-        <p>Start a Python web server on the TCP/8000 port.<br>
-          Access the /home/cry0l1t3/target_files folder from the browser.<br>
-          We can also host our Python web server on a port other than the default port by using the -p option:</p>
-
-        <h5>kalijester68@htb[/htb]$ python3 -m http.server 443</h5>
-
-        <p>Host our Python web server on port 443 instead of the default TCP/8000 port.<br>
-          We can access this web server by typing the link in our browser.</p>
 
       </div>
     </div>
