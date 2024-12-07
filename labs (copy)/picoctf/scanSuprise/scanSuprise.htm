@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>PicoCTF | Scan Suprise</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Pico CTF</a>
+        </h3>
+        <hr>
+        <h3>
+          <a href="https://play.picoctf.org/practice/challenge/444">Scan Suprise</a>
+        </h3>
+
+        <h4>Description</h4>
+        <p>
+          I've gotten bored of handing out flags as text. Wouldn't it be cool if they were an image instead? You can download the challenge files here:
+
+        <ul>
+          <li><a href="challenge.zip">challenge.zip</a></li>
+        </ul>
+
+        <p>The same files are accessible via SSH here: ssh -p 59056 ctf-player@atlas.picoctf.net Using the password 6dd28e9b.<br>
+          Accept the fingerprint with yes, and ls once connected to begin. Remember, in a shell, passwords are hidden!
+        </p>
+
+        <h4>Hints</h4>
+        <p>
+        <ol>
+          <li>QR codes are a way of encoding data. While they're most known for storing URLs, they can store other things too.</li>
+          <li>Mobile phones have included native QR code scanners in their cameras since version 8 (Oreo) and iOS 11</li>
+          <li>If you don't have access to a phone, you can also use zbar-tools to convert an image to text</li>
+        </ol>
+
+        <h4>Solution</h4>
+        <p>picoCTF{p33k_@_b00_a81f0a35}
+        </p>
+
+        <h4>CLI</h4>
+        <h5>Kappajester83-picoctf@webshell:~$ ssh -p 59056 ctf-player@atlas.picoctf.net<br><br>
+
+          The authenticity of host '[atlas.picoctf.net]:59056 ([18.217.83.136]:59056)' can't be established. ED25519 key fingerprint is SHA256:hVmbk/OaNT4902bBr7h26wfhmBuJWi4tub8AJqoAJCM. This key is not known by any other names
+          Are you sure you want to continue connecting (yes/no/[fingerprint])? yes<br><br>
+
+          Warning: Permanently added '[atlas.picoctf.net]:59056' (ED25519) to the list of known hosts.<br><br>
+
+          ctf-player@atlas.picoctf.net's password:<br>
+
+          ctf-player@challenge:~/drop-in$ cd home/ctf-player/drop-in<br>
+
+          picoCTF{p33k_@_b00_a81f0a35}<br>
+        </h5>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

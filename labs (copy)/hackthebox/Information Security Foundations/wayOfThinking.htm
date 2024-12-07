@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Security Foundations</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../informationSecurityFoundations.htm">Information Security Foundations</a></h4>
+          <ul>
+            <li><a href="wayOfThinking.htm"><b><em>~ Way of Thinking</em></b></a></li>
+            <li><a href="thinkOutsideBox.htm">Think Ouside The Box</a></li>
+          </ul>
+         </div>
+         <hr>
+
+        <div>
+          <h3><em>Way of Thinking</em></h3>
+          <p>
+            The field of information security is massive. It would be impossible for any one person to learn everything. Let us take the following example:
+          </p>
+          <p>
+            Imagine you want to become a programmer, and you know that there are more than 200 different programming languages that can be used to create applications that can be cracked by debugging or reverse engineering. If we learned every programming language within 100 hours, we would spend 20,000 hours or 2,500 days (8 hours per day) or, in other words, almost seven years to learn all of these programming languages. As a result, we spent seven years learning all these languages and never tried to debug or reverse engineer the program we created. Great! Let us spend another seven years learning to debug and reverse engineering.
+          </p>
+          <p>
+            We have got the idea. No one wants to spend so much time on just one area. Furthermore, this is not necessary. We will need some time to learn different technical principles, structures, and processes, but we will not need to spend seven years. Every programming language has its own strengths and weaknesses. Also, if we can obtain a deep understanding of a single programming language, we will learn others much faster. We do not need to learn every programming language to understand how to read their code. All of them follow the same principles which R. D. Tennent initially defined:
+          <ul>
+            <li>The Principle of Abstraction</li>
+            <li>The Principle of Correspondence</li>
+            <li>The Principle of Data Type Completeness</li>
+          </ul>
+          <p>
+            In information security, we have to learn and understand these principles, structures, and processes quickly. Additionally, we have to adapt our knowledge to the various environments we encounter. We will have many situations where we will not understand how "it" works. That is good. At this point, we have to find out what we do not know. More about that later.
+          </p>
+          <p>
+            There are many learning-focused information security communities available to us. Many of these communities provide free reviews of tested applications, vulnerable machines, and guides to help each other and improve their members' skills. When we speak with the other members, we will notice there are generally two types of people.
+          <ul>
+            <li>Those that do not know anything.</li>
+            <li>Those who think they do not know anything.</li>
+          </ul>
+          <p>
+            This can be very frustrating, and this is a normal part of the learning process. Communication within these communities should be respectful, always keeping in mind that we all started with zero knowledge of this field. This is a critical point of success for the community and everyone learning and working in this field. Within Hack The Box, we can use the Forum and Discord server to interact with the community.
+          <ul>
+            <li><a href="https://forum.hackthebox.com/">Forum: https://forum.hackthebox.eu</a></li>
+            <li><a href="https://discord.com/invite/hackthebox">Discord: https://discord.gg/hackthebox</a></li>
+          </ul>
+          <p>
+            Another important point is our knowledge level. Many people do not know their actual skill and knowledge level. This is a complicated topic because penetration testers must have a deep understanding of a wide variety of technologies. As previously mentioned, the problem in this field is the sheer volume of information available to us. We can learn about every topic and still not master any one area, or we can learn about just one topic and become an expert in it.
+          </p>
+          <p>
+            Another option is developing our research methodology, the learning process, and how to use this to improve our knowledge. We will be successful if we know how to search for the required information on the internet, and we know how to learn fast and adapt it to the environment we are working in. However, before we can do this, we have to learn and practice how to do it.
+          </p>
+          <p>
+            We will become a good penetration tester only through considerable practice. There is no other way to improve our practical skills. For example, we can read 50 books about programming, and we will understand how to read the code. This is the process of passive learning. This can be useful. However, if we need to write our own program, we have to practice active learning, which means we have to write code and test it on our own.
+          </p>
+          <p>
+            One of the most common questions is:
+          <ol>
+            <li>When is a penetration tester good enough?</li>
+            <li>We know that one person cannot know everything. In this case, we have to learn how to find, choose, and adapt the information we need.</li>
+          </ol>
+          The crucial missing term is: LEARN
+          <p>
+            The process of "learning how to learn" is not easy. Most people have never truly learned how to learn effectively. For example, in school, our teachers discussed some topics with our class. First, teachers show us just one way to solve a problem. They explained one way to solve the problem, and after that, they gave us exercises to practice further.
+          </p>
+          <p>
+            Let us take a closer look at the problem. Look at this simple math equation and try to solve it:
+          <ul>
+            <li>20 * ________+ ________ = 65535</li>
+          </ul>
+          This equation is easy to solve, but did we think about how many different ways are there to solve it?
+          <p>
+          <h3><em>Optional Exercise:</em></h3>
+          <ul>
+            <li>Ask yourself why you didn't solve the problem in a different way. Write it down and try to think about the reasons for choosing the method that you chose. Take as much time as you need for it before you continue.</li>
+          </ul>
+          <hr>
+
+          <div id="labs-table">
+            <h4><a href="../informationSecurityFoundations.htm">Information Security Foundations</a></h4>
+            <ol>
+              <li><a href="wayOfThinking.htm"><b><em>~ Way of Thinking</em></b></a></li>
+              <li><a href="thinkOutsideBox.htm">Think Ouside The Box</a></li>
+              <li><a href="occamsRazor.htm">Occam's Razor</a></li>
+              <li><a href="talent.htm">Talent</a></li>
+              <li><a href="wayOfLearning.htm">Way of Learning</a></li>
+              <li><a href="learningEfficiency.htm">Learning Efficiency</a></li>
+              <li><a href="learningTypes.htm">Learning Types</a></li>
+              <li><a href="theBrain.htm">The Brain</a></li>
+              <li><a href="theWill.htm">The Will</a></li>
+              <li><a href="theGoal.htm">The Goal</a></li>
+              <li><a href="decisionMaking.htm">Decision Making</a></li>
+              <li><a href="documentation.htm">Documentation</a></li>
+              <li><a href="organization.htm">Organization</a></li>
+              <li><a href="focus.htm">Focus</a></li>
+              <li><a href="attention.htm">Attention</a></li>
+              <li><a href="comfort.htm">Comfort</a></li>
+              <li><a href="obstacles.htm">Obstacles</a></li>
+              <li><a href="questioning.htm">Questioning</a></li>
+              <li><a href="handlingFrustration.htm">Handling Frustration</a></li>
+              <li><a href="learningProccess.htm">Learning Proccess</a></li>
+              <li><a href="conclusion.htm">Conclusion</a></li>
+            </ol>
+            <hr>
+        </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

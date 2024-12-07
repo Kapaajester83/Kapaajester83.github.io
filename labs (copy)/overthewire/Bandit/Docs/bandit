@@ -1,0 +1,1316 @@
+Over The Wire - Bandit
+
+Host:   bandit.labs.overthewire.org
+Port:   2220
+
+===
+Level 0
+
+Objective:
+
+The password for the next level is stored in a file called "readme" located in the home directory.  Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
+
+  $ ssh [user@]hostname -p [:port]
+  $ ssh bandit0@bandit.labs.overthewire.org -p 2220
+  password: bandit0
+
+CLI:
+
+  bandit0@bandit:~$ ls
+  readme
+  bandit0@bandit:~$ cat readme
+  NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+
+---
+Level 1
+
+$ ssh bandit1@bandit.labs.overthewire.org -p 2220
+password: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+
+Objective:
+
+The password for the next level is stored in a file called "-" located in the home directory.
+
+  Use flow redirection to read the file.
+
+CLI:
+
+  bandit1@bandit:~$ ls
+  -
+  bandit1@bandit:~$ cat < -
+  rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+
+---
+Level 2
+
+ssh bandit2@bandit.labs.overthewire.org -p 2220
+password: rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+
+Objective:
+
+The password for the next level is stored in a file called spaces in this filename located in the home directory.
+
+  Use cat "[filename with spaces]"
+
+CLI:
+
+  bandit2@bandit:~$ ls
+  spaces in this filename
+  bandit2@bandit:~$ cat "spaces in this filename"
+  aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+
+---
+Level 3
+
+ssh bandit3@bandit.labs.overthewire.org -p 2220
+password: aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+
+Objective:
+
+The password for the next level is stored in a hidden file in the inhere directory.
+
+  cd into directory
+  ls -a to show all files including hidden
+  cat .hidden
+
+CLI:
+
+  bandit3@bandit:~$ ls
+  inhere
+  bandit3@bandit:~$ cd inhere
+  bandit3@bandit:~/inhere$ ls
+  bandit3@bandit:~/inhere$ ls -a
+  .  ..  .hidden
+  bandit3@bandit:~/inhere$ cat .hidden
+  2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+  bandit3@bandit:~/inhere$ 
+
+---
+Level 4
+
+ssh bandit4@bandit.labs.overthewire.org -p 2220
+password: 2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+
+Objective:
+
+The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+
+  ls
+  file ./-file*
+  cat "./-file07"  
+
+CLI:
+
+  bandit4@bandit:~$ ls
+  inhere
+  bandit4@bandit:~$ cd inhere
+  bandit4@bandit:~/inhere$ ls
+  -file00  -file02  -file04  -file06  -file08
+  -file01  -file03  -file05  -file07  -file09
+  bandit4@bandit:~/inhere$ file ./-file*
+  ./-file00: data
+  ./-file01: data
+  ./-file02: data
+  ./-file03: data
+  ./-file04: data
+  ./-file05: data
+  ./-file06: data
+  ./-file07: ASCII text
+  ./-file08: data
+  ./-file09: data
+  bandit4@bandit:~/inhere$ cat "./-file07"
+  lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+  bandit4@bandit:~/inhere$ 
+
+---
+Level 5
+
+ssh bandit5@bandit.labs.overthewire.org -p 2220
+password: lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+
+Objective:
+
+The password for the next level is stored in a file somewhere under the "inhere" directory and has all of the following properties:
+
+    human-readable
+    1033 bytes in size
+    not executable
+
+  $ find -readable -size 1033c ! -executable
+
+  The find command with some flags
+    -readable is human-readable
+    -size 1033c means in bytes
+    ! -executable means not executable
+
+CLI:
+  
+  bandit5@bandit:~$ ls
+  inhere
+  bandit5@bandit:~$ cd inhere
+  bandit5@bandit:~/inhere$ ls
+  maybehere00  maybehere04  maybehere08  maybehere12  maybehere16
+  maybehere01  maybehere05  maybehere09  maybehere13  maybehere17
+  maybehere02  maybehere06  maybehere10  maybehere14  maybehere18
+  maybehere03  maybehere07  maybehere11  maybehere15  maybehere19
+  bandit5@bandit:~/inhere$ find -readable -size 1033c ! -executable
+  ./maybehere07/.file2
+  bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
+  P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+  bandit5@bandit:~/inhere$
+
+---
+Level 6
+
+ssh bandit6@bandit.labs.overthewire.org -p 2220
+password: P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+
+Objective:
+
+The password for the next level is stored somewhere on the server and has all of the following properties:
+
+    owned by user bandit7
+    owned by group bandit6
+    33 bytes in size
+
+  $ find / -user bandit7 -group bandit6 -size 33c 2>/dev/null
+
+    2>/dev/null will remove the errors because we are not in root for a "clean" result
+
+CLI:
+
+bandit6@bandit:~$ find / -user bandit7 -group bandit6 -size 33c 2>/dev/null
+/var/lib/dpkg/info/bandit7.password
+bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
+z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+bandit6@bandit:~
+
+---
+Level 7
+
+ssh bandit7@bandit.labs.overthewire.org -p 2220
+password: z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+
+Objective:
+
+The password for the next level is stored in the file data.txt next to the word millionth.
+
+  $cat data.txt | grep millionth
+
+    With the pipe "|" we can use cat and grep to look through the text file because they are on the same line.
+
+CLI:
+
+  bandit7@bandit:~$ du -b data.txt
+  4184396	data.txt
+  bandit7@bandit:~$ cat data.txt | grep millionth
+  millionth	TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+  bandit7@bandit:~$
+
+---
+Level 8
+
+ssh bandit8@bandit.labs.overthewire.org -p 2220
+password: TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+
+Objective:
+
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.
+
+$ sort data.txt | uniq -u
+
+CLI:
+
+bandit8@bandit:~$ ls
+data.txt
+bandit8@bandit:~$ sort data.txt | uniq -u
+EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+
+---
+Level 9
+
+ssh bandit9@bandit.labs.overthewire.org -p 2220
+password: EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+
+Objective:
+
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
+
+CLI:
+
+bandit9@bandit:~$ strings data.txt | grep ===
+x]T========== theG)"
+========== passwordk^
+========== is
+========== G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+bandit9@bandit:~$
+
+---
+Level 10
+
+ssh bandit10@bandit.labs.overthewire.org -p 2220
+password: G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+
+Objective:
+
+The password for the next level is stored in the file data.txt, which contains base64 encoded data.
+
+$ base64 -d data.txt
+
+CLI:
+
+bandit10@bandit:~$ base64 -d data.txt
+The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
+bandit10@bandit:~$
+
+---
+Level 11
+
+ssh bandit11@bandit.labs.overthewire.org -p 2220
+password: 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
+
+Objective:
+
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.
+
+$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+
+tr <old_chars> <new_chars> is the translate command
+ROT13 cipher: 'A-Za-z' 'N-ZA-Mn-za-m'
+ROT5 cipher: '5-90-4'
+
+CLI:
+
+bandit11@bandit:~$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+The password is JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
+bandit11@bandit:~$
+
+---
+Level 12
+
+ssh bandit12@bandit.labs.overthewire.org -p 2220
+password: JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
+
+Objective:
+
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+
+CLI:
+
+bandit12@bandit:~$ mktemp -d
+/tmp/tmp.tXJKa7KVxR
+bandit12@bandit:~$ cd /tmp/tmp.tXJKa7KVxR
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ cp ~/data.txt .
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+data.txt
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ mv data.txt hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ cat hexdump_data | head
+00000000: 1f8b 0808 6855 1e65 0203 6461 7461 322e  ....hU.e..data2.
+...
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ xxd -r hexdump_data compressed_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ mv compressed_data compressed_data.gz
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.gz  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ gzip -d compressed_data.gz
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ xxd compressed_data
+00000000: 425a 6839 3141 5926 5359 481b 3202 0000  BZh91AY&SYH.2...
+...
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ mv compressed_data compressed_data.bz2
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.bz2  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ bzip2 -d compressed_data.bz2
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ xxd compressed_data
+00000000: 1f8b 0808 6855 1e65 0203 6461 7461 342e  ....hU.e..data4.
+...
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ mv compressed_data compressed_data.gz
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.gz  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ gzip -d compressed_data.gz
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ cat compressed_data
+data5.bin0000644000000000000000000002400014507452550011247 0ustar  rootrootdata6.bin0000644000000000000000000000033114507452550011251 0ustar  rootrootBZh91AY&SYJ!�1����&�2i6��I�P�2���@�@4��k�ʀ@��8M|�V1@��P����2[j.�v'�1��s���TTI��V��*�A�^O
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ mv compressed_data compressed_data.tar
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.tar  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ tar -xf compressed_data.tar
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.tar  data5.bin  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ xxd data5.bin | head
+00000000: 6461 7461 362e 6269 6e00 0000 0000 0000  data6.bin.......
+...
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ tar -xf data5.bin
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.tar  data5.bin  data6.bin  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ xxd data6.bin | head
+00000000: 425a 6839 3141 5926 5359 0403 8894 0000  BZh91AY&SY......
+...
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ bzip2 -d data6.bin
+bzip2: Can't guess original name for data6.bin -- using data6.bin.out
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.tar  data5.bin  data6.bin.out  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ tar -xf data6.bin.out
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.tar  data5.bin  data6.bin.out  data8.bin  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ xxd data8.bin
+00000000: 1f8b 0808 6855 1e65 0203 6461 7461 392e  ....hU.e..data9.
+...
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ mv data8.bin data8.gz
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.tar  data5.bin  data6.bin.out  data8.gz  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ gzip -d data8.gz
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ ls
+compressed_data.tar  data5.bin  data6.bin.out  data8  hexdump_data
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$ cat data8
+The password is wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
+bandit12@bandit:/tmp/tmp.tXJKa7KVxR$
+
+---
+Level 13
+
+ssh bandit13@bandit.labs.overthewire.org -p 2220
+password: wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
+
+Objective:
+
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.
+
+
+
+CLI:
+
+bandit13@bandit:~$ ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
+The authenticity of host '[bandit.labs.overthewire.org]:2220 ([127.0.0.1]:2220)' can't be established.
+ED25519 key fingerprint is SHA256:C2ihUBV7ihnV1wUXRb4RrEcLfXC5CXlhmAAM/urerLY.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Could not create directory '/home/bandit13/.ssh' (Permission denied).
+Failed to add the host to the list of known hosts (/home/bandit13/.ssh/known_hosts).
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+!!! You are trying to log into this SSH server with a password on port 2220 from localhost.
+!!! Connecting from localhost is blocked to conserve resources.
+!!! Please log out and log in again.
+
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+  Enjoy your stay!
+
+bandit14@bandit:~$ whoami
+bandit14
+bandit14@bandit:~$ cat etc/bandit_pass/bandit14
+cat: etc/bandit_pass/bandit14: No such file or directory
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
+fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+bandit14@bandit:~$ 
+
+---
+Level 14
+
+ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
+password: fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+
+Objective:
+
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+
+CLI:
+
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
+fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+bandit14@bandit:~$ nc  localhost 30000
+fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+Correct!
+jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+
+---
+Level 15
+
+ssh bandit15@bandit.labs.overthewire.org -p 2220
+password: jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+
+Objective:
+
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
+
+CLI:
+
+bandit15@bandit:~$ openssl s_client -connect localhost:30001
+jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+Correct!
+JQttfApK4SeyHwDlI9SXGR50qclOAil1
+
+closed
+bandit15@bandit:~$
+
+---
+Level 16
+
+ssh bandit16@bandit.labs.overthewire.org -p 2220
+password: JQttfApK4SeyHwDlI9SXGR50qclOAil1
+
+Objective:
+
+The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+
+Run nmap
+openssl s_client
+save access key in /tmp
+chmod 600
+
+CLI:
+
+bandit16@bandit:~$ nmap -sV localhost -p 31000-32000
+Starting Nmap 7.80 ( https://nmap.org ) at 2024-03-31 18:28 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00012s latency).
+Not shown: 996 closed ports
+PORT      STATE SERVICE     VERSION
+31046/tcp open  echo
+31518/tcp open  ssl/echo
+31691/tcp open  echo
+31790/tcp open  ssl/unknown
+31960/tcp open  echo
+
+bandit16@bandit:~$ openssl s_client -connect localhost:31790
+
+bandit16@bandit:~$ cd /tmp
+bandit16@bandit:/tmp$ touch 17key
+bandit16@bandit:/tmp$ nano 17key
+bandit16@bandit:/tmp$ cat 17key
+bandit16@bandit:/tmp$ chmod 600 17key
+bandit16@bandit:/tmp$ ls -l 17key
+-rw------- 1 bandit16 bandit16 1675 Mar 31 20:59 17key
+bandit16@bandit:/tmp$ ssh -i 17key bandit17@localhost -p 2220
+
+---
+Level 17
+
+ssh bandit16@bandit.labs.overthewire.org -p 2220
+password: JQttfApK4SeyHwDlI9SXGR50qclOAil1
+bandit16@bandit:~$ cd /tmp
+bandit16@bandit:/temp$ ssh -i 17key bandit17@localhost -p 2220
+
+Objective:
+
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+
+diff prints the difference between two files.
+
+NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19.
+
+CLI:
+
+bandit17@bandit:~$ ls
+passwords.new  passwords.old
+bandit17@bandit:~$ diff passwords.old passwords.new
+42c42
+< p6ggwdNHncnmCNxuAt0KtKVq185ZU7AW
+---
+> hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+bandit17@bandit:~$
+
+---
+Level 18
+
+ssh bandit18@bandit.labs.overthewire.org -p 2220
+password: hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+
+Objective:
+
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+
+SSH also allows you to execute commands such as ls or cat.
+
+CLI:
+
+kali@Kali:~/Documents/CTF/OverTheWire$ ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+
+bandit18@bandit.labs.overthewire.org's password: 
+awhqfNnAbc1naukrpqDYcF95h7HoMTrC
+kali@Kali:~/Documents/CTF/OverTheWire$ 
+
+---
+Level 19
+
+ssh bandit19@bandit.labs.overthewire.org -p 2220
+password: awhqfNnAbc1naukrpqDYcF95h7HoMTrC
+
+Objective:
+
+To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+
+Suid is a special permission, it will replace "x" of the user permission. The binary will run as owner, not the one executing it.
+
+CLI:
+
+bandit19@bandit:~$ ls -la
+total 36
+drwxr-xr-x  2 root     root      4096 Oct  5 06:19 .
+drwxr-xr-x 70 root     root      4096 Oct  5 06:20 ..
+-rwsr-x---  1 bandit20 bandit19 14876 Oct  5 06:19 bandit20-do
+-rw-r--r--  1 root     root       220 Jan  6  2022 .bash_logout
+-rw-r--r--  1 root     root      3771 Jan  6  2022 .bashrc
+-rw-r--r--  1 root     root       807 Jan  6  2022 .profile
+bandit19@bandit:~$ ./bandit20-do
+Run a command as another user.
+  Example: ./bandit20-do id
+bandit19@bandit:~$ ./bandit20-do ls /etc/bandit_pass
+bandit0   bandit13  bandit18  bandit22	bandit27  bandit31  bandit6
+bandit1   bandit14  bandit19  bandit23	bandit28  bandit32  bandit7
+bandit10  bandit15  bandit2   bandit24	bandit29  bandit33  bandit8
+bandit11  bandit16  bandit20  bandit25	bandit3   bandit4   bandit9
+bandit12  bandit17  bandit21  bandit26	bandit30  bandit5
+bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass
+cat: /etc/bandit_pass: Is a directory
+bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass/bandit20
+VxCazJaVykI6W36BkBU0mJTCM8rR95XT
+bandit19@bandit:~$ 
+
+---
+Level 20
+
+ssh bandit20@bandit.labs.overthewire.org -p 2220
+password: VxCazJaVykI6W36BkBU0mJTCM8rR95XT
+
+Objective:
+
+There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21). NOTE: Try connecting to your own network daemon to see if it works as you think.
+
+To create a one-time server, send one message then disconnect, we use "|" and echo. Netcat will create a connection in server mode that listens for an inbound connecter.
+
+-l means listening
+-n prevents newline charactor
+& to run in background
+
+CLI:
+
+bandit20@bandit:~$ echo -n 'VxCazJaVykI6W36BkBU0mJTCM8rR95XT' | nc -l -p 1234 &
+[1] 1356183
+bandit20@bandit:~$ ./suconnect 1234
+Could not connect
+[1]+  Done                    echo -n 'VxCazJaVykI6W36BkBU0mJTCM8rR95XT' | nc -l -p 1234
+bandit20@bandit:~$ echo -n 'VxCazJaVykI6W36BkBU0mJTCM8rR95XT' | nc -l -p 1234 &
+[1] 1357707
+bandit20@bandit:~$ ./suconnect 1234
+Read: VxCazJaVykI6W36BkBU0mJTCM8rR95XT
+Password matches, sending next password
+NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
+bandit20@bandit:~$ 
+
+---
+Level 21
+
+ssh bandit21@bandit.labs.overthewire.org -p 2220
+password: NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
+
+Objective:
+
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+$ ls -la /etc/cron.d
+$ cat /usr/bin/cronjob_bandit22.sh
+$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+
+CLI:
+
+bandit21@bandit:~$ ls -la /etc/cron.d
+total 56
+drwxr-xr-x   2 root root  4096 Oct  5 06:20 .
+drwxr-xr-x 106 root root 12288 Oct  5 06:20 ..
+-rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit15_root
+-rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit17_root
+-rw-r--r--   1 root root   120 Oct  5 06:19 cronjob_bandit22
+-rw-r--r--   1 root root   122 Oct  5 06:19 cronjob_bandit23
+-rw-r--r--   1 root root   120 Oct  5 06:19 cronjob_bandit24
+-rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit25_root
+-rw-r--r--   1 root root   201 Jan  8  2022 e2scrub_all
+-rwx------   1 root root    52 Oct  5 06:20 otw-tmp-dir
+-rw-r--r--   1 root root   102 Mar 23  2022 .placeholder
+-rw-r--r--   1 root root   396 Feb  2  2021 sysstat
+bandit21@bandit:~$ cat /etc/cron.d/cronjob_bandit22
+@reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+bandit21@bandit:~$ cat /usr/bin/cronjob_bandit22.sh
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+bandit21@bandit:~$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
+bandit21@bandit:~$
+
+---
+Level 22
+
+ssh bandit22@bandit.labs.overthewire.org -p 2220
+password: WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
+
+Objective:
+
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+var_name=var_value    declare a variable
+var_name=$(command)   save output of command as variable
+$var_name             access existing variable
+
+CLI:
+
+bandit22@bandit:~$ ls -la /etc/cron.d
+total 56
+drwxr-xr-x   2 root root  4096 Oct  5 06:20 .
+drwxr-xr-x 106 root root 12288 Oct  5 06:20 ..
+-rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit15_root
+-rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit17_root
+-rw-r--r--   1 root root   120 Oct  5 06:19 cronjob_bandit22
+-rw-r--r--   1 root root   122 Oct  5 06:19 cronjob_bandit23
+-rw-r--r--   1 root root   120 Oct  5 06:19 cronjob_bandit24
+-rw-r--r--   1 root root    62 Oct  5 06:19 cronjob_bandit25_root
+-rw-r--r--   1 root root   201 Jan  8  2022 e2scrub_all
+-rwx------   1 root root    52 Oct  5 06:20 otw-tmp-dir
+-rw-r--r--   1 root root   102 Mar 23  2022 .placeholder
+-rw-r--r--   1 root root   396 Feb  2  2021 sysstat
+bandit22@bandit:~$ cat /etc/cron.d/cronjob_bandit23
+@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+bandit22@bandit:~$ cat /usr/bin/cronjob_bandit23.sh
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+bandit22@bandit:~$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+8ca319486bfbbc3663ea0fbe81326349
+bandit22@bandit:~$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
+bandit22@bandit:~$
+
+---
+Level 23
+
+ssh bandit23@bandit.labs.overthewire.org -p 2220
+password: QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
+
+Objective:
+
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+NOTE: Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.
+
+NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…
+
+CLI:
+
+bandit23@bandit:~$ mkdir /tmp/rand
+bandit23@bandit:~$ cd /tmp/rand
+bandit23@bandit:/tmp/rand$ touch script.sh
+bandit23@bandit:/tmp/rand$ ls
+script.sh
+bandit23@bandit:/tmp/rand$ nano script.sh
+  #!/bin/sh
+  chmod 777 pcdir123
+bandit23@bandit:/tmp/rand$ touch password
+bandit23@bandit:/tmp/rand$ cd ../
+bandit23@bandit:/tmp$ chmod 777 rand
+bandit23@bandit:/tmp$ cd rand
+bandit23@bandit:/tmp/rand$ cat script.sh
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/rand/password
+bandit23@bandit:/tmp/rand$ ls
+password  script.sh
+bandit23@bandit:/tmp/rand$ chmod 777 script.sh
+bandit23@bandit:/tmp/rand$ ls -la
+total 408
+drwxrwxrwx   2 bandit23 bandit23   4096 Apr  1 14:00 .
+drwxrwx-wt 103 root     root     405504 Apr  1 14:13 ..
+-rwxrwxrwx   1 bandit23 bandit23      0 Apr  1 13:53 password
+-rwxrwxrwx   1 bandit23 bandit23     63 Apr  1 13:53 script.sh
+bandit23@bandit:/tmp/rand$ cp script.sh /var/spool/bandit24/foo
+bandit23@bandit:/tmp/rand$ ls -la
+total 408
+drwxrwxrwx   2 bandit23 bandit23   4096 Apr  1 14:00 .
+drwxrwx-wt 103 root     root     405504 Apr  1 14:18 ..
+-rwxrwxrwx   1 bandit23 bandit23      0 Apr  1 13:53 password
+-rwxrwxrwx   1 bandit23 bandit23     63 Apr  1 13:53 script.sh
+bandit23@bandit:/tmp/rand$ ls
+password  script.sh
+bandit23@bandit:/tmp/rand$ cat password
+VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+bandit23@bandit:/tmp/rand$ 
+
+---
+Level 24
+
+ssh bandit24@bandit.labs.overthewire.org -p 2220
+password: VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+
+Objective:
+
+A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
+You do not need to create new connections each time.
+
+CLI:
+
+bandit24@bandit:~$ nc localhost 30002
+I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.
+Timeout. Exiting.
+
+bandit24@bandit:~$ mktemp -d
+/tmp/tmp.tj5NdkweE8
+bandit24@bandit:~$ cd /tmp/tmp.tj5NdkweE8
+bandit24@bandit:/tmp/tmp.tj5NdkweE8$ nano brute_force.sh
+Unable to create directory /home/bandit24/.local/share/nano/: No such file or directory
+It is required for saving/loading search history or cursor positions.
+bandit24@bandit:/tmp/tmp.tj5NdkweE8$ ls
+brute_force.sh
+  #!/bin/bash
+
+  pw=VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+  for i in {0000..9999}
+  do 
+          echo "$pw $i"
+  done |
+  nc localhost 30002
+
+bandit24@bandit:/tmp/tmp.tj5NdkweE8$ ls -l
+total 8
+-rwx------ 1 bandit24 bandit24 116 Apr  2 02:13 brute_force.sh
+-rw-rw-r-- 1 bandit24 bandit24 169 Apr  2 02:00 combinations.txt
+-rw-rw-r-- 1 bandit24 bandit24   0 Apr  2 01:59 combination.txt
+bandit24@bandit:/tmp/tmp.tj5NdkweE8$ chmod u+x brute_force.sh
+bandit24@bandit:/tmp/tmp.tj5NdkweE8$ ./brute_force.sh
+I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.
+Wrong! Please enter the correct pincode. Try again.
+Wrong! Please enter the correct pincode. Try again.
+Wrong! Please enter the correct pincode. Try again.
+Correct!
+The password of user bandit25 is p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d
+
+Exiting.
+bandit24@bandit:/tmp/tmp.tj5NdkweE8$ 
+
+---
+Level 25
+
+ssh bandit25@bandit.labs.overthewire.org -p 2220
+password: p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d
+
+Objective:
+
+Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
+
+CLI:
+
+bandit25@bandit:~$ ls -al bandit26.sshkey
+-r-------- 1 bandit25 bandit25 1679 Oct 16 14:00 bandit26.sshkey
+bandit25@bandit:~$ cat /etc/passwd | grep bandit26
+bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtextbandit25@bandit:~$ cat /usr/bin/showtext
+#!/bin/shexport TERM=linuxmore ~/text.txt
+exit 0
+
+  shrink terminal and v to use vim editor
+
+$ ssh bandit26@bandit.labs.overthewire.org -p 2220 -i bandit26.sshkey
+
+v
+: /etc/bandit_pass/bandit26
+
+c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1
+
+---
+
+Level 26
+
+ssh bandit26@bandit.labs.overthewire.org -p 2220
+password: c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1
+
+Objective:
+
+Good job getting a shell! Now hurry and grab the password for bandit27!
+
+Just like 25, shrink the terminal so you get the "more option" and then v to enter vim
+
+
+
+CLI:
+
+bandit26@bandit:~$ whoami
+bandit26
+bandit26@bandit:~$ ls
+bandit27-do  text.txt
+bandit26@bandit:~$ ./bandit27-do
+Run a command as another user.
+  Example: ./bandit27-do id
+bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27
+YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS
+bandit26@bandit:~$ 
+
+---
+Level 27
+
+ssh bandit27@bandit.labs.overthewire.org -p 2220
+password: YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS
+
+Objective:
+
+There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo via the port 2220. The password for the user bandit27-git is the same as for the user bandit27.
+
+Clone the repository and find the password for the next level.
+
+CLI:
+
+bandit27@bandit:~$ mktemp -d
+/tmp/tmp.KuHdXPAYk2
+bandit27@bandit:~$ cd /tmp/tmp.KuHdXPAYk2
+bandit27@bandit:/tmp/tmp.KuHdXPAYk2$ ls
+
+bandit27@bandit:/tmp/tmp.KuHdXPAYk2$ git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo
+Cloning into 'repo'...
+bandit27-git@localhost's password: 
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (3/3), done.
+
+bandit27@bandit:/tmp/tmp.KuHdXPAYk2$ ls
+repo
+bandit27@bandit:/tmp/tmp.KuHdXPAYk2$ cd repo
+bandit27@bandit:/tmp/tmp.KuHdXPAYk2/repo$ 
+bandit27@bandit:/tmp/tmp.KuHdXPAYk2/repo$ ls -la
+total 16
+drwxrwxr-x 3 bandit27 bandit27 4096 Apr  2 19:43 .
+drwx------ 3 bandit27 bandit27 4096 Apr  2 19:43 ..
+drwxrwxr-x 8 bandit27 bandit27 4096 Apr  2 19:43 .git
+-rw-rw-r-- 1 bandit27 bandit27   68 Apr  2 19:43 README
+bandit27@bandit:/tmp/tmp.KuHdXPAYk2/repo$ cat README
+The password to the next level is: AVanL161y9rsbcJIsFHuw35rjaOM19nR
+bandit27@bandit:/tmp/tmp.KuHdXPAYk2/repo$ 
+
+---
+Level 28
+
+ssh bandit28@bandit.labs.overthewire.org -p 2220
+password: AVanL161y9rsbcJIsFHuw35rjaOM19nR
+
+Objective:
+
+There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo via the port 2220. The password for the user bandit28-git is the same as for the user bandit28.
+
+Clone the repository and find the password for the next level.
+
+CLI:
+===
+Template
+
+ssh bandit[]@bandit.labs.overthewire.org -p 2220
+password: 
+
+Objective:
+
+CLI:
+
+bandit28@bandit:~$ mktemp -d
+/tmp/tmp.KWGAJSSlGx
+bandit28@bandit:~$ cd /tmp/tmp.KWGAJSSlGx
+
+bandit28@bandit:/tmp/tmp.KWGAJSSlGx$ git clone ssh://bandit28-git@localhost:2220/home/bandit28-git/repo
+Cloning into 'repo'...
+bandit28-git@localhost's password: 
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 9 (delta 2), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (9/9), done.
+Resolving deltas: 100% (2/2), done.
+
+bandit28@bandit:/tmp/tmp.KWGAJSSlGx$ ls
+repo
+bandit28@bandit:/tmp/tmp.KWGAJSSlGx$ cd repo
+bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$ ls -la
+total 16
+drwxrwxr-x 3 bandit28 bandit28 4096 Apr  2 20:04 .
+drwx------ 3 bandit28 bandit28 4096 Apr  2 20:04 ..
+drwxrwxr-x 8 bandit28 bandit28 4096 Apr  2 20:04 .git
+-rw-rw-r-- 1 bandit28 bandit28  111 Apr  2 20:04 README.md
+
+bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$ cat README.md
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+
+
+bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$ git log
+commit 14f754b3ba6531a2b89df6ccae6446e8969a41f3 (HEAD -> master, origin/master, origin/HEAD)
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu Oct 5 06:19:41 2023 +0000
+
+    fix info leak
+
+commit f08b9cc63fa1a4602fb065257633c2dae6e5651b
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu Oct 5 06:19:41 2023 +0000
+
+    add missing data
+
+commit a645bcc508c63f081234911d2f631f87cf469258
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu Oct 5 06:19:41 2023 +0000
+
+    initial commit of README.md
+bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$ git show f08b9cc63fa1a4602fb065257633c2dae6e5651b
+commit f08b9cc63fa1a4602fb065257633c2dae6e5651b
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu Oct 5 06:19:41 2023 +0000
+
+    add missing data
+
+diff --git a/README.md b/README.md
+index 7ba2d2f..b302105 100644
+--- a/README.md
++++ b/README.md
+@@ -4,5 +4,5 @@ Some notes for level29 of bandit.
+ ## credentials
+ 
+ - username: bandit29
+-- password: <TBD>
++- password: tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S
+ 
+bandit28@bandit:/tmp/tmp.KWGAJSSlGx/repo$
+
+--- Level 29
+
+ssh bandit29@bandit.labs.overthewire.org -p 2220
+password: tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S
+
+Objective:
+
+There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29.
+
+Clone the repository and find the password for the next level.
+
+CLI:
+
+bandit29@bandit:~$ mktemp -d
+/tmp/tmp.kLJgDrE6Pl
+bandit29@bandit:~$ cd /tmp/tmp.kLJgDrE6Pl
+
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl$ git clone ssh://bandit29-git@localhost:2220/home/bandit29-git/repo
+Cloning into 'repo'...
+bandit29-git@localhost's password: 
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 16 (delta 2), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (16/16), done.
+Resolving deltas: 100% (2/2), done.
+
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl$ ls
+repo
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl$ cd repo
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl/repo$ ls -la
+total 16
+drwxrwxr-x 3 bandit29 bandit29 4096 Apr  2 20:25 .
+drwx------ 3 bandit29 bandit29 4096 Apr  2 20:25 ..
+drwxrwxr-x 8 bandit29 bandit29 4096 Apr  2 20:25 .git
+-rw-rw-r-- 1 bandit29 bandit29  131 Apr  2 20:25 README.md
+
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl/repo$ cat README.md
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: <no passwords in production!>
+
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl/repo$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/dev
+  remotes/origin/master
+  remotes/origin/sploits-dev
+
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl/repo$ git checkout dev
+Branch 'dev' set up to track remote branch 'dev' from 'origin'.
+Switched to a new branch 'dev'
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl/repo$ ls -la
+total 20
+drwxrwxr-x 4 bandit29 bandit29 4096 Apr  2 20:26 .
+drwx------ 3 bandit29 bandit29 4096 Apr  2 20:25 ..
+drwxrwxr-x 2 bandit29 bandit29 4096 Apr  2 20:26 code
+drwxrwxr-x 8 bandit29 bandit29 4096 Apr  2 20:26 .git
+-rw-rw-r-- 1 bandit29 bandit29  134 Apr  2 20:26 README.md
+
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl/repo$ cat README.md
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS
+
+bandit29@bandit:/tmp/tmp.kLJgDrE6Pl/repo$
+
+---
+Level 30
+
+ssh bandit30@bandit.labs.overthewire.org -p 2220
+password: xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS
+
+Objective:
+
+There is a git repository at ssh://bandit30-git@localhost:2220/home/bandit30-git/repo via the port 2220. The password for the user bandit30-git is the same as for the user bandit30.
+
+Clone the repository and find the password for the next level.
+
+CLI:
+
+bandit30@bandit:~$ mktemp -d
+/tmp/tmp.8MJdmmbENz
+bandit30@bandit:~$ cd /tmp/tmp.8MJdmmbENz
+
+bandit30@bandit:/tmp/tmp.8MJdmmbENz$ git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo
+Cloning into 'repo'...
+bandit30-git@localhost's password: 
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (4/4), done.
+bandit30@bandit:/tmp/tmp.8MJdmmbENz$ ls
+repo
+
+bandit30@bandit:/tmp/tmp.8MJdmmbENz$ cd repo
+bandit30@bandit:/tmp/tmp.8MJdmmbENz/repo$ ls
+README.md
+bandit30@bandit:/tmp/tmp.8MJdmmbENz/repo$ cat README.md
+just an epmty file... muahaha
+bandit30@bandit:/tmp/tmp.8MJdmmbENz/repo$ git tag
+secret
+bandit30@bandit:/tmp/tmp.8MJdmmbENz/repo$ git show secret
+OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt
+bandit30@bandit:/tmp/tmp.8MJdmmbENz/repo$
+
+---
+Level 31
+
+ssh bandit31@bandit.labs.overthewire.org -p 2220
+password: OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt
+
+Objective:
+
+There is a git repository at ssh://bandit31-git@localhost:2220/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31.
+
+Clone the repository and find the password for the next level.
+
+CLI:
+
+bandit31@bandit:~$ mktemp -d
+/tmp/tmp.lgVyuuL42w
+bandit31@bandit:~$ /tmp/tmp.lgVyuuL42w
+-bash: /tmp/tmp.lgVyuuL42w: Is a directory
+bandit31@bandit:~$ cd /tmp/tmp.lgVyuuL42w
+
+bandit31@bandit:/tmp/tmp.lgVyuuL42w$ git clone ssh://bandit31-git@localhost:2220/home/bandit31-git/repo
+Cloning into 'repo'...
+bandit31-git@localhost's password: 
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (4/4), done.
+
+bandit31@bandit:/tmp/tmp.lgVyuuL42w$ ls
+repo
+bandit31@bandit:/tmp/tmp.lgVyuuL42w$ cd repo
+bandit31@bandit:/tmp/tmp.lgVyuuL42w/repo$ ls -la
+total 20
+drwxrwxr-x 3 bandit31 bandit31 4096 Apr  2 21:26 .
+drwx------ 3 bandit31 bandit31 4096 Apr  2 21:26 ..
+drwxrwxr-x 8 bandit31 bandit31 4096 Apr  2 21:26 .git
+-rw-rw-r-- 1 bandit31 bandit31    6 Apr  2 21:26 .gitignore
+-rw-rw-r-- 1 bandit31 bandit31  147 Apr  2 21:26 README.md
+bandit31@bandit:/tmp/tmp.lgVyuuL42w/repo$ cat README.md
+This time your task is to push a file to the remote repository.
+
+Details:
+    File name: key.txt
+    Content: 'May I come in?'
+    Branch: master
+
+bandit31@bandit:/tmp/tmp.lgVyuuL42w/repo$ echo 'May I come in?' > key.txt
+bandit31@bandit:/tmp/tmp.lgVyuuL42w/repo$ ls -la
+total 24
+drwxrwxr-x 3 bandit31 bandit31 4096 Apr  2 21:30 .
+drwx------ 3 bandit31 bandit31 4096 Apr  2 21:26 ..
+drwxrwxr-x 8 bandit31 bandit31 4096 Apr  2 21:26 .git
+-rw-rw-r-- 1 bandit31 bandit31    6 Apr  2 21:26 .gitignore
+-rw-rw-r-- 1 bandit31 bandit31   15 Apr  2 21:30 key.txt
+-rw-rw-r-- 1 bandit31 bandit31  147 Apr  2 21:26 README.md
+
+bandit31@bandit:/tmp/tmp.lgVyuuL42w/repo$ git add -f key.txt
+bandit31@bandit:/tmp/tmp.lgVyuuL42w/repo$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   key.txt
+
+bandit31@bandit:/tmp/tmp.lgVyuuL42w/repo$ git commit -a
+bandit31-git@localhost's password: 
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 321 bytes | 321.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: ### Attempting to validate files... ####
+remote: 
+remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+remote: 
+remote: Well done! Here is the password for the next level:
+remote: rmCBvG56y58BXzv98yZGdO7ATVL5dW8y 
+remote: 
+remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+
+bandit31@bandit:/tmp/tmp.lgVyuuL42w/repo$
+
+---
+Level 32
+
+ssh bandit32@bandit.labs.overthewire.org -p 2220
+password: rmCBvG56y58BXzv98yZGdO7ATVL5dW8y
+
+Objective:
+
+After all this git stuff its time for another escape. Good luck!
+
+CLI:
+
+WELCOME TO THE UPPERCASE SHELL
+>> ls
+sh: 1: LS: Permission denied
+>> $0
+$ ls -la
+total 36
+drwxr-xr-x  2 root     root      4096 Oct  5 06:19 .
+drwxr-xr-x 70 root     root      4096 Oct  5 06:20 ..
+-rw-r--r--  1 root     root       220 Jan  6  2022 .bash_logout
+-rw-r--r--  1 root     root      3771 Jan  6  2022 .bashrc
+-rw-r--r--  1 root     root       807 Jan  6  2022 .profile
+-rwsr-x---  1 bandit33 bandit32 15128 Oct  5 06:19 uppershell
+$ whoami
+bandit33
+$ cat /etc/bandit\_pass/bandit33
+odHo63fHiFqcWWJG9rLiLDtPm45KzUKy
+$ 
+
+---
+Level 33
+
+ssh bandit33@bandit.labs.overthewire.org -p 2220
+password: odHo63fHiFqcWWJG9rLiLDtPm45KzUKy
+
+CLI:
+
+bandit33@bandit:~$ ls
+README.txt
+bandit33@bandit:~$ cat README.txt
+Congratulations on solving the last level of this game!
+
+At this moment, there are no more levels to play in this game. However, we are constantly working
+on new levels and will most likely expand this game with more levels soon.
+Keep an eye out for an announcement on our usual communication channels!
+In the meantime, you could play some of our other wargames.
+
+If you have an idea for an awesome new level, please let us know!
+bandit33@bandit:~$ 
+
+===
+Resources
+
+man ssh
+man ls
+man cat
+man file
+man du
+man find
+man grep
+man sort
+man uniq
+man strings
+man base64
+man tr
+man tar
+man gzip
+man bzip2
+man xxd
+man mkdir
+man cp
+man mv
+man telnet
+man nc
+man openssl
+man s_client
+man nmap
+man bash
+man screen
+man tmux
+man Unix 
+man job control’ (bg, fg, jobs, &, CTRL-Z, …)
+man cron, 
+man crontab
+man crontab(5) (use “man 5 crontab” to access this)
+man more
+man vi
+man ls
+man id
+man pwd
+man sh
+

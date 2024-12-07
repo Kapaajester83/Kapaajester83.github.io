@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Linux Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../linuxFundamentals.htm">Linux Fundamentals</a></h4>
+          <ul>
+            <li><a href="linuxSecurity.htm">Linux Security</a></li>
+            <li><a href="firewallSetup.htm"><b><em>~ Firewall Setup</em></b></a></li>
+            <li><a href="logsMonitoring.htm">System Logs and Monitoring</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Firewall Setup</em></h3>
+
+          <p>The primary goal of firewalls is to provide a security mechanism for controlling and monitoring network traffic between different network segments, such as internal and external networks or different network zones. Firewalls play a crucial role in protecting computer networks from unauthorized access, malicious traffic, and other security threats. Linux, being a popular operating system used in servers and other network devices, provides built-in firewall capabilities that can be used to control network traffic. In other words, they can filter incoming and outgoing traffic based on pre-defined rules, protocols, ports, and other criteria to prevent unauthorized access and mitigate security threats. The specific goal of a firewall implementation can vary depending on the specific needs of the organization, such as ensuring the confidentiality, integrity, and availability of network resources.</p>
+
+          <p>An example from the history of Linux firewalls is the development of the iptables tool, which replaced the earlier ipchains and ipfwadm tools. The iptables utility was first introduced in the Linux 2.4 kernel in 2000 and provided a flexible and efficient mechanism for filtering network traffic. iptables became the de facto standard firewall solution for Linux systems, and it has been widely adopted by many organizations and users.</p>
+
+          <p>The iptables utility provided a simple yet powerful command-line interface for configuring firewall rules, which could be used to filter traffic based on various criteria such as IP addresses, ports, protocols, and more. iptables was designed to be highly customizable and could be used to create complex firewall rulesets that could protect against various security threats such as denial-of-service (DoS) attacks, port scans, and network intrusion attempts.</p>
+
+          <p>In Linux, the firewall functionality is typically implemented using the Netfilter framework, which is an integral part of the kernel. Netfilter provides a set of hooks that can be used to intercept and modify network traffic as it passes through the system. The iptables utility is commonly used to configure the firewall rules on Linux systems.</p>
+
+          <h4>Iptables</h4>
+
+          <p>The iptables utility provides a flexible set of rules for filtering network traffic based on various criteria such as source and destination IP addresses, port numbers, protocols, and more. There also exist other solutions like nftables, ufw, and firewalld. Nftables provides a more modern syntax and improved performance over iptables. However, the syntax of nftables rules is not compatible with iptables, so migration to nftables requires some effort. UFW stands for “Uncomplicated Firewall” and provides a simple and user-friendly interface for configuring firewall rules. UFW is built on top of the iptables framework like nftables and provides an easier way to manage firewall rules. Finally, FirewallD provides a dynamic and flexible firewall solution that can be used to manage complex firewall configurations, and it supports a rich set of rules for filtering network traffic and can be used to create custom firewall zones and services. It consists of several components that work together to provide a flexible and powerful firewall solution. The main components of iptables are:
+          <ul>
+            <li><b>Tables - Tables are used to organize and categorize firewall rules.</b></li>
+            <li><b>Chains - Chains are used to group a set of firewall rules applied to a specific type of network traffic.</b></li>
+            <li><b>Rules - Rules define the criteria for filtering network traffic and the actions to take for packets that match the criteria.</b></li>
+
+            <li><b>Matches - Matches are used to match specific criteria for filtering network traffic, such as source or destination IP addresses, ports, protocols, and more.</b></li>
+
+            <li><b>Targets - Targets specify the action for packets that match a specific rule. For example, targets can be used to accept, drop, or reject packets or modify the packets in another way.</b></li>
+          </ul>
+
+          <h4>Tables</h4>
+
+          <p>When working with firewalls on Linux systems, it is important to understand how tables work in iptables. Tables in iptables are used to categorize and organize firewall rules based on the type of traffic that they are designed to handle. These tables are used to organize and categorize firewall rules. Each table is responsible for performing a specific set of tasks.
+          <ul>
+            <li><b>filter - Used to filter network traffic based on IP addresses, ports, and protocols. INPUT, OUTPUT, FORWARD</b></li>
+            <li><b>nat - Used to modify the source or destination IP addresses of network packets. PREROUTING, POSTROUTING</b></li>
+            <li><b>mangle Used to modify the header fields of network packets. PREROUTING, OUTPUT, INPUT, FORWARD, POSTROUTING</b></li>
+          </ul>
+
+          <p>In addition to the built-in tables, iptables provides a fourth table called the raw table, which is used to configure special packet processing options. The raw table contains two built-in chains: PREROUTING and OUTPUT.</p>
+
+          <h4>Chains</h4>
+
+          <p>In iptables, chains organize rules that define how network traffic should be filtered or modified. There are two types of chains in iptables:
+          <ul>
+            <li>Built-in chains</li>
+            <li>User-defined chains</li>
+          </ul>
+
+          <p>The built-in chains are pre-defined and automatically created when a table is created. Each table has a different set of built-in chains. For example, the filter table has three built-in chains:
+          <ul>
+            <li>INPUT</li>
+            <li>OUTPUT</li>
+            <li>FORWARD</li>
+          </ul>
+
+          <p>These chains are used to filter incoming and outgoing network traffic, as well as traffic that is being forwarded between different network interfaces. The nat table has two built-in chains:
+          <ul>
+            <li>PREROUTING</li>
+            <li>POSTROUTING</li>
+          </ul>
+
+          <p>The PREROUTING chain is used to modify the destination IP address of incoming packets before the routing table processes them. The POSTROUTING chain is used to modify the source IP address of outgoing packets after the routing table has processed them. The mangle table has five built-in chains:
+          <ul>
+            <li>PREROUTING</li>
+            <li>OUTPUT</li>
+            <li>INPUT</li>
+            <li>FORWARD</li>
+            <li>POSTROUTING</li>
+          </ul>
+
+          <p>These chains are used to modify the header fields of incoming and outgoing packets and packets being processed by the corresponding chains.</p>
+
+          <p>User-defined chains can simplify rule management by grouping firewall rules based on specific criteria, such as source IP address, destination port, or protocol. They can be added to any of the three main tables. For example, if an organization has multiple web servers that all require similar firewall rules, the rules for each server could be grouped in a user-defined chain. Another example is when a user-defined chain could filter traffic destined for a specific port, such as port 80 (HTTP). The user could then add rules to this chain that specifically filter traffic destined for port 80.</p>
+
+          <h4>Rules and Targets</h4>
+
+          <p>Iptables rules are used to define the criteria for filtering network traffic and the actions to take for packets that match the criteria. Rules are added to chains using the -A option followed by the chain name, and they can be modified or deleted using various other options.</p>
+
+          <p>Each rule consists of a set of criteria or matches and a target specifying the action for packets that match the criteria. The criteria or matches match specific fields in the IP header, such as the source or destination IP address, protocol, source, destination port number, and more. The target specifies the action for packets that match the criteria. They specify the action to take for packets that match a specific rule. For example, targets can accept, drop, reject, or modify the packets. Some of the common targets used in iptables rules include the following:
+          <ul>
+            <li><b>ACCEPT - Allows the packet to pass through the firewall and continue to its destination</b></li>
+            <li><b>DROP - Drops the packet, effectively blocking it from passing through the firewall</b></li>
+            <li><b>REJECT - Drops the packet and sends an error message back to the source address, notifying them that the packet was blocked</b></li>
+            <li><b>LOG - Logs the packet information to the system log</b></li>
+            <li><b>SNAT - Modifies the source IP address of the packet, typically used for Network Address Translation (NAT) to translate private IP addresses to public IP addresses</b></li>
+
+            <li><b>DNAT - Modifies the destination IP address of the packet, typically used for NAT to forward traffic from one IP address to another</b></li>
+
+            <li><b>MASQUERADE - Similar to SNAT but used when the source IP address is not fixed, such as in a dynamic IP address scenario</b></li>
+            <li><b>REDIRECT - Redirects packets to another port or IP address</b></li>
+            <li><b>MARK - Adds or modifies the Netfilter mark value of the packet, which can be used for advanced routing or other purposes</b></li>
+          </ul>
+
+          <p>Let us illustrate a rule and consider that we want to add a new entry to the INPUT chain that allows incoming TCP traffic on port 22 (SSH) to be accepted. The command for that would look like the following:</p>
+
+          <h4>Firewall Setup</h4>
+
+          <h5>kalijester68@htb[/htb]$ sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT</h5>
+
+          <h4>Matches</h4>
+
+          <p>Matches are used to specify the criteria that determine whether a firewall rule should be applied to a particular packet or connection. Matches are used to match specific characteristics of network traffic, such as the source or destination IP address, protocol, port number, and more.
+          <ul>
+            <li><b>-p or --protocol</b> - Specifies the protocol to match (e.g. tcp, udp, icmp)</li>
+            <li><b>--dport</b> - Specifies the destination port to match</li>
+            <li><b>--sport</b> - Specifies the source port to match</li>
+            <li><b>-s or --source</b> - Specifies the source IP address to match</li>
+            <li><b>-d or --destination</b> - Specifies the destination IP address to match</li>
+            <li><b>-m state</b> - Matches the state of a connection (e.g. NEW, ESTABLISHED, RELATED)</li>
+            <li><b>-m multiport</b> - Matches multiple ports or port ranges</li>
+            <li><b>-m tcp</b> - Matches TCP packets and includes additional TCP-specific options</li>
+            <li><b>-m udp</b> - Matches UDP packets and includes additional UDP-specific options</li>
+            <li><b>-m string</b> - Matches packets that contain a specific string</li>
+            <li><b>-m limit</b> - Matches packets at a specified rate limit</li>
+            <li><b>-m conntrack</b> - Matches packets based on their connection tracking information</li>
+            <li><b>-m mark</b> - Matches packets based on their Netfilter mark value</li>
+            <li><b>-m mac</b> - Matches packets based on their MAC address</li>
+            <li><b>-m iprange</b> - Matches packets based on a range of IP addresses</li>
+          </ul>
+
+          <p>In general, matches are specified using the '-m' option in iptables. For example, the following command adds a rule to the 'INPUT' chain in the 'filter' table that matches incoming TCP traffic on port 80:</p>
+
+          <h4>Firewall Setup</h4>
+
+          <h5>kalijester68@htb[/htb]$ sudo iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT</h5>
+
+          <p>This example rule matches incoming TCP traffic (-p tcp) on port 80 (--dport 80) and jumps to the accept target (-j ACCEPT) if the match is successful.
+          <ol>
+            <li>Launch a web server on TCP/8080 port on your target and use iptables to block incoming traffic on that port.</li>
+            <li>Change iptables rules to allow incoming traffic on the TCP/8080 port.</li>
+            <li>Block traffic from a specific IP address.</li>
+            <li>Allow traffic from a specific IP address.</li>
+            <li>Block traffic based on protocol.</li>
+            <li>Allow traffic based on protocol.</li>
+            <li>Create a new chain.</li>
+            <li>Forward traffic to a specific chain.</li>
+            <li>Delete a specific rule.</li>
+            <li>List all existing rules.</li>
+          </ol>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../linuxFundamentals.htm">Linux Fundamentals</a></h4>
+          <ol>
+            <li><a href="linuxStructure.htm">Linux Structure</a></li>
+            <li><a href="linuxDistributions.htm">Linux Distributions</a></li>
+            <li><a href="shell.htm">Introduction to Shell</a></li>
+            <li><a href="promptDescription.htm">Prompt Description</a></li>
+            <li><a href="gettingHelp.htm">Getting Help</a></li>
+            <li><a href="systemInformation.htm">System Information</a></li>
+            <li><a href="navigation.htm">Navigation</a></li>
+            <li><a href="filesDirectories.htm">Working with Files and Directories</a></li>
+            <li><a href="editingFiles.htm">Editing Files</a></li>
+            <li><a href="findFilesDirectories.htm">Find Files and Directories</a></li>
+            <li><a href="redirection.htm">File Description and Redirection</a></li>
+            <li><a href="filterContents.htm">Filter Contents</a></li>
+            <li><a href="regularExpressions.htm">Regular Expressions</a></li>
+            <li><a href="permissionManagement.htm">Permission Management</a></li>
+            <li><a href="userManagement.htm">User Management</a></li>
+            <li><a href="packageManagement.htm">Package Management</a></li>
+            <li><a href="proccessManagement.htm">Service Proccess Management</a></li>
+            <li><a href="networkingServices.htm">Networking Services</a></li>
+            <li><a href="webServices.htm">Working with Web Services</a></li>
+            <li><a href="backupRestore.htm">Backup and Restore</a></li>
+            <li><a href="fileSystemManagement.htm">File System Management</a></li>
+            <li><a href="containerization.htm">Containerization</a></li>
+            <li><a href="networkConfiguration.htm">Network Configuration</a></li>
+            <li><a href="remoteDesktopProtocals.htm">Remote Desktop Protocals</a></li>
+            <li><a href="linuxSecurity.htm">Linux Security</a></li>
+            <li><a href="firewallSetup.htm"><b><em>~ Firewall Setup</em></b></a></li>
+            <li><a href="logsMonitoring.htm">System Logs and Monitoring</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
