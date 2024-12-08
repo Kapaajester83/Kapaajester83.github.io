@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Windows Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../windowsFundamentals.htm">Windows Fundamentals</a></h4>
+          <ul>
+            <li><a href="interactingOperatingSystem.htm">Interacting with the Windows Operating System</a></li>
+            <li><a href="managementInstrumentation.htm"><b><em>~ Windows Management Instrumentations (WMI)</em></b></a></li>
+            <li><a href="managementConsole.htm">Microsoft Management Console (MMC)</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Windows Management Instrumentation (WMI)</em></h3>
+
+          <p>WMI is a subsystem of PowerShell that provides system administrators with powerful tools for system monitoring. The goal of WMI is to consolidate device and application management across corporate networks. WMI is a core part of the Windows operating system and has come pre-installed since Windows 2000. It is made up of the following components:
+          <ul>
+            <li><b>WMI service</b> - The Windows Management Instrumentation process, which runs automatically at boot and acts as an intermediary between WMI providers, the WMI repository, and managing applications.</li>
+            <li><b>Managed objects</b> - Any logical or physical components that can be managed by WMI.</li>
+            <li><b>WMI providers</b> - Objects that monitor events/data related to a specific object.</li>
+            <li><b>Classes</b> - These are used by the WMI providers to pass data to the WMI service.</li>
+            <li><b>Methods</b> - These are attached to classes and allow actions to be performed. For example, methods can be used to start/stop processes on remote machines.</li>
+            <li><b>WMI repository</b> - A database that stores all static data related to WMI.</li>
+            <li><b>CIM Object Manager</b> - The system that requests data from WMI providers and returns it to the application requesting it.</li>
+            <li><b>WMI API</b> - Enables applications to access the WMI infrastructure.</li>
+            <li><b>WMI Consumer</b> - Sends queries to objects via the CIM Object Manager.</li>
+          </ul>
+
+          <p>Some of the uses for WMI are:
+          <ul>
+            <li>Status information for local/remote systems</li>
+            <li>Configuring security settings on remote machines/applications</li>
+            <li>Setting and changing user and group permissions</li>
+            <li>Setting/modifying system properties</li>
+            <li>Code execution</li>
+            <li>Scheduling processes</li>
+            <li>Setting up logging</li>
+          </ul>
+
+          <p>These tasks can all be performed using a combination of PowerShell and the WMI Command-Line Interface (WMIC). WMI can be run via the Windows command prompt by typing WMIC to open an interactive shell or by running a command directly such as wmic computersystem get name to get the hostname. We can view a listing of WMIC commands and aliases by typing WMIC /?.</p>
+
+          <h5>
+            C:\htb> wmic /?<br>
+            WMIC is deprecated.<br>
+            <br>
+            [global switches] "command"<br>
+            <br>
+            The following global switches are available:<br>
+            /NAMESPACE Path for the namespace the alias operate against.<br>
+            /ROLE Path for the role containing the alias definitions.<br>
+            /NODE Servers the alias will operate against.<br>
+            /IMPLEVEL Client impersonation level.<br>
+            /AUTHLEVEL Client authentication level.<br>
+            /LOCALE Language id the client should use.<br>
+            /PRIVILEGES Enable or disable all privileges.<br>
+            /TRACE Outputs debugging information to stderr.<br>
+            /RECORD Logs all input commands and output.<br>
+            /INTERACTIVE Sets or resets the interactive mode.<br>
+            /FAILFAST Sets or resets the FailFast mode.<br>
+            /USER User to be used during the session.<br>
+            /PASSWORD Password to be used for session login.<br>
+            /OUTPUT Specifies the mode for output redirection.<br>
+            /APPEND Specifies the mode for output redirection.<br>
+            /AGGREGATE Sets or resets aggregate mode.<br>
+            /AUTHORITY Specifies the "authority type" for the connection.<br>
+            /?[:"BRIEF|FULL"] Usage information.
+          </h5>
+
+          <p>For more information on a specific global switch, type: switch-name /?</p>
+
+          <p>The following command example lists information about the operating system.</p>
+
+          <h5>C:\htb> wmic os list brief</h5>
+
+          <p>WMIC uses aliases and associated verbs, adverbs, and switches. The above command example uses LIST to show data and the adverb BRIEF to provide just the core set of properties. An in-depth listing of verbs, switches, and adverbs is available here. WMI can be used with PowerShell by using the Get-WmiObject module. This module is used to get instances of WMI classes or information about available classes. This module can be used against local or remote machines.</p>
+
+          <p>Here we can get information about the operating system.</p>
+
+          <h5>
+            PS C:\htb> Get-WmiObject -Class Win32_OperatingSystem | select SystemDirectory,BuildNumber,SerialNumber,Version | ft<br>
+            <br>
+            SystemDirectory BuildNumber SerialNumber Version<br>
+            --------------- ----------- ------------ -------<br>
+            C:\Windows\system32 19041 00123-00123-00123-AAOEM 10.0.19041
+          </h5>
+
+          <p>We can also use the Invoke-WmiMethod module, which is used to call the methods of WMI objects. A simple example is renaming a file. We can see that the command completed properly because the ReturnValue is set to 0.</p>
+
+          <h5>
+            PS C:\htb> Invoke-WmiMethod -Path "CIM_DataFile.Name='C:\users\public\spns.csv'" -Name Rename -ArgumentList "C:\Users\Public\kerberoasted_users.csv"<br>
+            <br>
+            __GENUS : 2<br>
+            __CLASS : __PARAMETERS<br>
+            __SUPERCLASS :<br>
+            __DYNASTY : __PARAMETERS<br>
+            __RELPATH :<br>
+            __PROPERTY_COUNT : 1<br>
+            __DERIVATION : {}<br>
+            __SERVER :<br>
+            __NAMESPACE :<br>
+            __PATH :<br>
+            ReturnValue : 0<br>
+            PSComputerName :
+          </h5>
+
+          <p>This section provides a brief overview of WMI, WMIC, and combining WMIC and PowerShell. WMI has a wide variety of uses for both blue team and red team operators. Later sections of this course will show some ways that WMI can be leveraged offensively for both enumeration and lateral movement.</p>
+
+          <h5>
+            C:\htb> wmic os list brief<br>
+            <br>
+            00329-10280-00000-AA938<br>
+            PS C:\htb> Get-WmiObject -Class Win32_OperatingSystem | select SystemDirectory,BuildNumber,SerialNumber,Version | ft<br>
+            <br>
+            Get-WmiObject -Class Win32_OperatingSystem | select SystemDirectory,BuildNumber,SerialNumber,Version | ft
+          </h5>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../windowsFundamentals.htm">Windows Fundamentals</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction to Windows</a></li>
+            <li><a href="operatingSystemStructure.htm">Operating System Structure</a></li>
+            <li><a href="fileSystem.htm">File System</a></li>
+            <li><a href="ntfSharePermissions.htm">NTFS vs. Share Permissions</a></li>
+            <li><a href="servicesProcesses.htm">Windows Services and Processes</a></li>
+            <li><a href="servicePermissions.htm">Service Permissions</a></li>
+            <li><a href="windowsSessions.htm">Windows Sessions</a></li>
+            <li><a href="interactingOperatingSystem.htm">Interacting with the Windows Operating System</a></li>
+            <li><a href="managementInstrumentation.htm"><b><em>~ Windows Management Instrumentations (WMI)</em></b></a></li>
+            <li><a href="managementConsole.htm">Microsoft Management Console (MMC)</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Windows Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../windowsFundamentals.htm">Windows Fundamentals</a></h4>
+          <ul>
+            <li><a href="windowsSubsystemLinux.htm">Windows Subsystem for Linux (WSL)</a></li>
+            <li><a href="desktopServer.htm"><b><em>~ Desktop Experience vs. Server Core</em></b></a></li>
+            <li><a href="windowsSecurity.htm">Windows Security</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Desktop Experience vs. Server Core</em></h3>
+
+          <p>Windows Server Core was first released with Windows Server 2008 as a minimalistic Server environment only containing key Server functionality. As a result, Server Core has lower management requirements, a smaller attack surface, and uses less disk space and memory than its Desktop Experience (GUI) counterpart. In Server Core, all configuration and maintenance tasks are performed via the command-line, PowerShell, or remote management with MMC or Remote Server Administration Tools (RSAT).</p>
+
+          <p>While Server Core aims to have a smaller footprint by lacking a GUI, some graphical programs are still supported, such as Registry Editor, Notepad, System Information, Windows Installer, Task Manager, and PowerShell. It also supports some Sysinternals suite tools such as Active Directory Explorer, Process Explorer, Process Monitor, and TCPView.</p>
+
+          <p>As of Windows Server 2019, Server Core or Desktop Experience must be selected at installation, and neither can be rolled back (i.e., converting Server Core to Desktop Experience). Once installed, the initial setup for Server Core can be done via Sconfig, which is a text-based interface (actually a VBScript executed by WScript). Sconfig is used for performing a variety of common commands such as configuring networking, checking for/installing Windows updates, account management, configuring remote management, activating Windows, and more.</p>
+
+          <p>Certain server applications cannot run on Server Core, including Microsoft Server Virtual Machine Manager 2019 (SCVMM), System Center Data Protection Manager 2019, SharePoint Server 2019, Project Server 2019.</p>
+
+          <p>In summary, Server Core is lighter weight and less resource-intensive but has a steeper learning curve and can be more difficult to manage. It also has some limitations, such as performing management tasks using certain GUI programs.</p>
+
+          <p>In any environment, the determination between using Desktop Experience or Server Core for a server installation should be made by both the business need and intended use of the server and the skill level of the administrators responsible for maintaining it. The following table shows some of the applications available on Server Core vs. Desktop Experience. This is a list of common applications and not an exhaustive list.</p>
+
+          <p>Application Server Core Desktop Experience
+          <ul>
+            <li><b>Command prompt</b> - Available - Available</li>
+            <li><b>Windows PowerShell/ Microsoft .NET</b> - Available - Available</li>
+            <li><b>Regedit</b> - Available - Available</li>
+            <li><b>Diskmgmt.msc</b> Not Available Available</li>
+            <li><b>Server Manager</b> Not Available Available</li>
+            <li><b>Mmc.exe</b> - Not Available Available</li>
+            <li><b>Eventvwr</b> - Not Available - Available</li>
+            <li><b>Services.msc</b> - Not Available - Available</li>
+            <li><b>Control Panel</b> - Not Available - Available</li>
+            <li><b>Windows Explorer</b> - Not Available - Available</li>
+            <li><b>Taskmgr</b> - Available - Available</li>
+            <li><b>Internet Explorer or Edge</b> - Not Available - Available</li>
+            <li><b>Remote Desktop Services</b> - Available - Available</li>
+          </ul>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../windowsFundamentals.htm">Windows Fundamentals</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction to Windows</a></li>
+            <li><a href="operatingSystemStructure.htm">Operating System Structure</a></li>
+            <li><a href="fileSystem.htm">File System</a></li>
+            <li><a href="ntfSharePermissions.htm">NTFS vs. Share Permissions</a></li>
+            <li><a href="servicesProcesses.htm">Windows Services and Processes</a></li>
+            <li><a href="servicePermissions.htm">Service Permissions</a></li>
+            <li><a href="windowsSessions.htm">Windows Sessions</a></li>
+            <li><a href="interactingOperatingSystem.htm">Interacting with the Windows Operating System</a></li>
+            <li><a href="managementInstrumentation.htm">Windows Management Instrumentations (WMI)</a></li>
+            <li><a href="managementConsole.htm">Microsoft Management Console (MMC)</a></li>
+            <li><a href="windowsSubsystemLinux.htm">Windows Subsystem for Linux (WSL)</a></li>
+            <li><a href="desktopServer.htm"><b><em>~ Desktop Experience vs. Server Core</em></b></a></li>
+            <li><a href="windowsSecurity.htm">Windows Security</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
