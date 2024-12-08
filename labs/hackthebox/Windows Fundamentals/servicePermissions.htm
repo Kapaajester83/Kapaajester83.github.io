@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Windows Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--   _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../windowsFundamentals.htm">Windows Fundamentals</a></h4>
+          <ul>
+            <li><a href="servicesProcesses.htm">Windows Services and Processes</a></li>
+            <li><a href="servicePermissions.htm"><b><em>~ Service Permissions</em></b></a></li>
+            <li><a href="windowsSessions.htm">Windows Sessions</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Service Permissions</em></h3>
+
+          <p>Recall that services allow for the management of long-running processes and are a critical part of Windows operating systems. Sysadmins often overlook them as potential threat vectors that can be used to load malicious DLLs, execute applications without access to an admin account, escalate privileges and even maintain persistence. These threat vectors in Windows services often come into existence through service permissions misconfigurations put in place by 3rd party software and easy to make mistakes by admins during install processes.</p>
+
+          <p>The first step in realizing the importance of service permissions is simply understanding that they exist and being mindful of them. On server operating systems, critical network services like DHCP and Active Directory Domain Services commonly get installed using the account assigned to the admin performing the install. Part of the install process includes assigning a specific service to run using the credentials and privileges of a designated user, which by default is set within the currently logged-on user context.</p>
+
+          <p>For example, if we are logged on as Bob on a server during DHCP install, then that service will be configured to run as Bob unless specified otherwise. What bad things could come of this? Well, what if Bob leaves the organization or gets fired? The typical business practice would be to disable Bob’s account as part of his exit process. In this case, what would happen to DHCP and other services running using Bob’s account? Those services would fail to start. DHCP or Dynamic Host Configuration Protocol is responsible for leasing IP addresses to computers on the network. If this service stops on a Windows DHCP server, clients requesting an IP address will not receive one. This means a service misconfiguration could lead to downtime and loss of productivity. It is highly recommended to create an individual user account to run critical network services. These are referred to as service accounts.</p>
+
+          <p>We should also be mindful of service permissions and the permissions of the directories they execute from because it is possible to replace the path to an executable with a malicious DLL or executable file. Let's examine the permissions of services running on Windows 10 to get an even better understanding of this.</p>
+
+          <h4>Examining Services using services.msc</h4>
+
+          <p>As discussed in the processes and services section, we can use services.msc to view and manage just about every detail regarding all services. Let's take a closer look at the service associated with Windows Update (wuauserv).</p>
+
+          <p>Make a note of the different properties available for viewing and configuration. Knowing the service name is especially useful when using command-line tools to examine and manage services. Path to the executable is the full path to the program and command to execute when the service starts. If the NTFS permissions of the destination directory are configured with weak permissions, an attacker could replace the original executable with one created for malicious purposes. We discuss NTFS permissions more in the NTFS vs. Share permissions section of this module.</p>
+
+          <h4>Log On tab</h4>
+
+          <p>Most services run with LocalSystem privileges by default which is the highest level of access allowed on an individual Windows OS. Not all applications need Local System account-level permissions, so it is beneficial to perform research on a case-by-case basis when considering installing new applications in a Windows environment. It is a good practice to identify applications that can run with the least privileges possible to align with the principle of least privilege.</p>
+
+          <p>Here is one breakdown of the principle of least privilege</p>
+
+          <p>Notable built-in service accounts in Windows:
+          <ul>
+            <li>LocalService</li>
+            <li>NetworkService</li>
+            <li>LocalSystem</li>
+          </ul>
+
+          <p>Note: We can also create new accounts and use them for the sole purpose of running a service.</p>
+
+          <h4>Recovery tab</h4>
+
+          <p>The recovery tab allows steps to be configured should a service fail. Notice how this service can be set to run a program after the first failure. This is yet another vector that an attacker could use to run malicious programs by utilizing a legitimate service.</p>
+
+          <h4>Examining services using sc</h4>
+
+          <p>Sc can also be used to configure and manage services. Let's experiment with a few commands.</p>
+
+          <h5>
+            C:\Users\htb-student>sc qc wuauserv<br>
+            [SC] QueryServiceConfig SUCCESS
+          </h5>
+
+          <p>The sc qc command is used to query the service. This is where knowing the names of services can come in handy. If we wanted to query a service on a device over the network, we could specify the hostname or IP address immediately after sc.</p>
+
+          <h5>C:\Users\htb-student>sc //hostname or ip of box query ServiceName</h5>
+
+          <p>We can also use sc to start and stop services.
+          <p>
+
+          <h5>
+            C:\Users\htb-student> sc stop wuauserv<br>
+            [SC] OpenService FAILED 5:<br>
+            Access is denied.
+          </h5>
+
+          <p>Notice how we are denied access from performing this action without running it within an administrative context. If we run a command prompt with elevated privileges, we will be permitted to complete this action.</p>
+
+          <h5>
+            C:\WINDOWS\system32> sc config wuauserv binPath=C:\Winbows\Perfectlylegitprogram.exe<br>
+            [SC] ChangeServiceConfig SUCCESS<br>
+            C:\WINDOWS\system32> sc qc wuauserv<br>
+            [SC] QueryServiceConfig SUCCESS<br>
+            <br>
+            SERVICE_NAME: wuauserv<br>
+            .TYPE : 20 WIN32_SHARE_PROCESS<br>
+            .START_TYPE : 3 DEMAND_START<br>
+            .ERROR_CONTROL : 1 NORMAL<br>
+            .BINARY_PATH_NAME : C:\Winbows\Perfectlylegitprogram.exe<br>
+            .LOAD_ORDER_GROUP :<br>
+            .TAG : 0<br>
+            .DISPLAY_NAME : Windows Update<br>
+            .DEPENDENCIES : rpcss<br>
+            .SERVICE_START_NAME : LocalSystem<br>
+          </h5>
+
+          <p>If we were investigating a situation where we suspected that the system had malware, sc would give us the ability to quickly search and analyze commonly targeted services and newly created services. It’s also much more script-friendly than utilizing GUI tools like services.msc.</p>
+
+          <p>Another helpful way we can examine service permissions using sc is through the sdshow command.</p>
+
+          <h5>
+            C:\WINDOWS\system32> sc sdshow wuauserv<br>
+            D:(A;;CCLCSWRPLORC;;;AU)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)<br>S:(AU;FA;CCDCLCSWRPWPDTLOSDRCWDWO;;;WD)
+          </h5>
+
+          <p>At an initial glance, the output looks crazy. It almost seems that we have done something wrong in our command, but there is a meaning to this madness. Every named object in Windows is a securable object, and even some unnamed objects are securable. If it's securable in a Windows OS, it will have a security descriptor. Security descriptors identify the object’s owner and a primary group containing a Discretionary Access Control List (DACL) and a System Access Control List (SACL).</p>
+
+          <p>Generally, a DACL is used for controlling access to an object, and a SACL is used to account for and log access attempts. This section will examine the DACL, but the same concepts would apply to a SACL.</p>
+
+          <h5>D:(A;;CCLCSWRPLORC;;;AU)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)</h5>
+
+          <p>This amalgamation of characters crunched together and delimited by opened and closed parentheses is in a format known as the Security Descriptor Definition Language (SDDL).</p>
+
+          <p>We may be tempted to read from left to right because that is how the English language is typically written, but it can be much different when interacting with computers. Read the entire security descriptor for the Windows Update (wuauserv) service in this order starting with the first letter and set of parentheses:</p>
+
+          <h4>D: (A;;CCLCSWRPLORC;;;AU)</h4>
+
+          <ul>
+            <li><b>D:</b> - the proceeding characters are DACL permissions</li>
+            <li><b>AU:</b> - defines the security principal Authenticated Users</li>
+            <li><b>A;;</b> - access is allowed</li>
+            <li><b>CC</b> - SERVICE_QUERY_CONFIG is the full name, and it is a query to the service control manager (SCM) for the service configuration</li>
+            <li><b>LC</b> - SERVICE_QUERY_STATUS is the full name, and it is a query to the service control manager (SCM) for the current status of the service</li>
+            <li><b>SW</b> - SERVICE_ENUMERATE_DEPENDENTS is the full name, and it will enumerate a list of dependent services</li>
+            <li><b>RP</b> - SERVICE_START is the full name, and it will start the service</li>
+            <li><b>LO</b> - SERVICE_INTERROGATE is the full name, and it will query the service for its current status</li>
+            <li><b>RC</b> - READ_CONTROL is the full name, and it will query the security descriptor of the service
+          </ul>
+
+          <p>As we read the security descriptor, it can be easy to get lost in the seemingly random order of characters, but recall that we are essentially viewing access control entries in an access control list. Each set of 2 characters in between the semi-colons represents actions allowed to be performed by a specific user or group.</p>
+
+          <h4>;;CCLCSWRPLORC;;;</h4>
+
+          <p>After the last set of semi-colons, the characters specify the security principal (User and/or Group) that is permitted to perform those actions.</p>
+
+          <h4>;;;AU</h4>
+
+          <p>The character immediately after the opening parentheses and before the first set of semi-colons defines whether the actions are Allowed or Denied.</p>
+
+          <h4>A;;</h4>
+
+          <p>This entire security descriptor associated with the Windows Update (wuauserv) service has three sets of access control entries because there are three different security principals. Each security principal has specific permissions applied.</p>
+
+          <h4>Examine service permissions using PowerShell</h4>
+
+          <p>Using the Get-Acl PowerShell cmdlet, we can examine service permissions by targeting the path of a specific service in the registry.</p>
+
+          <h5>
+            PS C:\Users\htb-student> Get-ACL -Path HKLM:\System\CurrentControlSet\Services\wuauserv | Format-List<br>
+            <br>
+            Path : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\wuauserv<br>
+            Owner : NT AUTHORITY\SYSTEM<br>
+            Group : NT AUTHORITY\SYSTEM<br>
+            Access : BUILTIN\Users Allow ReadKey<br>
+            .BUILTIN\Users Allow -2147483648<br>
+            .BUILTIN\Administrators Allow FullControl<br>
+            .BUILTIN\Administrators Allow 268435456<br>
+            .NT AUTHORITY\SYSTEM Allow FullControl<br>
+            .NT AUTHORITY\SYSTEM Allow 268435456<br>
+            .CREATOR OWNER Allow 268435456<br>
+            .APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow ReadKey<br>
+            .APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow -2147483648<br>
+            .S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow
+            ReadKey<br>
+            .S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow
+            -2147483648<br>
+            Audit :<br>
+            Sddl : O:SYG:SYD:AI(<br>A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A<br>
+            .;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654<br>
+            .721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-351173842<br>
+            .8-1654721687-432734479-3232135806-4053264122-3456934681)
+          </h5>
+
+          <p>Notice how this command returns specific account permissions in an easy-to-read format and in SDDL. Also, the SID that represents each security principal (User and/or Group) is present in the SDDL. This is something we do not get when running sc from the command prompt.</p>
+
+          <p>Knowing how to interact with services and their associated permissions from the command line makes it easier to script out these tasks. While it is good to know how to perform these tasks from the GUI, it does not scale well as we start getting into larger network environments and Domains.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../windowsFundamentals.htm">Windows Fundamentals</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction to Windows</a></li>
+            <li><a href="operatingSystemStructure.htm">Operating System Structure</a></li>
+            <li><a href="fileSystem.htm">File System</a></li>
+            <li><a href="ntfSharePermissions.htm">NTFS vs. Share Permissions</a></li>
+            <li><a href="servicesProcesses.htm">Windows Services and Processes</a></li>
+            <li><a href="servicePermissions.htm"><b><em>~ Service Permissions</em></b></a></li>
+            <li><a href="windowsSessions.htm">Windows Sessions</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
