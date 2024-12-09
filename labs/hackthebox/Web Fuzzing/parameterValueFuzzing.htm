@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Web Fuzzing</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../webFuzzing.htm">Web Fuzzing</a></h4>
+          <ul>
+            <li><a href="recursiveFuzzing.htm">Recursive Fuzzing</a></li>
+            <li><a href="parameterValueFuzzing.htm"><b><em>~ Parameter and Value Fuzzing</em></b></a></li>
+            <li><a href="virtualSubdomainFuzzing.htm">Virtual Host and Subdomain Fuzzing</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Parameter and Value Fuzzing</em></h3>
+
+          <p>Building upon the discovery of hidden directories and files, we now delve into parameter and value fuzzing. This technique focuses on manipulating the parameters and their values within web requests to uncover vulnerabilities in how the application processes input.</p>
+
+          <p>Parameters are the messengers of the web, carrying vital information between your browser and the server that hosts the web application. They're like variables in programming, holding specific values that influence how the application behaves.</p>
+
+          <h4>GET Parameters: Openly Sharing Information</h4>
+
+          <p>You'll often spot GET parameters right in the URL, following a question mark (?). Multiple parameters are strung together using ampersands (&). For example:</p>
+
+          <h5>
+            Code: http<br>
+            <br>
+            https://example.com/search?query=fuzzing&category=security
+          </h5>
+
+          <p>In this URL:
+          <ul>
+            <li>query is a parameter with the value "fuzzing"</li>
+            <li>category is another parameter with the value "security"</li>
+          </ul>
+
+          <p>GET parameters are like postcards – their information is visible to anyone who glances at the URL. They're primarily used for actions that don't change the server's state, like searching or filtering.</p>
+
+          <h4>POST Parameters: Behind-the-Scenes Communication</h4>
+
+          <p>While GET parameters are like open postcards, POST parameters are more like sealed envelopes, carrying their information discreetly within the body of the HTTP request. They are not visible directly in the URL, making them the preferred method for transmitting sensitive data like login credentials, personal information, or financial details.</p>
+
+          <p>When you submit a form or interact with a web page that uses POST requests, the following happens:
+          <ul>
+            <li><b>Data Collection:</b> The information entered into the form fields is gathered and prepared for transmission.</li>
+
+            <li><b>Encoding:</b> This data is encoded into a specific format, typically application/x-www-form-urlencoded or multipart/form-data:</li>
+
+            <li><b>application/x-www-form-urlencoded:</b> This format encodes the data as key-value pairs separated by ampersands (&), similar to GET parameters but placed within the request body instead of the URL.</li>
+
+            <li><b>multipart/form-data:</b> This format is used when submitting files along with other data. It divides the request body into multiple parts, each containing a specific piece of data or a file.</li>
+
+            <li><b>HTTP Request:</b> The encoded data is placed within the body of an HTTP POST request and sent to the web server.</li>
+
+            <li><b>Server-Side Processing:</b> The server receives the POST request, decodes the data, and processes it according to the application's logic.</li>
+          </ul>
+
+          <p>Here's a simplified example of how a POST request might look when submitting a login form:</p>
+
+          <h5>
+            Code: http
+
+            POST /login HTTP/1.1
+            Host: example.com
+            Content-Type: application/x-www-form-urlencoded
+
+            username=your_username&password=your_password
+          </h5>
+
+          <p>POST: Indicates the HTTP method (POST).
+          <ul>
+            <li><b>/login:</b> Specifies the URL path where the form data is sent.</li>
+            <li><b>Content-Type:</b> Specifies how the data in the request body is encoded (application/x-www-form-urlencoded in this case).</li>
+            <li><b>Request Body:</b> Contains the encoded form data as key-value pairs (username and password).</li>
+          </ul>
+
+          <h4>Why Parameters Matter for Fuzzing</h4>
+
+          <p>Parameters are the gateways through which you can interact with a web application. By manipulating their values, you can test how the application responds to different inputs, potentially uncovering vulnerabilities. For instance:
+          <ul>
+            <li>Altering a product ID in a shopping cart URL could reveal pricing errors or unauthorized access to other users' orders.</li>
+
+            <li>Modifying a hidden parameter in a request might unlock hidden features or administrative functions.</li>
+
+            <li>Injecting malicious code into a search query could expose vulnerabilities like Cross-Site Scripting (XSS) or SQL Injection (SQLi).</li>
+          </ul>
+
+          <h4>wenum</h4>
+
+          <p>In this section, we'll leverage wenum to explore both GET and POST parameters within our target web application, ultimately aiming to uncover hidden values that trigger unique responses, potentially revealing vulnerabilities.</p>
+
+          <p>To follow along, start the target system via the question section at the bottom of the page, replacing the uses of IP:PORT with the IP:PORT for your spawned instance. We will be using the /usr/share/seclists/Discovery/Web-Content/common.txt wordlists for these fuzzing tasks.</p>
+
+          <p>Let's first ready our tools by installing wenum to our attack host:</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ pipx install git+https://github.com/WebFuzzForge/wenum<br>
+            kappajester83@htb[/htb]$ pipx runpip wenum install setuptools
+          </h5>
+
+          <p>Then to begin, we will use curl to manually interact with the endpoint and gain a better understanding of its behavior:</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ curl http://IP:PORT/get.php<br>
+            <br>
+            Invalid parameter value<br>
+            x:
+          </h5>
+
+          <p>The response tells us that the parameter x is missing. Let's try adding a value:</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ curl http://IP:PORT/get.php?x=1<br>
+            <br>
+            Invalid parameter value<br>
+            x: 1
+          </h5>
+
+          <p>The server acknowledges the x parameter this time but indicates that the provided value (1) is invalid. This suggests that the application is indeed checking the value of this parameter and producing different responses based on its validity. We aim to find the specific value to trigger a different and hopefully more revealing response.</p>
+
+          <p>Manually guessing parameter values would be tedious and time-consuming. This is where wenum comes in handy. It allows us to automate the process of testing many potential values, significantly increasing our chances of finding the correct one.</p>
+
+          <p>Let's use wenum to fuzz the "x" parameter's value, starting with the common.txt wordlist from SecLists:</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ wenum -w /usr/share/seclists/Discovery/Web-Content/common.txt --hc 404 -u "http://IP:PORT/get.php?x=FUZZ"<br>
+            <br>
+            ...<br>
+            Code Lines Words Size Method URL <br>
+            ...<br>
+            200 1 L 1 W 25 B GET http://IP:PORT/get.php?x=OA... <br>
+            <br>
+            Total time: 0:00:02<br>
+            Processed Requests: 4731<br>
+            Filtered Requests: 4730<br>
+            Requests/s: 1681
+          </h5>
+
+          <ul>
+            <li><b>-w:</b> Path to your wordlist.</li>
+            <li><b>--hc 404:</b> Hides responses with the 404 status code (Not Found), since wenum by default will log every request it makes.</li>
+            <li><b>http://IP:PORT/get.php?x=FUZZ:</b> This is the target URL. wenum will replace the parameter value FUZZ with words from the wordlist.</li>
+          </ul>
+
+          <p>Analyzing the results, you'll notice that most requests return the "Invalid parameter value" message and the incorrect value you tried. However, one line stands out:</p>
+
+          <h5>
+            Code: bash<br>
+            <br>
+            200 1 L 1 W 25 B GET http://IP:PORT/get.php?x=OA...
+          </h5>
+
+          <p>This indicates that when the parameter x was set to the value "OA...," the server responded with a 200 OK status code, suggesting a valid input.</p>
+
+          <p>If you try accessing http://IP:PORT/get.php?x=OA..., you'll see the flag.</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ curl http://IP:PORT/get.php?x=OA...<br>
+            <br>
+            HTB{...}
+          </h5>
+
+          <h4>POST</h4>
+
+          <p>Fuzzing POST parameters requires a slightly different approach than fuzzing GET parameters. Instead of appending values directly to the URL, we'll use ffuf to send the payloads within the request body. This enables us to test how the application handles data submitted through forms or other POST mechanisms.</p>
+
+          <p>Our target application also features a POST parameter named "y" within the post.php script. Let's probe it with curl to see its default behavior:</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ curl -d "" http://IP:PORT/post.php<br>
+            <br>
+            Invalid parameter value<br>
+            y:
+          </h5>
+
+          <p>The -d flag instructs curl to make a POST request with an empty body. The response tells us that the parameter y is expected but not provided.</p>
+
+          <p>As with GET parameters, manually testing POST parameter values would be inefficient. We'll use ffuf to automate this process:</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ ffuf -u http://IP:PORT/post.php -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "y=FUZZ" -w /usr/share/seclists/Discovery/Web-Content/common.txt -mc 200 -v<br>
+            <br>
+            v2.1.0-dev<br>
+            ________________________________________________<br>
+            <br>
+            :: Method : POST<br>
+            :: URL : http://IP:PORT/post.php<br>
+            :: Wordlist : FUZZ: /usr/share/seclists/Discovery/Web-Content/common.txt<br>
+            :: Header : Content-Type: application/x-www-form-urlencoded<br>
+            :: Data : y=FUZZ<br>
+            :: Follow redirects : false<br>
+            :: Calibration : false<br>
+            :: Timeout : 10<br>
+            :: Threads : 40<br>
+            :: Matcher : Response status: 200<br>
+            ________________________________________________<br>
+            <br>
+            [Status: 200, Size: 26, Words: 1, Lines: 2, Duration: 7ms]<br>
+            | URL | http://IP:PORT/post.php<br>
+            * FUZZ: SU...<br>
+            <br>
+            :: Progress: [4730/4730] :: Job [1/1] :: 5555 req/sec :: Duration: [0:00:01] :: <br>Errors: 0 ::
+          </h5>
+
+          <p>The main difference here is the use of the -d flag, which tells ffuf that the payload ("y=FUZZ") should be sent in the request body as POST data.</p>
+
+          <p>Again, you'll see mostly invalid parameter responses. The correct value ("SU...") will stand out with its 200 OK status code:</p>
+
+          <h5>
+            Code: bash<br>
+            <br>
+            000000326: 200 1 L 1 W 26 Ch "SU..."
+          </h5>
+
+          <p>Similarly, after identifying "SU..." as the correct value, validate it with curl:
+
+          <h5>
+            kappajester83@htb[/htb]$ curl -d "y=SU..." http://IP:PORT/post.php<br>
+            <br>
+            HTB{...}
+          </h5>
+
+          <p>In a real-world scenario, these flags would not be present, and identifying valid parameter values might require a more nuanced analysis of the responses. However, this exercise provides a simplified demonstration of how to leverage ffuf to automate the process of testing many potential parameter values.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../webFuzzing.htm">Web Fuzzing</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction to Web Fuzzing</a></li>
+            <li><a href="tooling.htm">Tooling</a></li>
+            <li><a href="directoryFileFuzzing.htm">Directory and File Fuzzing</a></li>
+            <li><a href="recursiveFuzzing.htm">Recursive Fuzzing</a></li>
+            <li><a href="parameterValueFuzzing.htm"><b><em>~ Parameter and Value Fuzzing</em></b></a></li>
+            <li><a href="virtualSubdomainFuzzing.htm">Virtual Host and Subdomain Fuzzing</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

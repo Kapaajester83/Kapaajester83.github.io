@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Web Fuzzing</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../webFuzzing.htm">Web Fuzzing</a></h4>
+          <ul>
+            <li><a href="directoryFileFuzzing.htm">Directory and File Fuzzing</a></li>
+            <li><a href="recursiveFuzzing.htm"><b><em>~ Recursive Fuzzing</em></b></a></li>
+            <li><a href="parameterValueFuzzing.htm">Parameter and Value Fuzzing</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Recursive Fuzzing</em></h3>
+
+          <p>So far, we've focused on fuzzing directories directly under the web root and files within a single directory. But what if our target has a complex structure with multiple nested directories? Manually fuzzing each level would be tedious and time-consuming. This is where recursive fuzzing comes in handy.</p>
+
+          <h4>How Recursive Fuzzing Works</h4>
+
+          <p>Recursive fuzzing is an automated way to delve into the depths of a web application's directory structure. It's a pretty basic 3 step process:
+          <ul>
+            <li>Initial Fuzzing: The fuzzing process begins with the top-level directory, typically the web root (/).</li>
+            <li>The fuzzer starts sending requests based on the provided wordlist containing the potential directory and file names.</li>
+            <li>The fuzzer analyzes server responses, looking for successful results (e.g., HTTP 200 OK) that indicate the existence of a directory.</li>
+          </ul>
+
+          <p>Directory Discovery and Expansion:
+          <ul>
+            <li>When a valid directory is found, the fuzzer doesn't just note it down. It creates a new branch for that directory, essentially appending the directory name to the base URL.</li>
+            <li>For example, if the fuzzer finds a directory named admin at the root level, it will create a new branch like http://localhost/admin/.</li>
+            <li>This new branch becomes the starting point for a fresh fuzzing process. The fuzzer will again iterate through the wordlist, appending each entry to the new branch's URL (e.g., http://localhost/admin/FUZZ).</li>
+          </ul>
+
+          <p>Iterative Depth:
+          <ul>
+            <li>The process repeats for each discovered directory, creating further branches and expanding the fuzzing scope deeper into the web application's structure.</li>
+            <li>This continues until a specified depth limit is reached (e.g., a maximum of three levels deep) or no more valid directories are found.</li>
+          </ul>
+
+          <p>Imagine a tree structure where the web root is the trunk, and each discovered directory is a branch. Recursive fuzzing systematically explores each branch, going deeper and deeper until it reaches the leaves (files) or encounters a predetermined stopping point.</p>
+
+          <h4>Why Use Recursive Fuzzing?</h4>
+
+          <p>Recursive fuzzing is a practical necessity when dealing with complex web applications:
+          <ul>
+            <li><b>Efficiency:</b> Automating the discovery of nested directories saves significant time compared to manual exploration.</li>
+            <li><b>Thoroughness:</b> It systematically explores every branch of the directory structure, reducing the risk of missing hidden assets.</li>
+            <li><b>Reduced Manual Effort:</b> You don't need to input each new directory to fuzz manually; the tool handles the entire process.</li>
+            <li><b>Scalability:</b> It's particularly valuable for large-scale web applications where manual exploration would be impractical.</li>
+          </ul>
+
+          <p>In essence, recursive fuzzing is about working smarter, not harder. It allows you to efficiently and comprehensively probe the depths of a web application, uncovering potential vulnerabilities that might be lurking in its hidden corners.</p>
+
+          <h4>Recursive Fuzzing with ffuf</h4>
+
+          <p>To follow along, start the target system via the question section at the bottom of the page, replacing the uses of IP:PORT with the IP:PORT for your spawned instance. We will be using the /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt wordlists for these fuzzing tasks.</p>
+
+          <p>Let's use ffuf to demonstrate recursive fuzzing:</p>
+
+          <h4>Recursive Fuzzing</h4>
+
+          <h5>
+            kappajester83@htb[/htb]$ ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -ic -v -u http://IP:PORT/FUZZ -e .html -recursion<br>
+            <br>
+            v2.1.0-dev<br>
+            ________________________________________________<br>
+            <br>
+            :: Method : GET<br>
+            :: URL : http://IP:PORT/FUZZ<br>
+            :: Wordlist : FUZZ: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt<br>
+            :: Extensions : .html <br>
+            :: Follow redirects : false<br>
+            :: Calibration : false<br>
+            :: Timeout : 10<br>
+            :: Threads : 40<br>
+            :: Matcher : Response status: 200-299,301,302,307,401,403,405,500<br>
+            ________________________________________________<br>
+            <br>
+            [Status: 301, Size: 0, Words: 1, Lines: 1, Duration: 0ms]<br>
+            | URL | http://IP:PORT/level1<br>
+            | --> | /level1/<br>
+            * FUZZ: level1<br>
+            <br>
+            [INFO] Adding a new job to the queue: http://IP:PORT/level1/FUZZ<br>
+            [INFO] Starting queued job on target: http://IP:PORT/level1/FUZZ<br>
+            <br>
+            [Status: 200, Size: 96, Words: 6, Lines: 2, Duration: 0ms]<br>
+            | URL | http://IP:PORT/level1/index.html<br>
+            * FUZZ: index.html<br>
+            <br>
+            [Status: 301, Size: 0, Words: 1, Lines: 1, Duration: 0ms]<br>
+            | URL | http://IP:PORT/level1/level2<br>
+            | --> | /level1/level2/<br>
+            * FUZZ: level2<br>
+            <br>
+            [INFO] Adding a new job to the queue: http://IP:PORT/level1/level2/FUZZ<br>
+            <br>
+            [Status: 301, Size: 0, Words: 1, Lines: 1, Duration: 0ms]<br>
+            | URL | http://IP:PORT/level1/level3<br>
+            | --> | /level1/level3/<br>
+            * FUZZ: level3<br>
+            <br>
+            [INFO] Adding a new job to the queue: http://IP:PORT/level1/level3/FUZZ<br>
+            [INFO] Starting queued job on target: http://IP:PORT/level1/level2/FUZZ<br>
+            <br>
+            [Status: 200, Size: 96, Words: 6, Lines: 2, Duration: 0ms]<br>
+            | URL | http://IP:PORT/level1/level2/index.html<br>
+            * FUZZ: index.html<br>
+            <br>
+            [INFO] Starting queued job on target: http://IP:PORT/level1/level3/FUZZ<br>
+            <br>
+            [Status: 200, Size: 126, Words: 8, Lines: 2, Duration: 0ms]<br>
+            | URL | http://IP:PORT/level1/level3/index.html<br>
+            * FUZZ: index.html<br>
+            <br>
+            :: Progress: [441088/441088] :: Job [4/4] :: 100000 req/sec :: Duration: [0:00:06] :: Errors: 0 ::
+          </h5>
+
+          <p>Notice the addition of the -recursion flag. This tells ffuf to fuzz any directories it finds recursively. For example, if ffuf discovers an admin directory, it will automatically start a new fuzzing process on http://localhost/admin/FUZZ. In fuzzing scenarios where wordlists contain comments (lines starting with #), the ffuf -ic option proves invaluable. By enabling this option, ffuf intelligently ignores commented lines during fuzzing, preventing them from being treated as valid inputs.</p>
+
+          <p>The fuzzing commences at the web root (http://IP:PORT/FUZZ). Initially, ffuf identifies a directory named level1, indicated by a 301 (Moved Permanently) response. This signifies a redirection and prompts the tool to initiate a new fuzzing process within this directory, effectively branching out its search.</p>
+
+          <p>As ffuf recursively explores level1, it uncovers two additional directories: level2 and level3. Each is added to the fuzzing queue, expanding the search depth. Furthermore, an index.html file is discovered within level1.</p>
+
+          <p>The fuzzer systematically works through its queue, identifying index.html files in both level2 and level3. Notably, the index.html file within level3 stands out due to its larger file size than the others.</p>
+
+          <p>Further analysis reveals this file contains the flag HTB{r3curs1v3_fuzz1ng_w1ns}, signifying a successful exploration of the nested directory structure.</p>
+
+          <h4>Be Responsible</h4>
+
+          <p>While recursive fuzzing is a powerful technique, it can also be resource-intensive, especially on large web applications. Excessive requests can overwhelm the target server, potentially causing performance issues or triggering security mechanisms.</p>
+
+          <p>To mitigate these risks, ffuf provides options for fine-tuning the recursive fuzzing process:
+          <ul>
+            <li><b>-recursion-depth:</b> This flag allows you to set a maximum depth for recursive exploration. For example, -recursion-depth 2 limits fuzzing to two levels deep (the starting directory and its immediate subdirectories).</li>
+            <li><b>-rate:</b> You can control the rate at which ffuf sends requests per second, preventing the server from being overloaded.</li>
+            <li><b>-timeout:</b> This option sets the timeout for individual requests, helping to prevent the fuzzer from hanging on unresponsive targets.</li>
+          </ul>
+
+          <h4>Recursive Fuzzing</h4>
+
+          <h5>
+            kappajester83@htb[/htb]$ ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -ic -u http://IP:PORT/FUZZ -e .html -recursion -recursion-depth 2 -rate 500
+          </h5>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../webFuzzing.htm">Web Fuzzing</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction to Web Fuzzing</a></li>
+            <li><a href="tooling.htm">Tooling</a></li>
+            <li><a href="directoryFileFuzzing.htm">Directory and File Fuzzing</a></li>
+            <li><a href="recursiveFuzzing.htm"><b><em>~ Recursive Fuzzing</em></b></a></li>
+            <li><a href="parameterValueFuzzing.htm">Parameter and Value Fuzzing</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
