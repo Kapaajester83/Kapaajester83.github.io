@@ -81,62 +81,72 @@
             KRYPTONISGREAT
           </h5>
 
+          <h4>Objective</h4>
+
           <p>The password for level 2 is in the file ‘krypton2’. It is ‘encrypted’ using a simple rotation. It is also in non-standard ciphertext format. When using alpha characters for cipher text it is normal to group the letters into 5 letter clusters, regardless of word boundaries. This helps obfuscate any patterns. This file has kept the plain text word boundaries and carried them to the cipher text. Enjoy!</p>
 
           <h4>CLI</h4>
 
-krypton1@bandit:~$ cd /krypton/
-krypton1@bandit:/krypton$ ls -la
-total 36
-drwxr-xr-x  9 root root 4096 Sep 19 07:10 .
-drwxr-xr-x 25 root root 4096 Nov 28 03:49 ..
-drwxr-xr-x  2 root root 4096 Sep 19 07:09 krypton1
-drwxr-xr-x  2 root root 4096 Sep 19 07:09 krypton2
-drwxr-xr-x  2 root root 4096 Sep 19 07:09 krypton3
-drwxr-xr-x  2 root root 4096 Sep 19 07:10 krypton4
-drwxr-xr-x  2 root root 4096 Sep 19 07:10 krypton5
-drwxr-xr-x  3 root root 4096 Sep 19 07:10 krypton6
-drwxr-xr-x  2 root root 4096 Sep 19 07:10 krypton7
-krypton1@bandit:/krypton$ cd krypton1
-krypton1@bandit:/krypton/krypton1$ ls -la
-total 16
-drwxr-xr-x 2 root     root     4096 Sep 19 07:09 .
-drwxr-xr-x 9 root     root     4096 Sep 19 07:10 ..
--rw-r----- 1 krypton1 krypton1   26 Sep 19 07:09 krypton2
--rw-r----- 1 krypton1 krypton1  882 Sep 19 07:09 README
-krypton1@bandit:/krypton/krypton1$ cat README
-Welcome to Krypton!
+          <h5>
+            krypton1@bandit:~$ cd /krypton/<br>
+            krypton1@bandit:/krypton$ ls -la<br>
+            <br>
+            total 36<br>
+            drwxr-xr-x 9 root root 4096 Sep 19 07:10 .<br>
+            drwxr-xr-x 25 root root 4096 Nov 28 03:49 ..<br>
+            drwxr-xr-x 2 root root 4096 Sep 19 07:09 krypton1<br>
+            drwxr-xr-x 2 root root 4096 Sep 19 07:09 krypton2<br>
+            drwxr-xr-x 2 root root 4096 Sep 19 07:09 krypton3<br>
+            drwxr-xr-x 2 root root 4096 Sep 19 07:10 krypton4<br>
+            drwxr-xr-x 2 root root 4096 Sep 19 07:10 krypton5<br>
+            drwxr-xr-x 3 root root 4096 Sep 19 07:10 krypton6<br>
+            drwxr-xr-x 2 root root 4096 Sep 19 07:10 krypton7<br>
+            <br>
+            krypton1@bandit:/krypton$ cd krypton1<br>
+            krypton1@bandit:/krypton/krypton1$ ls -la<br>
+            total 16<br>
+            <br>
+            drwxr-xr-x 2 root root 4096 Sep 19 07:09 .<br>
+            drwxr-xr-x 9 root root 4096 Sep 19 07:10 ..<br>
+            -rw-r----- 1 krypton1 krypton1 26 Sep 19 07:09 krypton2<br>
+            -rw-r----- 1 krypton1 krypton1 882 Sep 19 07:09 README<br>
+            <br>
+            krypton1@bandit:/krypton/krypton1$ cat README<br>
+            <br>
+            Welcome to Krypton!<br>
+            <br>
+            This game is intended to give hands on experience with cryptography
+            and cryptanalysis. The levels progress from classic ciphers, to modern,
+            easy to harder.<br>
+            <br>
+            Although there are excellent public tools, like cryptool,to perform
+            the simple analysis, we strongly encourage you to try and do these without them for now. We will use them in later excercises.
+          </h5>
 
-This game is intended to give hands on experience with cryptography
-and cryptanalysis.  The levels progress from classic ciphers, to modern,
-easy to harder.
+          <p>** Please try these levels without cryptool first **</p>
 
-Although there are excellent public tools, like cryptool,to perform
-the simple analysis, we strongly encourage you to try and do these
-without them for now.  We will use them in later excercises.
+          <p>The first level is easy. The password for level 2 is in the file
+            'krypton2'. It is 'encrypted' using a simple rotation called ROT13.
+            It is also in non-standard ciphertext format. When using alpha characters for
+            cipher text it is normal to group the letters into 5 letter clusters,
+            regardless of word boundaries. This helps obfuscate any patterns.</p>
 
-** Please try these levels without cryptool first **
+          <p>This file has kept the plain text word boundaries and carried them to
+            the cipher text.</p>
 
-The first level is easy.  The password for level 2 is in the file 
-'krypton2'.  It is 'encrypted' using a simple rotation called ROT13.  
-It is also in non-standard ciphertext format.  When using alpha characters for
-cipher text it is normal to group the letters into 5 letter clusters, 
-regardless of word boundaries.  This helps obfuscate any patterns.
+          <p>Enjoy!</p>
 
-This file has kept the plain text word boundaries and carried them to
-the cipher text.
-
-Enjoy!
-
-krypton1@bandit:/krypton/krypton1$ alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
-krypton1@bandit:/krypton/krypton1$ alias rot5="tr '0-9' '5-90-4'"
-krypton1@bandit:/krypton/krypton1$ alias rot="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"
-
-krypton1@bandit:/krypton/krypton1$ cat krypton2
-YRIRY GJB CNFFJBEQ EBGGRA
-krypton1@bandit:/krypton/krypton1$ cat krypton2 | rot13
-LEVEL TWO PASSWORD ROTTEN
-krypton1@bandit:/krypton/krypton1$
+          <h5>
+            krypton1@bandit:/krypton/krypton1$ alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"<br>
+            krypton1@bandit:/krypton/krypton1$ alias rot5="tr '0-9' '5-90-4'"<br>
+            krypton1@bandit:/krypton/krypton1$ alias rot="tr 'A-Za-z0-9' 'N-ZA-Mn-za-m5-90-4'"<br>
+            <br>
+            krypton1@bandit:/krypton/krypton1$ cat krypton2<br>
+            YRIRY GJB CNFFJBEQ EBGGRA<br>
+            krypton1@bandit:/krypton/krypton1$ cat krypton2 | rot13<br>
+            LEVEL TWO PASSWORD ROTTEN<br>
+            krypton1@bandit:/krypton/krypton1$
+          </h5>
 
         </div>
         <hr>

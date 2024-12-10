@@ -697,6 +697,210 @@ Good Luck!
 
 CLI
 
+krypton6@bandit:~$ cd /krypton/krypton6
+krypton6@bandit:/krypton/krypton6$ ls
+encrypt6  HINT1  HINT2  keyfile.dat  krypton7  onetime  README
+krypton6@bandit:/krypton/krypton6$ mktemp -d
+/tmp/tmp.s8BXQat15e
+krypton6@bandit:/krypton/krypton6$ cd /tmp/tmp.s8BXQat15e
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ ln -s /krypton/krypyon6/keyfile.dat
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ ls
+keyfile.dat
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ chmod 777 .
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ ls /krypton/krypton6
+encrypt6  HINT1  HINT2  keyfile.dat  krypton7  onetime  README
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ touch tale.txt
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ nano
+Unable to create directory /home/krypton6/.local/share/nano/: No such file or directory
+It is required for saving/loading search history or cursor positions.
+
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ cat HINT1
+cat: HINT1: No such file or directory
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ cat HINT2
+cat: HINT2: No such file or directory
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ cd ../
+krypton6@bandit:/tmp$ cd ../
+krypton6@bandit:/$ ls
+bin                formulaone  lib.usr-is-merged  proc                srv
+bin.usr-is-merged  home        libx32             root                sys
+boot               krypton     lost+found         run                 tmp
+dev                lib         media              sbin                usr
+drifter            lib32       mnt                sbin.usr-is-merged  var
+etc                lib64       opt                snap
+krypton6@bandit:/$ cd /krypton/krypton6
+krypton6@bandit:/krypton/krypton6$ ls -li
+total 48
+2097183 -rwsr-x--- 1 krypton7 krypton6 16520 Sep 19 07:10 encrypt6
+2097186 -rw-r----- 1 krypton6 krypton6   164 Sep 19 07:10 HINT1
+2097187 -rw-r----- 1 krypton6 krypton6    11 Sep 19 07:10 HINT2
+2097188 -rw-r----- 1 krypton7 krypton7    11 Sep 19 07:10 keyfile.dat
+2097185 -rw-r----- 1 krypton6 krypton6    15 Sep 19 07:10 krypton7
+2097189 drwxr-xr-x 2 root     root      4096 Sep 19 07:10 onetime
+2097184 -rw-r----- 1 krypton6 krypton6  4342 Sep 19 07:10 README
+krypton6@bandit:/krypton/krypton6$ cat HINT1
+The 'random' generator has a limited number of bits, and is periodic.
+Entropy analysis and a good look at the bytes in a hex editor will help.
+
+There is a pattern!
+krypton6@bandit:/krypton/krypton6$ cat HINT2
+8 bit LFSR
+krypton6@bandit:/krypton/krypton6$ cd /tmp/tmp.s8BXQat15e
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ python -c "print('A'*100)"
+Command 'python' not found, did you mean:
+  command 'python3' from deb python3
+  command 'python' from deb python-is-python3
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ python3 -c "print('A'*100)"
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ python3 -c "print('A'*100)" > a.txt
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ cat a.txt
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ /krypton/krypton6 a.txt cipher_a.txt
+-bash: /krypton/krypton6: Is a directory
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ /krypton/krypton6/encrypt6 a.txt cipher_a.txt
+failed to open keyfile 
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ cat cipher_a.txt
+EICTDGYIYZKTHNSIRFXYCPFUEOCKRNEICTDGYIYZ
+krypton6@bandit:/tmp/tmp.s8BXQat15e$ cat /krypton/krypton6/krypton7
+PNUKLYLWRQKGKBEkrypton6@bandit:/tmp/tmp.s8BXQat15e$
+
+ciphertext = 'PNUKLYLWRQKGKBE'
+key = 'EICTDGYIYZKTHNSIRFXYCPFUEOCKRN'
+
+for c, k in zip(ciphertext, key):
+    p = ord('A') + ((ord(c) - ord(k)) % 26)
+    print(chr(p), end='')
+
+print()
+LFSRISNOTRANDOM
+
+Level 7
+
+ssh krypton7@krypton.labs.overthewire.org -p 2231
+LFSRISNOTRANDOM
+
+CLI
+
+kali@Kali:~$ ssh krypton7@krypton.labs.overthewire.org -p 2231
+                      _                     _              
+                     | | ___ __ _   _ _ __ | |_ ___  _ __  
+                     | |/ / '__| | | | '_ \| __/ _ \| '_ \ 
+                     |   <| |  | |_| | |_) | || (_) | | | |
+                     |_|\_\_|   \__, | .__/ \__\___/|_| |_|
+                                |___/|_|                   
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+krypton7@krypton.labs.overthewire.org's password: 
+Permission denied, please try again.
+krypton7@krypton.labs.overthewire.org's password: 
+Connection closed by 16.16.163.126 port 2231
+kali@Kali:~$ ssh krypton7@krypton.labs.overthewire.org -p 2231
+                      _                     _              
+                     | | ___ __ _   _ _ __ | |_ ___  _ __  
+                     | |/ / '__| | | | '_ \| __/ _ \| '_ \ 
+                     |   <| |  | |_| | |_) | || (_) | | | |
+                     |_|\_\_|   \__, | .__/ \__\___/|_| |_|
+                                |___/|_|                   
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+krypton7@krypton.labs.overthewire.org's password: 
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+krypton7@bandit:~$ ls
+krypton7@bandit:~$ cd /krypton/krypton7
+krypton7@bandit:/krypton/krypton7$ ls -li
+total 4
+2097194 -rw-r----- 1 krypton7 krypton7 36 Sep 19 07:10 README
+krypton7@bandit:/krypton/krypton7$ car README
+Command 'car' not found, but can be installed with:
+apt install ucommon-utils
+Please ask your administrator.
+krypton7@bandit:/krypton/krypton7$ cat README
+Congratulations on beating Krypton!
+krypton7@bandit:/krypton/krypton7$ 
 
 
 Resources
@@ -726,4 +930,14 @@ The task explanation gives a short explanation of what a Vigenère Cipher is. Th
 A little bit of Theory
 
 The Kasiski examination is an attack on polyalphabetic cipher that makes it possible to guess the key length. The method looks for repeated sequences and their offsets/distances. The greatest common divisor of the offsets would most likely be the key length.
+
+A Little Bit Of Theory
+
+This level introduces the notion of repeating keys as insecure, as Frequency Analysis can be used to quickly determine the key, and we've been using block ciphers. We're now moving on to the world of stream ciphers which are another type of symmetric cipher.
+
+These ciphers create random keys, which are then used to encrypt one character at a time, typically using an XOR function, combining the output with the keystream. In this level, we're introduced to the notion of Linear-Feedback Shift Registers. These take taps off the binary data and XOR them together to get a result. The result of this function is then pushed onto the end of the binary blob, where the digit on the other end is dropped off. Computerphile has a great video that explains it further here.
+
+https://www.eetimes.com/tutorial-linear-feedback-shift-registers-lfsrs-part-1/
+https://www.youtube.com/watch?v=Ks1pw1X22y4
+
 
