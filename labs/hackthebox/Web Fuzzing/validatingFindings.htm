@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Web Fuzzing</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../webFuzzing.htm">Web Fuzzing</a></h4>
+          <ul>
+            <li><a href="filteringFuzzingOutputs.htm">Filtering Fuzzing Outputs</a></li>
+            <li><a href="validatingFindings.htm"><b><em>~ Validating Findings</em></b></a></li>
+            <li><a href="webAPIs.htm">Web APIs</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Validating Findings</em></h3>
+
+          <p>Fuzzing is excellent at casting a wide net and generating potential leads, but not every finding is a genuine vulnerability. The process often yields false positives – harmless anomalies that trigger the fuzzer's detection mechanisms but pose no real threat. This is why validation is a crucial step in the fuzzing workflow.</p>
+
+          <p>Why Validate?</p>
+
+          <p>Validating findings serves several important purposes:
+          <ul>
+            <li><b>Confirming Vulnerabilities:</b> - Ensures that the discovered issues are real vulnerabilities and not just false alarms.</li>
+
+            <li><b>Understanding Impact:</b> - Helps you assess the severity of the vulnerability and the potential impact on the web application.</li>
+
+            <li><b>Reproducing the Issue:</b> - Provides a way to consistently replicate the vulnerability, aiding in developing a fix or mitigation strategy.</li>
+
+            <li><b>Gather Evidence:</b> - Collect proof of the vulnerability to share with developers or stakeholders.</li>
+          </ul>
+
+          <h4>Manual Verification</h4>
+
+          <p>The most reliable way to validate a potential vulnerability is through manual verification. This typically involves:
+          <ul>
+            <li><b>Reproducing the Request:</b> - Use a tool like curl or your web browser to manually send the same request that triggered the unusual response during fuzzing.</li>
+
+            <li><b>Analyzing the Response:</b> - Carefully examine the response to confirm whether it indicates vulnerability. Look for error messages, unexpected content, or behavior that deviates from the expected norm.</li>
+
+            <li><b>Exploitation:</b> - If the finding seems promising, attempt to exploit the vulnerability in a controlled environment to assess its impact and severity. This step should be performed with caution and only after obtaining proper authorization.</li>
+          </ul>
+
+          <p>To responsibly validate and exploit a finding, avoiding actions that could harm the production system or compromise sensitive data is crucial. Instead, focus on creating a proof of concept (PoC) that demonstrates the existence of the vulnerability without causing damage. For example, if you suspect a SQL injection vulnerability, you could craft a harmless SQL query that returns the SQL server version string rather than trying to extract or modify sensitive data.</p>
+
+          <p>The goal is to gather enough evidence to convince stakeholders of the vulnerability's existence and potential impact while adhering to ethical and legal guidelines.</p>
+
+          <h4>Example</h4>
+
+          <p>To follow along, start the target system via the question section at the bottom of the page, replacing the uses of IP:PORT with the IP:PORT for your spawned instance.</p>
+
+          <p>Imagine your fuzzer discovered a directory named /backup/ on a web server. The response to this directory returned a 200 OK status code, suggesting that the directory exists and is accessible. While this might seem innocuous at first glance, it's crucial to remember that backup directories often contain sensitive information.</p>
+
+          <p>Backup files are designed to preserve data, which means they might include:
+          <ul>
+            <li><b>Database dumps:</b> - These files could contain entire databases, including user credentials, personal information, and other confidential data.</li>
+
+            <li><b>Configuration files:</b> These files might store API keys, encryption keys, or other sensitive settings that attackers could exploit.</li>
+
+            <li><b>Source code:</b> - Backup copies of source code could reveal vulnerabilities or implementation details that attackers could leverage.</li>
+          </ul>
+
+          <p>If an attacker gains access to these files, they could potentially compromise the entire web application, steal sensitive data, or cause significant damage. However, as a security professional, you will need to interact with this finding so that you do not compromise the integrity of the target or open yourself up to any potential blowback while proving the issue exists.</p>
+
+          <h4>Using curl for validation</h4>
+
+          <p>First, we need to confirm if this directory is truly browsable. We can use curl to validate if it is or isn't.</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ curl http://IP:PORT/backup/
+          </h5>
+
+          <p>Examine the output in your terminal. If the server responds with a list of files and directories contained within the /backup directory, you've successfully confirmed the directory listing vulnerability. This could look something like this:</p>
+
+          <p>To responsibly confirm the vulnerability without risking exposure of sensitive data, the optimal approach is to examine the response headers for clues about the files within the directory. Specifically, the Content-Type header often indicates the type of file (e.g., application/sql for a database dump, application/zip for a compressed backup).</p>
+
+          <p>Additionally, scrutinize the Content-Length header. A value greater than zero suggests a file with actual content, whereas a zero-length file, while potentially unusual, may not pose a direct vulnerability. For instance, if you see a dump.sql file with a Content-Length of 0, it's likely empty. Although its presence in the directory might be suspicious, it doesn't automatically indicate a security risk.</p>
+
+          <p>Here's an example using curl to retrieve only the headers for a file named password.txt:</p>
+
+          <h5>
+            kappajester83@htb[/htb]$ curl -I http://IP:PORT/backup/password.txt<br>
+            <br>
+            HTTP/1.1 200 OK<br>
+            Content-Type: text/plain;charset=utf-8<br>
+            ETag: "3406387762"<br>
+            Last-Modified: Wed, 12 Jun 2024 14:08:46 GMT<br>
+            Content-Length: 171<br>
+            Accept-Ranges: bytes<br>
+            Date: Wed, 12 Jun 2024 14:08:59 GMT<br>
+            Server: lighttpd/1.4.76
+          </h5>
+
+          <ul>
+            <li><b>Content-Type: text/plain;charset=utf-8:</b> This tells us that password.txt is a plain text file, which is what is expected.</li>
+            <li><b>Content-Length:</b> 171: The file size is 171 bytes. While this doesn't definitively tell us the contents, it suggests that the file isn't empty and likely contains some data. This is concerning, given the file name and the fact that it's in a backup directory.</li>
+          </ul>
+
+          <p>These header details and the directory listing's existence provide strong evidence of a potential security risk. We've confirmed that the backup directory is accessible and contains a file named password.txt with actual content, which is likely sensitive.</p>
+
+          <p>By focusing on headers, you can gather valuable information without directly accessing the file's contents, striking a balance between confirming the vulnerability and maintaining responsible disclosure practices.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../webFuzzing.htm">Web Fuzzing</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction to Web Fuzzing</a></li>
+            <li><a href="tooling.htm">Tooling</a></li>
+            <li><a href="directoryFileFuzzing.htm">Directory and File Fuzzing</a></li>
+            <li><a href="recursiveFuzzing.htm">Recursive Fuzzing</a></li>
+            <li><a href="parameterValueFuzzing.htm">Parameter and Value Fuzzing</a></li>
+            <li><a href="virtualSubdomainFuzzing.htm">Virtual Host and Subdomain Fuzzing</a></li>
+            <li><a href="filteringFuzzingOutputs.htm">Filtering Fuzzing Outputs</a></li>
+            <li><a href="validatingFindings.htm"><b><em>~ Validating Findings</em></b></a></li>
+            <li><a href="webAPIs.htm">Web APIs</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
