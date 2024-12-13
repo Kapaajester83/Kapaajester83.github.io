@@ -3,24 +3,22 @@
 Consolidate Past Archives<br>
 Make acsessable from any internet connected device<br>
 
-# Goal
-
 ## Ruby with Rails App
 
 Active Directory<br>
 Aauth<br>
 Secure Login Portal for propriety entities<br>
 
-# References
+## References
 
-## Kappa
+---Kappa
 
 https://github.com/im-luka/markdown-cheatsheet?tab=readme-ov-file#%EF%B8%8F-the-only-markdown-cheatsheet-you-need
 https://beej.us/guide/bgnet/
 https://cyberchef.org/
 https://www.dcode.fr/vigenere-cipher
 
-## Kali-Linux
+---Kali-Linux
 
 https://www.kali.org/
 https://www.kali.org/tools/
@@ -31,7 +29,7 @@ https://www.exploit-db.com/
 https://www.exploit-db.com/google-hacking-database
 https://www.offsec.com/
 
-## ParrotSec
+---ParrotSec
 
 https://www.parrotsec.org/docs/
 https://www.parrotsec.org/community/
@@ -39,7 +37,7 @@ https://crypt.parrot.sh/
 https://www.parrotsec.org/team/
 https://www.parrotsec.org/donate/
 
-### Hack the box
+-Hack the box
 
 https://www.hackthebox.com/
 https://www.hackthebox.com/hacker/hacking-labs
@@ -50,9 +48,9 @@ https://www.hackthebox.com/blog
 https://www.hackthebox.com/blog
 https://help.hackthebox.com/en/
 
-### OSINT Services
+-OSINT Services
 
-#### Air and Space Tracking
+--Air and Space Tracking
 
 https://globe.adsbexchange.com/
 https://www.flightaware.com/live/
@@ -63,14 +61,14 @@ https://satellitemap.space/
 https://geoxc-apps.bd.esri.com/space/satellite-explorer/
 https://in-the-sky.org/satmap_worldmap.php
 
-#### Land and Sea Tracking
+--Land and Sea Tracking
 
 https://www.openrailwaymap.org/
 https://mobility.portal.geops.io/
 https://www.opentraintimes.com/maps
 https://satellites.pro/
 
-#### Camera Tracking
+--Camera Tracking
 
 http://www.insecam.org/
 https://world-webcams.nsspot.net/
@@ -79,7 +77,7 @@ https://worldcam.eu/
 http://www.opentopia.com/hiddencam.php
 https://livefromiceland.is/
 
-#### Search Engines
+--Search Engines
 
 https://www.shodan.io/
 https://search.censys.io/
@@ -88,7 +86,7 @@ https://www.zoomeye.hk/
 https://hunter.io/
 https://wigle.net/
 
-### Vuln DB
+-Vuln DB
 
 https://www.exploit-db.com/
 https://wpscan.com/wordpresses/
@@ -99,7 +97,7 @@ https://packetstorm.news/
 https://cxsecurity.com/exploit/
 https://www.vulnerability-lab.com/
 
-### Privacy and Security
+--Privacy and Security
 
 https://www.eff.org/
 https://ssd.eff.org/
@@ -111,9 +109,7 @@ https://filen.io/
 https://quad9.net/
 https://www.privacytools.io/
 
-### Learning Resources
-
-#### Programming
+--Programming
 
 https://www.learnpython.org/
 https://go.dev/learn/
@@ -124,7 +120,7 @@ https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
 https://dev.java/learn/
 https://www.learn-php.org/
 
-#### System and Networking
+--System and Networking
 
 https://linuxjourney.com/
 http://linux-training.be/
@@ -134,7 +130,7 @@ https://www.softwaretestinghelp.com/computer-networking-basics/
 https://www.computernetworkingnotes.com/networking-tutorials
 https://www.guru99.com/data-communication-computer-network-tutorial.html
 
-#### Training Labs
+--Training Labs
 
 https://github.com/ashemery/exploitation-course
 https://github.com/RPISEC/MBE
@@ -144,7 +140,7 @@ https://pentesterlab.com/
 https://owasp.org/www-project-webgoat/
 https://owasp.org/www-project-secure-coding-dojo/
 
-#### Materials
+--Materials
 
 https://opensecuritytraining.info/Training.html
 http://www.pentest-standard.org/index.php/Main_Page
@@ -153,7 +149,7 @@ http://www.computersecuritystudent.com/
 https://guyinatuxedo.github.io/
 https://freecomputerbooks.com/
 
-#### Blogs and Researches
+-- Blogs and Researches
 
 https://0xsp.com/offensive/privilege-escalation-cheatsheet/
 https://csandker.io/2021/01/10/Offensive-Windows-IPC-1-NamedPipes.html
