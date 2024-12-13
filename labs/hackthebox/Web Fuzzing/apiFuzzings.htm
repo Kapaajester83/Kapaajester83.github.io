@@ -69,103 +69,124 @@
 
         <div>
 
-          API Fuzzing
+          <h3><em>API Fuzzing</em></h3>
 
-API fuzzing is a specialized form of fuzzing tailored for web APIs. While the core principles of fuzzing remain the same – sending unexpected or invalid inputs to a target – API fuzzing focuses on the unique structure and protocols used by web APIs.
+          <p>API fuzzing is a specialized form of fuzzing tailored for web APIs. While the core principles of fuzzing remain the same – sending unexpected or invalid inputs to a target – API fuzzing focuses on the unique structure and protocols used by web APIs.</p>
 
-API fuzzing involves bombarding an API with a series of automated tests, where each test sends a slightly modified request to an API endpoint. These modifications might include:
+          <p>API fuzzing involves bombarding an API with a series of automated tests, where each test sends a slightly modified request to an API endpoint. These modifications might include:
+          <ul>
+            <li>Altering parameter values</li>
+            <li>Modifying request headers</li>
+            <li>Changing the order of parameters</li>
+            <li>Introducing unexpected data types or formats</li>
+          </ul>
 
-    Altering parameter values
-    Modifying request headers
-    Changing the order of parameters
-    Introducing unexpected data types or formats
+          <p>The goal is to trigger API errors, crashes, or unexpected behavior, revealing potential vulnerabilities like input validation flaws, injection attacks, or authentication issues.</p>
 
-The goal is to trigger API errors, crashes, or unexpected behavior, revealing potential vulnerabilities like input validation flaws, injection attacks, or authentication issues.
-Why Fuzz APIs?
+          <h4>Why Fuzz APIs?</h4>
 
-API fuzzing is crucial for several reasons:
+          <p>API fuzzing is crucial for several reasons:
+          <ul>
+            <li><b>Uncovering Hidden Vulnerabilities:</b> APIs often have hidden or undocumented endpoints and parameters that can be susceptible to attacks. Fuzzing helps uncover these hidden attack surfaces.</li>
 
-    Uncovering Hidden Vulnerabilities: APIs often have hidden or undocumented endpoints and parameters that can be susceptible to attacks. Fuzzing helps uncover these hidden attack surfaces.
-    Testing Robustness: Fuzzing assesses the API's ability to gracefully handle unexpected or malformed input, ensuring it doesn't crash or expose sensitive data.
-    Automating Security Testing: Manual testing of all possible input combinations is infeasible. Fuzzing automates this process, saving time and effort.
-    Simulating Real-World Attacks: Fuzzing can mimic the actions of malicious actors, allowing you to identify vulnerabilities before attackers exploit them.
+            <li><b>Testing Robustness:</b> Fuzzing assesses the API's ability to gracefully handle unexpected or malformed input, ensuring it doesn't crash or expose sensitive data.</li>
 
-Types of API Fuzzing
+            <li><b>Automating Security Testing:</b> Manual testing of all possible input combinations is infeasible. Fuzzing automates this process, saving time and effort.</li>
 
-There are 3 primary types of API fuzzing
+            <li><b>Simulating Real-World Attacks:</b> Fuzzing can mimic the actions of malicious actors, allowing you to identify vulnerabilities before attackers exploit them.</li>
+          </ul>
 
-    Parameter Fuzzing - One of the primary techniques in API fuzzing, parameter fuzzing focuses on systematically testing different values for API parameters. This includes query parameters (appended to the API endpoint URL), headers (containing metadata about the request), and request bodies (carrying the data payload). By injecting unexpected or invalid values into these parameters, fuzzers can expose vulnerabilities like injection attacks (e.g., SQL injection, command injection), cross-site scripting (XSS), and parameter tampering.
-    Data Format Fuzzing - Web APIs frequently exchange data in structured formats like JSON or XML. Data format fuzzing specifically targets these formats by manipulating the structure, content, or encoding of the data. This can reveal vulnerabilities related to parsing errors, buffer overflows, or improper handling of special characters.
-    Sequence Fuzzing - APIs often involve multiple interconnected endpoints, where the order and timing of requests are crucial. Sequence fuzzing examines how an API responds to sequences of requests, uncovering vulnerabilities like race conditions, insecure direct object references (IDOR), or authorization bypasses. By manipulating the order, timing, or parameters of API calls, fuzzers can expose weaknesses in the API's logic and state management.
+          <h4>Types of API Fuzzing</h4>
 
-Exploring the API
+          <p>There are 3 primary types of API fuzzing
+          <ul>
+            <li><b>Parameter Fuzzing</b> - One of the primary techniques in API fuzzing, parameter fuzzing focuses on systematically testing different values for API parameters. This includes query parameters (appended to the API endpoint URL), headers (containing metadata about the request), and request bodies (carrying the data payload). By injecting unexpected or invalid values into these parameters, fuzzers can expose vulnerabilities like injection attacks (e.g., SQL injection, command injection), cross-site scripting (XSS), and parameter tampering.</li>
 
-To follow along, start the target system via the question section at the bottom of the page, replacing the uses of IP:PORT with the IP:PORT for your spawned instance.
+            <li><b>Data Format Fuzzing</b> - Web APIs frequently exchange data in structured formats like JSON or XML. Data format fuzzing specifically targets these formats by manipulating the structure, content, or encoding of the data. This can reveal vulnerabilities related to parsing errors, buffer overflows, or improper handling of special characters.</li>
 
-This API provides automatically generated documentation via the /docs endpoint, http://IP:PORT/docs. The following page outlines the API's documented endpoint.
+            <li><b>Sequence Fuzzing</b> - APIs often involve multiple interconnected endpoints, where the order and timing of requests are crucial. Sequence fuzzing examines how an API responds to sequences of requests, uncovering vulnerabilities like race conditions, insecure direct object references (IDOR), or authorization bypasses. By manipulating the order, timing, or parameters of API calls, fuzzers can expose weaknesses in the API's logic and state management.</li>
+          </ul>
 
-The specification details five endpoints, each with a specific purpose and method:
+          <h4>Exploring the API</h4>
 
-    GET / (Read Root): This fetches the root resource. It likely returns a basic welcome message or API information.
-    GET /items/{item_id} (Read Item): Retrieves a specific item identified by item_id.
-    DELETE /items/{item_id} (Delete Item): Deletes an item identified by item_id.
-    PUT /items/{item_id} (Update Item): Updates an existing item with the provided data.
-    POST /items/ (Create Or Update Item): This function creates a new item or updates an existing one if the item_id matches.
+          <p>To follow along, start the target system via the question section at the bottom of the page, replacing the uses of IP:PORT with the IP:PORT for your spawned instance.</p>
 
-While the Swagger specification explicitly details five endpoints, it's crucial to acknowledge that APIs can contain undocumented or "hidden" endpoints that are intentionally omitted from the public documentation.
+          <p>This API provides automatically generated documentation via the /docs endpoint, http://IP:PORT/docs. The following page outlines the API's documented endpoint.</p>
 
-These hidden endpoints might exist to serve internal functions not meant for external use, as a misguided attempt at security through obscurity, or because they are still under development and not yet ready for public consumption.
-Fuzzing the API
+          <p>The specification details five endpoints, each with a specific purpose and method:
+          <ul>
+            <li><b>GET / (Read Root):</b> This fetches the root resource. It likely returns a basic welcome message or API information.</li>
 
-We will use a fuzzer that will use a wordlist in an attempt to discover these undocumented endpoints. Run the commands to pull, install the requirements, and run the fuzzer:
-API Fuzzing
+            <li><b>GET /items/{item_id} (Read Item):</b> Retrieves a specific item identified by item_id.</li>
 
-kappajester83@htb[/htb]$ git clone https://github.com/PandaSt0rm/webfuzz_api.git
-kappajester83@htb[/htb]$ cd webfuzz_api
-kappajester83@htb[/htb]$ pip3 install -r requirements.txt
+            <li><b>DELETE /items/{item_id} (Delete Item):</b> Deletes an item identified by item_id.</li>
 
-Then, run the fuzzer using the spawned target IP and PORT
-API Fuzzing
+            <li><b>PUT /items/{item_id} (Update Item):</b> Updates an existing item with the provided data.</li>
 
-kappajester83@htb[/htb]$ python3 api_fuzzer.py http://IP:PORT
+            <li><b>POST /items/ (Create Or Update Item):</b> This function creates a new item or updates an existing one if the item_id matches.</li>
+          </ul>
 
-[-] Invalid endpoint: http://localhost:8000/~webmaster (Status code: 404)
-[-] Invalid endpoint: http://localhost:8000/~www (Status code: 404)
+          <p>While the Swagger specification explicitly details five endpoints, it's crucial to acknowledge that APIs can contain undocumented or "hidden" endpoints that are intentionally omitted from the public documentation.</p>
 
-Fuzzing completed.
-Total requests: 4730
-Failed requests: 0
-Retries: 0
-Status code counts:
-404: 4727
-200: 2
-405: 1
-Found valid endpoints:
-- http://localhost:8000/cz...
-- http://localhost:8000/docs
-Unusual status codes:
-405: http://localhost:8000/items
+          <p>These hidden endpoints might exist to serve internal functions not meant for external use, as a misguided attempt at security through obscurity, or because they are still under development and not yet ready for public consumption.</p>
 
-    The fuzzer identifies numerous invalid endpoints (returning 404 Not Found errors).
-    Two valid endpoints are discovered:
-        /cz...: This is an undocumented endpoint as it doesn't appear in the API documentation.
-        /docs: This is the documented Swagger UI endpoint.
-    The 405 Method Not Allowed response for /items suggests that an incorrect HTTP method was used to access this endpoint (e.g., trying a GET request instead of a POST).
+          <h4>Fuzzing the API</h4>
 
-We can explore the undocumented endpoint via curl and it will return a flag:
-API Fuzzing
+          <p>We will use a fuzzer that will use a wordlist in an attempt to discover these undocumented endpoints. Run the commands to pull, install the requirements, and run the fuzzer:</p>
 
-kappajester83@htb[/htb]$ curl http://localhost:8000/cz...
+          <h5>
+            kappajester83@htb[/htb]$ git clone https://github.com/PandaSt0rm/webfuzz_api.git<br>
+            kappajester83@htb[/htb]$ cd webfuzz_api<br>
+            kappajester83@htb[/htb]$ pip3 install -r requirements.txt
+          </h5>
 
-{"flag":"<snip>"}
+          <p>Then, run the fuzzer using the spawned target IP and PORT</p>
 
-In addition to discovering endpoints, fuzzing can be applied to the parameters these endpoints accept. By systematically injecting unexpected values into parameters, you can trigger errors, crashes, or unexpected behavior that could expose a wide range of vulnerabilities. For example, consider the following scenarios:
+          <h5>
+            kappajester83@htb[/htb]$ python3 api_fuzzer.py http://IP:PORT<br>
+            <br>
+            [-] Invalid endpoint: http://localhost:8000/~webmaster (Status code: 404)<br>
+            [-] Invalid endpoint: http://localhost:8000/~www (Status code: 404)<br>
+            <br>
+            Fuzzing completed.<br>
+            Total requests: 4730<br>
+            Failed requests: 0<br>
+            Retries: 0<br>
+            Status code counts:<br>
+            404: 4727<br>
+            200: 2<br>
+            405: 1<br>
+            Found valid endpoints:<br>
+            - http://localhost:8000/cz...<br>
+            - http://localhost:8000/docs<br>
+            Unusual status codes:<br>
+            405: http://localhost:8000/items<br>
+            <br>
+            The fuzzer identifies numerous invalid endpoints (returning 404 Not Found errors).<br>
+            Two valid endpoints are discovered:<br>
+            /cz...: This is an undocumented endpoint as it doesn't appear in the API documentation.<br>
+            /docs: This is the documented Swagger UI endpoint.<br>
+            The 405 Method Not Allowed response for /items suggests that an incorrect HTTP method was used to access this endpoint (e.g., trying a GET request instead of a POST).
+          </h5>
 
-    Broken Object-Level Authorization: Fuzzing could reveal instances where manipulating parameter values can allow unauthorized access to specific objects or resources.
-    Broken Function Level Authorization: Fuzzing might uncover cases where unauthorized function calls can be made by manipulating parameters, allowing attackers to perform actions they cannot.
-    Server-Side Request Forgery (SSRF): Injections of malicious values into parameters could trick the server into making unintended requests to internal or external resources, potentially exposing sensitive information or facilitating further attacks.
+          <p>We can explore the undocumented endpoint via curl and it will return a flag:</p>
 
-To explore these and other web API vulnerabilities and attacks in more detail, refer to the API Attacks module. Understanding these risks is crucial for building secure and resilient APIs.
+          <h5>
+            kappajester83@htb[/htb]$ curl http://localhost:8000/cz...<br>
+            <br>
+            {"flag":"snip"}
+          </h5>
+
+          <p>In addition to discovering endpoints, fuzzing can be applied to the parameters these endpoints accept. By systematically injecting unexpected values into parameters, you can trigger errors, crashes, or unexpected behavior that could expose a wide range of vulnerabilities. For example, consider the following scenarios:
+          <ul>
+            <li><b>Broken Object-Level Authorization:</b> Fuzzing could reveal instances where manipulating parameter values can allow unauthorized access to specific objects or resources.</li>
+
+            <li><b>Broken Function Level Authorization:</b> Fuzzing might uncover cases where unauthorized function calls can be made by manipulating parameters, allowing attackers to perform actions they cannot.</li>
+
+            <li><b>Server-Side Request Forgery (SSRF):</b> Injections of malicious values into parameters could trick the server into making unintended requests to internal or external resources, potentially exposing sensitive information or facilitating further attacks.</li>
+          </ul>
+
+          <p>To explore these and other web API vulnerabilities and attacks in more detail, refer to the API Attacks module. Understanding these risks is crucial for building secure and resilient APIs.</p>
 
         </div>
         <hr>
