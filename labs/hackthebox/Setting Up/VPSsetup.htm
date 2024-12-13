@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Setting Up</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../settingUp.htm">Setting Up</a></h4>
+          <ul>
+            <li><a href="VPSproviders.htm">VPS Providers</a></li>
+            <li><a href="VPSsetup.htm"><b><em>~ VPS Setup</em></b></a></li>
+            <li><a href="VPShardening.htm">VPS Hardening</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>VPS Setup</em></h3>
+
+          <p>Whether we are on an internal or external penetration test, a VPS that we can use is of great importance to us in many different cases. We can store all our resources on it and access them from almost any point with internet access. Apart from the fact that we first have to set up the VPS, we also have to prepare the corresponding folder structure and its services. In this example, we will deal with the provider called Vultr and set up our VPS there. For the other providers, the configuration options look almost identical.</p>
+
+We should still read the individual information about their components carefully and understand what kind of VPS we will be working with in the future. In Vultr, we can choose one of the four different servers. For our purposes, the Cloud Computer server is sufficient for now.
+
+Next, we need to select the location closest to us. This will ensure an excellent connection to our server. If we need to perform a penetration test on another continent, we can also set up a VPS there using our automation scripts and perform the penetration test from there.
+
+For the server type, we select which operating system should be installed on the VPS. ParrotOS is based on Debian, just like Ubuntu. Here we can choose one of these two or go to advanced options and upload our ISO.
+
+If we want to upload our ISO, we have to do it via a public link to that ISO. We can go to the ParrotOS website, copy the link to the mirror server for the appropriate version, and paste it into Vultr.
+
+Next, we need to choose the performance level for our VPS. This is one of the points where the cost can change a lot. For our purposes, however, we can choose one of the two options on the left. However, here we need to select the performance for which we want to use the VPS. If the VPS is to be used for advanced purposes and provides many requests and services, 1024MB memory will not be enough. Therefore, it is always advisable to first set up the installation of our OS locally in a VM and then check the services' load.
+
+Next, we have the choice if we want to use IPv6 for our VPS. This is highly recommended because many firewalls are only protected against IPv4, and IPv6 is forgotten. We can also allow automatic backups, private networking, and DDOS protection, but at a higher cost.
+
+After that, we can generate our SSH keys, which we can use to log in to the VPS via SSH later. We can also generate these keys later on our VPS or our VM or own host operating system. Let's use our VM to generate the key pair.
+Generate SSH Keys
+VPS Setup
+
+┌─[cry0l1t3@parrot]─[~]
+└──╼ $ ssh-keygen -t rsa -b 4096 -f vps-ssh
+
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): ******************
+Enter same passphrase again: ******************
+Your identification has been saved in vps-ssh
+Your public key has been saved in vps-ssh.pub
+The key fingerprint is:
+SHA256:zXyVAWK00000000000000000000VS4a/f0000+ag cry0l1t3@parrot
+The key's randomart image is:
+...SNIP...
+
+With the command shown above, we generate two different keys. The vps-ssh is the private key and must not be shared anywhere or with anyone. The second vps-ssh.pub is the public key which we can now insert in the Vultr control panel.
+SSH Keys
+VPS Setup
+
+┌─[cry0l1t3@parrot]─[~]
+└──╼ $ ls -l vps*
+
+-rw------- 1 cry0l1t3 cry0l1t3 3434 Mar 30 12:23 vps-ssh
+-rw-r--r-- 1 cry0l1t3 cry0l1t3  741 Mar 30 12:23 vps-ssh.pub
+
+Finally, we choose a hostname and the server label with which we want to name our VPS.
+
+Once the VPS is installed, we can access it via SSH.
+SSH Using Password
+VPS Setup
+
+kalijester68@htb[/htb]$ ssh root@<vps-ip-address>
+
+root@<vps-ip-address>'s password: 
+
+[root@VPS ~]# 
+
+After that, we should add a new user for the VPS to not run our services with root or administrator privileges. For this, we can then generate another SSH key and insert it for this user.
+Adding a New Sudo User
+VPS Setup
+
+[root@VPS ~]# adduser cry0l1t3
+[root@VPS ~]# usermod -aG sudo cry0l1t3
+[root@VPS ~]# su - cry0l1t3
+Password: 
+
+[cry0l1t3@VPS ~]$
+
+Adding Public SSH Key to VPS
+VPS Setup
+
+[cry0l1t3@VPS ~]$ mkdir ~/.ssh
+[cry0l1t3@VPS ~]$ echo '<vps-ssh.pub>' > ~/.ssh/authorized_keys
+[cry0l1t3@VPS ~]$ chmod 600 ~/.ssh/authorized_keys
+
+Once we have added this to the authorized_keys file, we can use the private key to log in to the system via SSH.
+Using SSH Keys
+VPS Setup
+
+kalijester68@htb[/htb]$ ssh cry0l1t3@<vps-ip-address> -i vps-ssh
+
+[cry0l1t3@VPS ~]$ 
+
+
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../settingUp.htm">Setting Up</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction</a></li>
+            <li><a href="organization.htm">Organization</a></li>
+            <li><a href="virtualization.htm">Virtualization</a></li>
+            <li><a href="containers.htm">Containers</a></li>
+            <li><a href="linux.htm">Linux</a></li>
+            <li><a href="windows.htm">Windows</a></li>
+            <li><a href="VPSproviders.htm">VPS Providers</a></li>
+            <li><a href="VPSsetup.htm"><b><em>~ VPS Setup</em></b></a></li>
+            <li><a href="VPShardening.htm">VPS Hardening</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
