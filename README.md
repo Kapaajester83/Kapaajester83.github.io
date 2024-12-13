@@ -1,17 +1,15 @@
 # Objective
 
-## Consolidate Past Archives
-## Make acsessable from any internet connected device
+Consolidate Past Archives<br>
+Make acsessable from any internet connected device<br>
 
 # Goal
 
 ## Ruby with Rails App
 
-~unless things change?
-
-Active Directory
-Aauth
-Secure Login Portal for propriety entities
+Active Directory<br>
+Aauth<br>
+Secure Login Portal for propriety entities<br>
 
 # References
 
