@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Python 3</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../python3.htm">Python 3</a></h4>
+          <ul>
+            <li><a href="executingPythonCode.htm">Executing Python Code</a></li>
+            <li><a href="introductionVariables.htm"><b><em>~ Introduction to Variables</em></b></a></li>
+            <li><a href="conditionalStatementsLoops.htm">Conditional Statements and Loops</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Introduction to Variables</em></h3>
+
+          <p>Let us assume for a moment that we are tasked with doing a penetration test for a client with a locked-down user environment. While investigating our options for our Assume Breach test, i.e., a test assuming that we have already successfully compromised a regular user account and machine through phishing, we discover that we can run Python scripts. We can produce a list of potential user accounts, and we would also like to have a target specific list of potential passwords. We notice that the client's website contains many buzzwords, and we wonder if some users used variations of product names as their passwords. For this, we need to write a simple script that can produce a list of a website's most frequently occurring words. Since the client wants to get a copy, we will try our best to make the script easy to read and maintain.</p>
+
+          <p>Before we get ahead of ourselves, we need to carve out the essential building blocks. For this, let us talk about math. Math and programming have some things in common: both use variables and constants a fair bit, and both have functions. In Python, a variable is our way of storing a value of some sort in memory. For example, a number, some text, or the bytes of an image. Like in math, variables have a name that we make up, but the names should be descriptive in Python. Below are some examples:</p>
+
+          <h4>A Few Simple Variables</h4>
+
+          <h5>
+            Code: python<br>
+            <br>
+            advice = "Don't panic"<br>
+            ultimate_answer = 42<br>
+            potential_question = 6 * 7<br>
+            confident = True<br>
+            something_false = False<br>
+            problems = None<br>
+            # Oh, and by the way, this is a comment. We can tell by the leading # sign.
+          </h5>
+
+          <h4>Strings</h4>
+
+          <p>The first variable, advice, is a string. Strings in Python can be specified using both "double quotes" and 'single quotes'. When typing out strings that contain either symbol as a natural part of the string itself, e.g., don't lie, it is a good idea to use the other kind of quotes. Writing "don't lie" works just fine. However, using single quotes would throw an error.</p>
+
+          <h4>Integers</h4>
+
+          <p>Following the advice variable comes two numbers, or integers, the first of which is a number. The second variable, potential_question, is also a number but not until runtime. During runtime, the equation 6 * 7 is evaluated to 42, which is then stored as the variable.</p>
+
+          <h4>Booleans</h4>
+
+          <p>Following the number variables come two boolean variables, confident and something_false. A boolean value is a truth value and can be either True or False. These will come in handy later. Right after comes the variable problems, which is set to None. None is a special "nothingness" of a value similar to null in other languages. The usefulness of this value is, among other things, that it allows us to define variables in the code but not give them a concrete value just yet. It also allows us to create a more meaningful program flow and decide to pass along either some data or None, e.g., in case of errors. Moreover, it allows us to return it as a value if "none of something" was found. This also enhances the program flow and readability.</p>
+
+          <h4>Comments</h4>
+
+          <p>Lastly, we see a comment. Comments work the same way in Python as they do in all other languages: they are ignored when the program runs and are only for the developers' eyes. It can sometimes be advisible to use comments to remember what a piece of code does or explain some oddity. However, it is strongly recommended to write clean and simple code that will not need further explanation other than the code itself. This is not always the easiest way to get started, but we will try to aim for this later.</p>
+
+          <h4>Combining Variables</h4>
+
+          <p>Let us go through a few examples to see how all these variables can also be combined. Later on, whether for our projects or specific tasks, we will want to output variables (and thus also their contents) together. Therefore, let us first briefly go through some basic math operations with Python.</p>
+
+          <h4>Basic Math Operations</h4>
+
+          <h5>
+            Code: python<br>
+            <br>
+            >>> 10 + 10 # Addition<br>
+            20<br>
+            >>> 20 - 10 # Subtraction<br>
+            10<br>
+            >>> 5 * 5 # Multiplication<br>
+            25<br>
+            >>> 10 / 5 # Division<br>
+            2
+          </h5>
+
+          <p>For all of these values we can define variables to store them. As for the name itself, we can name them as we please, however with a few exceptions e.g. they must begin with a letter or _.</p>
+
+          <h4>Saving Values to Variables</h4>
+
+          <h5>
+            Code: python<br>
+            <br>
+            >>> add = 10 + 10<br>
+            >>> sub = 20 - 10<br>
+            >>> multi = 5 * 5<br>
+            >>> div = 10 / 5<br>
+            >>><br>
+            >>> print(add, sub, multi, div)<br>
+            20 10 25 2
+          </h5>
+
+          <p>This also allows us to work with the values stored in the individual variables.</p>
+
+          <h4>Working with Variables</h4>
+
+          <h5>
+            Code: python<br>
+            <br>
+            ...SNIP...<br>
+            >>> print(add, sub, multi, div)<br>
+            20 10 25 2<br>
+            >>> result = (add * sub) - (multi * div) # (20 * 10) - (25 * 2)<br>
+            >>> print('Result: ', result)<br>
+            Result: 150
+          </h5>
+
+          <p>
+            Another handy feature of the Python interpreter is that the IDLE assigns the latest expression to the variable _. This allows us to continue working with the last value.</p>
+
+          <h5>
+            Code: python<br>
+            <br>
+            >>> 38 + 4<br>
+            42<br>
+            >>> 50 - _ # 50 - 42<br>
+            8
+          </h5>
+
+          <p>Note however that this is true only for IDLE. In regular Python code that is run from .py files e.g. from the command line or in an Integrated Development Environment, _ is simply just a variable. It is often used as a placeholder for values we do not care about, for example if a function returns two values, but only one of them is important to us, for example x_coord, _ = get_position_of_birb(). This is to show other developers, and ourselves a few months into the future, that the value returned, e.g. the y-coordinate from the previous example, is not needed.</p>
+
+          <h4>Coding Style</h4>
+
+          <p>In Python, variable names follow the snake_case naming convention. This means that variable names should be all lower case initially, and an underscore should separate any potential need for multiple words in the name. While ignoring these naming conventions will not cause any issues for the script - Python could care less about what we call our things - other Python developers may get thrown off if they expect one set of rules but face others.</p>
+
+          <p>The main point here is that our code should be easy to follow and read. Every programmer has their style and preferences when it comes to writing code. There are even several style guides for Python, such as PEP8, which describes certain types of variable or function definitions. Having a style guide is very important when we want someone to read the code we write. We usually write code so that someone can use it, benefit from it and possibly work on it or learn something new from it. Without a style guide, debugging, improving, or extending becomes immensely difficult. Of course, there are many other things besides the style guide that we as professional programmers need to pay attention to, such as code architecture, general principles for code quality, etc.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../python3.htm">Python 3</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction to Python 3</a></li>
+            <li><a href="executingPythonCode.htm">Executing Python Code</a></li>
+            <li><a href="introductionVariables.htm"><b><em>~ Introduction to Variables</em></b></a></li>
+            <li><a href="conditionalStatementsLoops.htm">Conditional Statements and Loops</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
