@@ -75,151 +75,105 @@
 
           <p>Over at Hack The Box, we use OpenVPN connections to create links between you and our labs and machines. You may be familiar with one of the many personal VPN services available to individuals, but our VPN serves an entirely different purpose. </p>
 
-A personal VPN is a service that encrypts a device's internet connection and routes it through a server in a location of the user's choosing. This can be used to protect the user's privacy, as well as to bypass internet censorship. Personal VPNs are often used by individuals to protect their online activity from being monitored or to mask their physical location. 
+          <p>A personal VPN is a service that encrypts a device's internet connection and routes it through a server in a location of the user's choosing. This can be used to protect the user's privacy, as well as to bypass internet censorship. Personal VPNs are often used by individuals to protect their online activity from being monitored or to mask their physical location.</p>
 
-In contrast, a VPN provided by a company or organization is typically used to allow individuals to access the company's internal network remotely. This type of VPN establishes a secure connection between a user's device and the company's network, allowing the individual to access internal resources as if they were physically connected to the network.
+          <p>In contrast, a VPN provided by a company or organization is typically used to allow individuals to access the company's internal network remotely. This type of VPN establishes a secure connection between a user's device and the company's network, allowing the individual to access internal resources as if they were physically connected to the network.</p>
 
-In the case of various VPN configurations we provide, they allow you to access our internal lab networks over the Internet. These configuration files needed to auto-configure your OpenVPN client are called VPN packs or VPN files. 
+          <p>In the case of various VPN configurations we provide, they allow you to access our internal lab networks over the Internet. These configuration files needed to auto-configure your OpenVPN client are called VPN packs or VPN files.</p>
 
-These will place you in the same IP subnet as the vulnerable machines, allowing you to contact them (and attack them).
+          <p>These will place you in the same IP subnet as the vulnerable machines, allowing you to contact them (and attack them).</p>
 
- 
+          <p>You will need:
+          <ul>
+            <li>A Hack The Box account.</li>
+            <li>The latest version of OpenVPN. (pre-installed with Kali Linux and ParrotOS)</li>
+            <li>A working internet connection.</li>
+          </ul>
 
-You will need:
+          <p>Tutorial VPN packs
+          <ul>
+            <li>Starting Point EU Free Access</li>
+            <li>Starting Point US Free Access</li>
+          </ul>
 
-    A Hack The Box account.
+          <p>Free VPN packs
+          <ul>
+            <li>EU Lab Free Access</li>
+            <li>US Lab Free Access</li>
+            <li>AU Lab Free Access</li>
+            <li>SG Lab Free Access</li>
+          </ul>
 
-    The latest version of OpenVPN. (pre-installed with Kali Linux and ParrotOS)
+          <p>If you’ve bought a VIP Subscription, you will be able to see the VIP packs as well. These look the same as the Free VPN packs listed above, with the "Free" part changed to "VIP".</p>
 
-    A working internet connection.
+          <p>While a Linux environment is not required to connect to the VPN, we strongly recommend you use a Linux VM. If you do not have a Linux VM setup, please see the article below:</p>
 
-Tutorial VPN packs
+          <h4>Installing Parrot Security on a VM</h4>
 
-    Starting Point EU Free Access
+          <p>If you want to view and use the currently available VPN controls, you can do so from any page by clicking on the Connect to HTB button next to your profile picture at the top right of the page you're currently on.</p>
 
-    Starting Point US Free Access
+          <p>You can select the specific content for which you'd like to configure settings from this menu: Machines, Starting Point, Endgame, Fortresses, Pro Labs, and Seasonal.</p>
 
-Free VPN packs
+          <p>Once you've chosen the content type you're engaging with, you'll have the opportunity to select your preferred method of connecting, either by utilizing a VPN file or opting for the Pwnbox option.</p>
 
-    EU Lab Free Access
+          <h4>OpenVPN :</h4>
 
-    US Lab Free Access
+          <p>To configure the settings for the VPN file, you should first select the VPN Access that corresponds to your subscription level, which can be either Free, VIP, or VIP+. This choice is available within one of the four regions: Europe, United States, Australia, and Singapore. Following that, you can proceed to pick the specific VPN server associated with the chosen VPN Access.</p>
 
-    AU Lab Free Access
+          <p>You can select either the TCP or UDP protocol based on your network circumstances. If your network experiences significant packet loss or congestion, TCP might be the preferable choice because of its ability to handle such issues through error recovery mechanisms. Conversely, when operating on a robust network, UDP is typically the preferred option.</p>
 
-    SG Lab Free Access
+          <p>You can now click Download VPN after configuring the settings and start using the file.</p>
 
-If you’ve bought a VIP Subscription, you will be able to see the VIP packs as well. These look the same as the Free VPN packs listed above, with the "Free" part changed to "VIP".
+          <h4>Pwnbox:</h4>
 
-While a Linux environment is not required to connect to the VPN, we strongly recommend you use a Linux VM. If you do not have a Linux VM setup, please see the article below:
- 
-Installing Parrot Security on a VM
- 
-VPN Settings Configuration
+          <p>The settings for Pwnbox are identical to those of OpenVPN. Additionally, you'll be required to select a Pwnbox location, which will impact the Pwnbox's latency. It's advisable to opt for a nearby location to minimize latency issues.</p>
 
-If you want to view and use the currently available VPN controls, you can do so from any page by clicking on the Connect to HTB button next to your profile picture at the top right of the page you're currently on.
+          <p>When you click "Start Pwnbox" it initiates the process of launching your virtual machine. This may take a few moments before you're presented with the choices to either "Open Desktop" for a full-screen experience in a new browser tab or "Terminate" the instance.</p>
 
-You can select the specific content for which you'd like to configure settings from this menu: Machines, Starting Point, Endgame, Fortresses, Pro Labs, and Seasonal.
+          <p>Furthermore, if you wish to modify your VPN Access or VPN Server settings, you'll notice a new button labeled "Switch Pwnbox Access." You'll need to click this button in order to apply and save these changes to the currently running instance.</p>
 
- 
+          <p>You can utilize either the Pwnbox or the VPN file connection method, but attempting to use both simultaneously will lead to routing errors that will disrupt your connection.</p>
 
-Once you've chosen the content type you're engaging with, you'll have the opportunity to select your preferred method of connecting, either by utilizing a VPN file or opting for the Pwnbox option.
+          <h4>Booting up OpenVPN</h4>
 
- 
-OpenVPN :
+          <p>After you click the Download button, your OpenVPN file should be found, by default, in the Downloads folder of your Linux distro. You will be using this file as the configuration for your OpenVPN initialization process.
+          <ul>
+            <li>Open up a terminal and navigate to your Downloads folder.</li>
+            <li>Then, boot up the OpenVPN initialization process using your VPN file as the configuration file.</li>
+            <li>Once the Initialization Sequence Completed message appears, you can open a new terminal tab or window and start playing.</li>
+          </ul>
 
-To configure the settings for the VPN file, you should first select the VPN Access that corresponds to your subscription level, which can be either Free, VIP, or VIP+. This choice is available within one of the four regions: Europe, United States, Australia, and Singapore. Following that, you can proceed to pick the specific VPN server associated with the chosen VPN Access.
+          <p>Please note that you must keep this terminal window open to keep the OpenVPN process running.</p>
 
- 
+          <p>In case of any issues, check out the article below to start troubleshooting:</p>
 
-You can select either the TCP or UDP protocol based on your network circumstances. If your network experiences significant packet loss or congestion, TCP might be the preferable choice because of its ability to handle such issues through error recovery mechanisms. Conversely, when operating on a robust network, UDP is typically the preferred option.
+          <h4>Connection Troubleshooting</h4>
 
- 
+          <p>Below, you can find an explanation of all the VPN control menus:</p>
 
-You can now click Download VPN after configuring the settings and start using the file.
+          <h4>Access</h4>
 
- 
-Pwnbox:
+          <p>Under the Access menu, you can select from all the different available labs for the main Machines lineup. This includes both free and VIP servers, the latter now including the much-requested AU VIP, SG Free, and SG VIP servers!</p>
 
-The settings for Pwnbox are identical to those of OpenVPN. Additionally, you'll be required to select a Pwnbox location, which will impact the Pwnbox's latency. It's advisable to opt for a nearby location to minimize latency issues.
+          <p>As a best practice, select the closest lab to you while also considering your account’s VIP status.</p>
 
- 
+          <p>VIP servers will, of course, have fewer users on them as there are many more than just the free VPN servers. Fewer members mean less traffic and, more importantly, fewer people trying to attack the same Machines as you.</p>
 
-When you click "Start Pwnbox" it initiates the process of launching your virtual machine. This may take a few moments before you're presented with the choices to either "Open Desktop" for a full-screen experience in a new browser tab or "Terminate" the instance.
+          <h4>Server</h4>
 
- 
+          <p>From the Server menu, you can select the actual VPN server you want to connect to. After this step, you should be able to download your .ovpn connection pack directly and proceed with engaging in attacks over the Machines.</p>
 
-Furthermore, if you wish to modify your VPN Access or VPN Server settings, you'll notice a new button labeled "Switch Pwnbox Access." You'll need to click this button in order to apply and save these changes to the currently running instance.
+          <p>We have implemented this method of server selection instead of randomly assigning users to the least populated ones due to several requests for multiple teammates attacking the same Machines on the same VPN server to compete against each other. We hope that this will further improve collaboration between teammates and bring your educational progress to the next level for both you and your team or organization!</p>
 
- 
+          <h4>Download</h4>
 
-You can utilize either the Pwnbox or the VPN file connection method, but attempting to use both simultaneously will lead to routing errors that will disrupt your connection.
+          <p>The button to the right of the Server selection menu is the Download button for your now newly generated .ovpn pack. Once clicked, it will initialize a download for your .ovpn file, which you can use to start up the OpenVPN process on your Linux distro that will allow you to connect to the Machines in our labs.</p>
 
- 
-Booting up OpenVPN 
+          <h4>Regenerate</h4>
 
-After you click the Download button, your OpenVPN file should be found, by default, in the Downloads folder of your Linux distro. You will be using this file as the configuration for your OpenVPN initialization process.
+          <p>In the case where your .ovpn file might be incorrectly generated due to an error, you can regenerate the file by switching back and forth between the Servers on the lab you’ve selected. This will generate the new .ovpn file, which you can directly download to your OS.</p>
 
- 
-
-Open up a terminal and navigate to your Downloads folder.
-
- 
-
-Then, boot up the OpenVPN initialization process using your VPN file as the configuration file.
-
- 
-
-Once the Initialization Sequence Completed message appears, you can open a new terminal tab or window and start playing. 
-
- 
-
-Please note that you must keep this terminal window open to keep the OpenVPN process running.
-
- 
-
-In case of any issues, check out the article below to start troubleshooting:
-
- 
-T: Connection Troubleshooting
-
- 
-
-Below, you can find an explanation of all the VPN control menus:
-
- 
-Access
-
-Under the Access menu, you can select from all the different available labs for the main Machines lineup. This includes both free and VIP servers, the latter now including the much-requested AU VIP, SG Free, and SG VIP servers!
-
- 
-
-As a best practice, select the closest lab to you while also considering your account’s VIP status.
-
- 
-
-VIP servers will, of course, have fewer users on them as there are many more than just the free VPN servers. Fewer members mean less traffic and, more importantly, fewer people trying to attack the same Machines as you.
-Server
-
-From the Server menu, you can select the actual VPN server you want to connect to. After this step, you should be able to download your .ovpn connection pack directly and proceed with engaging in attacks over the Machines.
-
- 
-
-We have implemented this method of server selection instead of randomly assigning users to the least populated ones due to several requests for multiple teammates attacking the same Machines on the same VPN server to compete against each other. We hope that this will further improve collaboration between teammates and bring your educational progress to the next level for both you and your team or organization!
-
- 
-Download
-
-The button to the right of the Server selection menu is the Download button for your now newly generated .ovpn pack. Once clicked, it will initialize a download for your .ovpn file, which you can use to start up the OpenVPN process on your Linux distro that will allow you to connect to the Machines in our labs.
-
- 
-Regenerate
-
-In the case where your .ovpn file might be incorrectly generated due to an error, you can regenerate the file by switching back and forth between the Servers on the lab you’ve selected. This will generate the new .ovpn file, which you can directly download to your OS.
-
- 
-
-If even after regenerating, the .ovpn file is still invalid, our support team would be happy to assist you! 
+          <p>If even after regenerating, the .ovpn file is still invalid, our support team would be happy to assist you!</p>
 
         </div>
         <hr>
@@ -243,9 +197,3 @@ If even after regenerating, the .ovpn file is still invalid, our support team wo
   </div>
 
 </html>
-
-
-
-
-
-
