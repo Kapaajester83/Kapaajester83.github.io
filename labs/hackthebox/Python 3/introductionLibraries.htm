@@ -76,43 +76,52 @@
           <p>A library in programming is in many ways similar to a library in real life. It is a collection of knowledge that we can borrow in our projects without reinventing the wheel. Once we import a library, we can use everything inside it, including functions and classes. Some libraries ship along with Python, for example, datetime, which lets us get an object representing the current, local date, and time.</p>
 
           <p>Let us see what classes and functions the library datetime contains. For that, we will use the built-in function called dir().</p>
-          
-Dir(datetime)
-Code: python
 
->>> import datetime
->>> dir(datetime)
-['MAXYEAR', 'MINYEAR', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'date', 'datetime', 'datetime_CAPI', 'sys', 'time', 'timedelta', 'timezone', 'tzinfo']
+          <h4>Dir(datetime)</h4>
 
-The datetime Library
-Code: python
+          <h5>
+            Code: python<br>
+            <br>
+            >>> import datetime<br>
+            >>> dir(datetime)<br>
+            ['MAXYEAR', 'MINYEAR', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'date', 'datetime', 'datetime_CAPI', 'sys', 'time', 'timedelta', 'timezone', 'tzinfo']
+          </h5>
 
-import datetime
+          <h4>The datetime Library</h4>
 
-now = datetime.datetime.now()
-print(now)  # Prints: 2021-03-11 17:03:48.937590
+          <h5>
+            Code: python<br>
+            <br>
+            import datetime<br>
+            now = datetime.datetime.now()<br>
+            print(now) # Prints: 2021-03-11 17:03:48.937590
+          </h5>
 
-As we see, we have to call datetime.datetime.now() to get the current timestamp. We import the library, or module, datetime, which then becomes available to reference by name. This module is also called datetime, which contains a now() function. So to get to the now() function, we first have to reference the module, then the class, and finally the function, all "chained together" to speak with dots.
+          <p>As we see, we have to call datetime.datetime.now() to get the current timestamp. We import the library, or module, datetime, which then becomes available to reference by name. This module is also called datetime, which contains a now() function. So to get to the now() function, we first have to reference the module, then the class, and finally the function, all "chained together" to speak with dots.</p>
 
-This may become cumbersome and clutter the code, so let us look at alternative ways of importing:
-Importing a Class From a Library
-Code: python
+          <p>This may become cumbersome and clutter the code, so let us look at alternative ways of importing:</p>
 
-from datetime import datetime
+          <h4>Importing a Class From a Library</h4>
 
-print(datetime.now())
+          <h5>
+            Code: python<br>
+            <br>
+            from datetime import datetime<br>
+            print(datetime.now())
+          </h5>
 
-Giving It a New Name
-Code: python
+          <h4>Giving It a New Name</h4>
 
-from datetime import datetime as dt
+          <h5>
+            Code: python<br>
+            <br>
+            from datetime import datetime as dt<br>
+            print(dt.now())
+          </h5>
 
-print(dt.now())
+          <p>The above example contains two newlines between the import statement and the code. This is because the PEP-8 style guide, Python's guidelines for "correct" Python, urges developers to add two new lines between import statements and the actual code. It also suggests using the CapWords convention for class names but notes a separate style guide for built-in names. See <a href="https://www.python.org/dev/peps/pep-0008/#class-names">https://www.python.org/dev/peps/pep-0008/#class-names</a> for more information. This is why classes such as datetime are in lowercase.</p>
 
-The above example contains two newlines between the import statement and the code. This is because the PEP-8 style guide, Python's guidelines for "correct" Python, urges developers to add two new lines between import statements and the actual code. It also suggests using the CapWords convention for class names but notes a separate style guide for built-in names. See https://www.python.org/dev/peps/pep-0008/#class-names for more information. This is why classes such as datetime are in lowercase.
-
-Next up, we will dive deeper into how to install and manage external libraries in Python.
-
+          <p>Next up, we will dive deeper into how to install and manage external libraries in Python.</p>
 
         </div>
         <hr>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Python 3</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../python3.htm">Python 3</a></h4>
+          <ul>
+            <li><a href="introductionLibraries.htm">Introduction to Librairies</a></li>
+            <li><a href="managingLibraries.htm"><b><em>~ Managing Libraries in Python</em></b></a></li>
+            <li><a href="importanceLibraries.htm">The Importance of Libraries</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Managing Libraries in Python</em></h3>
+
+          <p>The most popular way of installing external packages in Python is by using pip. According to the author, pip is short for "pip installs packages", a recursive abbreviation (meaning the definition refers to the abbreviation, and thus circles itself). Very funny indeed. Regardless, pip is the name of the Python module that manages external Python packages. With pip, we can install, uninstall and upgrade Python packages. Unlike downloading and installing plugins for a browser or text editor, it is not common to "go shopping" for Python packages.</p>
+
+          <p>Programming is all about using the right tool for the job, so do not worry about finding packages to install. The right approach, and probably also the one most common, is finding out how to do something and getting package recommendations along the way. The documentation of these packages - their websites most of the time - will typically show examples of installing the package for first-time users. Let us look at how to manage packages as well.</p>
+
+          <p>Some valuable arguments for pip that we will look at are install and--upgrade flag, uninstall and freeze. The install argument lets users install new packages or upgrade existing packages to the latest version (if the --upgrade parameter is provided). The uninstall argument will, as its name suggests, remove the package from the system. Surprisingly the freeze command has nothing to do with halting anything or cheesy police movies. This prints a list of all the installed (via pip) packages and their dependencies. We can call the commands either using pip directly or as a Python module. Below are some examples of how this might look.</p>
+
+          <h4>Installing "flask" with Pip</h4>
+
+          <h5>
+            kappajester83@htb[/htb]$ # Syntax: python3 -m pip install [package]<br>
+            kappajester83@htb[/htb]$ python3 -m pip install flask<br>
+            <br>
+            Collecting flask<br>
+            Using cached Flask-1.1.2-py2.py3-none-any.whl (94 kB)<br>
+            Collecting Werkzeug>=0.15<br>
+            Using cached Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)<br>
+            Collecting itsdangerous>=0.24<br>
+            Using cached itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)<br>
+            Collecting click>=5.1<br>
+            Using cached click-7.1.2-py2.py3-none-any.whl (82 kB)<br>
+            Collecting Jinja2>=2.10.1<br>
+            Downloading Jinja2-2.11.3-py2.py3-none-any.whl (125 kB)<br>
+            Collecting MarkupSafe>=0.23<br>
+            Downloading MarkupSafe-1.1.1-cp39-cp39-macosx_10_9_x86_64.whl (16 kB)<br>
+            Installing collected packages: Werkzeug, itsdangerous, click, MarkupSafe, Jinja2, flask<br>
+            Successfully installed Jinja2-2.11.3 MarkupSafe-1.1.1 Werkzeug-1.0.1 click-7.1.2 flask-1.1.2 itsdangerous-1.1.0
+          </h5>
+
+          <p>As can be seen, even though we only asked to install flask, a brilliant package for running Python-based web servers (as is bottle - same-same, but different), we get a multitude of other packages as well, which are all requirements of flask. We could try to upgrade it, but we are already told that we are already running the latest version.</p>
+
+          <h4>Upgrading Packages</h4>
+
+          <h5>
+            kappajester83@htb[/htb]$ python3 -m pip install --upgrade flask<br>
+            <br>
+            Requirement already up-to-date: flask in /usr/local/lib/python3.9/site-packages (1.1.2)<br>
+            Requirement already satisfied, skipping upgrade: itsdangerous>=0.24 in /usr/local/lib/python3.9/site-packages (from flask) (1.1.0)<br>
+            Requirement already satisfied, skipping upg...<br>
+            ---SNIP---
+          </h5>
+
+          <p>If we wanted to uninstall a particular package, we could do so by calling:</p>
+
+          <h4>Uninstalling Packages</h4>
+
+          <h5>kappajester83@htb[/htb]$ pip uninstall [package]</h5>
+
+          <p>Let us see what is currently installed by running pip with the freeze argument. As some of them are dependencies of flask, we will leave the uninstallation itself as "extras." Please note that if we choose to uninstall a dependency package, the primary package likely will not work. Also, note that freeze may produce different outputs from machine to machine and Python version to Python version.</p>
+
+          <h4>Listing the Installed Packages</h4>
+
+          <h5>
+            kappajester83@htb[/htb]$ # Syntax: python3 -m pip freeze [package]<br>
+            kappajester83@htb[/htb]$ python3 -m pip freeze<br>
+            <br>
+            click==7.1.2<br>
+            Flask==1.1.2<br>
+            itsdangerous==1.1.0<br>
+            Jinja2==2.11.3<br>
+            MarkupSafe==1.1.1<br>
+            protobuf==3.13.0<br>
+            pynput==1.7.3<br>
+            pyobjc-core==7.1<br>
+            pyobjc-framework-Cocoa==7.1<br>
+            pyobjc-framework-Quartz==7.1<br>
+            six==1.15.0<br>
+            Werkzeug==1.0.1
+          </h5>
+
+          <p>This list of installed packages would be nice to be given to another person to either use our scripts or help with development. This way, they will know which packages need to be installed (and which versions even).</p>
+
+          <p>It just so happens to be the case that pip supports maintaining packages from a requirements file. This file, often called literally requirements.txt, contains a list of all the required packages needed to run the script successfully. The format is quite simple. We would copy the above freeze output and save it as a requirements file. However, it is a little bloated, and we do not need to know or even list the dependencies of the packages we need.</p>
+
+          <p>For the sake of an example, let us suppose that we would like to use flask and click (we will return to click later). If we do not know the version requirements or do not mind, either way, we could list the packages one after the other and save them, like so:</p>
+
+          <h4>Example requirements.txt</h4>
+
+          <h5>
+            kappajester83@htb[/htb]$ cat requirements.txt<br>
+            <br>
+            flask<br>
+            click
+          </h5>
+
+          <p>Then, to install all the packages in the requirements file, we would type:</p>
+
+          <h4>Install from requirements.txt</h4>
+
+          <h5>kappajester83@htb[/htb]$ python3 -m pip install -r requirements.txt</h5>
+
+          <p>This will then go through each of the requirements and install them by selecting the latest available and permitted version. Say we explicitly wanted flask version 1.1.2. All we had to do was replace flask with flask==1.1.2 in the requirements file, just like the pip freeze command output. Below is a list of common version comparison operators that we are highly likely to come across in larger Python projects (read more at PEP 440).</p>
+
+          <ul>
+            <li><b>"=="</b> - Version matching clause</li>
+            <li><b>"= / ="</b> - Inclusive ordered comparison clause</li>
+            <li><b>" / "</b> - Exclusive ordered comparison clause</li>
+          </ul>
+
+          <p>They let us specify, in the requirements file, our exact requirements to versions. For example, if we know that some package xyz is vulnerable to exploitation at versions 1.0.4 and lower, we can specify in our requirements file that we need.</p>
+
+          <p>To not dig too deep into it right from the start, we will return to this topic later in the module. For now, let us move on with some pre-requisites for our first project.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../python3.htm">Python 3</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction to Python 3</a></li>
+            <li><a href="executingPythonCode.htm">Executing Python Code</a></li>
+            <li><a href="introductionVariables.htm">Introduction to Variables</a></li>
+            <li><a href="conditionalStatementsLoops.htm">Conditional Statements and Loops</a></li>
+            <li><a href="definingFunctions.htm">Defining Functions</a></li>
+            <li><a href="makingCodeClassy.htm">Making Code Classy</a></li>
+            <li><a href="introductionLibraries.htm">Introduction to Librairies</a></li>
+            <li><a href="managingLibraries.htm"><b><em>~ Managing Libraries in Python</em></b></a></li>
+            <li><a href="importanceLibraries.htm">The Importance of Libraries</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
