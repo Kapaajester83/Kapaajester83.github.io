@@ -62,7 +62,7 @@
           <ul>
             <li><a href="managingLibraries.htm">Managing Libraries in Python</a></li>
             <li><a href="importanceLibraries.htm"><b><em>~ The Importance of Libraries</em></b></a></li>
-            <li><a href="firstIteration.htm">The First Iterations</a></li>
+            <li><a href="firstIterations.htm">The First Iterations</a></li>
           </ul>
         </div>
         <hr>
@@ -73,118 +73,74 @@
 
           <p>Now that we know how important libraries can be for our development and how to manage them let us discuss two of the more popular ones that we will use in our project, starting with the requests library.</p>
           
-The Requests Package
+          <h4>The Requests Package</h4>
 
-The requests library is an elegant and simple HTTP library for Python. From the documenation:
+          <p>The requests library is an elegant and simple HTTP library for Python. From the documenation:</p>
 
-Requests allows you to send HTTP/1.1 requests extremely easily. There’s no need to manually add query strings to your URLs, or to form-encode your POST data. Keep-alive and HTTP connection pooling are 100% automatic, thanks to urllib3.
+          <p>Requests allows you to send HTTP/1.1 requests extremely easily. There’s no need to manually add query strings to your URLs, or to form-encode your POST data. Keep-alive and HTTP connection pooling are 100% automatic, thanks to urllib3.</p>
 
-Let us install requests just like we have learned.
-Installing requests
-The Importance of Libraries
+          <p>Let us install requests just like we have learned.</p>
 
-kappajester83@htb[/htb]$ python3 -m pip install requests
+          <h4>Installing requests</h4>
 
-Collecting requests
-  Downloading requests-2.25.1-py2.py3-none-any.whl (61 kB)
-     |████████████████████████████████| 61 kB 3.8 MB/s
-Collecting chardet<5,>=3.0.2
-  Downloading chardet-4.0.0-py2.py3-none-any.whl (178 kB)
-     |████████████████████████████████| 178 kB 6.8 MB/s
-Collecting certifi>=2017.4.17
-...SNIP...
-Successfully installed certifi-2020.12.5 chardet-4.0.0 idna-2.10 requests-2.25.1 urllib3-1.26.3
+          <h5>
+            kappajester83@htb[/htb]$ python3 -m pip install requests<br>
+            <br>
+            Collecting requests<br>
+              Downloading requests-2.25.1-py2.py3-none-any.whl (61 kB)<br>
+            Collecting chardet<5,>=3.0.2<br>
+              Downloading chardet-4.0.0-py2.py3-none-any.whl (178 kB)<br>
+            Collecting certifi>=2017.4.17<br>
+            ...SNIP...<br>
+            Successfully installed certifi-2020.12.5 chardet-4.0.0 idna-2.10 requests-2.25.1 urllib3-1.26.3
+          </h5>
 
-Once installed, we can import the library into our code by typing import requests and then use it right away.
+          <p>Once installed, we can import the library into our code by typing import requests and then use it right away.</p>
 
-The two most useful things to know about the requests library are making HTTP requests, and secondly, it has a Session class, which is useful when we need to maintain a certain context during our web activity. For example, if we need to keep track of a range of cookies, we could use a Session object. To get one of these, we import requests and create an object of the Session class like sess = requests.Session(). Alternatively, we can use the requests module (the library itself) to make HTTP requests. However, this will not keep its state automatically.
+          <p>The two most useful things to know about the requests library are making HTTP requests, and secondly, it has a Session class, which is useful when we need to maintain a certain context during our web activity. For example, if we need to keep track of a range of cookies, we could use a Session object. To get one of these, we import requests and create an object of the Session class like sess = requests.Session(). Alternatively, we can use the requests module (the library itself) to make HTTP requests. However, this will not keep its state automatically.</p>
 
-Consider the following code:
-Example of Requests
-Code: python
+          <p>Consider the following code:</p>
 
-import requests
+          <h4>Example of Requests</h4>
 
-resp = requests.get('http://httpbin.org/ip')
-print(resp.content.decode())
+          <h5>
+            Code: python<br>
+            <br>
+            import requests<br>
+            <br>
+            resp = requests.get('http://httpbin.org/ip')<br>
+            print(resp.content.decode())<br>
+            <br>
+            # Prints:<br>
+            # {<br>
+            #   "origin": "X.X.X.X"<br>
+            # }
+          </h5>
 
-# Prints:
-# {
-#   "origin": "X.X.X.X"
-# }
+          <p>This is a simple example of how to perform a GET request to obtain our public IP address. Since the resp.content variable is a byte-string, a string of bytes that may or may not be printable, we have to call decode() on the object. Decoding the byte-string with the decode() function and no parameters tells Python to interpret the bytes as UTF-8 characters. UTF-8 is the default encoding used when no other encoding is specified. However, other encodings can be used and set as parameter arguments to the decode() function, for example, decode(encoding='UTF-16'). Going back to the resp object, this contains useful information such as the status_code, the numeric HTTP status code of the request we made, and cookies. We will use this library later on, but for now, let us move on with some more food talk.</p>
 
-This is a simple example of how to perform a GET request to obtain our public IP address. Since the resp.content variable is a byte-string, a string of bytes that may or may not be printable, we have to call decode() on the object. Decoding the byte-string with the decode() function and no parameters tells Python to interpret the bytes as UTF-8 characters. UTF-8 is the default encoding used when no other encoding is specified. However, other encodings can be used and set as parameter arguments to the decode() function, for example, decode(encoding='UTF-16'). Going back to the resp object, this contains useful information such as the status_code, the numeric HTTP status code of the request we made, and cookies. We will use this library later on, but for now, let us move on with some more food talk.
-The BeautifulSoup Package
+          <h4>The BeautifulSoup Package</h4>
 
-Another handy package is the BeautifulSoup library (rather beautifulsoup4). This library makes working with HTML a lot easier in Python. Before, we learned how to query a website and get output back, which could be the raw HTML. Digging through this HTML can be cumbersome if we have to search through textual output by hand. BeautifulSoup turns the HTML into Python objects that are much easier to work with and allows us to analyze the content better programmatically. Let us install BeautifulSoup.
-Installing BeautifulSoup
-The Importance of Libraries
+          <p>Another handy package is the BeautifulSoup library (rather beautifulsoup4). This library makes working with HTML a lot easier in Python. Before, we learned how to query a website and get output back, which could be the raw HTML. Digging through this HTML can be cumbersome if we have to search through textual output by hand. BeautifulSoup turns the HTML into Python objects that are much easier to work with and allows us to analyze the content better programmatically. Let us install BeautifulSoup.</p>
 
-kappajester83@htb[/htb]$ python3 -m pip install beautifulsoup4
+          <h4>Installing BeautifulSoup</h4>
 
-Collecting beautifulsoup4
-  Downloading beautifulsoup4-4.9.3-py3-none-any.whl (115 kB)
-     |████████████████████████████████| 115 kB ...
-Collecting soupsieve>1.2
-  Downloading soupsieve-2.2-py3-none-any.whl (33 kB)
-Installing collected packages: soupsieve, beautifulsoup4
-Successfully installed beautifulsoup4-4.9.3 soupsieve-2.2
+          <h5>
+            kappajester83@htb[/htb]$ python3 -m pip install beautifulsoup4<br>
+            <br>
+            Collecting beautifulsoup4<br>
+              Downloading beautifulsoup4-4.9.3-py3-none-any.whl (115 kB)<br>
+            Collecting soupsieve>1.2<br>
+              Downloading soupsieve-2.2-py3-none-any.whl (33 kB)<br>
+            Installing collected packages: soupsieve, beautifulsoup4<br>
+            Successfully installed beautifulsoup4-4.9.3 soupsieve-2.2
+          </h5>
 
-Once installed, let's go through some quick examples of how to use BeautifulSoup. For a more in-depth walkthrough, please visit the documentation. For now, please consider the below code:
-HTML - Ugly Format
-Code: html
+          <p>Once installed, let's go through some quick examples of how to use BeautifulSoup. For a more in-depth walkthrough, please visit the documentation. For now, please consider the below code:</p>
 
-<html>
-<head><title>Birbs are pretty</title></head>
-<body><p class="birb-food"><b>Birbs and their foods</b></p>
-<p class="food">Birbs love:<a class="seed" href="http://seeds" id="seed">seed</a>
-   and 
-   <a class="fruit" href="http://fruit" id="fruit">fruit</a></p>
- </body></html>
+          <p>The import statement of BeautifulSoup is worth noticing. Because the class BeautifulSoup lies within the module bs4 we will usually import it this way. What happens in the code is that the class is imported from the module, and then we create a new BeautifulSoup object and set the parser of the class to the HTML parser of BeautifulSoup. We need to set this parser when loading HTML.</p>
 
-This HTML looks a little messy. We will assume that this HTML is stored in a variable html_doc. We'll then load this into BeautifulSoup and print it in a nicely formatted way, as follows:
-Example of BeautifulSoup
-Code: python
-
-from bs4 import BeautifulSoup
-
-html_doc = """ html code goes here """
-soup = BeautifulSoup(html_doc, 'html.parser')
-print(soup.prettify())
-
-which then prints:
-HTML - Pretty Format
-Code: html
-
-<html>
- <head>
-  <title>
-   Birbs are pretty
-  </title>
- </head>
- <body>
-  <p class="birb-food">
-   <b>
-    Birbs and their foods
-   </b>
-  </p>
-  <p class="food">
-   Birbs love:
-   <a class="seed" href="http://seeds" id="seed">
-    seed
-   </a>
-   and
-   <a class="fruit" href="http://fruit" id="fruit">
-    fruit
-   </a>
-  </p>
- </body>
-</html>
-
-The import statement of BeautifulSoup is worth noticing. Because the class BeautifulSoup lies within the module bs4 we will usually import it this way. What happens in the code is that the class is imported from the module, and then we create a new BeautifulSoup object and set the parser of the class to the HTML parser of BeautifulSoup. We need to set this parser when loading HTML.
-
-Let us not delve too long into thought-up examples and instead move straight to the actual implementation of our final product: the word extractor.
-
+          <p>Let us not delve too long into thought-up examples and instead move straight to the actual implementation of our final product: the word extractor.</p>
 
         </div>
         <hr>
@@ -201,7 +157,7 @@ Let us not delve too long into thought-up examples and instead move straight to 
             <li><a href="introductionLibraries.htm">Introduction to Librairies</a></li>
             <li><a href="managingLibraries.htm">Managing Libraries in Python</a></li>
             <li><a href="importanceLibraries.htm"><b><em>~ The Importance of Libraries</em></b></a></li>
-            <li><a href="firstIteration.htm">The First Iterations</a></li>
+            <li><a href="firstIterations.htm">The First Iterations</a></li>
           </ol>
         </div>
         <hr>
