@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Networking</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ul>
+            <li><a href="networkingOverview.htm">Networking Overview</a></li>
+            <li><a href="networkypes.htm">Network Types</a></li>
+            <li><a href="networkingTopologies.htm"><b><em>~ Networking Topologies</em></b></a></li>
+            <li><a href="proxies.htm">Proxies</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Networking Topologies</em></h3>
+
+          <p>A network topology is a typical arrangement and physical or logical connection of devices in a network. Computers are hosts, such as clients and servers, that actively use the network. They also include network components such as switches, bridges, and routers, which we will discuss in more detail in later sections, which have a distribution function and ensure that all network hosts can establish a logical connection with each other. The network topology determines the components to be used and the access methods to the transmission media.</p>
+
+          <p>The transmission medium layout used to connect devices is the physical topology of the network. For conductive or glass fiber media, this refers to the cabling plan, the positions of the nodes, and the connections between the nodes and the cabling. In contrast, the logical topology is how the signals act on the network media or how the data will be transmitted across the network from one device to the devices' physical connection.</p>
+
+          <p>We can divide the entire network topology area into three areas:</p>
+
+          <h4>1. Connections</h4>
+
+          <p>Wired connections
+          <ul>
+            <li>Coaxial cabling</li>
+            <li>Glass fiber cabling</li>
+            <li>Twisted-pair cabling</li>
+          </ul>
+
+          <p>Wireless connections
+          <ul>
+            <li>Wi-Fi</li>
+            <li>Cellular</li>
+            <li>Satellite</li>
+          </ul>
+
+          <h4>2. Nodes - Network Interface Controller (NICs)</h4>
+
+          <ul>
+            <li>Repeaters</li>
+            <li>Hubs</li>
+            <li>Bridges</li>
+            <li>Switches</li>
+            <li>Router/Modem</li>
+            <li>Gateways</li>
+            <li>Firewalls</li>
+          </ul>
+
+          <p>Network nodes are the transmission medium's connection points to transmitters and receivers of electrical, optical, or radio signals in the medium. A node may be connected to a computer, but certain types may have only one microcontroller on a node or may have no programmable device at all.</p>
+
+          <h4>3. Classifications</h4>
+
+          <p>We can imagine a topology as a virtual form or structure of a network. This form does not necessarily correspond to the actual physical arrangement of the devices in the network. Therefore these topologies can be either physical or logical. For example, the computers on a LAN may be arranged in a circle in a bedroom, but it is very unlikely to have an actual ring topology.</p>
+
+          <p>Network topologies are divided into the following eight basic types:
+          <ul>
+            <li>Point-to-Point</li>
+            <li>Bus</li>
+            <li>Star</li>
+            <li>Ring</li>
+            <li>Mesh</li>
+            <li>Tree</li>
+            <li>Hybrid</li>
+            <li>Daisy Chain</li>
+          </ul>
+
+          <p>More complex networks can be built as hybrids of two or more of the basic topologies mentioned above.</p>
+
+          <h4>Point-to-Point</h4>
+
+          <p>The simplest network topology with a dedicated connection between two hosts is the point-to-point topology. In this topology, a direct and straightforward physical link exists only between two hosts. These two devices can use these connections for mutual communication.</p>
+
+          <p>Point-to-point topologies are the basic model of traditional telephony and must not be confused with P2P (Peer-to-Peer architecture).
+          <ul>
+            <li><a href="Images/topo_p2p.png">Point-To-Point Topology.png</a></li>
+          </ul>
+
+          <h4>Bus</h4>
+
+          <p>All hosts are connected via a transmission medium in the bus topology. Every host has access to the transmission medium and the signals that are transmitted over it. There is no central network component that controls the processes on it. The transmission medium for this can be, for example, a coaxial cable.</p>
+
+          <p>Since the medium is shared with all the others, only one host can send, and all the others can only receive and evaluate the data and see whether it is intended for itself.
+          <ul>
+            <li><a href="Images/topo_bus.png">Bus Topology.png</a></li>
+          </ul>
+
+          <h4>Star</h4>
+
+          <p>The star topology is a network component that maintains a connection to all hosts. Each host is connected to the central network component via a separate link. This is usually a router, a hub, or a switch. These handle the forwarding function for the data packets. To do this, the data packets are received and forwarded to the destination. The data traffic on the central network component can be very high since all data and connections go through it.
+          <ul>
+            <li><a href="Images/topo_star.png">Star Topology.png</a></li>
+          </ul>
+
+          <h4>Ring</h4>
+
+          <p>The physical ring topology is such that each host or node is connected to the ring with two cables:
+          <ul>
+            <li>One for the incoming signals</li>
+            <li>Another for the outgoing ones.</li>
+          </ul>
+
+          <p>This means that one cable arrives at each host and one cable leaves. The ring topology typically does not require an active network component. The control and access to the transmission medium are regulated by a protocol to which all stations adhere.</p>
+
+          <p>A logical ring topology is based on a physical star topology, where a distributor at the node simulates the ring by forwarding from one port to the next.</p>
+
+          <p>The information is transmitted in a predetermined transmission direction. Typically, the transmission medium is accessed sequentially from station to station using a retrieval system from the central station or a token. A token is a bit pattern that continually passes through a ring network in one direction, which works according to the claim token process.
+          <ul>
+            <li><a href="Images/topo_ring.png">Ring Topology.png</a></li>
+          </ul>
+
+          <h4>Mesh</h4>
+
+          <p>Many nodes decide about the connections on a physical level and the routing on a logical level in meshed networks. Therefore, meshed structures have no fixed topology. There are two basic structures from the basic concept:
+          <ul>
+            <li>Fully Meshed</li>
+            <li>Partially Meshed</li>
+          </ul>
+
+          <p>Each host is connected to every other host in the network in a fully meshed structure. This means that the hosts are meshed with each other. This technique is primarily used in WAN or MAN to ensure high reliability and bandwidth.</p>
+
+          <p>In this setup, important network nodes such as routers could be networked together. If one router fails, the others can continue to work without problems, and the network can absorb the failure due to the many connections.</p>
+
+          <p>Each node of a fully meshed topology has the same routing functions and knows the neighboring nodes it can communicate with proximity to the network gateway and traffic loads.</p>
+
+          <p>In the partially meshed structure, the endpoints are connected by only one connection. In this type of network topology, specific nodes are connected to exactly one other node, and some other nodes are connected to two or more other nodes with a point-to-point connection.
+          <ul>
+            <li><a href="Images/topo_mesh.png">Mesh Topology.png</a></li>
+          </ul>
+
+          <h4>Tree</h4>
+
+          <p>The tree topology is an extended star topology that more extensive local networks have in this structure. This is especially useful when several topologies are combined. This topology is often used, for example, in larger company buildings.</p>
+
+          <p>There are both logical tree structures according to the spanning tree and physical ones. Modular modern networks, based on structured cabling with a hub hierarchy, also have a tree structure. Tree topologies are also used for broadband networks and city networks (MAN).
+          <ul>
+            <li><a href="Images/topo_tree.png">Tree Topology.png</a></li>
+          </ul>
+
+          <h4>Hybrid</h4>
+
+          <p>Hybrid networks combine two or more topologies so that the resulting network does not present any standard topologies. For example, a tree network can represent a hybrid topology in which star networks are connected via interconnected bus networks. However, a tree network that is linked to another tree network is still topologically a tree network. A hybrid topology is always created when two different basic network topologies are interconnected.
+          <ul>
+            <li><a href="Images/topo_hybrid.png">Hybrid Topology.png</a></li>
+          </ul>
+
+          <h4>Daisy Chain</h4>
+
+          <p>In the daisy chain topology, multiple hosts are connected by placing a cable from one node to another.</p>
+
+          <p>Since this creates a chain of connections, it is also known as a daisy-chain configuration in which multiple hardware components are connected in a series. This type of networking is often found in automation technology (CAN).</p>
+
+          <p>Daisy chaining is based on the physical arrangement of the nodes, in contrast to token procedures, which are structural but can be made independent of the physical layout. The signal is sent to and from a component via its previous nodes to the computer system.
+          <ul>
+            <li><a href="Images/topo_daisy-chain.png">Daisy Chain Topology.png</a></li>
+          </ul>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ol>
+            <li><a href="networkingOverview.htm">Networking Overview</a></li>
+            <li><a href="networkypes.htm">Network Types</a></li>
+            <li><a href="networkingTopologies.htm"><b><em>~ Networking Topologies</em></b></a></li>
+            <li><a href="proxies.htm">Proxies</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
