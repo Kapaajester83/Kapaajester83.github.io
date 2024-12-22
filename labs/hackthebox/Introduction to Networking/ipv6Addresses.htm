@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Networking</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ul>
+            <li><a href="macAddresses.htm">MAC Addresses</a></li>
+            <li><a href="ipv6Addresses.htm"><b><em>~ IPv6 Addresses</em></b></a></li>
+            <li><a href="networkingKeyTerminology.htm">Networking Key Terminology</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>IPv6 Addresses</em></h3>
+
+          <p>IPv6 is the successor of IPv4. In contrast to IPv4, the IPv6 address is 128 bit long. The prefix identifies the host and network parts. The Internet Assigned Numbers Authority (IANA) is responsible for assigning IPv4 and IPv6 addresses and their associated network portions. In the long term, IPv6 is expected to completely replace IPv4, which is still predominantly used on the Internet. In principle, however, IPv4 and IPv6 can be made available simultaneously (Dual Stack).</p>
+
+          <p>IPv6 consistently follows the end-to-end principle and provides publicly accessible IP addresses for any end devices without the need for NAT. Consequently, an interface can have multiple IPv6 addresses, and there are special IPv6 addresses to which multiple interfaces are assigned.</p>
+
+          <p>IPv6 is a protocol with many new features, which also has many other advantages over IPv4:
+          <ul>
+            <li>Larger address space</li>
+            <li>Address self-configuration (SLAAC)</li>
+            <li>Multiple IPv6 addresses per interface</li>
+            <li>Faster routing</li>
+            <li>End-to-end encryption (IPsec)</li>
+            <li>Data packages up to 4 GByte</li>
+          </ul>
+
+          <pre>
+            Features              IPv4              IPv6
+            Bit length            32-bit            128 bit
+            OSI layer             Network Layer
+            Adressing range       ~ 4.3 billion     ~ 340 undecillion - or 340(10^36)
+            Representation        Binary            Hexadecimal
+            Prefix notation       10.10.10.0/24     fe80::dd80:b1a9:6687:2d3b/64
+            Dynamic addressing    DHCP              SLAAC / DHCPv6
+            IPsec                 Optional          Mandatory
+          </pre>
+
+          <p>There are four different types of IPv6 addresses:
+          <ul>
+            <li>Unicast - Addresses for a single interface.</li>
+            <li>Anycast - Addresses for multiple interfaces, where only one of them receives the packet.</li>
+            <li>Multicast - Addresses for multiple interfaces, where all receive the same packet.</li>
+            <li>Broadcast - Do not exist and is realized with multicast addresses.</li>
+          </ul>
+
+          <h4>Hexadecimal System</h4>
+
+          <p>The hexadecimal system (hex) is used to make the binary representation more readable and understandable. We can only show 10 (0-9) states with the decimal system and 2 (0 / 1) with the binary system by using a single character. In contrast to the binary and decimal system, we can use the hexadecimal system to show 16 (0-F) states with a single character.</p>
+
+          <p>Decimal - Hex - Binary</p>
+
+          <pre>
+            1   1   0001
+            2   2   0010
+            3   3   0011
+            4   4   0100
+            5   5   0101
+            6   6   0110
+            7   7   0111
+            8   8   1000
+            9   9   1001
+            10  A   1010
+            11  B   1011
+            12  C   1100
+            13  D   1101
+            14  E   1110
+            15  F   1111
+          </pre>
+
+          <p>Let's look at an example with an IPv4, at how the IPv4 address (192.168.12.160) would look in hexadecimal representation.</p>
+
+          <pre>
+            Binary    1100 0000   1010 1000   0000 1100   1010 0000
+            Hex       C0          A8          0C          A0
+            Decimal   192         168         12          160
+          </pre>
+
+          <p>In total, the IPv6 address consists of 16 bytes. Because of its length, an IPv6 address is represented in a hexadecimal notation. Therefore the 128 bits are divided into 8 blocks multiplied by 16 bits (or 4 hex numbers). All four hex numbers are grouped and separated by a colon (:) instead of a simple dot (.) as in IPv4. To simplify the notation, we leave out leading at least 4 zeros in the blocks, and we can replace them with two colons (::).</p>
+
+          <p>An IPv6 address can look like this:
+          <ul>
+            <li>Full IPv6: fe80:0000:0000:0000:dd80:b1a9:6687:2d3b/64</li>
+            <li>Short IPv6: fe80::dd80:b1a9:6687:2d3b/64</li>
+          </ul>
+
+          <p>An IPv6 address consists of two parts:
+          <ul>
+            <li>Network Prefix (network part)</li>
+            <li>Interface Identifier also called Suffix (host part)</li>
+          </ul>
+
+          <p>The Network Prefix identifies the network, subnet, or address range. The Interface Identifier is formed from the 48-bit MAC address (which we will discuss later) of the interface and is converted to a 64-bit address in the process. The default prefix length is /64. However, other typical prefixes are /32, /48, and /56. If we want to use our networks, we get a shorter prefix (e.g. /56) than /64 from our provider.</p>
+
+          <p>In RFC 5952, the aforementioned IPv6 address notation was defined:
+          <ul>
+            <li>All alphabetical characters are always written in lower case.</li>
+            <li>All leading zeros of a block are always omitted.</li>
+            <li>One or more consecutive blocks of 4 zeros (hex) are shortened by two colons (::).</li>
+            <li>The shortening to two colons (::) may only be performed once starting from the left.</li>
+          </ul>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ol>
+            <li><a href="networkingOverview.htm">Networking Overview</a></li>
+            <li><a href="networkypes.htm">Network Types</a></li>
+            <li><a href="networkingTopologies.htm">Networking Topologies</a></li>
+            <li><a href="proxies.htm">Proxies</a></li>
+            <li><a href="networkingModels.htm">Networking Models</a></li>
+            <li><a href="osiModel.htm">The OSI Model</a></li>
+            <li><a href="tcp-ipModel.htm">The TCP/IP Model</a></li>
+            <li><a href="networkLayer.htm">Network Layer</a></li>
+            <li><a href="ipAddresses.htm">IP Addresses</a></li>
+            <li><a href="subnetting.htm">Subnetting</a></li>
+            <li><a href="macAddresses.htm">MAC Addresses</a></li>
+            <li><a href="ipv6Addresses.htm"><b><em>~ IPv6 Addresses</em></b></a></li>
+            <li><a href="networkingKeyTerminology.htm">Networking Key Terminology</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
