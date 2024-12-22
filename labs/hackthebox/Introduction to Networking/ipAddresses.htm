@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Networking</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ul>
+            <li><a href="networkLayer.htm">Network Layer</a></li>
+            <li><a href="ipAddresses.htm"><b><em>~ IP Addresses</em></b></a></li>
+            <li><a href="subnetting.htm">Subnetting</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>IP Addresses</em></h3>
+
+          <p>Each host in the network located can be identified by the so-called Media Access Control address (MAC). This would allow data exchange within this one network. If the remote host is located in another network, knowledge of the MAC address is not enough to establish a connection. Addressing on the Internet is done via the IPv4 and/or IPv6 address, which is made up of the network address and the host address.</p>
+
+          <p>It does not matter whether it is a smaller network, such as a home computer network, or the entire Internet. The IP address ensures the delivery of data to the correct receiver. We can imagine the representation of MAC and IPv4 / IPv6 addresses as follows:
+          <ul>
+            <li><b>IPv4 / IPv6</b> - describes the unique postal address and district of the receiver's building.</li>
+            <li><b>MAC</b> - describes the exact floor and apartment of the receiver.</li>
+          </ul>
+
+          <p>It is possible for a single IP address to address multiple receivers (broadcasting) or for a device to respond to multiple IP addresses. However, it must be ensured that each IP address is assigned only once within the network.</p>
+
+          <h4>IPv4 Structure</h4>
+
+          <p>The most common method of assigning IP addresses is IPv4, which consists of a 32-bit binary number combined into 4 bytes consisting of 8-bit groups (octets) ranging from 0-255. These are converted into more easily readable decimal numbers, separated by dots and represented as dotted-decimal notation.</p>
+
+          <p>Thus an IPv4 address can look like this:</p>
+
+          <pre>
+            Binary    0111 1111.0000 0000.0000 0000.0000 0001
+            Decimal   127.0.0.1
+          </pre>
+
+          <p>Each network interface (network cards, network printers, or routers) is assigned a unique IP address.</p>
+
+          <p>The IPv4 format allows 4,294,967,296 unique addresses. The IP address is divided into a host part and a network part. The router assigns the host part of the IP address at home or by an administrator. The respective network administrator assigns the network part. On the Internet, this is IANA, which allocates and manages the unique IPs.</p>
+
+          <p>In the past, further classification took place here. The IP network blocks were divided into classes A - E. The different classes differed in the host and network shares' respective lengths.</p>
+
+          <p> Class - Network Address - First Address - Last Address - Subnetmask - CIDR - Subnets - IPs;</p>
+
+          <pre>
+            A   1.0.0.0     1.0.0.1     127.255.255.255   255.0.0.0       /8      127         16,777,214 + 2
+            B   128.0.0.0   128.0.0.1   191.255.255.255   255.255.0.0     /16     16,384      65,534 + 2
+            C   192.0.0.0   192.0.0.1   223.255.255.255   255.255.255.0   /24     2,097,152   254 + 2
+            D   224.0.0.0   224.0.0.1   239.255.255.255   Multicast
+            E   240.0.0.0   240.0.0.1   255.255.255.255   reserved
+          </pre>
+
+          <h4>Subnet Mask</h4>
+
+          <p>A further separation of these classes into small networks is done with the help of subnetting. This separation is done using the netmasks, which is as long as an IPv4 address. As with classes, it describes which bit positions within the IP address act as network part or host part.</p>
+
+          <p>Class - Network Address - First Address - Last Address - Subnetmask - CIDR - Subnets - IPs</p>
+
+          <pre>
+            A   1.0.0.0     1.0.0.1     127.255.255.255   255.0.0.0       /8    127         16,777,214 + 2
+            B   128.0.0.0   128.0.0.1   191.255.255.255   255.255.0.0     /16   16,384      65,534 + 2
+            C   192.0.0.0   192.0.0.1   223.255.255.255   255.255.255.0   /24   2,097,152   254 + 2
+            D   224.0.0.0   224.0.0.1   239.255.255.255   Multicast
+            E   240.0.0.0   240.0.0.1   255.255.255.255   reserved
+          </pre>
+
+          <h4>Network and Gateway Addresses</h4>
+
+          <p>The two additional IPs added in the IPs column are reserved for the so-called network address and the broadcast address. Another important role plays the default gateway, which is the name for the IPv4 address of the router that couples networks and systems with different protocols and manages addresses and transmission methods. It is common for the default gateway to be assigned the first or last assignable IPv4 address in a subnet. This is not a technical requirement, but has become a de-facto standard in network environments of all sizes.</p>
+
+          <p>Class - Network Address - First Address - Last Address - Subnetmask - CIDR - Subnets - IPs</p>
+
+          <pre>
+            A   1.0.0.0     1.0.0.1     127.255.255.255   255.0.0.0       /8    127         16,777,214 + 2
+            B   128.0.0.0   128.0.0.1   191.255.255.255   255.255.0.0     /16   16,384      65,534 + 2
+            C   192.0.0.0   192.0.0.1   223.255.255.255   255.255.255.0   /24   2,097,152   254 + 2
+            D   224.0.0.0   224.0.0.1   239.255.255.255   Multicast
+            E   240.0.0.0   240.0.0.1   255.255.255.255   reserved
+          </pre>
+
+          <h4>Broadcast Address</h4>
+
+          <p>The broadcast IP address's task is to connect all devices in a network with each other. Broadcast in a network is a message that is transmitted to all participants of a network and does not require any response. In this way, a host sends a data packet to all other participants of the network simultaneously and, in doing so, communicates its IP address, which the receivers can use to contact it. This is the last IPv4 address that is used for the broadcast.</p>
+
+          <p>Class - Network Address - First Address - Last Address - Subnetmask - CIDR - Subnets - IPs</p>
+
+          <pre>
+            A   1.0.0.0     1.0.0.1     127.255.255.255   255.0.0.0       /8    127         16,777,214 + 2
+            B   128.0.0.0   128.0.0.1   191.255.255.255   255.255.0.0     /16   16,384      65,534 + 2
+            C   192.0.0.0   192.0.0.1   223.255.255.255   255.255.255.0   /24   2,097,152   254 + 2
+            D   224.0.0.0   224.0.0.1   239.255.255.255   Multicast
+            E   240.0.0.0   240.0.0.1   255.255.255.255   reserved
+          </pre>
+
+          <h4>Binary system</h4>
+
+          <p>The binary system is a number system that uses only two different states that are represented into two numbers (0 and 1) opposite to the decimal-system (0 to 9).</p>
+
+          <p>An IPv4 address is divided into 4 octets, as we have already seen. Each octet consists of 8 bits. Each position of a bit in an octet has a specific decimal value. Let's take the following IPv4 address as an example:</p>
+
+          <p>IPv4 Address: 192.168.10.39</p>
+
+          <h4>1st Octet - Value: 192</h4>
+
+          <pre>
+            Values:         128  64  32  16  8  4  2  1
+            Binary:           1   1   0   0  0  0  0  0
+          </pre>
+
+          <p>If we calculate the sum of all these values for each octet where the bit is set to 1, we get the sum:</p>
+
+          <pre>
+            1st   128 + 64 + 0 + 0 + 0 + 0 + 0 + 0  = 192
+            2nd   128 + 0 + 32 + 0 + 8 + 0 + 0 + 0  = 168
+            3rd   0 + 0 + 0 + 0 + 8 + 0 + 2 + 0     =  10
+            4th   0 + 0 + 32 + 0 + 0 + 4 + 2 + 1    =  39
+          </pre>
+
+          <p>The entire representation from binary to decimal would look like this:</p>
+
+          <h4>IPv4 - Binary Notation</h4>
+
+          <pre>
+            Octet:             1st         2nd         3rd         4th
+            Binary:         1100 0000 . 1010 1000 . 0000 1010 . 0010 0111
+            Decimal:           192    .    168    .     10    .     39
+          </pre>
+
+          <p>IPv4 Address: 192.168.10.39</p>
+
+          <p>This addition takes place for each octet, which results in a decimal representation of the IPv4 address. The subnet mask is calculated in the same way.
+
+          <h4>IPv4 - Decimal to Binary</h4>
+
+          <pre>
+            Values:         128  64  32  16  8  4  2  1
+            Binary:           1   1   1   1  1  1  1  1
+
+            1st   128 + 64 + 32 + 16 + 8 + 4 + 2 + 1  = 255
+            2nd   128 + 64 + 32 + 16 + 8 + 4 + 2 + 1  = 255
+            3rd   128 + 64 + 32 + 16 + 8 + 4 + 2 + 1  = 255
+            4th   0 + 0 + 0 + 0 + 0 + 0 + 0 + 0   = 0
+          </pre>
+
+          <h4>Subnet Mask</h4>
+
+          <pre>
+            Octet:             1st         2nd         3rd         4th
+            Binary:         1111 1111 . 1111 1111 . 1111 1111 . 0000 0000
+            Decimal:           255    .    255    .    255    .     0
+          </pre>
+
+          <ul>
+            <li>IPv4 Address: 192.168.10.39</li>
+            <li>Subnet mask: 255.255.255.0</li>
+          </ul>
+
+          <h4>CIDR</h4>
+
+          <p>Classless Inter-Domain Routing (CIDR) is a method of representation and replaces the fixed assignment between IPv4 address and network classes (A, B, C, D, E). The division is based on the subnet mask or the so-called CIDR suffix, which allows the bitwise division of the IPv4 address space and thus into subnets of any size. The CIDR suffix indicates how many bits from the beginning of the IPv4 address belong to the network. It is a notation that represents the subnet mask by specifying the number of 1-bits in the subnet mask.</p>
+
+          <p>Let us stick to the following IPv4 address and subnet mask as an example:
+
+          <ul>
+            <li>IPv4 Address: 192.168.10.39</li>
+            <li>Subnet mask: 255.255.255.0</li>
+          </ul>
+
+          <p>Now the whole representation of the IPv4 address and the subnet mask would look like this:</p>
+
+          <p>CIDR: 192.168.10.39/24</p>
+
+          <p>The CIDR suffix is, therefore, the sum of all ones in the subnet mask.</p>
+
+          <pre>
+            Octet:             1st         2nd         3rd         4th
+            Binary:         1111 1111 . 1111 1111 . 1111 1111 . 0000 0000 (/24)
+            Decimal:           255    .    255    .    255    .     0
+          </pre>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ol>
+            <li><a href="networkingOverview.htm">Networking Overview</a></li>
+            <li><a href="networkypes.htm">Network Types</a></li>
+            <li><a href="networkingTopologies.htm">Networking Topologies</a></li>
+            <li><a href="proxies.htm">Proxies</a></li>
+            <li><a href="networkingModels.htm">Networking Models</a></li>
+            <li><a href="osiModel.htm">The OSI Model</a></li>
+            <li><a href="tcp-ipModel.htm">The TCP/IP Model</a></li>
+            <li><a href="networkLayer.htm">Network Layer</a></li>
+            <li><a href="ipAddresses.htm"><b><em>~ IP Addresses</em></b></a></li>
+            <li><a href="subnetting.htm">Subnetting</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Networking</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ul>
+            <li><a href="osiModel.htm">The OSI Model</a></li>
+            <li><a href="tcp-ipModel.htm"><b><em>~ The TCP/IP Model</em></b></a></li>
+            <li><a href="networkLayer.htm">Network Layer</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>The TCP/IP Model</em></h3>
+
+          <p>The TCP/IP model is also a layered reference model, often referred to as the Internet Protocol Suite. The term TCP/IP stands for the two protocols Transmission Control Protocol (TCP) and Internet Protocol (IP). IP is located within the network layer (Layer 3) and TCP is located within the transport layer (Layer 4) of the OSI layer model.
+          <ul>
+            <li><b>4.Application</b> - The Application Layer allows applications to access the other layers' services and defines the protocols applications use to exchange data.</li>
+
+            <li><b>3.Transport</b> - The Transport Layer is responsible for providing (TCP) session and (UDP) datagram services for the Application Layer.</li>
+
+            <li><b>2.Internet</b> - The Internet Layer is responsible for host addressing, packaging, and routing functions.</li>
+
+            <li><b>1.Link</b> - The Link layer is responsible for placing the TCP/IP packets on the network medium and receiving corresponding packets from the network medium. TCP/IP is designed to work independently of the network access method, frame format, and medium.</li>
+          </ul>
+
+          <p>With TCP/IP, every application can transfer and exchange data over any network, and it does not matter where the receiver is located. IP ensures that the data packet reaches its destination, and TCP controls the data transfer and ensures the connection between data stream and application. The main difference between TCP/IP and OSI is the number of layers, some of which have been combined.
+          <ul>
+            <li><a href="Images/net_models2.png">Network Models2.png</a></li>
+          </ul>
+
+          <p>The most important tasks of TCP/IP are:
+          <ul>
+            <li><b>Logical Addressing</b> - IP - Due to many hosts in different networks, there is a need to structure the network topology and logical addressing. Within TCP/IP, IP takes over the logical addressing of networks and nodes. Data packets only reach the network where they are supposed to be. The methods to do so are network classes, subnetting, and CIDR.</li>
+
+            <li><b>Routing</b> - IP - For each data packet, the next node is determined in each node on the way from the sender to the receiver. This way, a data packet is routed to its receiver, even if its location is unknown to the sender.</li>
+
+            <li><b>Error & Control Flow</b> - TCP - The sender and receiver are frequently in touch with each other via a virtual connection. Therefore control messages are sent continuously to check if the connection is still established.</li>
+
+            <li><b>Application Support</b> - TCP - TCP and UDP ports form a software abstraction to distinguish specific applications and their communication links.</li>
+
+            <li><b>Name Resolution</b> - DNS - DNS provides name resolution through Fully Qualified Domain Names (FQDN) in IP addresses, enabling us to reach the desired host with the specified name on the internet.</li>
+          </ul>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ol>
+            <li><a href="networkingOverview.htm">Networking Overview</a></li>
+            <li><a href="networkypes.htm">Network Types</a></li>
+            <li><a href="networkingTopologies.htm">Networking Topologies</a></li>
+            <li><a href="proxies.htm">Proxies</a></li>
+            <li><a href="networkingModels.htm">Networking Models</a></li>
+            <li><a href="osiModel.htm">The OSI Model</a></li>
+            <li><a href="tcp-ipModel.htm"><b><em>~ The TCP/IP Model</em></b></a></li>
+            <li><a href="networkLayer.htm">Network Layer</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
