@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Networking</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ul>
+            <li><a href="keyExchangeMechanisms.htm">Key Exchange Mechanisms</a></li>
+            <li><a href="authenticationsProtocols.htm"><b><em>~ Authentications Protocols</em></b></a></li>
+            <li><a href="tcp-udpConnections.htm">TCP/UDP Connections</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Authentication Protocols</em></h3>
+
+          <p>Many different authentication protocols are used in networking to verify the identity of devices and users. Those protocols are essential because they provide a secure and standardized way of verifying the identity of users, devices, and other entities in a network. Without authentication protocols, it would be difficult to securely and reliably identify entities in a network, making it easy for attackers to gain unauthorized access and potentially compromise the network.</p>
+
+          <p>Authentication protocols also provide a means for securely exchanging information between entities in a network which we will discuss briefly. This is important for ensuring the confidentiality and integrity of sensitive data and preventing unauthorized access and other security threats. Let us take a look at a few most commonly used authentication protocols:
+          <ul>
+            <li><b>Kerberos</b> - Key Distribution Center (KDC) based authentication protocol that uses tickets in domain environments.</li>
+
+            <li><b>SRP</b> - This is a password-based authentication protocol that uses cryptography to protect against eavesdropping and man-in-the-middle attacks.</li>
+
+            <li><b>SSL</b> - A cryptographic protocol used for secure communication over a computer network.</li>
+
+            <li><b>TLS</b> - TLS is a cryptographic protocol that provides communication security over the internet. It is the successor to SSL.</li>
+
+            <li><b>OAuth</b> - An open standard for authorization that allows users to grant third-party access to their web resources without sharing their passwords.</li>
+
+            <li><b>OpenID</b> - OpenID is a decentralized authentication protocol that allows users to use a single identity to sign in to multiple websites.</li>
+
+            <li><b>SAML</b> - Security Assertion Markup Language is an XML-based standard for securely exchanging authentication and authorization data between parties.</li>
+
+            <li><b>2FA</b> - An authentication method that uses a combination of two different factors to verify a user's identity.</li>
+
+            <li><b>FIDO</b> - The Fast IDentity Online Alliance is a consortium of companies working to develop open standards for strong authentication.</li>
+
+            <li><b>PKI</b> - PKI is a system for securely exchanging information based on the use of public and private keys for encryption and digital signatures.</li>
+
+            <li><b>SSO</b> - An authentication method that allows a user to use a single set of credentials to access multiple applications.</li>
+
+            <li><b>MFA</b> - MFA is an authentication method that uses multiple factors, such as something the user knows (a password), something the user has (a phone), or something the user is (biometric data), to verify their identity.</li>
+
+            <li><b>PAP</b> - A simple authentication protocol that sends a user's password in clear text over the network.</li>
+
+            <li><b>CHAP</b> - An authentication protocol that uses a three-way handshake to verify a user's identity.</li>
+
+            <li><b>EAP</b> - A framework for supporting multiple authentication methods, allowing for the use of various technologies to verify a user's identity.</li>
+
+            <li><b>SSH</b> - This is a network protocol for secure communication between a client and a server. We can use it for remote command-line access and remote command execution, as well as for secure file transfer. SSH uses encryption to protect against eavesdropping and other attacks and can also be used for authentication.</li>
+
+            <li><b>HTTPS</b> - This is a secure version of the HTTP protocol used for communication on the internet. HTTPS uses SSL/TLS to encrypt communication and provide authentication, ensuring that third parties cannot intercept and read the transmitted data. It is widely used for secure communication over the internet, particularly for web browsing.</li>
+
+            <li><b>LEAP</b> - LEAP is a wireless authentication protocol developed by Cisco. It uses EAP to provide mutual authentication between a wireless client and a server and uses the RC4 encryption algorithm to encrypt communication between the two. Unfortunately, LEAP is vulnerable to dictionary attacks and other security vulnerabilities and has been largely replaced by more secure protocols such as EAP-TLS and PEAP.</li>
+
+            <li><b>PEAP</b> - PEAP on the other hand is a secure tunneling protocol used for wireless and wired networks. It is based on EAP and uses TLS to encrypt communication between a client and a server. PEAP uses a server-side certificate to authenticate the server and can also be used to authenticate the client using various methods, such as passwords, certificates, or biometric data. PEAP is widely used in enterprise networks for secure authentication.</li>
+          </ul>
+
+          <p>For example, LEAP and PEAP may be used to authenticate wireless clients when they access the wireless network or to authenticate remote employees connecting to the network via a VPN. In these cases, using SSH or HTTPS would be challenging to implement, as they are designed for different purposes. In terms of security, PEAP is generally more secure than LEAP because it uses a server-side public key certificate to authenticate the server and encrypting MSCHAPv2 hash, while LEAP relies on a shared secret that is negotiated between the client and the server and does not encrypt MSCHAPv2 hashes. PEAP also supports the use of stronger encryption algorithms, such as AES and 3DES, for encrypting the authentication information, whereas LEAP uses the weaker RC4 algorithm.</p>
+
+          <p>However, both protocols are vulnerable to specific attacks and have been largely replaced by more secure protocols such as EAP-TLS.</p>
+
+          <p>As physical connections, protocols with SSL or TLS are used by default, such as SSH or HTTPS. Both protocols use robust encryption algorithms to protect the authentication information transmitted between the client and the server. This helps to prevent interception or to tamper the authentication data, which is essential for maintaining the security of the authentication process. Also, they support using digital certificates and PKI for authenticating the server to the client. This ensures that the client can verify the server's identity and helps to prevent MITM attacks. SSH and HTTPS are widely used and well-supported protocols, with implementations available for various operating systems and devices and makes them easy to use and deploy in a variety of environments.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ol>
+            <li><a href="networkingOverview.htm">Networking Overview</a></li>
+            <li><a href="networkypes.htm">Network Types</a></li>
+            <li><a href="networkingTopologies.htm">Networking Topologies</a></li>
+            <li><a href="proxies.htm">Proxies</a></li>
+            <li><a href="networkingModels.htm">Networking Models</a></li>
+            <li><a href="osiModel.htm">The OSI Model</a></li>
+            <li><a href="tcp-ipModel.htm">The TCP/IP Model</a></li>
+            <li><a href="networkLayer.htm">Network Layer</a></li>
+            <li><a href="ipAddresses.htm">IP Addresses</a></li>
+            <li><a href="subnetting.htm">Subnetting</a></li>
+            <li><a href="macAddresses.htm">MAC Addresses</a></li>
+            <li><a href="ipv6Addresses.htm">IPv6 Addresses</a></li>
+            <li><a href="networkingKeyTerminology.htm">Networking Key Terminology</a></li>
+            <li><a href="commonProtocols.htm">Common Protocols</a></li>
+            <li><a href="wirelessNetworks.htm">Wireless Networks</a></li>
+            <li><a href="virtualPrivateNetworks.htm">Virtual Private Networks</a></li>
+            <li><a href="venderSpecificInformation.htm">Vendor Specific Information</a></li>
+            <li><a href="keyExchangeMechanisms.htm">Key Exchange Mechanisms</a></li>
+            <li><a href="authenticationsProtocols.htm"><b><em>~ Authentications Protocols</em></b></a></li>
+            <li><a href="tcp-udpConnections.htm">TCP/UDP Connections</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

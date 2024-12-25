@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Networking</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ul>
+            <li><a href="wirelessNetworks.htm">Wireless Networks</a></li>
+            <li><a href="virtualPrivateNetworks.htm"><b><em>~ Virtual Private Networks</em></b></a></li>
+            <li><a href="venderSpecificInformation.htm">Vendor Specific Information</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Virtual Private Networks</em></h3>
+
+          <p>A Virtual Private Network (VPN) is a technology that allows a secure and encrypted connection between a private network and a remote device. This allows the remote machine to access the private network directly, providing secure and confidential access to the network's resources and services. For example, an administrator from another location has to manage the internal servers so that the employees can continue to use the internal services. Many companies limit servers' access, so clients can only reach those servers from the local network. This is where VPN comes into play, where the administrator connects to the VPN server via the internet, authenticates himself, and thus creates an encrypted tunnel so that others cannot read the data transfer. In addition, the administrator's computer is also assigned a local (internal) IP address through which he can access and manage the internal servers. Administrators commonly use VPNs to provide secure and cost-effective remote access to a company's network. VPN typically uses the ports TCP/1723 for Point-to-Point Tunneling Protocol PPTP VPN connections and UDP/500 for IKEv1 and IKEv2 VPN connections.</p>
+
+          <p>This allows employees to access the network and its resources, such as email and file servers, from remote locations, such as their homes or while traveling. There are several reasons why administrators use VPNs. VPNs encrypt the connection between the remote device and the private network, making it much more difficult for attackers to intercept and steal sensitive information. With this, the entire communication is more secure.</p>
+
+          <p>Another reason is that VPNs allow employees to access the private network and its resources remotely from anywhere, as long as they have an internet connection. This is particularly useful for employees who need to work remotely, such as those traveling or working from home. Additionally, VPNs can be more cost-effective than other remote access solutions, such as leased lines or dedicated connections, because they use the public internet to connect remote users to the private network.</p>
+
+          <p>Moreover, we can use VPNs to connect multiple remote locations, such as branch offices, into a single private network, making it easier to manage and access network resources. However, several components and requirements are necessary for a VPN to work:
+          <ul>
+            <li><b>VPN Client</b> - This is installed on the remote device and is used to establish and maintain a VPN connection with the VPN server. For example, this could be an OpenVPN client.</li>
+
+            <li><b>VPN Server</b> - This is a computer or network device responsible for accepting VPN connections from VPN clients and routing traffic between the VPN clients and the private network.</li>
+
+            <li><b>Encryption</b> - VPN connections are encrypted using a variety of encryption algorithms and protocols, such as AES and IPsec, to secure the connection and protect the transmitted data.</li>
+
+            <li><b>Authentication</b> - The VPN server and client must authenticate each other using a shared secret, certificate, or another authentication method to establish a secure connection.</li>
+          </ul>
+
+          <p>The VPN client and server use these ports to establish and maintain the VPN connection. At the TCP/IP layer, a VPN connection typically uses the Encapsulating Security Payload (ESP) protocol to encrypt and authenticate the VPN traffic. This allows the VPN client and server to exchange data over the public internet securely.</p>
+
+          <h4>IPsec</h4>
+
+          <p>Internet Protocol Security (IPsec) is a network security protocol that provides encryption and authentication for internet communications. It is a powerful and widely-used security protocol that provides encryption and authentication for internet communications and works by encrypting the data payload of each IP packet and adding an authentication header (AH), which is used to verify the integrity and authenticity of the packet. IPsec uses a combination of two protocols to provide encryption and authentication:
+          <ul>
+            <li><b>Authentication Header (AH):</b> This protocol provides integrity and authenticity for IP packets but does not provide encryption. It adds an authentication header to each IP packet, which contains a cryptographic checksum that can be used to verify that the packet has not been tampered with.</li>
+
+            <li><b>Encapsulating Security Payload (ESP):</b> This protocol provides encryption and optional authentication for IP packets. It encrypts the data payload of each IP packet and optionally adds an authentication header, similar to AH.</li>
+          </ul>
+
+          <p>IPsec can be used in two modes.
+          <ul>
+            <li><b>Transport Mode</b> - In this mode, IPsec encrypts and authenticates the data payload of each IP packet but does not encrypt the IP header. This is typically used to secure end-to-end communication between two hosts.</li>
+
+            <li><b>Tunnel Mode</b> - With this mode, IPsec encrypts and authenticates the entire IP packet, including the IP header. This is typically used to create a VPN tunnel between two networks.</li>
+          </ul>
+
+          <p>For example, an administrator could place a firewall in between. In order to facilitate IPsec VPN traffic from a VPN client outside a firewall to a VPN server inside, the firewall would need to allow the following protocols:</p>
+
+          <p>Protocol - Port - Description
+          <ul>
+            <li><b>Internet Protocol (IP)</b> - :UDP/50-51 - This is the primary protocol that provides the foundation for all internet communication. It is used to route packets of data between the VPN client and the VPN server.</li>
+
+            <li><b>Internet Key Exchange (IKE)</b> - :UDP/500 - IKE is a protocol that is used to establish and maintain secure communication between the VPN client and the VPN server. It is based on the Diffie-Hellman key exchange algorithm, and it is used to negotiate and establish shared secret keys that can be used to encrypt and decrypt the VPN traffic.</li>
+
+            <li><b>Encapsulating Security Payload (ESP)</b> - :UDP/4500 - ESP is also a protocol that provides encryption and authentication for IP datagrams. It is used to encrypt the VPN traffic between the VPN client and the VPN server, using the keys that were negotiated with IKE.</li>
+          </ul>
+
+          <p>These protocols are necessary for facilitating IPsec VPN traffic because they provide the security and encryption that are required for secure communication over the public internet. Without these protocols, the VPN traffic would be vulnerable to interception and tampering.</p>
+
+          <h4>PPTP</h4>
+
+          <p>Point-to-Point Tunneling Protocol (PPTP) is a network protocol that enables the creation of VPNs by establishing a secure tunnel between the VPN client and server, encapsulating the data transmitted within this tunnel. Originally an extension of the Point-to-Point Protocol (PPP), PPTP is supported by many operating systems.</p>
+
+          <p>However, due to its known vulnerabilities, PPTP is no longer considered secure. It can tunnel protocols such as IP, IPX, or NetBEUI via IP, but has been largely replaced by more secure VPN protocols like L2TP/IPsec, IPsec/IKEv2, and OpenVPN. Since 2012, the use of PPTP has declined because its authentication method, MSCHAPv2, employs the outdated DES encryption, which can be easily cracked with specialized hardware.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionNetworking.htm">Introduction to Networking</a></h4>
+          <ol>
+            <li><a href="networkingOverview.htm">Networking Overview</a></li>
+            <li><a href="networkypes.htm">Network Types</a></li>
+            <li><a href="networkingTopologies.htm">Networking Topologies</a></li>
+            <li><a href="proxies.htm">Proxies</a></li>
+            <li><a href="networkingModels.htm">Networking Models</a></li>
+            <li><a href="osiModel.htm">The OSI Model</a></li>
+            <li><a href="tcp-ipModel.htm">The TCP/IP Model</a></li>
+            <li><a href="networkLayer.htm">Network Layer</a></li>
+            <li><a href="ipAddresses.htm">IP Addresses</a></li>
+            <li><a href="subnetting.htm">Subnetting</a></li>
+            <li><a href="macAddresses.htm">MAC Addresses</a></li>
+            <li><a href="ipv6Addresses.htm">IPv6 Addresses</a></li>
+            <li><a href="networkingKeyTerminology.htm">Networking Key Terminology</a></li>
+            <li><a href="commonProtocols.htm">Common Protocols</a></li>
+            <li><a href="wirelessNetworks.htm">Wireless Networks</a></li>
+            <li><a href="virtualPrivateNetworks.htm"><b><em>~ Virtual Private Networks</em></b></a></li>
+            <li><a href="venderSpecificInformation.htm">Vendor Specific Information</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
