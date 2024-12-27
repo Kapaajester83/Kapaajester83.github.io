@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>PicoCTF | Commitment Issues</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../picoCtf.htm">Pico CTF</a>
+        </h3>
+        <hr>
+        <h3>
+          <a href="https://play.picoctf.org/practice/challenge/411?page=2">Commitment Issues</a>
+        </h3>
+
+        <h4>Description</h4>
+
+        <p>I accidentally wrote the flag down. Good thing I deleted it! You download the challenge files here:
+        <ul>
+          <li><a href="challenge.zip">Challenge.zip</a></li>
+        </ul>
+
+        <h4>Hints</h4>
+        <p>
+        <ol>
+          <li>Version control can help you recover files if you change or lose them!</li>
+          <li>Read the chapter on Git from the picoPrimer <a href="https://primer.picoctf.org/#_git_version_control">PicoPrimer.</a></li>
+          <li>You can 'checkout' commits to see the files inside them.</li>
+        </ol>
+
+        <h4>Solution</h4>
+        <p>
+          picoCTF{s@n1t1z3_c785c319}
+        </p>
+
+        <h4>CLI</h4>
+
+        <h5>
+          kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ ls<br>
+          message.txt<br>
+          kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ cat message.txt<br>
+          TOP SECRET<br>
+          <br>
+          kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git log<br>
+          commit 42942c9c605b30100f5d859ef6e172027447c0db (HEAD -> master)<br>
+          Author: picoCTF "ops@picoctf.com"<br>
+          Date: Tue Mar 12 00:06:23 2024 +0000<br>
+          <br>
+          create flag<br>
+          <br>
+          kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git show 42942c<br>
+          commit 42942c9c605b30100f5d859ef6e172027447c0db (HEAD -> master)<br>
+          Author: picoCTF "ops@picoctf.com"<br>
+          Date: Tue Mar 12 00:06:23 2024 +0000<br>
+          <br>
+          remove sensitive info<br>
+          <br>
+          diff --git a/message.txt b/message.txt<br>
+          index 0e0fefc..d552d1e 100644<br>
+          --- a/message.txt<br>
+          +++ b/message.txt<br>
+          @@ -1 +1 @@<br>
+          -picoCTF{s@n1t1z3_c785c319}<br>
+          +TOP SECRET
+        </h5>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

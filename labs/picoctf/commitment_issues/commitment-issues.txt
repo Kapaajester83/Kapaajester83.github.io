@@ -1,0 +1,60 @@
+Description
+I accidentally wrote the flag down. Good thing I deleted it! You download the challenge files here:
+
+    challenge.zip
+
+Hints
+
+Version control can help you recover files if you change or lose them!
+
+Read the chapter on Git from the picoPrimer here
+https://primer.picoctf.org/#_git_version_control
+
+You can 'checkout' commits to see the files inside them
+
+CLI
+
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ ls
+message.txt
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ cat message.txt
+TOP SECRET
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git status
+On branch master
+nothing to commit, working tree clean
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git log
+commit 42942c9c605b30100f5d859ef6e172027447c0db (HEAD -> master)
+Author: picoCTF <ops@picoctf.com>
+Date:   Tue Mar 12 00:06:23 2024 +0000
+
+    remove sensitive info
+
+commit b562f0b425907789d11d2fe2793e67592dc6be93
+Author: picoCTF <ops@picoctf.com>
+Date:   Tue Mar 12 00:06:23 2024 +0000
+
+    create flag
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git checkout 7447c0db
+error: pathspec '7447c0db' did not match any file(s) known to git
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git checkout "7447c0db"
+error: pathspec '7447c0db' did not match any file(s) known to git
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git show^C
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git show 47c0db
+fatal: ambiguous argument '47c0db': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ git show 42942c
+commit 42942c9c605b30100f5d859ef6e172027447c0db (HEAD -> master)
+Author: picoCTF <ops@picoctf.com>
+Date:   Tue Mar 12 00:06:23 2024 +0000
+
+    remove sensitive info
+
+diff --git a/message.txt b/message.txt
+index 0e0fefc..d552d1e 100644
+--- a/message.txt
++++ b/message.txt
+@@ -1 +1 @@
+-picoCTF{s@n1t1z3_c785c319}
++TOP SECRET
+kappa@kappa-Aspire-Z5600:~/Desktop/commitmentIssues/drop-in$ 
+
