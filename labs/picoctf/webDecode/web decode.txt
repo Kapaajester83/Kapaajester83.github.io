@@ -1,0 +1,29 @@
+Description
+Do you know how to use the web inspector?
+
+Additional details will be available after launching your challenge instance.
+
+Hints
+
+Use the web inspector on other files included by the web page.
+
+The flag may or may not be encoded
+
+Start searching here to find the flag
+
+http://titan.picoctf.net:52075/
+
+CLI
+
+Inspect the About Page, there is a long text string that looks like base64.
+
+cGljb0NURnt3ZWJfc3VjYzNzc2Z1bGx5X2QzYzBkZWRfMTBmOTM3NmZ9
+
+kappa@kappa-Aspire-Z5600:~$ echo -n 'cGljb0NURnt3ZWJfc3VjYzNzc2Z1bGx5X2QzYzBkZWRfMTBmOTM3NmZ9' | base64 --decode
+picoCTF{web_succ3ssfully_d3c0ded_10f9376f}kappa@kappa-Aspire-Z5600:~$
+
+or
+
+Use an online decoder like https://cyberchef.org/
+
+

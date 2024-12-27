@@ -4,19 +4,20 @@
 <head>
   <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
   <link rel="shortcut icon" href="../../../favicon.ico">
-  <title>PicoCTF | Gym</title>
+  <title>PicoCTF | Web Decode</title>
   <meta name="author" content="Kappa">
   <meta name="description" content="Splash">
   <meta name="viewport" content="width=device-width">
   <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="../labs.css" type="text/css">
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
 </head>
 
 <body>
 
-  <!--   _  __          _____  _____        
+  <!--
+  _  __          _____  _____        
  | |/ /    /\   |  __ \|  __ \ /\    
  | ' /    /  \  | |__) | |__) /  \   
  |  <    / /\ \ |  ___/|  ___/ /\ \  
@@ -46,40 +47,58 @@
         <br>
         <br>
       </div>
-
     </div>
 
     <div>
       <div id="writeup">
-        <div id="labs-table">
-          <hr>
-          <h3>
-            <a href="../contents.html">Table of Contents</a>
-          </h3>
-          <hr>
-          <h3>Pico Gym</h3>
-            <ul>
-              <li><a href="obedientCat/obedientCat.htm">Obedient Cat</a></li>
-              <li><a href="mod26/mod26.htm">Mod 26</a></li>
-              <li><a href="pythonWrangling/pythonWrangling.htm">Python Wrangling</a></li>
-              <li><a href="waveFlag/waveFlag.htm">Wave a Flag</a></li>
-              <li><a href="information/information.htm">Information</a></li>
-              <li><a href="niceNetcat/niceNetcat.htm">Nice Netcat</a></li>
-              <li><a href="verify/verify.htm">Verify</a></li>
-              <li><a href="scanSuprise/scanSuprise.htm">Scan Suprise</a></li>
-              <li><a href="binarySearch/binarySearch.htm">Binary Search</a></li>
-              <li><a href="heap0/heap0.htm">Heap 0</a></li>
-              <li><a href="formatStrings0/formatStrings0.htm">Format Strings 0</a></li>
-              <li><a href="webDecode/webDecode.htm">Web Decode</a></li>
-              <li><a href="unminify/unminify.htm">Unminify</a></li>
-              <li><a href="timeMachine/timeMachine.htm">Time Machine</a></li>
-              <li><a href="superSSH/superSSH.htm">Super SSH</a></li>
-              <li><a href="secretOfPolygot/SecretOfPolygot.htm">Secret of the Polygot</a></li>
-            </ul>
-          </div>
-          <hr>
+        <h3>
+          <a href="../picoCtf.htm">Pico CTF</a>
+        </h3>
+        <hr>
+        <h3>
+          <a href="https://play.picoctf.org/practice/challenge/427">Web Decode</a>
+        </h3>
+
+        <h4>Description</h4>
+
+        <p>Do you know how to use the web inspector?</p>
+
+        <p>Start searching here to find the flag
+        <ul>
+          <li>http://titan.picoctf.net:52075/</li>
+        </ul>
+
+        <h4>Hints</h4>
+        <p>
+        <ol>
+          <li>Use the web inspector on other files included by the web page.</li>
+          <li>The flag may or may not be encoded</li>
+        </ol>
+
+        <h4>Solution</h4>
+        <p>
+          picoCTF{web_succ3ssfully_d3c0ded_10f9376f}
+        </p>
+
+        <h4>CLI</h4>
+
+        <p>Inspect the About Page, there is a long text string that looks like base64.</p>
+
+        <p>cGljb0NURnt3ZWJfc3VjYzNzc2Z1bGx5X2QzYzBkZWRfMTBmOTM3NmZ9</p>
+
+        <h5>
+          kappa@kappa-Aspire-Z5600:~$ echo -n 'cGljb0NURnt3ZWJfc3VjYzNzc2Z1bGx5X2QzYzBkZWRfMTBmOTM3NmZ9' | base64 --decode
+          picoCTF{web_succ3ssfully_d3c0ded_10f9376f}kappa@kappa-Aspire-Z5600:~$
+        </h5>
+
+        <p>Or use an online decoder like <a href="https://cyberchef.org/">Cyber Chef</a>
+        <ul>
+          <li><a href="decoded.png">Decoded.png</a></li>
+        </ul>
 
       </div>
+      <hr>
+
     </div>
   </div>
 

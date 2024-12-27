@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>PicoCTF | Binary Search</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../picoCtf.htm">Pico CTF</a>
+        </h3>
+        <hr>
+        <h3>
+          <a href="https://play.picoctf.org/practice/challenge/442">Binary Search</a>
+        </h3>
+
+        <h4>Description</h4>
+
+        <p>Want to play a game? As you use more of the shell, you might be interested in how they work! Binary search is a classic algorithm used to quickly find an item in a sorted list. Can you find the flag? You'll have 1000 possibilities and only 10 guesses. Cyber security often has a huge amount of data to look through - from logs, vulnerability reports, and forensics. Practicing the fundamentals manually might help you in the future when you have to write your own tools! You can download the challenge files here:
+        <ul>
+          <li><a href="challenge.zip">Challenge.zip</a></li>
+        </ul>
+
+        <p>ssh -p 52311 ctf-player@atlas.picoctf.net Using the password 1db87a14. Accept the fingerprint with yes, and ls once connected to begin. Remember, in a shell, passwords are hidden!</p>
+
+        <h4>Hints</h4>
+        <p>
+        <ol>
+          <li>Have you ever played hot or cold? Binary search is a bit like that.</li>
+          <li>You have a very limited number of guesses. Try larger jumps between numbers!</li>
+          <li>The program will randomly choose a new number each time you connect. You can always try again, but you should start your binary search over from the beginning - try around 500. Can you think of why?</li>
+        </ol>
+
+        <h4>Solution</h4>
+        <p>
+          picoCTF{g00d_gu355_1597707f}
+        </p>
+
+        <h4>CLI</h4>
+        <h5>
+          kappa@kappa-Aspire-Z5600:~$ ssh -p 52311 ctf-player@atlas.picoctf.net<br>
+          ctf-player@atlas.picoctf.net's password: <br>
+          Welcome to the Binary Search Game!<br>
+          I'm thinking of a number between 1 and 1000.<br>
+          Enter your guess: 500<br>
+          Higher! Try again.<br>
+          Enter your guess: 750<br>
+          Higher! Try again.<br>
+          Enter your guess: 825<br>
+          Higher! Try again.<br>
+          Enter your guess: 900<br>
+          Lower! Try again.<br>
+          Enter your guess: 840<br>
+          Lower! Try again.<br>
+          Enter your guess: 830<br>
+          Higher! Try again.<br>
+          Enter your guess: 835<br>
+          Congratulations! You guessed the correct number: 835<br>
+          <br>
+          Here's your flag: picoCTF{g00d_gu355_1597707f}<br>
+          <br>
+          Connection to atlas.picoctf.net closed.<br>
+          kappa@kappa-Aspire-Z5600:~$
+        </h5>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

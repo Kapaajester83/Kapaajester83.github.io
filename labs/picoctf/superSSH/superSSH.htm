@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>PicoCTF | Super SSH</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../picoCtf.htm">Pico CTF</a>
+        </h3>
+        <hr>
+        <h3>
+          <a href="https://play.picoctf.org/practice/challenge/424">Super SSH</a>
+        </h3>
+
+        <h4>Description</h4>
+
+        <p>Using a Secure Shell (SSH) is going to be pretty important.</p>
+
+        <p>Can you ssh as ctf-player to titan.picoctf.net at port 51450 to get the flag? You'll also need the password 84b12bae. If asked, accept the fingerprint with yes. If your device doesn't have a shell, you can use: https://webshell.picoctf.org If you're not sure what a shell is, check out our Primer: https://primer.picoctf.com/#_the_shell</p>
+
+        <h4>Hints</h4>
+        <p>
+        <ol>
+          <li>https://linux.die.net/man/1/ssh</li>
+          <li>You can try logging in 'as' someone with "user"@titan.picoctf.net</li>
+          <li>How could you specify the port?</li>
+          <li>Remember, passwords are hidden when typed into the shell</li>
+        </ol>
+
+        <h4>Solution</h4>
+        <p>
+          picoCTF{s3cur3_c0nn3ct10n_07a987ac}
+        </p>
+
+        <h4>CLI</h4>
+
+        <h5>
+          kappa@kappa-Aspire-Z5600:~$ ssh ctf-player@titan.picoctf.net -p 51450<br>
+          <br>
+          The authenticity of host '[titan.picoctf.net]:51450 ([3.139.174.234]:51450)' can't be established.<br>
+          ED25519 key fingerprint is SHA256:4S9EbTSSRZm32I+cdM5TyzthpQryv5kudRP9PIKT7XQ.<br>
+          This key is not known by any other names<br>
+          Are you sure you want to continue connecting (yes/no/[fingerprint])? yes<br>
+          Warning: Permanently added '[titan.picoctf.net]:51450' (ED25519) to the list of known hosts.<br>
+          ctf-player@titan.picoctf.net's password: <br>
+          <br>
+          Welcome ctf-player, here's your flag: picoCTF{s3cur3_c0nn3ct10n_07a987ac}<br>
+          <br>
+          Connection to titan.picoctf.net closed.<br>
+          kappa@kappa-Aspire-Z5600:~$
+        </h5>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
