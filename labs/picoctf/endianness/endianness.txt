@@ -1,0 +1,47 @@
+https://play.picoctf.org/practice/challenge/414?page=2
+
+
+Description
+Know of little and big endian? 
+
+Source 
+
+nc titan.picoctf.net 53996
+
+Hints
+
+You might want to check the ASCII table to first find the hexadecimal representation of characters before finding the endianness.
+
+Read more about how endianness here
+https://levelup.gitconnected.com/little-endian-and-big-endian-74ab6441b2a7
+
+CLI
+
+kappa@kappa-Aspire-Z5600:~$ nc titan.picoctf.net 53996
+Welcome to the Endian CTF!
+You need to find both the little endian and big endian representations of a word.
+If you get both correct, you will receive the flag.
+Word: ofexh
+
+Enter the Little Endian representation: 687865666f
+Correct Little Endian representation!
+
+Enter the Big Endian representation: 6f66657868
+Correct Big Endian representation!
+
+Congratulations! You found both endian representations correctly!
+Your Flag is: picoCTF{3ndi4n_sw4p_su33ess_91bc76a4}
+
+In a new terminal
+
+kappa@kappa-Aspire-Z5600:~$ echo -n "ofexh" | hexdump --format '/1 "%02x"'
+6f66657868kappa@kappa-Aspire-Z5600:~$
+
+Hex:6f66657868
+
+rotate the hex characters to find
+
+6f 66 65 78 68 - big
+68 78 65 66 6f - little
+
+eliminate the spaces
