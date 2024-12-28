@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>PicoCTF | First Find</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../picoCtf.htm">Pico CTF</a>
+        </h3>
+        <hr>
+        <h3>
+          <a href="https://play.picoctf.org/practice/challenge/320?page=2">First Find</a>
+        </h3>
+
+        <h4>Description</h4>
+
+        <p>Unzip this archive and find the file named 'uber-secret.txt'
+        <ul>
+          <li><a href="files.zip">Download zip file</a></li>
+        </ul>
+
+        <h4>Hints</h4>
+        <p>
+        <ol>
+          <li>None</li>
+        </ol>
+
+        <h4>Solution</h4>
+        <p>
+          picoCTF{f1nd_15_f457_ab443fd1}
+        </p>
+
+        <h4>CLI</h4>
+
+        <h5>
+          kappa@kappa-Aspire-Z5600:~/Desktop/firstFind/files$ ls<br>
+          13771.txt.utf-8 acceptable_books satisfactory_books<br>
+          14789.txt.utf-8 adequate_books<br>
+          <br>
+          kappa@kappa-Aspire-Z5600:~/Desktop/firstFind/files$ find ./ -name 'uber-secret.txt'<br>
+          ./adequate_books/more_books/.secret/deeper_secrets/deepest_secrets/uber-secret.txt<br>
+          <br>
+          kappa@kappa-Aspire-Z5600:~/Desktop/firstFind/files$ cat ./adequate_books/more_books/.secret/deeper_secrets/deepest_secrets/uber-secret.txt<br>
+          picoCTF{f1nd_15_f457_ab443fd1}<br>
+          kappa@kappa-Aspire-Z5600:~/Desktop/firstFind/files$
+        </h5>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
