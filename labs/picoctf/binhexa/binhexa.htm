@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>PicoCTF | Binhexa</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../picoCtf.htm">Pico CTF</a>
+        </h3>
+        <hr>
+        <h3>
+          <a href="https://play.picoctf.org/practice/challenge/404?page=2">Binhexa</a>
+        </h3>
+
+        <h4>Description</h4>
+
+        <p>How well can you perfom basic binary operations? Start searching for the flag here.
+        <ul>
+          <li>nc titan.picoctf.net 61002</li>
+        </ul>
+
+        <h4>Hints</h4>
+        <p>
+        <ol>
+          <li>None</li>
+        </ol>
+
+        <h4>Solution</h4>
+        <p>
+          picoCTF{b1tw^3se_0p3eR@tI0n_su33essFuL_6862762d}
+        </p>
+
+        <h4>CLI</h4>
+
+        <h5>kappa@kappa-Aspire-Z5600:~$ nc titan.picoctf.net 61002</h5>
+
+        <pre>
+          Welcome to the Binary Challenge!"
+          Your task is to perform the unique operations in the given order and find the final result in hexadecimal that yields the flag.
+
+          Binary Number 1: 00001010
+          Binary Number 2: 11010110
+
+
+          Question 1/6:
+          Operation 1: '>>'
+          Perform a right shift of Binary Number 2 by 1 bits .
+          Enter the binary result: 1101011
+          Correct!
+
+          Question 2/6:
+          Operation 2: '&'
+          Perform the operation on Binary Number 1&2.
+          Enter the binary result: 0
+          Incorrect. Try again
+          Enter the binary result: 00000010
+          Correct!
+
+          Question 3/6:
+          Operation 3: '<<'
+          Perform a left shift of Binary Number 1 by 1 bits.
+          Enter the binary result: 10100
+          Correct!
+
+          Question 4/6:
+          Operation 4: '*'
+          Perform the operation on Binary Number 1&2.
+          Enter the binary result: 100001011100
+          Correct!
+
+          Question 5/6:
+          Operation 5: '+'
+          Perform the operation on Binary Number 1&2.
+          Enter the binary result: 11100000
+          Correct!
+
+          Question 6/6:
+          Operation 6: '|'
+          Perform the operation on Binary Number 1&2.
+          Enter the binary result: 11011110
+          Correct!
+
+          Enter the results of the last operation in hexadecimal: DE
+
+          Correct answer!
+          The flag is: picoCTF{b1tw^3se_0p3eR@tI0n_su33essFuL_6862762d}
+        </pre>
+
+        <p>Here are some converters
+        <ul>
+          <li><a href="https://miniwebtool.com/bitwise-calculator/bit-shift/">https://miniwebtool.com/bitwise-calculator/bit-shift</a></li>
+
+          <li><a href="https://www.rapidtables.com/calc/math/binary-calculator.html">https://www.rapidtables.com/calc/math/binary-calculator.html</a></li>
+          <li><a href="https://www.rapidtables.com/convert/number/binary-to-hex.html">https://www.rapidtables.com/convert/number/binary-to-hex.html</a></li>
+        </ul>
+
+        <p>List of functions
+        <ul>
+          <li>
+            << (Logical left shift)</li>
+          <li>>> (Logical right shift)</li>
+          <li>| (OR)</li>
+          <li>& (AND)</li>
+          <li>* (Multiplication)</li>
+          <li>+ (Addition)</li>
+        </ul>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
