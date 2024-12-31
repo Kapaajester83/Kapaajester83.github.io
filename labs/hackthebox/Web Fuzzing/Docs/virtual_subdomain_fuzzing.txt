@@ -1,0 +1,8 @@
+kappa@kappa-Aspire-Z5600:~$ gobuster vhost -u http://inlanefreight.htb:35301 -w /home/kappa/SecLists-master/Discovery/Web-Content/common.txt --append-domain | grep "web-"
+
+web-beans.inlanefreight.htb
+
+
+kappa@kappa-Aspire-Z5600:~$ gobuster dns -d inlanefreight.com -w /home/kappa/SecLists-master/Discovery/DNS/subdomains-top1million-5000.txt
+
+support.inlanefreight.com

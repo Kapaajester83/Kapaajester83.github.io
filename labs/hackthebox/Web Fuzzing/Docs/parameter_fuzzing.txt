@@ -1,0 +1,29 @@
+
+curl 94.237.50.242:56466
+
+curl 94.237.50.242:56466/get.php?x=
+
+kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/common.txt -u http://94.237.50.242:56466/get.php?x=FUZZ
+
+:: Progress: [280/4735] :: Job [1/1] :: 280 req/sec :: Duration: [0:00:01] :: Er:: Progress: [283/4735] :: Job [1/1] :: 283 req/sec :: Duration: [0:00:01] :: Er:: Progress: [320/4735] :: Job [1/1] :: 320 req/sec :: Duration: [0:00:01] :: ErOA_HTML                 [Status: 200, Size: 25, Words: 1, Lines: 2]
+:: Progress: [346/4735] :: Job [1/1] :: 346 req/sec :: Duration: [0:00:01] :: Er:: Progress: [349/4735] :: Job [1/1] :: 349 req/sec :: Duration: [0:00:01] :: Er:: Progress: [361/4735] :: Job [1/1] :: 361 req/sec :: Duration: [0:00:01] :: Er
+
+What flag do you find when successfully fuzzing the GET parameter? 
+http://94.237.50.242:56466/get.php?x=OA_HTML
+
+HTB{g3t_fuzz1ng_succ3ss}
+
+
+kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/common.txt -u http://94.237.50.242:56466/post.php? -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "y=FUZZ"
+
+:: Progress: [292/4735] :: Job [1/1] :: 292 req/sec :: Duration: [0:00:01] :: Er:: Progress: [320/4735] :: Job [1/1] :: 320 req/sec :: Duration: [0:00:01] :: Er:: Progress: [360/4735] :: Job [1/1] :: 360 req/sec :: Duration: [0:00:01] :: Er:: Progress: [360/4735] :: Job [1/1] :: 360 req/sec :: Duration: [0:00:01] :: ErSUNWmc                  [Status: 200, Size: 26, Words: 1, Lines: 2]
+:: Progress: [364/4735] :: Job [1/1] :: 364 req/sec :: Duration: [0:00:01] :: Er:: Progress: [400/4735] :: Job [1/1] :: 400 req/sec :: Duration: [0:00:01] :: Er:: Progress: [416/4735] :: Job [1/1] :: 416 req/sec :: Duration: [0:00:01] :: Er
+
+What flag do you find when successfully fuzzing the POST parameter? 
+
+kappa@kappa-Aspire-Z5600:~$ curl -d "y=SUNWmc" 94.237.50.242:56466/post.php
+HTB{p0st_fuzz1ng_succ3ss}
+kappa@kappa-Aspire-Z5600:~$ 
+
+
+

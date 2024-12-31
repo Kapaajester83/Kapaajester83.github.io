@@ -71,7 +71,208 @@
 
           <h3><em>Skills Assessment</em></h3>
 
-          <p>To complete this Skills Assessment, you will need to apply the multitude of tools and techniques showcased throughout this module. All fuzzing can be completed using the common.txt SecLists Wordlist, found at /usr/share/seclists/Discovery/Web-Content on Pwnbox, or via the SecLists GitHub.</p>
+          <p>To complete this Skills Assessment, you will need to apply the multitude of tools and techniques showcased throughout this module. All fuzzing can be completed using the common.txt SecLists Wordlist, found at /usr/share/seclists/Discovery/Web-Content on Pwnbox, or via the SecLists GitHub.
+          <ul>
+            <li><a href="https://github.com/danielmiessler/SecLists">https://github.com/danielmiessler/SecLists</a></li>
+          </ul>
+
+          <h4>Directory and File Fuzzing</h4>
+
+          <p>Within the "webfuzzing_hidden_path" path on the target system (ie http://IP:PORT/webfuzzing_hidden_path/), fuzz for folders and then files to find the flag.</p>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.50.242:45270/webfuzzing_hidden_path/FUZZ -ic
+          </h5>
+
+          <pre>
+            :: Progress: [1648/220546] :: Job [1/1] :: 274 req/sec :: Duration: [0:00:06] :::: Progress: [1667/220546] :: Job [1/1] :: 277 req/sec :: Duration: [0:00:06]
+
+            flag                    [Status: 301, Size: 0, Words: 1, Lines: 1]
+
+            :: Progress: [1688/220546] :: Job [1/1] :: 281 req/sec :: Duration: [0:00:06] :::: Progress: [1693/220546] :: Job [1/1] :: 282 req/sec :: Duration: [0:00:06]
+          </pre>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/common.txt -u http://94.237.50.242:45270/webfuzzing_hidden_path/flag/FUZZ -ic .html -e .php,.html,.txt,.bak,.js -v
+          </h5>
+
+          <pre>
+            :: Progress: [2219/4735] :: Job [1/1] :: 246 req/sec :: Duration: [0:00:09] :: E:: Progress: [2238/4735] :: Job [1/1] :: 248 req/sec :: Duration: [0:00:09]
+
+            index.html              [Status: 200, Size: 104, Words: 6, Lines: 2]
+
+            :: Progress: [2243/4735] :: Job [1/1] :: 249 req/sec :: Duration: [0:00:09] :: E:: Progress: [2266/4735] :: Job [1/1] :: 251 req/sec :: Duration: [0:00:09]
+          </pre>
+
+          <p>http://94.237.50.242:45270/webfuzzing_hidden_path/flag/flag.html
+          <ul>
+            <li>(Note: you must spawn a unique target system!)</li>
+            <li><a href="Images/directory_fuzzing_flag.png">Directory Fuzzing Flag.png</a></li>
+          </ul>
+
+          <h4>Recursive Fuzzing</h4>
+
+          <p>Recursively fuzz the "recursive_fuzz" path on the target system (ie http://IP:PORT/recursive_fuzz/) to find the flag.</p>
+
+          <h5>
+            ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.62.184:59887/recursive_fuzz/FUZZ -ic -recursion
+          </h5>
+
+          <pre>
+            :: Progress: [16475/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:01:06] ::: Progress: [16495/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:01:06] :level1                  [Status: 301, Size: 0, Words: 1, Lines: 1]
+            :: Progress: [16501/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:06] :[INFO] Adding a new job to the queue: http://94.237.62.184:59887/recursive_fuzz/
+
+            level1/FUZZ
+
+            :: Progress: [16520/220546] :: Job [1/2] :: 250 req/sec :: Duration: [0:01:06] ::: Progress: [16549/220546] :: Job [1/2] :: 250 req/sec :: Duration: [0:01:06]
+          </pre>
+
+          <h5>
+            ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.62.184:59887/recursive_fuzz/level1/FUZZ -ic -recursion
+          </h5>
+
+          <pre>
+            :: Progress: [17334/220546] :: Job [1/1] :: 247 req/sec :: Duration: [0:01:10] ::: Progress: [17364/220546] :: Job [1/1] :: 248 req/sec :: Duration: [0:01:10] ::: Progress: [17386/220546] :: Job [1/1] :: 248 req/sec :: Duration: [0:01:10] :level2                  [Status: 301, Size: 0, Words: 1, Lines: 1]
+            :: Progress: [17399/220546] :: Job [1/1] :: 248 req/sec :: Duration: [0:01:10] :[INFO] Adding a new job to the queue: http://94.237.62.184:59887/recursive_fuzz/
+
+            level1/level2/FUZZ
+
+            :: Progress: [17410/220546] :: Job [1/2] :: 248 req/sec :: Duration: [0:01:10] ::: Progress: [17439/220546] :: Job [1/2] :: 249 req/sec :: Duration: [0:01:10] ::: Progress: [17457/220546] :: Job [1/2] :: 249 req/sec :: Duration: [0:01:10]
+          </pre>
+
+          <h5>
+            ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.62.184:59887/recursive_fuzz/level1/level2/FUZZ -ic -recursion
+          </h5>
+
+          <pre>
+            :: Progress: [18220/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:01:13] ::: Progress: [18244/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:01:13] ::: Progress: [18266/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:13] ::: Progress: [18298/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:13] :level3                  [Status: 301, Size: 0, Words: 1, Lines: 1]
+            :: Progress: [18309/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:13] :[INFO] Adding a new job to the queue: http://94.237.62.184:59887/recursive_fuzz/
+
+            level1/level2/level3/FUZZ
+
+            :: Progress: [18316/220546] :: Job [1/2] :: 250 req/sec :: Duration: [0:01:13] ::: Progress: [18343/220546] :: Job [1/2] :: 251 req/sec :: Duration: [0:01:13] ::: Progress: [18374/220546] :: Job [1/2] :: 251 req/sec :: Duration: [0:01:13]
+          </pre>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.62.184:59887/recursive_fuzz/level1/level2/level3/FUZZ -ic -recursion
+          </h5>
+
+          <pre>
+            :: Progress: [17532/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:10] ::: Progress: [17558/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:10] ::: Progress: [17584/220546] :: Job [1/1] :: 251 req/sec :: Duration: [0:01:10] ::: Progress: [17604/220546] :: Job [1/1] :: 251 req/sec :: Duration: [0:01:10] :threatcon_level2        [Status: 301, Size: 0, Words: 1, Lines: 1]
+            :: Progress: [17619/220546] :: Job [1/1] :: 251 req/sec :: Duration: [0:01:10] :[INFO] Adding a new job to the queue: 
+
+            http://94.237.62.184:59887/recursive_fuzz/level1/level2/level3/threatcon_level2/FUZZ
+            
+            :: Progress: [17631/220546] :: Job [1/2] :: 251 req/sec :: Duration: [0:01:10] ::: Progress: [17655/220546] :: Job [1/2] :: 252 req/sec :: Duration: [0:01:10] ::: Progress: [17681/220546] :: Job [1/2] :: 249 req/sec :: Duration: [0:01:11]
+          </pre>
+
+          <p>http://94.237.62.184:59887/recursive_fuzz/level1/level2/level3/threatcon_level2/
+          <ul>
+            <li><a href="Images/recursive_fuzzing_flag.png">Recursive Fuzzing Flag.png</a></li>
+          </ul>
+
+          <h4>Parameter and Value Fuzzing</h4>
+
+          <p>What flag do you find when successfully fuzzing the GET parameter?</p>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ curl 94.237.50.242:56466<br>
+            kappa@kappa-Aspire-Z5600:~$ curl 94.237.50.242:56466/get.php?x=<br>
+            <br>
+            kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/common.txt -u http://94.237.50.242:56466/get.php?x=FUZZ
+          </h5>
+
+          <pre>
+            :: Progress: [280/4735] :: Job [1/1] :: 280 req/sec :: Duration: [0:00:01] :: Er:: Progress: [283/4735] :: Job [1/1] :: 283 req/sec :: Duration: [0:00:01] :: Er:: Progress: [320/4735] :: Job [1/1] :: 320 req/sec :: Duration: [0:00:01]
+
+            OA_HTML                 [Status: 200, Size: 25, Words: 1, Lines: 2]
+
+            :: Progress: [346/4735] :: Job [1/1] :: 346 req/sec :: Duration: [0:00:01] :: Er:: Progress: [349/4735] :: Job [1/1] :: 349 req/sec :: Duration: [0:00:01] :: Er:: Progress: [361/4735] :: Job [1/1] :: 361 req/sec :: Duration: [0:00:01]
+          </pre>
+
+          <p>http://94.237.50.242:56466/get.php?x=OA_HTML
+          <ul>
+            <li><a href="Images/parameter_fuzzing_flag.png">GET Parameter Fuzzing Flag.png</a></li>
+          </ul>
+
+          <p>What flag do you find when successfully fuzzing the POST parameter?</p>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/common.txt -u http://94.237.50.242:56466/post.php? -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "y=FUZZ"
+          </h5>
+
+          <pre>
+            :: Progress: [292/4735] :: Job [1/1] :: 292 req/sec :: Duration: [0:00:01] :: Er:: Progress: [320/4735] :: Job [1/1] :: 320 req/sec :: Duration: [0:00:01] :: Er:: Progress: [360/4735] :: Job [1/1] :: 360 req/sec :: Duration: [0:00:01] :: Er:: Progress: [360/4735] :: Job [1/1] :: 360 req/sec :: Duration: [0:00:01]
+
+            SUNWmc                  [Status: 200, Size: 26, Words: 1, Lines: 2]
+
+            :: Progress: [364/4735] :: Job [1/1] :: 364 req/sec :: Duration: [0:00:01] :: Er:: Progress: [400/4735] :: Job [1/1] :: 400 req/sec :: Duration: [0:00:01] :: Er:: Progress: [416/4735] :: Job [1/1] :: 416 req/sec :: Duration: [0:00:01]
+          </pre>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ curl -d "y=SUNWmc" 94.237.50.242:56466/post.php<br>
+            HTB{p0st_fuzz1ng_succ3ss}<br>
+            kappa@kappa-Aspire-Z5600:~$
+          </h5>
+
+          <h4>Virtual Host and Subdomain Fuzzing</h4>
+
+          <p>Using GoBuster against the target system to fuzz for vhosts using the common.txt wordlist, which vhost starts with the prefix "web-"? Respond with the full vhost, eg web-123.inlanefreight.htb.</p>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ gobuster vhost -u http://inlanefreight.htb:35301 -w /home/kappa/SecLists-master/Discovery/Web-Content/common.txt --append-domain | grep "web-"<br>
+            web-beans.inlanefreight.htb
+          </h5>
+
+          <p>Using GoBuster against inlanefreight.com to fuzz for subdomains using the subdomains-top1million-5000.txt wordlist, which subdomain starts with the prefix "su"? Respond with the full vhost, eg web.inlanefreight.com.</p>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ gobuster dns -d inlanefreight.com -w /home/kappa/SecLists-master/Discovery/DNS/subdomains-top1million-5000.txt<br>
+            support.inlanefreight.com
+          </h5>
+
+          <h4>Validating Findings</h4>
+
+          <p>Fuzz the target system using directory-list-2.3-medium.txt, looking for a hidden directory. Once you have found the hidden directory, responsibly determine the validity of the vulnerability by analyzing the tar.gz file in the directory. Answer using the full Content-Length header, eg "Content-Length: 1337"</p>
+
+          <h5>
+            kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.50.242:46015/FUZZ -ic
+          </h5>
+
+          <pre>
+            :: Progress: [1588/220546] :: Job [1/1] :: 264 req/sec :: Duration: [0:00:06] :::: Progress: [1616/220546] :: Job [1/1] :: 269 req/sec :: Duration: [0:00:06] :::: Progress: [1646/220546] :: Job [1/1] :: 274 req/sec :: Duration: [0:00:06]
+
+            backup                  [Status: 301, Size: 0, Words: 1, Lines: 1]
+
+            :: Progress: [1652/220546] :: Job [1/1] :: 275 req/sec :: Duration: [0:00:06] :::: Progress: [1663/220546] :: Job [1/1] :: 277 req/sec :: Duration: [0:00:06] :::: Progress: [1693/220546] :: Job [1/1] :: 282 req/sec :: Duration: [0:00:06] ::
+
+            -SNIP-
+
+            :: Progress: [77803/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] ::: Progress: [77810/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] ::: Progress: [77837/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12]
+
+            http://94.237.50.242:46015/ur-hiddenmember/
+
+            :: Progress: [77805/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] ::: Progress: [77810/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:13] ::: Progress: [77839/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:13]
+          </pre>
+
+          <h5>kappa@kappa-Aspire-Z5600:~$ curl -I http://94.237.50.242:46015/ur-hiddenmember/backup.tar.gz</h5>
+
+          <pre>
+            HTTP/1.1 200 OK
+            Content-Type: application/x-gtar-compressed
+            ETag: "1668958902"
+            Last-Modified: Thu, 01 Aug 2024 13:38:21 GMT
+            Content-Length: 210
+            Accept-Ranges: bytes
+            Date: Mon, 30 Dec 2024 23:58:51 GMT
+            Server: lighttpd/1.4.76
+            kappa@kappa-Aspire-Z5600:~$
+          </pre>
+
+          <p>Content-Length: 210</p>
+
+          <h4>API Fuzzing</h4>
+          <h4>Skills Assessment</h4>
 
         </div>
         <hr>

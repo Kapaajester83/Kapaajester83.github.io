@@ -1,0 +1,41 @@
+
+
+https://github.com/danielmiessler/SecLists
+
+Directory fuzzing
+
+kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.50.242:45270/webfuzzing_hidden_path/FUZZ -ic
+-SNIP-
+Progress: [1648/220546] :: Job [1/1] :: 274 req/sec :: Duration: [0:00:06] :::: Progress: [1667/220546] :: Job [1/1] :: 277 req/sec :: Duration: 
+
+[0:00:06] ::flag                    [Status: 301, Size: 0, Words: 1, Lines: 1]
+
+:: Progress: [1688/220546] :: Job [1/1] :: 281 req/sec :: Duration: [0:00:06] :::: Progress: [1693/220546] :: Job [1/1] :: 282 req/sec :: Duration: [0:00:06] ::
+-SNIP
+
+kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/common.txt -u http://94.237.50.242:45270/webfuzzing_hidden_path/flag/FUZZ -ic .html -e .php,.html,.txt,.bak,.js -v
+-SNIP-
+Progress: [2219/4735] :: Job [1/1] :: 246 req/sec :: Duration: [0:00:09] :: E:: Progress: [2238/4735] :: Job [1/1] :: 248 req/sec :: Duration: [0:00:09] :: E
+
+index.html              [Status: 200, Size: 104, Words: 6, Lines: 2]
+
+:: Progress: [2243/4735] :: Job [1/1] :: 249 req/sec :: Duration: [0:00:09] :: E:: Progress: [2266/4735] :: Job [1/1] :: 251 req/sec :: Duration: [0:00:09] :: E
+-SNIP-
+
+http://94.237.50.242:45270/webfuzzing_hidden_path/flag/flag.html
+
+directory_fuzzing_flag.png
+
+
+
+
+
+
+
+
+
+
+
+
+
+

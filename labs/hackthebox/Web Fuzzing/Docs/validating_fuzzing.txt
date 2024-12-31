@@ -1,0 +1,39 @@
+
+kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.50.242:46015/FUZZ -ic
+
+:: Progress: [1588/220546] :: Job [1/1] :: 264 req/sec :: Duration: [0:00:06] :::: Progress: [1616/220546] :: Job [1/1] :: 269 req/sec :: Duration: [0:00:06] :::: Progress: [1646/220546] :: Job [1/1] :: 274 req/sec :: Duration: [0:00:06] ::backup                  [Status: 301, Size: 0, Words: 1, Lines: 1]
+:: Progress: [1652/220546] :: Job [1/1] :: 275 req/sec :: Duration: [0:00:06] :::: Progress: [1663/220546] :: Job [1/1] :: 277 req/sec :: Duration: [0:00:06] :::: Progress: [1693/220546] :: Job [1/1] :: 282 req/sec :: Duration: [0:00:06] ::
+
+:: Progress: [77738/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] ::: Progress: [77763/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] ::: Progress: [77788/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] :ur-hiddenmember         [Status: 301, Size: 0, Words: 1, Lines: 1]
+:: Progress: [77803/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] ::: Progress: [77810/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] ::: Progress: [77837/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:05:12] :
+
+http://94.237.50.242:46015/ur-hiddenmember/
+
+kappa@kappa-Aspire-Z5600:~$ curl -I http://94.237.50.242:46015/ur-hiddenmember/backup.tar.gz
+HTTP/1.1 200 OK
+Content-Type: application/x-gtar-compressed
+ETag: "1668958902"
+Last-Modified: Thu, 01 Aug 2024 13:38:21 GMT
+Content-Length: 210
+Accept-Ranges: bytes
+Date: Mon, 30 Dec 2024 23:58:51 GMT
+Server: lighttpd/1.4.76
+
+kappa@kappa-Aspire-Z5600:~$ 
+
+Content-Length: 210
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

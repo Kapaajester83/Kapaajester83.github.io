@@ -1,0 +1,43 @@
+Recursive fuzzing
+
+ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.62.184:59887/recursive_fuzz/FUZZ -ic -recursion
+
+:: Progress: [16475/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:01:06] ::: Progress: [16495/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:01:06] :level1                  [Status: 301, Size: 0, Words: 1, Lines: 1]
+:: Progress: [16501/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:06] :[INFO] Adding a new job to the queue: http://94.237.62.184:59887/recursive_fuzz/
+
+level1/FUZZ
+
+:: Progress: [16520/220546] :: Job [1/2] :: 250 req/sec :: Duration: [0:01:06] ::: Progress: [16549/220546] :: Job [1/2] :: 250 req/sec :: Duration: [0:01:06] :
+
+ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.62.184:59887/recursive_fuzz/level1/FUZZ -ic -recursion
+
+:: Progress: [17334/220546] :: Job [1/1] :: 247 req/sec :: Duration: [0:01:10] ::: Progress: [17364/220546] :: Job [1/1] :: 248 req/sec :: Duration: [0:01:10] ::: Progress: [17386/220546] :: Job [1/1] :: 248 req/sec :: Duration: [0:01:10] :level2                  [Status: 301, Size: 0, Words: 1, Lines: 1]
+:: Progress: [17399/220546] :: Job [1/1] :: 248 req/sec :: Duration: [0:01:10] :[INFO] Adding a new job to the queue: http://94.237.62.184:59887/recursive_fuzz/
+
+level1/level2/FUZZ
+
+:: Progress: [17410/220546] :: Job [1/2] :: 248 req/sec :: Duration: [0:01:10] ::: Progress: [17439/220546] :: Job [1/2] :: 249 req/sec :: Duration: [0:01:10] ::: Progress: [17457/220546] :: Job [1/2] :: 249 req/sec :: Duration: [0:01:10] ::
+
+
+ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.62.184:59887/recursive_fuzz/level1/level2/FUZZ -ic -recursion
+
+:: Progress: [18220/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:01:13] ::: Progress: [18244/220546] :: Job [1/1] :: 249 req/sec :: Duration: [0:01:13] ::: Progress: [18266/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:13] ::: Progress: [18298/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:13] :level3                  [Status: 301, Size: 0, Words: 1, Lines: 1]
+:: Progress: [18309/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:13] :[INFO] Adding a new job to the queue: http://94.237.62.184:59887/recursive_fuzz/
+
+level1/level2/level3/FUZZ
+
+:: Progress: [18316/220546] :: Job [1/2] :: 250 req/sec :: Duration: [0:01:13] ::: Progress: [18343/220546] :: Job [1/2] :: 251 req/sec :: Duration: [0:01:13] ::: Progress: [18374/220546] :: Job [1/2] :: 251 req/sec :: Duration: [0:01:13] :
+
+kappa@kappa-Aspire-Z5600:~$ ffuf -w /home/kappa/SecLists-master/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://94.237.62.184:59887/recursive_fuzz/level1/level2/level3/FUZZ -ic -recursion
+
+:: Progress: [17532/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:10] ::: Progress: [17558/220546] :: Job [1/1] :: 250 req/sec :: Duration: [0:01:10] ::: Progress: [17584/220546] :: Job [1/1] :: 251 req/sec :: Duration: [0:01:10] ::: Progress: [17604/220546] :: Job [1/1] :: 251 req/sec :: Duration: [0:01:10] :threatcon_level2        [Status: 301, Size: 0, Words: 1, Lines: 1]
+
+:: Progress: [17619/220546] :: Job [1/1] :: 251 req/sec :: Duration: [0:01:10] :[INFO] Adding a new job to the queue: http://94.237.62.184:59887/recursive_fuzz/level1/level2/level3/threatcon_level2/FUZZ
+:: Progress: [17631/220546] :: Job [1/2] :: 251 req/sec :: Duration: 
+
+[0:01:10] ::: Progress: [17655/220546] :: Job [1/2] :: 252 req/sec :: Duration: [0:01:10] ::: Progress: [17681/220546] :: Job [1/2] :: 249 req/sec :: Duration: [0:01:11] :
+
+http://94.237.62.184:59887/recursive_fuzz/level1/level2/level3/threatcon_level2/
+
+recursive_fuzzing_flag.png
+
