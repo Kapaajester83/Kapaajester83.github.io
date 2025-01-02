@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Web Requests</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../webRequests.htm">Web Requests</a></h4>
+        <ul>
+          <li><a href="post.htm">POST</a></li>
+          <li><a href="crudAPI.htm"><b><em>~ CRUD API</em></b></a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>CRUD API</em></h3>
+
+        <p>We saw examples of a City Search web application that uses PHP parameters to search for a city name in the previous sections. This section will look at how such a web application may utilize APIs to perform the same thing, and we will directly interact with the API endpoint.</p>
+
+        <h4>APIs</h4>
+
+        <p>There are several types of APIs. Many APIs are used to interact with a database, such that we would be able to specify the requested table and the requested row within our API query, and then use an HTTP method to perform the operation needed. For example, for the api.php endpoint in our example, if we wanted to update the city table in the database, and the row we will be updating has a city name of london, then the URL would look something like this:</p>
+
+        <h5>kappajester83@htb[/htb]$ curl -X PUT http://"SERVER_IP":"PORT"/api.php/city/london</h5>
+
+        <h4>CRUD</h4>
+
+        <p>As we can see, we can easily specify the table and the row we want to perform an operation on through such APIs. Then we may utilize different HTTP methods to perform different operations on that row. In general, APIs perform 4 main operations on the requested database entity:
+        <ul>
+          <li><b>Create</b> - <em>POST</em> - Adds the specified data to the database table</li>
+          <li><b>Read</b> - <em>GET</em> - Reads the specified entity from the database table</li>
+          <li><b>Update</b> - <em>PUT</em> - Updates the data of the specified database table</li>
+          <li><b>Delete</b> - <em>DELETE</em> - Removes the specified row from the database table</li>
+        </ul>
+
+        <p>These four operations are mainly linked to the commonly known CRUD APIs, but the same principle is also used in REST APIs and several other types of APIs. Of course, not all APIs work in the same way, and the user access control will limit what actions we can perform and what results we can see. The Introduction to Web Applications module further explains these concepts, so you may refer to it for more details about APIs and their usage.</p>
+
+        <h4>Read</h4>
+
+        <p>The first thing we will do when interacting with an API is reading data. As mentioned earlier, we can simply specify the table name after the API (e.g. /city) and then specify our search term (e.g. /london), as follows:</p>
+
+        <h5>
+          kappajester83@htb[/htb]$ curl http://"SERVER_IP":"PORT"/api.php/city/london<br>
+          <br>
+          [{"city_name":"London","country_name":"(UK)"}]
+        </h5>
+
+        <p>We see that the result is sent as a JSON string. To have it properly formatted in JSON format, we can pipe the output to the jq utility, which will format it properly. We will also silent any unneeded cURL output with -s, as follows:</p>
+
+        <h5>kappajester83@htb[/htb]$ curl -s http://"SERVER_IP":"PORT"/api.php/city/london | jq</h5>
+
+        <pre>
+          [
+            {
+              "city_name": "London",
+              "country_name": "(UK)"
+            }
+          ]
+        </pre>
+
+        <p>As we can see, we got the output in a nicely formatted output. We can also provide a search term and get all matching results:</p>
+
+        <h5>kappajester83@htb[/htb]$ curl -s http://"SERVER_IP":"PORT"/api.php/city/le | jq</h5>
+
+        <pre>
+          [
+            {
+              "city_name": "Leeds",
+              "country_name": "(UK)"
+            },
+            {
+              "city_name": "Dudley",
+              "country_name": "(UK)"
+            },
+            {
+              "city_name": "Leicester",
+              "country_name": "(UK)"
+            },
+            ...SNIP...
+          ]
+        </pre>
+
+        <p>Finally, we can pass an empty string to retrieve all entries in the table:</p>
+
+        <h5>kappajester83@htb[/htb]$ curl -s http://"SERVER_IP":"PORT"/api.php/city/ | jq</h5>
+
+        <pre>
+          [
+            {
+              "city_name": "London",
+              "country_name": "(UK)"
+            },
+            {
+              "city_name": "Birmingham",
+              "country_name": "(UK)"
+            },
+            {
+              "city_name": "Leeds",
+              "country_name": "(UK)"
+            },
+            ...SNIP...
+          ]
+        </pre>
+
+        <p>Try visiting any of the above links using your browser, to see how the result is rendered.</p>
+
+        <h4>Create</h4>
+
+        <p>To add a new entry, we can use an HTTP POST request, which is quite similar to what we have performed in the previous section. We can simply POST our JSON data, and it will be added to the table. As this API is using JSON data, we will also set the Content-Type header to JSON, as follows:</p>
+
+        <h5>
+          kappajester83@htb[/htb]$ curl -X POST http://"SERVER_IP":"PORT"/api.php/city/ -d '{"city_name":"HTB_City", "country_name":"HTB"}' -H 'Content-Type: application/json'
+        </h5>
+
+        <p>Now, we can read the content of the city we added (HTB_City), to see if it was successfully added:</p>
+
+        <h5>kappajester83@htb[/htb]$ curl -s http://"SERVER_IP":"PORT"/api.php/city/HTB_City | jq</h5>
+
+        <pre>
+          [
+            {
+              "city_name": "HTB_City",
+              "country_name": "HTB"
+            }
+          ]
+        </pre>
+
+        <p>As we can see, a new city was created, which did not exist before.</p>
+
+        <p>Exercise: Try adding a new city through the browser devtools, by using one of the Fetch POST requests you used in the previous section.</p>
+
+        <h4>Update</h4>
+
+        <p>Now that we know how to read and write entries through APIs, let's start discussing two other HTTP methods we have not used so far: PUT and DELETE. As mentioned at the beginning of the section, PUT is used to update API entries and modify their details, while DELETE is used to remove a specific entity.</p>
+
+        <p>Note: The HTTP PATCH method may also be used to update API entries instead of PUT. To be precise, PATCH is used to partially update an entry (only modify some of its data "e.g. only city_name"), while PUT is used to update the entire entry. We may also use the HTTP OPTIONS method to see which of the two is accepted by the server, and then use the appropriate method accordingly. In this section, we will be focusing on the PUT method, though their usage is quite similar.</p>
+
+        <p>Using PUT is quite similar to POST in this case, with the only difference being that we have to specify the name of the entity we want to edit in the URL, otherwise the API will not know which entity to edit. So, all we have to do is specify the city name in the URL, change the request method to PUT, and provide the JSON data like we did with POST, as follows:</p>
+
+        <h5>
+          kappajester83@htb[/htb]$ curl -X PUT http://"SERVER_IP":"PORT"/api.php/city/london -d '{"city_name":"New_HTB_City", "country_name":"HTB"}' -H 'Content-Type: application/json'
+        </h5>
+
+        <p>We see in the example above that we first specified /city/london as our city, and passed a JSON string that contained "city_name":"New_HTB_City" in the request data. So, the london city should no longer exist, and a new city with the name New_HTB_City should exist. Let's try reading both to confirm:</p>
+
+        <h5>
+          kappajester83@htb[/htb]$ curl -s http://"SERVER_IP":"PORT"/api.php/city/london | jq<br>
+          kappajester83@htb[/htb]$ curl -s http://"SERVER_IP":"PORT"/api.php/city/New_HTB_City | jq
+        </h5>
+
+        <pre>
+          [
+            {
+              "city_name": "New_HTB_City",
+              "country_name": "HTB"
+            }
+          ]
+        </pre>
+
+        <p>Indeed, we successfully replaced the old city name with the new city.</p>
+
+        <p>Note: In some APIs, the Update operation may be used to create new entries as well. Basically, we would send our data, and if it does not exist, it would create it. For example, in the above example, even if an entry with a london city did not exist, it would create a new entry with the details we passed. In our example, however, this is not the case. Try to update a non-existing city and see what you would get.</p>
+
+        <h4>DELETE</h4>
+
+        <p>Finally, let's try to delete a city, which is as easy as reading a city. We simply specify the city name for the API and use the HTTP DELETE method, and it would delete the entry, as follows:</p>
+
+        <h5>
+          kappajester83@htb[/htb]$ curl -X DELETE http://"SERVER_IP":"PORT"/api.php/city/New_HTB_City<br>
+          kappajester83@htb[/htb]$ curl -s http://"SERVER_IP":"PORT"/api.php/city/New_HTB_City | jq
+        </h5>
+
+        <pre>
+          []
+        </pre>
+
+        <p>As we can see, after we deleted New_HTB_City, we get an empty array when we try reading it, meaning it no longer exists.</p>
+
+        <p>Exercise: Try to delete any of the cities you added earlier through POST requests, and then read all entries to confirm that they were successfully deleted.</p>
+
+        <p>With this, we are able to perform all 4 CRUD operations through cURL. In a real web application, such actions may not be allowed for all users, or it would be considered a vulnerability if anyone can modify or delete any entry. Each user would have certain privileges on what they can read or write, where write refers to adding, modifying, or deleting data. To authenticate our user to use the API, we would need to pass a cookie or an authorization header (e.g. JWT), as we did in an earlier section. Other than that, the operations are similar to what we practiced in this section.</p>
+
+        <h4>Questions</h4>
+
+        <p>First, try to update any city's name to be 'flag'. Then, delete any city. Once done, search for a city named 'flag' to get the flag.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../webRequests.htm">Web Requests</a></h4>
+        <ol>
+          <li><a href="http.htm">HyperText Transfer Protocol (HTTP)</a></li>
+          <li><a href="https.htm">Hypertext Transfer Protocol Secure (HTTPS)</a></li>
+          <li><a href="requestsResponses.htm">HTTP Requests and Responses</a></li>
+          <li><a href="httpHeaders.htm">HTTP Headers</a></li>
+          <li><a href="methodsCodes.htm">HTTP Methods and Codes</a></li>
+          <li><a href="get.htm">GET</a></li>
+          <li><a href="post.htm">POST</a></li>
+          <li><a href="crudAPI.htm"><b><em>~ CRUD API</em></b></a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

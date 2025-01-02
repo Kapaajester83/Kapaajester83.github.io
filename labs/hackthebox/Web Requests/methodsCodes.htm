@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Web Requests</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../webRequests.htm">Web Requests</a></h4>
+        <ul>
+          <li><a href="httpHeaders.htm">HTTP Headers</a></li>
+          <li><a href="methodsCodes.htm"><b><em>~ HTTP Methods and Codes</em></b></a></li>
+          <li><a href="get.htm">GET</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>HTTP Methods and Codes</em></h3>
+
+        <p>HTTP supports multiple methods for accessing a resource. In the HTTP protocol, several request methods allow the browser to send information, forms, or files to the server. These methods are used, among other things, to tell the server how to process the request we send and how to reply.</p>
+
+        <p>We saw different HTTP methods used in the HTTP requests we tested in the previous sections. With cURL, if we use -v to preview the full request, the first line contains the HTTP method (e.g. GET / HTTP/1.1), while with browser devtools, the HTTP method is shown in the Method column. Furthermore, the response headers also contain the HTTP response code, which states the status of processing our HTTP request.</p>
+
+        <h4>Request Methods</h4>
+
+        <p>The following are some of the commonly used methods:
+        <ul>
+          <li><b>GET</b> - Requests a specific resource. Additional data can be passed to the server via query strings in the URL (e.g. ?param=value).</li>
+
+          <li><b>POST</b> - Sends data to the server. It can handle multiple types of input, such as text, PDFs, and other forms of binary data. This data is appended in the request body present after the headers. The POST method is commonly used when sending information (e.g. forms/logins) or uploading data to a website, such as images or documents.</li>
+
+          <li><b>HEAD</b> - Requests the headers that would be returned if a GET request was made to the server. It doesn't return the request body and is usually made to check the response length before downloading resources.</li>
+
+          <li><b>PUT</b> - Creates new resources on the server. Allowing this method without proper controls can lead to uploading malicious resources.</li>
+
+          <li><b>DELETE</b> - Deletes an existing resource on the webserver. If not properly secured, can lead to Denial of Service (DoS) by deleting critical files on the web server.</li>
+
+          <li><b>OPTIONS</b> - Returns information about the server, such as the methods accepted by it.</li>
+          <li><b>PATCH</b> - Applies partial modifications to the resource at the specified location.</li>
+        </ul>
+
+        <p>The list only highlights a few of the most commonly used HTTP methods. The availability of a particular method depends on the server as well as the application configuration. For a full list of HTTP methods, you can visit this link.
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods</a></li>
+        </ul>
+
+        <p>Note: Most modern web applications mainly rely on the GET and POST methods. However, any web application that utilizes REST APIs also rely on PUT and DELETE, which are used to update and delete data on the API endpoint, respectively. Refer to the Introduction to Web Applications module for more details.</p>
+
+        <h4>Response Codes</h4>
+
+        <p>HTTP status codes are used to tell the client the status of their request. An HTTP server can return five types of response codes:
+        <ul>
+          <li><b>1xx</b> - Provides information and does not affect the processing of the request.</li>
+          <li><b>2xx</b> - Returned when a request succeeds.</li>
+          <li><b>3xx</b> - Returned when the server redirects the client.</li>
+          <li><b>4xx</b> - Signifies improper requests from the client. For example, requesting a resource that doesn't exist or requesting a bad format.</li>
+          <li><b>5xx</b> - Returned when there is some problem with the HTTP server itself.</li>
+        </ul>
+
+        <p>The following are some of the commonly seen examples from each of the above HTTP method types:
+        <ul>
+          <li><b>200 OK</b> - Returned on a successful request, and the response body usually contains the requested resource.</li>
+          <li><b>302 Found</b> - Redirects the client to another URL. For example, redirecting the user to their dashboard after a successful login.</li>
+          <li><b>400 Bad Request</b> - Returned on encountering malformed requests such as requests with missing line terminators.</li>
+          <li><b>403 Forbidden</b> - Signifies that the client doesn't have appropriate access to the resource. It can also be returned when the server detects malicious input from the user.</li>
+          <li><b>404 Not Found</b> - Returned when the client requests a resource that doesn't exist on the server.</li>
+          <li><b>500 Internal Server Error</b> - Returned when the server cannot process the request.</li>
+        </ul>
+
+        <p>For a full list of standard HTTP response codes, you can visit this link. Apart from the standard HTTP codes, various servers and providers such as Cloudflare or AWS implement their own codes.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../webRequests.htm">Web Requests</a></h4>
+        <ol>
+          <li><a href="http.htm">HyperText Transfer Protocol (HTTP)</a></li>
+          <li><a href="https.htm">Hypertext Transfer Protocol Secure (HTTPS)</a></li>
+          <li><a href="requestsResponses.htm">HTTP Requests and Responses</a></li>
+          <li><a href="httpHeaders.htm">HTTP Headers</a></li>
+          <li><a href="methodsCodes.htm"><b><em>~ HTTP Methods and Codes</em></b></a></li>
+          <li><a href="get.htm">GET</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
