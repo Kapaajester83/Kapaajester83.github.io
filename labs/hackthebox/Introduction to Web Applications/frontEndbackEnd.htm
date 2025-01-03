@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Web Applications</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../introductionWebApplications.htm">Introduction to Web Applications</a></h4>
+        <ul>
+          <li><a href="webApplicationLayout.htm">Web Application Layout</a></li>
+          <li><a href="frontEndbackEnd.htm"><b><em>~ Front End vs. Back End</em></b></a></li>
+          <li><a href="webApplicationsHtml.htm">HTML</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Front End vs. Back End</em></h3>
+
+        <p>We may have heard the terms front end and back end web development, or the term Full Stack web development, which refers to both front and back end web development. These terms are becoming synonymous with web application development, as they comprise the majority of the web development cycle. However, these terms are very different from each other, as each refers to one side of the web application, and each function and communicate in different areas.</p>
+
+        <h4>Front End</h4>
+
+        <p>The front end of a web application contains the user's components directly through their web browser (client-side). These components make up the source code of the web page we view when visiting a web application and usually include HTML, CSS, and JavaScript, which is then interpreted in real-time by our browsers.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/75/frontend-components.jpg">https://academy.hackthebox.com/storage/modules/75/frontend-components.jpg</a></li>
+        </ul>
+
+        <p>This includes everything that the user sees and interacts with, like the page's main elements such as the title and text HTML, the design and animation of all elements CSS, and what function each part of a page performs JavaScript.</p>
+
+        <p>In modern web applications, front end components should adapt to any screen size and work within any browser on any device. This contrasts with back end components, which are usually written for a specific platform or operating system. If the front end of a web application is not well optimized, it may make the entire web application slow and unresponsive. In this case, some users may think that the hosting server, or their internet, is slow, while the issue lies entirely on the client-side at the user's browser. This is why the front end of a web application must be optimized for most platforms, devices (including mobile!), and screen sizes.</p>
+
+        <p>Aside from frontend code development, the following are some of the other tasks related to front end web application development:
+        <ul>
+          <li>Visual Concept Web Design</li>
+          <li>User Interface (UI) design</li>
+          <li>User Experience (UX) design</li>
+        </ul>
+
+        <h4>Back End</h4>
+
+        <p>The back end of a web application drives all of the core web application functionalities, all of which is executed at the back end server, which processes everything required for the web application to run correctly. It is the part we may never see or directly interact with, but a website is just a collection of static web pages without a back end.</p>
+
+        <p>There are four main back end components for web applications:
+        <ul>
+          <li><b>Back end Servers</b> - The hardware and operating system that hosts all other components and are usually run on operating systems like Linux, Windows, or using Containers.</li>
+          <li><b>Web Servers</b> - Web servers handle HTTP requests and connections. Some examples are Apache, NGINX, and IIS.</li>
+          <li><b>Databases</b> - Databases (DBs) store and retrieve the web application data. Some examples of relational databases are MySQL, MSSQL, Oracle, PostgreSQL, while examples of non-relational databases include NoSQL and MongoDB.</li>
+          <li><b>Development Frameworks</b> - Development Frameworks are used to develop the core Web Application. Some well-known frameworks include Laravel (PHP), ASP.NET (C#), Spring (Java), Django (Python), and Express (NodeJS JavaScript).</li>
+        </ul>
+
+        <p>It is also possible to host each component of the back end on its own isolated server, or in isolated containers, by utilizing services such as Docker.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/75/backend-server.jpg">https://academy.hackthebox.com/storage/modules/75/backend-server.jpg</a></li>
+        </ul>
+
+        <p>To maintain logical separation and mitigate the impact of vulnerabilities, different components of the web application, such as the database, can be installed in one Docker container, while the main web application is installed in another, thereby isolating each part from potential vulnerabilities that may affect the other container(s). It is also possible to separate each into its dedicated server, which can be more resource-intensive and time-consuming to maintain. Still, it depends on the business case and design/functionality of the web application in question.</p>
+
+        <p>Some of the main jobs performed by back end components include:
+        <ul>
+          <li>Develop the main logic and services of the back end of the web application</li>
+          <li>Develop the main code and functionalities of the web application</li>
+          <li>Develop and maintain the back end database</li>
+          <li>Develop and implement libraries to be used by the web application</li>
+          <li>Implement technical/business needs for the web application</li>
+          <li>Implement the main APIs for front end component communications</li>
+          <li>Integrate remote servers and cloud services into the web application</li>
+        </ul>
+
+        <h4>Securing Front/Back End</h4>
+
+        <p>Even though in most cases, we will not have access to the back end code to analyze the individual functions and the structure of the code, it does not make the application invulnerable. It could still be exploited by various injection attacks, for example.</p>
+
+        <p>Suppose we have a search function in a web application that mistakenly does not process our search queries correctly. In that case, we could use specific techniques to manipulate the queries in such a way that we gain unauthorized access to specific database data SQL injections or even execute operating system commands via the web application, also known as Command Injections.</p>
+
+        <p>We will later discuss how to secure each component used on the front and back ends. When we have full access to the source code of front end components, we can perform a code review to find vulnerabilities, which is part of what is referred to as Whitebox Pentesting.</p>
+
+        <p>On the other hand, back end components' source code is stored on the back end server, so we do not have access to it by default, which forces us only to perform what is known as Blackbox Pentesting. However, as we will see, some web applications are open source, meaning we likely have access to their source code. Furthermore, some vulnerabilities such as Local File Inclusion could allow us to obtain the source code from the back end server. With this source code in hand, we can then perform a code review on back end components to further understand how the application works, potentially find sensitive data in the source code (such as passwords), and even find vulnerabilities that would be difficult or impossible to find without access to the source code.</p>
+
+        <p>The top 20 most common mistakes web developers make that are essential for us as penetration testers are:
+        <ol>
+          <li>Permitting Invalid Data to Enter the Database</li>
+          <li>Focusing on the System as a Whole</li>
+          <li>Establishing Personally Developed Security Methods</li>
+          <li>Treating Security to be Your Last Step</li>
+          <li>Developing Plain Text Password Storage</li>
+          <li>Creating Weak Passwords</li>
+          <li>Storing Unencrypted Data in the Database</li>
+          <li>Depending Excessively on the Client Side</li>
+          <li>Being Too Optimistic</li>
+          <li>Permitting Variables via the URL Path Name</li>
+          <li>Trusting third-party code</li>
+          <li>Hard-coding backdoor accounts</li>
+          <li>Unverified SQL injections</li>
+          <li>Remote file inclusions</li>
+          <li>Insecure data handling</li>
+          <li>Failing to encrypt data properly</li>
+          <li>Not using a secure cryptographic system</li>
+          <li>Ignoring layer 8</li>
+          <li>Review user actions</li>
+          <li>Web Application Firewall misconfigurations</li>
+        </ol>
+
+        <p>These mistakes lead to the OWASP Top 10 vulnerabilities for web applications, which we will discuss in other modules:
+        <ol>
+          <li>Broken Access Control</li>
+          <li>Cryptographic Failures</li>
+          <li>Injection</li>
+          <li>Insecure Design</li>
+          <li>Security Misconfiguration</li>
+          <li>Vulnerable and Outdated Components</li>
+          <li>Identification and Authentication Failures</li>
+          <li>Software and Data Integrity Failures</li>
+          <li>Security Logging and Monitoring Failures</li>
+          <li>Server-Side Request Forgery (SSRF)</li>
+        </ol>
+
+        <p>It is important to begin to familiarize ourselves with these flaws and vulnerabilities as they form the basis for many of the issues we cover in future web and even non-web related modules. As pentesters, we must have the ability to competently identify, exploit, and explain these vulnerabilities for our clients.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../introductionWebApplications.htm">Introduction to Web Applications</a></h4>
+        <ol>
+          <li><a href="introduction.htm">Introduction</a></li>
+          <li><a href="webApplicationLayout.htm">Web Application Layout</a></li>
+          <li><a href="frontEndbackEnd.htm"><b><em>~ Front End vs. Back End</em></b></a></li>
+          <li><a href="webApplicationsHtml.htm">HTML</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

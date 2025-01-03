@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Web Applications</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../introductionWebApplications.htm">Introduction to Web Applications</a></h4>
+        <ul>
+          <li><a href="frontEndbackEnd.htm">Front End vs. Back End</a></li>
+          <li><a href="webApplicationsHtml.htm"><b><em>~ HTML</em></b></a></li>
+          <li><a href="webApplicationsCss.htm">CSS</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>HTML</em></h3>
+
+        <p>The first and most dominant component of the front end of web applications is HTML (HyperText Markup Language). HTML is at the very core of any web page we see on the internet. It contains each page's basic elements, including titles, forms, images, and many other elements. The web browser, in turn, interprets these elements and displays them to the end-user.</p>
+
+        <p>Each element can contain other HTML elements, while the main HTML tag should contain all other elements within the page, which falls under document, distinguishing between HTML and documents written for other languages, such as XML documents.</p>
+
+        <h4>URL Encoding</h4>
+
+        <p>An important concept to learn in HTML is URL Encoding, or percent-encoding. For a browser to properly display a page's contents, it has to know the charset in use. In URLs, for example, browsers can only use ASCII encoding, which only allows alphanumerical characters and certain special characters. Therefore, all other characters outside of the ASCII character-set have to be encoded within a URL. URL encoding replaces unsafe ASCII characters with a % symbol followed by two hexadecimal digits.</p>
+          <ul>
+            <li><a href="https://www.w3schools.com/tags/ref_urlencode.ASP">https://www.w3schools.com/tags/ref_urlencode.ASP</a></li>
+          </ul>
+
+        <p>Many online tools can be used to perform URL encoding/decoding. Furthermore, the popular web proxy Burp Suite has a decoder/encoder which can be used to convert between various types of encodings. Try encoding/decoding some characters and strings using this online tool.
+          <ul>
+            <li><a href="https://portswigger.net/burp">https://portswigger.net/burp</a></li>
+          </ul>
+        
+        <h4>Usage</h4>
+
+        <p>The W3C Document Object Model (DOM) is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document and is separated into 3 parts:
+          <ul>
+            <li><b>Core DOM</b> - the standard model for all document types</li>
+            <li><b>XML DOM</b> - the standard model for XML documents</li>
+            <li><b>HTML DOM</b> - the standard model for HTML documents</li>
+          </ul>
+
+        <p>Understanding the HTML DOM structure can help us understand where each element we view on the page is located, which enables us to view the source code of a specific element on the page and look for potential issues. We can locate HTML elements by their id, their tag name, or by their class name.</p>
+
+        <p>This is also useful when we want to utilize front-end vulnerabilities (like XSS) to manipulate existing elements or create new elements to serve our needs.</p>
+
+        <h4>Questions</h4>
+
+        <p>What is the HTML tag used to show an image?</p> 
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../introductionWebApplications.htm">Introduction to Web Applications</a></h4>
+        <ol>
+          <li><a href="introduction.htm">Introduction</a></li>
+          <li><a href="webApplicationLayout.htm">Web Application Layout</a></li>
+          <li><a href="frontEndbackEnd.htm">Front End vs. Back End</a></li>
+          <li><a href="webApplicationsHtml.htm"><b><em>~ HTML</em></b></a></li>
+          <li><a href="webApplicationsCss.htm">CSS</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
