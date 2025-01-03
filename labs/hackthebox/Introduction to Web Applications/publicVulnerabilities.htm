@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Web Applications</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../introductionWebApplications.htm">Introduction to Web Applications</a></h4>
+        <ul>
+          <li><a href="commonWebVulnerabilities.htm">Common Web Vulnerabilities</a></li>
+          <li><a href="publicVulnerabilities.htm"><b><em>~ Public Vulnerabilities</em></b></a></li>
+          <li><a href="nextSteps.htm">Next Steps</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Public Vulnerabilities</em></h3>
+
+        <p>The most critical back end component vulnerabilities are those that can be attacked externally and can be leveraged to take control over the back end server without needing local access to that server (i.e., external penetration testing). These vulnerabilities are usually caused by coding mistakes made during the development of a web application's back-end components. So, there is a wide variety of vulnerability types in this area, ranging from basic vulnerabilities that can be exploited with relative ease to sophisticated vulnerabilities requiring deep knowledge of the entire web application.</p>
+
+        <h4>Public CVE</h4>
+
+        <p>As many organizations deploy web applications that are publicly used, like open-source and proprietary web applications, these web applications tend to be tested by many organizations and experts around the world. This leads to frequently uncovering a large number of vulnerabilities, most of which get patched and then shared publicly and assigned a CVE (Common Vulnerabilities and Exposures) record and score.</p>
+
+        <p>Many penetration testers also make proof of concept exploits to test whether a certain public vulnerability can be exploited and usually make these exploits available for public use, for testing and educational purposes. This makes searching for public exploits the very first step we must go through for web applications.</p>
+
+        <p>Tip: The first step is to identify the version of the web application. This can be found in many locations, like the source code of the web application. For open source web applications, we can check the repository of the web application and identify where the version number is shown (e.g,. in (version.php) page), and then check the same page on our target web application to confirm.</p>
+
+        <p>Once we identify the web application version, we can search Google for public exploits for this version of the web application. We can also utilize online exploit databases, like Exploit DB, Rapid7 DB, or Vulnerability Lab. The following example shows a search for WordPress public exploits in Rapid7 DB:
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/75/rapid7-db.jpg">https://academy.hackthebox.com/storage/modules/75/rapid7-db.jpg</a></li>
+        </ul>
+
+        <p>We would usually be interested in exploits with a CVE score of 8-10 or exploits that lead to Remote Code Execution. Other types of public exploits should also be considered if none of the above is available.</p>
+
+        <p>Furthermore, these vulnerabilities are not exclusive to web applications and apply to components utilized by the web application. If a web application uses external components (e.g., a plugin), we should also search for vulnerabilities for these external components.</p>
+
+        <h4>Common Vulnerability Scoring System (CVSS)</h4>
+
+        <p>The Common Vulnerability Scoring System (CVSS) is an open-source industry standard for assessing the severity of security vulnerabilities. This scoring system is often used as a standard measurement for organizations and governments that need to produce accurate and consistent severity scores for their systems' vulnerabilities. This helps with the prioritization of resources and the response to a given threat.</p>
+
+        <p>CVSS scores are based on a formula that uses several metrics: Base, Temporal, and Environmental. When calculating the severity of a vulnerability using CVSS, the Base metrics produce a score ranging from 0 to 10, modified by applying Temporal and Environmental metrics. The National Vulnerability Database (NVD) provides CVSS scores for almost all known, publicly disclosed vulnerabilities. At this time, the NVD only provides Base scores based upon a given vulnerability's inherent characteristics. The current scoring systems in place are CVSS v2 and CVSS v3. There are several differences between the v2 and v3 systems, namely changes to the Base and Environmental groups to account for additional metrics. More information about the differences between the two scoring systems can be found here.</p>
+
+        <p>CVSS scoring ratings differ slightly between V2 and V3 as can be seen in the following tables:</p>
+
+        <pre>
+          CVSS V2.0 Ratings
+          Severity  Base Score Range
+          -----
+          Low       0.0-3.9
+          Medium    4.0-6.9
+          High      7.0-10.0
+
+          CVSS V3.0 Ratings
+          Severity  Base Score Range
+          -----
+          None      0.0
+          Low       0.1-3.9
+          Medium    4.0-6.9
+          High      7.0-8.9
+          Critical  9.0-10.0
+        </pre>
+
+        <p>The NVD does not factor in Temporal and Environmental metrics because the former can change over time due to external events. The latter is a customized metric based on the potential impact of the vulnerability on a given organization. The NVD provides a CVSS v2 calculator and a CVSS v3 calculator that organizations can use to factor additional risk from Temporal and Environmental data unique to them. The calculators are very interactive and can be used to fine-tune the CVSS score to our environment. We can move over each metric to read more about it and determine exactly how it applies to our organization. Below is an example view of the CVSS v3 calculator:
+        <ul>
+          <li><a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator">https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator</a></li>
+        </ul>
+
+        <p>Play around with the CVSS calculator and see how the various metrics can be adjusted to arrive at a given score. Review some CVEs and attempt to arrive at the same CVSS score. How does the CVSS score change when you apply Temporal and Environmental metrics? This handy guide is extremely useful for understanding V2 and V3 and how to use the calculators to arrive at a given score.</p>
+
+        <h4>Back-end Server Vulnerabilities</h4>
+
+        <p>Like public vulnerabilities for web applications, we should also consider looking for vulnerabilities for other back end components, like the back end server or the webserver.</p>
+
+        <p>The most critical vulnerabilities for back-end components are found in web servers, as they are publicly accessible over the TCP protocol. An example of a well-known web server vulnerability is the Shell-Shock, which affected Apache web servers released during and before 2014 and utilized HTTP requests to gain remote control over the back-end server.</p>
+
+        <p>As for vulnerabilities in the back-end server or the database, they are usually utilized after gaining local access to the back-end server or back-end network, which may be gained through external vulnerabilities or during internal penetration testing. They are usually used to gain high privileged access on the back-end server or the back-end network or gain control over other servers within the same network.</p>
+
+        <p>Although not directly exploitable externally, these vulnerabilities are still critical and need to be patched to protect the entire web application from being compromised.</p>
+
+        <h4>Questions</h4>
+
+        <p>What is the CVSS score of the public vulnerability CVE-2017-0144?</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../introductionWebApplications.htm">Introduction to Web Applications</a></h4>
+        <ol>
+          <li><a href="introduction.htm">Introduction</a></li>
+          <li><a href="webApplicationLayout.htm">Web Application Layout</a></li>
+          <li><a href="frontEndbackEnd.htm">Front End vs. Back End</a></li>
+          <li><a href="webApplicationsHtml.htm">HTML</a></li>
+          <li><a href="webApplicationsCss.htm">CSS</a></li>
+          <li><a href="javascript.htm">JavaScript</a></li>
+          <li><a href="sensitiveDataExposure.htm">Sensitive Data Exposure</a></li>
+          <li><a href="htmlInjection.htm">HTML Injection</a></li>
+          <li><a href="crossSiteScripting.htm">Cross-Site Scripting (XSS)</a></li>
+          <li><a href="crossSiteForgery.htm">Cross-Site Request Forgery (CSRF)</a></li>
+          <li><a href="backEndServers.htm">Back End Servers</a></li>
+          <li><a href="webServers.htm">Web Servers</a></li>
+          <li><a href="databases.htm">Databases</a></li>
+          <li><a href="developmentFrameworks.htm">Development Frameworks & APIs</a></li>
+          <li><a href="commonWebVulnerabilities.htm">Common Web Vulnerabilities</a></li>
+          <li><a href="publicVulnerabilities.htm"><b><em>~ Public Vulnerabilities</em></b></a></li>
+          <li><a href="nextSteps.htm">Next Steps</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
