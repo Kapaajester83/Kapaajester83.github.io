@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | JavaScript Deobfuscation</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../javaScriptDeobfuscation.htm">JavaScript Deobfuscation</a></h4>
+        <ul>
+          <li><a href="codeObfuscation.htm">Code Obfuscation</a></li>
+          <li><a href="basicObfuscation.htm"><b><em>~ Basic Obfuscation</em></b></a></li>
+          <li><a href="advancedObfuscation.htm">Advanced Obfuscation</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Basic Obfuscation</em></h3>
+
+        <p>Code obfuscation is usually not done manually, as there are many tools for various languages that do automated code obfuscation. Many online tools can be found to do so, though many malicious actors and professional developers develop their own obfuscation tools to make it more difficult to deobfuscate.</p>
+
+        <h4>Running JavaScript code</h4>
+
+        <p>Let us take the following line of code as an example and attempt to obfuscate it:</p>
+
+        <pre>
+          Code: javascript
+          console.log('HTB JavaScript Deobfuscation Module');
+        </pre>
+
+        <p>First, let us test running this code in cleartext, to see it work in action. We can go to JSConsole, paste the code and hit enter, and see its output:
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/41/js_deobf_jsconsole_1_1.jpg">https://academy.hackthebox.com/storage/modules/41/js_deobf_jsconsole_1_1.jpg</a></li>
+        </ul>
+
+        <p>We see that this line of code prints HTB JavaScript Deobfuscation Module, which is done using the console.log() function.</p>
+
+        <h4>Minifying JavaScript code</h4>
+
+        <p>A common way of reducing the readability of a snippet of JavaScript code while keeping it fully functional is JavaScript minification. Code minification means having the entire code in a single (often very long) line. Code minification is more useful for longer code, as if our code only consisted of a single line, it would not look much different when minified.</p>
+
+        <p>Many tools can help us minify JavaScript code. We simply copy our code, and click Minify, and we get the minified output:
+        <ul>
+          <li><a href="https://www.minifier.org">https://www.minifier.org</a></li>
+          <li><a href="https://webpack.js.org">https://webpack.js.org</a></li>
+          <li><a href="https://jsconsole.com">https://jsconsole.com</a></li>
+        </ul>
+
+        <p>Once again, we can copy the minified code to JSConsole, and run it, and we see that it runs as expected. Usually, minified JavaScript code is saved with the extension .min.js.</p>
+
+        <p>Note: Code minification is not exclusive to JavaScript, and can be applied to many other languages, as can be seen on javascript-minifier.</p>
+
+        <h4>Packing JavaScript code</h4>
+
+        <p>Now, let us obfuscate our line of code to make it more obscure and difficult to read. First, we will try BeautifyTools to obfuscate our code:
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/41/js_deobf_obfuscator.jpg">https://academy.hackthebox.com/storage/modules/41/js_deobf_obfuscator.jpg</a></li>
+        </ul>
+
+        <pre>
+          eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){while(c--){d[c]=k[c]||c}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('5.4(\'3 2 1 0\');',6,6,'Module|Deobfuscation|JavaScript|HTB|log|console'.split('|'),0,{}))
+        </pre>
+
+        <p>We see that our code became much more obfuscated and difficult to read. We can copy this code into https://jsconsole.com, to verify that it still does its main function:
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/41/js_deobf_jsconsole_3_1.jpg">https://academy.hackthebox.com/storage/modules/41/js_deobf_jsconsole_3_1.jpg</a></li>
+        </ul>
+
+        <p>We see that we get the same output.</p>
+
+        <p>Note: The above type of obfuscation is known as "packing", which is usually recognizable from the six function arguments used in the initial function "function(p,a,c,k,e,d)".</p>
+
+        <p>A packer obfuscation tool usually attempts to convert all words and symbols of the code into a list or a dictionary and then refer to them using the (p,a,c,k,e,d) function to re-build the original code during execution. The (p,a,c,k,e,d) can be different from one packer to another. However, it usually contains a certain order in which the words and symbols of the original code were packed to know how to order them during execution.</p>
+
+        <p>While a packer does a great job reducing the code's readability, we can still see its main strings written in cleartext, which may reveal some of its functionality. This is why we may want to look for better ways to obfuscate our code.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../javaScriptDeobfuscation.htm">JavaScript Deobfuscation</a></h4>
+        <ol>
+          <li><a href="introduction.htm">Introduction</a></li>
+          <li><a href="sourceCode.htm">Source Code</a></li>
+          <li><a href="codeObfuscation.htm">Code Obfuscation</a></li>
+          <li><a href="basicObfuscation.htm"><b><em>~ Basic Obfuscation</em></b></a></li>
+          <li><a href="advancedObfuscation.htm">Advanced Obfuscation</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
