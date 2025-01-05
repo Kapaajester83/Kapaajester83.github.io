@@ -12,14 +12,12 @@ Secure Login Portal for propriety entities<br>
 #### References
 
 ---Kappa---
-
-
-https://help.hackthebox.com/en/articles/5185687-introduction-to-lab-access<br>
-https://github.com/im-luka/markdown-cheatsheet?tab=readme-ov-file#%EF%B8%8F-the-only-markdown-cheatsheet-you-need<br>
-https://beej.us/guide/bgnet/<br>
 https://cyberchef.org/<br>
 https://www.dcode.fr/vigenere-cipher<br>
+https://py3.codeskulptor.org/<br>
 https://www.vpnbook.com/<br>
+https://obfuscator.io/<br>
+https://matthewfl.com/unPacker.html<br>
 
 ---Kali-Linux---
 
@@ -152,7 +150,7 @@ http://www.computersecuritystudent.com/<br>
 https://guyinatuxedo.github.io/<br>
 https://freecomputerbooks.com/<br>
 
--- Blogs and Researches
+--Blogs and Researches
 
 https://0xsp.com/offensive/privilege-escalation-cheatsheet/<br>
 https://csandker.io/2021/01/10/Offensive-Windows-IPC-1-NamedPipes.html<br>
@@ -167,4 +165,45 @@ https://www.blackhillsinfosec.com/blog/<br>
 https://www.x86matthew.com/<br>
 https://connormcgarr.github.io/<br>
 https://speakerdeck.com/s1r1us/electrovolt-pwning-popular-desktop-apps-while-uncovering-new-attack-surface-on-electron<br>
+
+-Kappa2
+
+https://www.rapidtables.com/calc/math/binary-calculator.html<br>
+https://www.programiz.com/javascript/online-compiler/<br>
+https://www.online-utility.org/text/frequent_words.jsp<br>
+https://py2.codeskulptor.org/<br>
+https://bitbucket.org/<br>
+https://peps.python.org/pep-0008/#class-names<br>
+https://beej.us/guide/bgnet/<br>
+https://backbonejs.org/<br>
+https://www.behance.net/<br>
+https://getbootstrap.com/docs/5.0/getting-started/introduction/<br>
+https://www.codecademy.com/<br>
+https://www.pluralsight.com/codeschool<br>
+https://www.coursera.org/<br>
+https://dash.generalassemb.ly/<br>
+https://dribbble.com/<br>
+https://naltatis.github.io/jade-syntax-docs/<br>
+https://devdocs.io/javascript-finalizationregistry/<br>
+https://www.khanacademy.org/<br>
+https://www.rubykoans.com/<br>
+https://www.learnenough.com/courses<br>
+https://learn.co/<br>
+https://jekyllrb.com/docs/<br>
+https://prezi.com/<br>
+https://www.theodinproject.com/<br>
+https://www.udacity.com/<br>
+https://www.udemy.com/<br>
+
+-Kappa3
+
+https://webpack.js.org/<br>
+https://www.minifier.org/<br>
+https://www.rapid7.com/db/<br>
+https://www.exploit-db.com/<br>
+https://www.exploit-db.com/<br>
+https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html<br>
+https://portswigger.net/burp<br>
+https://aws.amazon.com/serverless/<br>
+https://d1.awsstatic.com/whitepapers/microservices-on-aws.pdf<br>
 
