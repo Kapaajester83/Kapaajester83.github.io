@@ -3,19 +3,14 @@
 Consolidate Past Archives<br>
 Make acsessable from any internet connected device<br>
 
-### Ruby with Rails App
-
-Active Directory<br>
-Aauth<br>
-Secure Login Portal for propriety entities<br>
-
 #### References
 
 ---Kappa---
+
+https://www.vpnbook.com/<br>
 https://cyberchef.org/<br>
 https://www.dcode.fr/vigenere-cipher<br>
 https://py3.codeskulptor.org/<br>
-https://www.vpnbook.com/<br>
 https://obfuscator.io/<br>
 https://matthewfl.com/unPacker.html<br>
 
