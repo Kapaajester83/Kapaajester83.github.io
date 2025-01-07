@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Getting Started</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../gettingStarted.htm">Getting Started</a></h4>
+        <ul>
+          <li><a href="connectingUsingVPN.htm">Connecting Using VPN</a></li>
+          <li><a href="commonTerms.htm"><b><em>~ Common Terms</em></b></a></li>
+          <li><a href="basicTools.htm">Basic Tools</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Common Terms</em></h3>
+
+        <p>Penetration testing/hacking is an enormous field. We will encounter countless technologies throughout our careers. Here are some of the most common terms and technologies that we will come across repeatedly and must have a firm grasp of. This is not an exhaustive list but is enough to get started with fundamental Modules and easy HTB boxes.</p>
+
+        <h4>What is a Shell?</h4>
+
+        <p>Shell is a very common term that we will hear again and again during our journey. It has a few meanings. On a Linux system, the shell is a program that takes input from the user via the keyboard and passes these commands to the operating system to perform a specific function. In the early days of computing, the shell was the only interface available for interacting with systems. Since then, many more operating system types and versions have emerged along with the graphic user interface (GUI) to complement command-line interfaces (shell), such as the Linux terminal, Windows command-line (cmd.exe), and Windows PowerShell.</p>
+
+        <p>Most Linux systems use a program called Bash (Bourne Again Shell) as a shell program to interact with the operating system. Bash is an enhanced version of sh, the Unix systems' original shell program. Aside from bash there are also other shells, including but not limited to Zsh, Tcsh, Ksh, Fish shell, etc.</p>
+
+        <p>We will often read about or hear others talking about "getting a shell" on a box (system). This means that the target host has been exploited, and we have obtained shell-level access (typically bash or sh) and can run commands interactively as if we are sitting logged in to the host. A shell may be obtained by exploiting a web application or network/service vulnerability or obtaining credentials and logging into the target host remotely. There are three main types of shell connections:
+        <ul>
+          <li><b>Reverse shell</b> - Initiates a connection back to a "listener" on our attack box.</li>
+          <li><b>Bind shell</b> - "Binds" to a specific port on the target host and waits for a connection from our attack box.</li>
+          <li><b>Web shell</b> - Runs operating system commands via the web browser, typically not interactive or semi-interactive. It can also be used to run single commands (i.e., leveraging a file upload vulnerability and uploading a PHP script to run a single command.</li>
+        </ul>
+
+        <p>Each type of shell has its use case, and the same way there are many ways to obtain a shell, the helper program that we use to get a shell can be written in many languages (Python, Perl, Go, Bash, Java, awk, PHP, etc.). These can be small scripts or larger, more complex programs to facilitate a connection from the target host back to our attacking system and obtain "shell" access. Shell access will be discussed in-depth in a later section.</p>
+
+        <h4>What is a Port?</h4>
+
+        <p>A port can be thought of as a window or door on a house (the house being a remote system), if a window or door is left open or not locked correctly, we can often gain unauthorized access to a home. This is similar in computing. Ports are virtual points where network connections begin and end. They are software-based and managed by the host operating system. Ports are associated with a specific process or service and allow computers to differentiate between different traffic types (SSH traffic flows to a different port than web requests to access a website even though the access requests are sent over the same network connection).</p>
+
+        <p>Each port is assigned a number, and many are standardized across all network-connected devices (though a service can be configured to run on a non-standard port). For example, HTTP messages (website traffic) typically go to port 80, while HTTPS messages go to port 443 unless configured otherwise. We will encounter web applications running on non-standard ports but typically find them on ports 80 and 443. Port numbers allow us to access specific services or applications running on target devices. At a very high level, ports help computers understand how to handle the various types of data they receive.</p>
+
+        <p>There are two categories of ports, Transmission Control Protocol (TCP), and User Datagram Protocol (UDP).</p>
+
+        <p>TCP is connection-oriented, meaning that a connection between a client and a server must be established before data can be sent. The server must be in a listening state awaiting connection requests from clients.</p>
+
+        <p>UDP utilizes a connectionless communication model. There is no "handshake" and therefore introduces a certain amount of unreliability since there is no guarantee of data delivery. UDP is useful when error correction/checking is either not needed or is handled by the application itself. UDP is suitable for applications that run time-sensitive tasks since dropping packets is faster than waiting for delayed packets due to retransmission, as is the case with TCP and can significantly affect a real-time system. There are 65,535 TCP ports and 65,535 different UDP ports, each denoted by a number. Some of the most well-known TCP and UDP ports are listed below:</p>
+
+        <pre>
+          Port(s) - Protocol
+          20/21 (TCP)       FTP
+          22    (TCP)       SSH
+          23    (TCP)       Telnet
+          25    (TCP)       SMTP
+          80    (TCP)       HTTP
+          161   (TCP/UDP)   SNMP
+          389   (TCP/UDP)   LDAP
+          443   (TCP)       SSL/TLS (HTTPS)
+          445   (TCP)       SMB
+          3389  (TCP)       RDP
+        </pre>
+
+        <p>As information security professionals, we must be able to quickly recall large amounts of information on a wide variety of topics. It is essential for us, especially as pentesters, to have a firm grasp of many TCP and UDP ports and be able to recognize them from just their number quickly (i.e., know that port 21 is FTP, port 80 is HTTP, port 88 is Kerberos) without having to look it up. This will come with practice and repetition and eventually become second nature as we attack more boxes, labs, and real-world networks and help us work more efficiently and better prioritize our enumeration efforts and attacks.</p>
+
+        <p>Guides such as this and this are great resources for learning standard and less common TCP and UDP ports. Challenge yourself to memorize as many of these as possible and do some research about each of the protocols listed in the table above. This is a great reference on the top 1,000 TCP and UDP ports from nmap along with the top 100 services scanned by nmap.</p>
+
+        <h4>What is a Web Server</h4>
+
+        <p>A web server is an application that runs on the back-end server, which handles all of the HTTP traffic from the client-side browser, routes it to the requests destination pages, and finally responds to the client-side browser. Web servers usually run on TCP ports 80 or 443, and are responsible for connecting end-users to various parts of the web application, in addition to handling their various responses:</p>
+
+        <p>As web applications tend to be open for public interaction and facing the internet, they may lead to the back-end server being compromised if they suffer from any vulnerabilities. Web applications can provide a vast attack surface, making them a high-value target for attackers and pentesters.</p>
+
+        <p>Many types of vulnerabilities can affect web applications. We will often hear about/see references to the OWASP Top 10. This is a standardized list of the top 10 web application vulnerabilities maintained by the Open Web Application Security Project (OWASP). This list is considered the top 10 most dangerous vulnerabilities and is not an exhaustive list of all possible web application vulnerabilities. Web application security assessment methodologies are often based around the OWASP top 10 as a starting point for the top categories of flaws that an assessor should be checking for. The current OWASP Top 10 list is:
+        <ol>
+          <li><b>Broken Access Control</b> - Restrictions are not appropriately implemented to prevent users from accessing other users accounts, viewing sensitive data, accessing unauthorized functionality, modifying data, etc.</li>
+          <li><b>Cryptographic Failures</b> - Failures related to cryptography which often leads to sensitive data exposure or system compromise.</li>
+          <li><b>Injection</b> - User-supplied data is not validated, filtered, or sanitized by the application. Some examples of injections are SQL injection, command injection, LDAP injection, etc.</li>
+          <li><b>Insecure Design</b> - These issues happen when the application is not designed with security in mind.</li>
+          <li><b>Security Misconfiguration</b> - Missing appropriate security hardening across any part of the application stack, insecure default configurations, open cloud storage, verbose error messages which disclose too much information.</li>
+          <li><b>Vulnerable and Outdated Components</b> - Using components (both client-side and server-side) that are vulnerable, unsupported, or out of date.</li>
+          <li><b>Identification and Authentication Failures</b> - Authentication-related attacks that target user's identity, authentication, and session management.</li>
+          <li><b>Software and Data Integrity Failures</b> - Software and data integrity failures relate to code and infrastructure that does not protect against integrity violations. An example of this is where an application relies upon plugins, libraries, or modules from untrusted sources, repositories, and content delivery networks (CDNs).</li>
+          <li><b>Security Logging and Monitoring Failures</b> - This category is to help detect, escalate, and respond to active breaches. Without logging and monitoring, breaches cannot be detected..</li>
+          <li><b>Server-Side Request Forgery</b> - SSRF flaws occur whenever a web application is fetching a remote resource without validating the user-supplied URL. It allows an attacker to coerce the application to send a crafted request to an unexpected destination, even when protected by a firewall, VPN, or another type of network access control list (ACL).</li>
+        </ol>
+
+        <p>It is essential to become familiar with each of these categories and the various vulnerabilities that fit each. Web application vulnerabilities will be covered in-depth in later modules. To learn more about web applications, check out the Introduction to Web Applications module.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../gettingStarted.htm">Getting Started</a></h4>
+        <ol>
+          <li><a href="infosecOverview.htm">Infosec Overview</a></li>
+          <li><a href="pentestDistro.htm">Getting Started with a Pentest Distro</a></li>
+          <li><a href="stayingOrganized.htm">Staying Organized</a></li>
+          <li><a href="connectingUsingVPN.htm">Connecting Using VPN</a></li>
+          <li><a href="commonTerms.htm"><b><em>~ Common Terms</em></b></a></li>
+          <li><a href="basicTools.htm">Basic Tools</a></li>
+        </ol>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

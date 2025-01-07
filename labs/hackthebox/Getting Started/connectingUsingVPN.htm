@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Getting Started</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../gettingStarted.htm">Getting Started</a></h4>
+        <ul>
+          <li><a href="stayingOrganized.htm">Staying Organized</a></li>
+          <li><a href="connectingUsingVPN.htm"><b><em>~ Connecting Using VPN</em></b></a></li>
+          <li><a href="commonTerms.htm">Common Terms</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Connecting Using VPN</em></h3>
+
+        <p>A virtual private network (VPN) allows us to connect to a private (internal) network and access hosts and resources as if we were directly connected to the target private network. It is a secured communications channel over shared public networks to connect to a private network (i.e., an employee remotely connecting to their company's corporate network from their home). VPNs provide a degree of privacy and security by encrypting communications over the channel to prevent eavesdropping and access to data traversing the channel.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/77/GettingStarted.png">https://academy.hackthebox.com/storage/modules/77/GettingStarted.png</a></li>
+        </ul>
+
+        <p>At a high-level, VPN works by routing our connecting device's internet connection through the target VPN's private server instead of our internet service provider (ISP). When connected to a VPN, data originates from the VPN server rather than our computer and will appear to originate from a public IP address other than our own.</p>
+
+        <p>There are two main types of remote access VPNs: client-based VPN and SSL VPN. SSL VPN uses the web browser as the VPN client. The connection is established between the browser and an SSL VPN gateway can be configured to only allow access to web-based applications such as email and intranet sites, or even the internal network but without the need for the end user to install or use any specialized software. Client-based VPN requires the use of client software to establish the VPN connection. Once connected, the user's host will work mostly as if it were connected directly to the company network and will be able to access any resources (applications, hosts, subnets, etc.) allowed by the server configuration. Some corporate VPNs will provide employees with full access to the internal corporate network, while others will place users on a specific segment reserved for remote workers.</p>
+
+        <h4>Why Use A VPN?</h4>
+
+        <p>We can use a VPN service such as NordVPN or Private Internet Access and connect to a VPN server in another part of our country or another region of the world to obscure our browsing traffic or disguise our public IP address. This can provide us with some level of security and privacy. Still, since we are connecting to a company's server, there is always the chance that data is being logged or the VPN service is not following security best practices or the security features that they advertise. Using a VPN service comes with the risk that the provider is not doing what they are saying and are logging all data. Usage of a VPN service does not guarantee anonymity or privacy but is useful for bypassing certain network/firewall restrictions or when connected to a possible hostile network (i.e., a public airport wireless network). A VPN service should never be used with the thought that it will protect us from the consequences of performing nefarious activities.</p>
+
+        <h4>Connecting to HTB VPN</h4>
+
+        <p>HTB and other services offering purposefully vulnerable VMs/networks require players to connect to the target network via a VPN to access the private lab network. Hosts within HTB networks cannot connect directly out to the internet. When connected to HTB VPN (or any penetration testing/hacking-focused lab), we should always consider the network to be "hostile." We should only connect from a virtual machine, disallow password authentication if SSH is enabled on our attacking VM, lockdown any web servers, and not leave sensitive information on our attack VM (i.e., do not play HTB or other vulnerable networks with the same VM that we use to perform client assessments). When connecting to a VPN (either within HTB Academy or the main HTB platform), we connect using the following command:
+
+        <h4>Connecting Using VPN</h4>
+
+        <h5>kappajester83@htb[/htb]$ sudo openvpn user.ovpn</h5>
+
+        <pre>
+          Thu Dec 10 18:42:41 2020 OpenVPN 2.4.9 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] built on Apr 21 2020
+          Thu Dec 10 18:42:41 2020 library versions: OpenSSL 1.1.1g  21 Apr 2020, LZO 2.10
+          Thu Dec 10 18:42:41 2020 Outgoing Control Channel Authentication: Using 256 bit message hash 'SHA256' for HMAC authentication
+          Thu Dec 10 18:42:41 2020 Incoming Control Channel Authentication: Using 256 bit message hash 'SHA256' for HMAC authentication
+          Thu Dec 10 18:42:41 2020 TCP/UDP: Preserving recently used remote address: [AF_INET]
+          Thu Dec 10 18:42:41 2020 Socket Buffers: R=[212992->212992] S=[212992->212992]
+          Thu Dec 10 18:42:41 2020 UDP link local: (not bound)
+          "SNIP"
+          Thu Dec 10 18:42:41 2020 Initialization Sequence Completed
+        </pre>
+
+        <p>The last line Initialization Sequence Completed tells us that we successfully connected to the VPN.</p>
+
+        <p>Where sudo tells our host to run the command as the elevated root user, openvpn is the VPN client, and the user.ovpn file is the VPN key that we download from either the Academy module section or the main HTB platform. If we type ifconfig in another terminal window, we will see a tun adapter if we successfully connected to the VPN.</p>
+
+        <h4>Connecting Using VPN</h4>
+
+        <h5>kappajester83@htb[/htb]$ ifconfig</h5>
+
+        <pre>
+          tun0: flags=4305"UP,POINTOPOINT,RUNNING,NOARP,MULTICAST"  mtu 1500
+            inet 10.10.x.2  netmask 255.255.254.0  destination 10.10.x.2
+            inet6 dead:beef:1::2000  prefixlen 64  scopeid 0x0"global"
+            inet6 fe80::d82f:301a:a94a:8723  prefixlen 64  scopeid 0x20"link"
+            unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen
+        </pre>
+
+        <p>Typing netstat -rn will show us the networks accessible via the VPN.</p>
+
+        <h5>kappajester83@htb[/htb]$ netstat -rn</h5>
+
+        <pre>
+          Kernel IP routing table
+          Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+          0.0.0.0         192.168.1.2     0.0.0.0         UG        0 0          0 eth0
+          10.10.14.0      0.0.0.0         255.255.254.0   U         0 0          0 tun0
+          10.129.0.0      10.10.14.1      255.255.0.0     UG        0 0          0 tun0
+          192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 eth0
+        </pre>
+
+        <p>Here can see that the 10.129.0.0/16 network used for HTB Academy machines is accessible via the tun0 adapter via the 10.10.14.0/23 network.</p>
+
+        <h4>Help with VPN</h4>
+
+        <p>If this is your first time using a VPN, the following resources on the Hack The Box support portal will be helpful:
+        <ul>
+          <li>Introduction to Lab Access <a href="https://help.hackthebox.com/en/articles/5185687-introduction-to-lab-access">https://help.hackthebox.com/en/articles/5185687-introduction-to-lab-access</a></li>
+
+          <li>Connection Troubleshooting <a href="https://help.hackthebox.com/en/articles/5185536-connection-troubleshooting
+            ">https://help.hackthebox.com/en/articles/5185536-connection-troubleshooting</a></li>
+        </ul>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../gettingStarted.htm">Getting Started</a></h4>
+        <ol>
+          <li><a href="infosecOverview.htm">Infosec Overview</a></li>
+          <li><a href="pentestDistro.htm">Getting Started with a Pentest Distro</a></li>
+          <li><a href="stayingOrganized.htm">Staying Organized</a></li>
+          <li><a href="connectingUsingVPN.htm"><b><em>~ Connecting Using VPN</em></b></a></li>
+          <li><a href="commonTerms.htm">Common Terms</a></li>
+        </ol>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
