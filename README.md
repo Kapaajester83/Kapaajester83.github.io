@@ -1,7 +1,6 @@
 # Objective
 
 Consolidate Past Archives<br>
-Make acsessable from any internet connected device<br>
 
 #### References
 
@@ -13,6 +12,10 @@ https://www.dcode.fr/vigenere-cipher<br>
 https://py3.codeskulptor.org/<br>
 https://obfuscator.io/<br>
 https://matthewfl.com/unPacker.html<br>
+https://github.com/swisskyrepo/PayloadsAllTheThings<br>
+https://book.hacktricks.wiki/en/index.html<br>
+https://gtfobins.github.io/<br>
+https://lolbas-project.github.io/#<br>
 
 ---Kali-Linux---
 
