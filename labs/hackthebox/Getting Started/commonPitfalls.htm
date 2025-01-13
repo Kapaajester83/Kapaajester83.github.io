@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Getting Started</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../gettingStarted.htm">Getting Started</a></h4>
+        <ul>
+          <li><a href="nibblesMetasploit.htm">Nibbles - Metasploit</a></li>
+          <li><a href="commonPitfalls.htm"><b><em>~ Common Pitfalls</em></b></a></li>
+          <li><a href="gettingHelp.htm">Getting Help</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Common Pitfalls</em></h3>
+
+        <p>While performing penetration tests or attacking HTB boxes/labs, we may make many common mistakes that will hamper our progress. In this section, we will discuss some of these common pitfalls and how to overcome them.</p>
+
+        <h4>VPN Issues</h4>
+
+        <p>We may sometimes face issues related to VPN connections to the HTB labs network. First, we should ensure that we are indeed connected to the HTB network.</p>
+
+        <h4>Still Connected to VPN</h4>
+
+        <p>The easiest method of checking if we have successfully connected to the VPN network is by checking whether we have Initialization Sequence Completed at the end of our VPN connection messages:</p>
+
+        <h5>
+          kappajester83@htb[/htb]$ sudo openvpn ./htb.ovpn<br>
+          ...SNIP...<br>
+          Initialization Sequence Completed
+        </h5>
+
+        <h4>Getting VPN Address</h4>
+
+        <p>Another way of checking whether we are connected to the VPN network is by checking our VPN tun0 address, which we can find with the following command:</p>
+
+        <h5>kappajester83@htb[/htb]$ ip -4 a show tun0</h5>
+
+        <pre>
+          6: tun0: "POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP" mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 500
+            inet 10.10.10.1/23 scope global tun0
+              valid_lft forever preferred_lft forever
+        </pre>
+
+        <p>As long we get our IP back, then we should be connected to the VPN network.</p>
+
+        <h4>Checking Routing Table</h4>
+
+        <p>Another way to check for connectivity is to use the command sudo netstat -rn to view our routing table:</p>
+
+        <h5>
+          kappajester83@htb[/htb]$ sudo netstat -rn<br>
+          [sudo] password for user:
+        </h5>
+
+        <pre>
+          Kernel IP routing table
+          Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+          0.0.0.0         192.168.195.2   0.0.0.0         UG        0 0          0 eth0
+          10.10.14.0      0.0.0.0         255.255.254.0   U         0 0          0 tun0
+          10.129.0.0      10.10.14.1      255.255.0.0     UG        0 0          0 tun0
+          192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 eth0
+        </pre>
+
+        <h4>Pinging Gateway</h4>
+
+        <p>From here, we can see that we are connected to the 10.10.14.0/23 network on the tun0 adapter and have access to the 10.129.0.0/16 network and can ping the gateway 10.10.14.1 to confirm access.</p>
+
+        <h5>kappajester83@htb[/htb]$ ping -c 4 10.10.14.1</h5>
+
+        <pre>
+          PING 10.10.14.1 (10.10.14.1) 56(84) bytes of data.
+          64 bytes from 10.10.14.1: icmp_seq=1 ttl=64 time=111 ms
+          64 bytes from 10.10.14.1: icmp_seq=2 ttl=64 time=111 ms
+          64 bytes from 10.10.14.1: icmp_seq=3 ttl=64 time=111 ms
+          64 bytes from 10.10.14.1: icmp_seq=4 ttl=64 time=111 ms
+
+          --- 10.10.14.1 ping statistics ---
+          4 packets transmitted, 4 received, 0% packet loss, time 3012ms
+          rtt min/avg/max/mdev = 110.574/110.793/111.056/0.174 ms
+        </pre>
+
+        <p>Finally, we can either attack an assigned target host on the 10.129.0.0/16 network or begin enumeration for live hosts.</p>
+
+        <h4>Working on Two Devices</h4>
+
+        <p>The HTB VPN cannot be connected to more than one device simultaneously. If we are connected on one device and try to connect from another device, the second connection attempt will fail.</p>
+
+        <p>For example, this can happen when our VPN connection is connected in our PwnBox, and then we try to connect to it from our Parrot VM at the same time. Alternatively, perhaps we are connected on our Parrot VM, and then we want to switch to a Windows VM to test something.</p>
+
+        <h4>Checking Region</h4>
+
+        <p>If we feel a noticeable lag in our VPN connection, such as latency in pings or ssh connections, we should ensure that we are connected to the most appropriate region. HTB provides VPN servers worldwide, in Europe, USA, Australia, and Singapore. Ideally, it would help if we tried to connect to the server closest to us to get the best possible connection.</p>
+
+        <p>To change our VPN Server, go to HackTheBox, click on the top-right icon that says Lab Access or Offline, click on Labs, and then click on OpenVPN. Once we do, we should be able to pick our VPN server location and pick any of the servers within that region:
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/77/htb_vpn.jpg">https://academy.hackthebox.com/storage/modules/77/htb_vpn.jpg</a></li>
+        </ul>
+
+        <p>Note: Users with a free subscription only can connect to 1-3 free servers in each region. Users with a VPN subscription can connect to VIP servers, which provide a faster connection with less traffic.</p>
+
+        <h4>VPN Troubleshooting</h4>
+
+        <p>In case we face any technical issues when connecting to the VPN, we can find detailed guidance on troubleshooting VPN connections on this HackTheBox Help page.</p>
+
+        <h4>Burp Suite Proxy Issues</h4>
+
+        <p>Burp Suite is a crucial tool during web application penetration tests (as well as other assessment types). Burp Suite is a web application proxy and can cause a few issues on our systems.</p>
+
+        <h4>Not Disabling Proxy</h4>
+
+        <p>When we turn the Burp proxy in our browser, Burp will start to capture our traffic and intercept our requests. This will make it stop any requests we make in the browser, i.e., visiting a page until we go to Burp, examine the request, and forward the request.</p>
+
+        <p>A common pitfall is forgetting to turn off the browser proxy after closing Burp, so it keeps intercepting our requests. If this happens, we will see that our browser is not loading any pages, so we should check if the browser proxy is still on. We can do that by clicking on the Foxy Proxy plugin icon in Firefox, and making sure it's set to Turn Off:</p>
+
+        <p>If we are not using a plugin like Foxy Proxy, we can check the browser's connection settings and make sure the proxy is turned off. Once we do, we should be able to continue browsing without any issues.</p>
+
+        <h4>Changing SSH Key and Password</h4>
+
+        <p>In case we start facing some issues with connecting to SSH servers or connecting to our machine from a remote server, we may want to renew or change our SSH key and password to make sure they are not causing any issues. We can do this with the ssh-keygen command, as follows:</p>
+
+        <h5>kappajester83@htb[/htb]$ ssh-keygen</h5>
+
+        <pre>
+          Generating public/private rsa key pair.
+          Enter file in which to save the key (/home/parrot/.ssh/id_rsa): 
+          Enter passphrase (empty for no passphrase):
+          Enter same passphrase again:
+
+          Your identification has been saved in /home/parrot/.ssh/id_rsa
+          Our public key has been saved in /home/parrot/.ssh/id_rsa.pub
+          The key fingerprint is:
+          SHA256:...SNIP... parrot@parrot
+          The key's randomart image is:
+          +---[RSA 3072]----+
+          |            o..  |
+          |     ...SNIP     |
+          |     ...SNIP     |
+          |     ...SNIP     |
+          |     ...SNIP     |
+          |     ...SNIP     |
+          |     ...SNIP     |
+          |       + +oo+o   |
+          +----[SHA256]-----+
+        </pre>
+
+        <p>By default, SSH keys are stored in the .ssh folder within our home folder (for example, /home/htb-student/.ssh). If we wanted to create an ssh key in a different directory, we could enter an absolute path for the key when prompted. We can encrypt our SSH key with a password when prompted or keep it empty if we do not want to use a password.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../gettingStarted.htm">Getting Started</a></h4>
+        <ol>
+          <li><a href="infosecOverview.htm">Infosec Overview</a></li>
+          <li><a href="pentestDistro.htm">Getting Started with a Pentest Distro</a></li>
+          <li><a href="stayingOrganized.htm">Staying Organized</a></li>
+          <li><a href="connectingUsingVPN.htm">Connecting Using VPN</a></li>
+          <li><a href="commonTerms.htm">Common Terms</a></li>
+          <li><a href="basicTools.htm">Basic Tools</a></li>
+          <li><a href="serviceScanning.htm">Service Scanning</a></li>
+          <li><a href="webEnumeration.htm">Web Enumeration</a></li>
+          <li><a href="publicExploits.htm">Public Exploits</a></li>
+          <li><a href="typesShells.htm">Types of Shells</a></li>
+          <li><a href="privilegeEscalation.htm">Privilege Escalation</a></li>
+          <li><a href="transferringFiles.htm">Transferring Files</a></li>
+          <li><a href="startingOut.htm">Starting Out</a></li>
+          <li><a href="navigatingHTB.htm">Navigating HTB</a></li>
+          <li><a href="nibblesEnumeration.htm">Nibbles - Enumeration</a></li>
+          <li><a href="nibblesFootprinting.htm">Nibbles - Web Footprinting</a></li>
+          <li><a href="nibblesInitialFoothold.htm">Nibbles - Initial Foothold</a></li>
+          <li><a href="nibblesPrivilegeEscalation.htm">Nibbles - Privilege Escalation</a></li>
+          <li><a href="nibblesMetasploit.htm">Nibbles - Metasploit</a></li>
+          <li><a href="commonPitfalls.htm"><b><em>~ Common Pitfalls</em></b></a></li>
+          <li><a href="gettingHelp.htm">Getting Help</a></li>
+          <li><a href="nextSteps.htm">Next Steps</a></li>
+          <li><a href="knowledgeCheck.htm">Knowledge Check</a></li>
+        </ol>
+
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
