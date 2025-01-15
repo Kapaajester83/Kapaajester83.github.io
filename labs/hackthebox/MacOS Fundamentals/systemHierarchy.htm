@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | MacOS Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../macOSFundamentals.htm">MacOS Fundamentals</a></h4>
+          <ul>
+            <li><a href="macOS.htm">What Is macOS</a></li>
+            <li><a href="systemHierarchy.htm"><b><em>~ System Hierarchy</em></b></a></li>
+            <li><a href="fileDirectoryPermissions.htm">File and Directory Permissions</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>System Hierarchy</em></h3>
+
+          <p>The macOS filesystem can be looked at through several lenses. The structure mimics a standard Unix/Linux setup but also has its own context for User, Local, and System directories. This section will break them down to ensure we know where our critical files reside on the host.</p>
+
+          <p>Note: As macOS is essentially unix-based, many of the things and commands covered in the Linux Fundamentals module also apply here and can be used with macOS, though some may use slightly difference syntax. This module will not repeat the Linux basics as covered in the Linux Fundamentals module, but will mainly be covering macOS-specific topics, so you are advised to also go through that module to have a wholistic understanding of both macOS and Linux.</p>
+
+          <h4>MacOS Domains</h4>
+
+          <p>In macOS, a file system is divided into multiple domains that separate files and resources depending on their intended usage. Domains apply access privilege to the files and resources in that domain, preventing unauthorized users from changing files.
+            <ul>
+              <li><a href="https://academy.hackthebox.com/storage/modules/157/D3.png">https://academy.hackthebox.com/storage/modules/157/D3.png</a></li>
+              <li><b>Local Domain</b> - Contains resources such as apps that are local to the current computer and shared among all computer users.</li>
+              <li><b>System Domain</b> - Contains the system software installed by Apple.</li>
+              <li><b>User Domain</b> - Contains resources specific to the users who log in to the system. This domain reflects the home directory of the current user at runtime.</li>
+              <li><b>Network Domain</b> - Contains resources such as apps and documents that are shared among users of a local area network.</li>
+            </ul>
+
+          <h4>macOS File System Structure</h4>
+
+          <p>Standard Directories
+            <ul>
+              <li><a href="https://academy.hackthebox.com/storage/modules/157/D1.png">https://academy.hackthebox.com/storage/modules/157/D1.png</a></li>
+            </ul>
+          
+          <h4>/Applications</h4>
+
+          <p>The Applications directory contains applications that users would commonly use. There are multiple /Applications folders, each belonging to a different domain.
+            <ul>
+              <li><b>User Domain</b> - Applications that are installed and related to a particular user are saved under /Users/username/Applications</li>
+              <li><b>Local Domain</b> - Applications which are installed by a user, installed by Apple, and which can be used by all users present in a computer are saved under /Applications</li>
+              <li><b>System Domain</b> - Applications which are related to the system or installed by Apple are saved under /System/Applications</li>
+            </ul>
+          
+          <h4>/Users</h4>
+
+          <p>The Users directory belongs to the User Domain. It contains user-related applications, files, and resources. Each user account has its own user folder, located under /Users/username. Each user has access only to their user directory and cannot access items on another user's directory.</p>
+
+          <p>For example, if two users, htb-student and htb-dev, are present in the system, then the /Users directory would consist of two directories, with each user account having its own directory.</p>
+
+          <p>System Hierarchy</p>
+
+          <h5>
+            [root@htb]/Users$ ls<br>
+            htb-dev<br>
+            htb-student
+          </h5>
+
+          <h4>/Library</h4>
+
+          <p>The Library directory stores custom data files for applications, caches, configurations, resources, preferences, and user data. The Local and system domain Library directories are Global in scope, while the user Library directory is specific to that user.
+            <ul>
+              <li><b>User Domain</b> - Information about the applications related to the current user is stored in /Users/username/Library</li>
+              <li><b>Local Domain</b> - Information related to an application that is shared by all the users who are using that application is stored in /Library directory</li>
+              <li><b>System Domain</b> - Information about system applications is stored in /System/Library</li>
+            </ul>
+
+          <p>The Library directory contains some key subdirectories:
+            <ul>
+              <li><b>Library/Application Support:</b> - Contains app-specific support files, data files & configuration files</li>
+              <li><b>Library/Caches:</b> - Contains app-specific support files that the app can re-create easily</li>
+              <li><b>Library/Frameworks:</b> - Stores libraries that are used, or needed, to create an application</li>
+              <li><b>Library/Preferences:</b> - contains the application preferences (PowerManagement, SoftwareUpdate, Logging, Calendar, etc.)</li>
+            </ul>
+
+          <h4>/Network</h4>
+
+          <p>The Network directory contains files that belong to the network domain. This directory contains the list of computers in the local area network.</p>
+
+          <h4>/System</h4>
+
+          <p>The System directory contains the system resources required by macOS to run. These files are installed by Apple and shouldn't be modified.</p>
+
+          <h4>Unix-Specific Directories</h4>
+
+          <p>Directory Tree
+            <ul>
+              <li><a href="https://academy.hackthebox.com/storage/modules/157/D2.png">https://academy.hackthebox.com/storage/modules/157/D2.png</a></li>
+            </ul>
+
+          <p>macOS also has some Unix-specific directories structured in a tree-like hierarchy.
+            <ul>
+              <li><b>/</b> - Is the root filesystem and contains everything the operating system needs to complete the boot cycle. Any volumes or filesystems can be found here. Think of / as our bucket containing everything the host needs and storing them in subdirectories like /etc, /home, and /usr.</li>
+              <li><b>/bin</b> - Is our main storage point for binaries.</li>
+              <li><b>/dev</b> - Maintains our device-id files that enable the use of hardware devices attached to the system.</li>
+              <li><b>/etc</b> - /etc contains our system and application configuration files.</li>
+              <li><b>/sbin</b> - Contains all the essential and common administrative binaries we need to keep our systems running smoothly.</li>
+              <li><b>/tmp</b> - The /tmp directory is used by the operating system to store temporary files that do not need to be persistent. The files in this directory are wiped away at each reboot.</li>
+              <li><b>/usr</b> - This is one of the largest directories on our host. It contains all of the libraries we may need, applications such as FTP, SSH, and even vim.</li>
+              <li><b>/var</b> - This Is where we store our system log files, sources for our web servers, backups, and more.</li>
+              <li><b>/private</b> - Stores critical system files and caches required to operate. They are hidden in the /Private directory to ensure the standard user does not modify them.</li>
+              <li><b>/opt</b> - This is our storage point for any third-party applications or packages we install.</li>
+              <li><b>/cores</b> - Contains Core Dumps stored by MacOS that are intended for developers to troubleshoot any issues that arise.</li>
+              <li><b>/home</b> - Each user on the system has a subdirectory here for storage. Our user Desktop, Downloads, and Documents folders can be found here.</li>
+            </ul>
+
+          <p>This was not an exhaustive list of every directory or subdirectory on our hosts. We recommend if you run into a specific folder you do not quite understand the purpose of, check the man page or Google what that specific directory is for. The man hier command is also helpful for getting an initial understanding of the standard Unix folder structure.</p>
+
+          <p>Now that we have an idea of how our macOS host filesystem is structured let's look at file and directory permissions so we understand who can access what files within the filesystem.</p>
+
+          <h4>Questions</h4>
+
+          <p>Where are the Applications related to the system stored at?</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../macOSFundamentals.htm">MacOS Fundamentals</a></h4>
+          <ol>
+            <li><a href="graphicalUserInterface.htm">Graphical User Interface</a></li>
+            <li><a href="navigatingAroundTheOS.htm">Navigating Around The OS</a></li>
+            <li><a href="macOS.htm">What Is macOS</a></li>
+            <li><a href="systemHierarchy.htm"><b><em>~ System Hierarchy</em></b></a></li>
+            <li><a href="fileDirectoryPermissions.htm">File and Directory Permissions</a></li>
+          </ol>
+          <hr>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | MacOS Fundamentals</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../macOSFundamentals.htm">MacOS Fundamentals</a></h4>
+          <ul>
+            <li><a href="graphicalUserInterface.htm">Graphical User Interface</a></li>
+            <li><a href="navigatingAroundTheOS.htm"><b><em>~ Navigating Around The OS</em></b></a></li>
+            <li><a href="macOS.htm">What Is macOS</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Navigating Around The OS</em></h3>
+
+          <p>Navigating between files, folders, and apps in macOS isn’t particularly tricky, but knowing the right tricks can improve efficiency and make navigation effortless.</p>
+
+          <h4>Using Finder</h4>
+
+          <p>As discussed in the previous section, Finder is the component of macOS that provides the File management functions within the OS. You can use Finder to find and browse files present inside your Mac.
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/1_finder.png">https://academy.hackthebox.com/storage/modules/157/1_finder.png</a></li>
+          </ul>
+
+          <h4>View Root Directory</h4>
+
+          <p>One way to view the root directory is to launch the Finder app from the Dock, click on the Go Pane at the top, select Computer & click on Storage.
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/visit_root_directory.png">https://academy.hackthebox.com/storage/modules/157/visit_root_directory.png</a></li>
+          </ul>
+
+          <p>Another way to open the root directory is to launch the Finder app from Dock; enter the keyboard shortcut Command + Shift + G, type /, and hit Go.
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/visit_root_directory_2.png">https://academy.hackthebox.com/storage/modules/157/visit_root_directory_2.png</a></li>
+          </ul>
+
+          <p>You may also go up and down directories in Finder using the Command with the up and down arrows.</p>
+
+          <h4>Copy and Paste Files & Folders</h4>
+
+          <p>Just like any other OS, you may copy/paste items in Finder with the right-click menu or the Command + C and Command + V keyboard shortcuts:
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/3_finder_pste-2.png">https://academy.hackthebox.com/storage/modules/157/3_finder_pste-2.png</a></li>
+          </ul>
+
+          <p>You can also move items by dragging them from one folder to another or even duplicate any item by holding the option key while dragging them.</p>
+
+          <h4>Cut and Paste (Move) Files & Folders</h4>
+
+          <p>MacOS does not offer a direct GUI feature to cut and paste files & folders using Finder. But you can use the keyboard shortcut Command + Option + V to move the copied file directly.
+          <ul>
+            <li>Launch the Finder app from the Dock.</li>
+            <li>Right-click on the file or folder you want to move and select Copy.</li>
+            <li>Use Finder to head to the location where you want to move a file, and use the keyboard shortcut Command + Option + V to move the file.</li>
+          </ul>
+
+          <p>Another way to move files in macOS is using the mv command in the terminal, which must be used with caution as it is an irreversible command. To do so, open a terminal from Dock & run the following command to move the Test folder from the Users Document directory into the Users Desktop directory.</p>
+
+          <h5>[root@htb]/Users$ mv /Users/htb-student/Documents/Test /Users/htb-student/Desktop/Test</h5>
+
+          <p>Note: While macOS does not allow "Cut/Paste" of files to avoid potential file loss, it does allow "Cut/Paste" of text through the right-click menu or with the "Command + X" shortcut.</p>
+
+          <h4>View Hidden Files and Folders</h4>
+
+          <p>There are lots of hidden files and folders present on macOS that prevent users from accidentally deleting files used by the operating system. However, there are multiple ways to view hidden files on a Mac using the GUI and terminal.</p>
+
+          <p>To view hidden files and folders using the GUI:
+          <ul>
+            <li>Open the folder where you want to see hidden files</li>
+            <li>Hold down Command + Shift + . (full stop/period)</li>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/org_files.png">https://academy.hackthebox.com/storage/modules/157/org_files.png</a></li>
+          </ul>
+
+          <p>You may also change the default view of Finder to show hidden files, as follows:
+          <ul>
+            <li>Open a terminal from Dock & run the following commands in Terminal</li>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/finder_hidden_files.png">https://academy.hackthebox.com/storage/modules/157/finder_hidden_files.png</a></li>
+          </ul>
+
+          <h5>
+            [root@htb]/Users$ defaults write com.apple.Finder AppleShowAllFiles true<br>
+            [root@htb]/Users$ killall Finder
+          </h5>
+
+          <h4>Using Preview Pane</h4>
+
+          <p>The Preview Pane within Finder allows us to glance at what files and images look like before opening them. It provides instant previews of what’s in each file you highlight with additional information about the file such as Creation Date & Time, Last Modified Date & Time, Last Opened Date & Time, etc.</p>
+
+          <p>Enable Preview Pane inside Finder to look at the file preview.
+          <ul>
+            <li>Launch the Finder app from the Dock.</li>
+            <li>Click on the View Pane at the top & select Show Preview.</li>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/Show_Preview-2.png">https://academy.hackthebox.com/storage/modules/157/Show_Preview-2.png</a></li>
+          </ul>
+
+          <p>Now, you can click on any file and see the file's contents on the right side with additional information regarding the file.
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/preview_pane-2.png">https://academy.hackthebox.com/storage/modules/157/preview_pane-2.png</a></li>
+          </ul>
+
+          <h4>Finding What You Need</h4>
+
+          <p>Spotlight is a system-wide desktop search feature of Apple's macOS and iOS operating systems, as discussed in previous sections. Spotlight can help you quickly find items present on your Mac.</p>
+
+          <p>Let's try opening a Dictionary in macOS using Spotlight.
+          <ul>
+            <li>Click on the magnifying glass icon at the top-right corner of the desktop or use the keyboard shortcut (Command + Space bar) to open Spotlight.</li>
+            <li>Type the keyword dictionary inside the Spotlight search bar and click on the Dictionary app to open a Dictionary instance.</li>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/3_spotlight.png">https://academy.hackthebox.com/storage/modules/157/3_spotlight.png</a></li>
+          </ul>
+
+          <h4>How To Move Around Apps</h4>
+
+          <p>Moving and switching from one app to another can be tedious, especially if there is a frequent need to split apps every few seconds. To improve efficiency while working on multiple apps, macOS provides features like Mission Control & Split View.</p>
+
+          <h4>Mission Control</h4>
+
+          <p>MacOS provides a feature named Mission Control, which offers a bird's-eye view of all open windows, desktop spaces, and apps, making switching between them easy.</p>
+
+          <p>There are multiple ways to open the bird's-eye view on your Mac.
+          <ul>
+            <li>Swipe up using three fingers on your trackpad.</li>
+            <li>Open the Mission Control app manually from the Launchpad.</li>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/2_mission_control.png">https://academy.hackthebox.com/storage/modules/157/2_mission_control.png</a></li>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/1_mission_control_app.png">https://academy.hackthebox.com/storage/modules/157/1_mission_control_app.png</a></li>
+          </ul>
+
+          <h4>Split View</h4>
+
+          <p>By using Split View, you can split your Mac screen between two apps. It would automatically resize the screen without manually moving and resizing windows. Split View only works if you already have two or more apps running in the background.</p>
+
+          <p>To use Split View with apps, hover the mouse pointer over the full-screen button (Green Colored) on the top-left, and you will be presented with three options to select from:
+          <ul>
+            <li>Enter Full Screen</li>
+            <li>Tile Window to Left of Screen</li>
+            <li>Tile Window to Right of Screen</li>
+            <li><a href=""></a></li>
+          </ul>
+
+          <p>Choose Tile Window to Left of Screen from the menu, and the window will fill that side of the screen. Now hover the mouse pointer onto the next side of the screen and select another app to begin using both apps in split windows side by side.
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/1_split_view.png">https://academy.hackthebox.com/storage/modules/157/1_split_view.png</a></li>
+            <li><a href="https://academy.hackthebox.com/storage/modules/157/2_split_view.png">https://academy.hackthebox.com/storage/modules/157/2_split_view.png</a></li>
+          </ul>
+
+          <p>Now that we are system navigation pros, the next section will give us insight into the host's filesystem structure.</p>
+
+          <h4>Questions</h4>
+
+          <p>Download the above file and double click on it to unzip it. The extracted folder may appear empty, but in reality it has a hidden file with the flag. Can you find the flag?</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../macOSFundamentals.htm">MacOS Fundamentals</a></h4>
+          <ol>
+            <li><a href="graphicalUserInterface.htm">Graphical User Interface</a></li>
+            <li><a href="navigatingAroundTheOS.htm"><b><em>~ Navigating Around The OS</em></b></a></li>
+            <li><a href="macOS.htm">What Is macOS</a></li>
+          </ol>
+          <hr>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
