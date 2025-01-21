@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Penetration Testing</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionPenetrationTesting.htm">Introduction to Penetration Testing</a></h4>
+          <ul>
+            <li><a href="introduction.htm"><b><em>~ Introduction</em></b></a></li>
+            <li><a href="typesPenetrationTests.htm">Types of Penetration Tests</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Introduction</em></h3>
+
+          <p>Penetration testing (pentesting), or ethical hacking, is where we legally mimic cyberattacks to spot security holes in a company's digital world. It's not just about finding weaknesses; it's about checking how well current security measures hold up, helping firms fix issues before the bad guys do. Pen testers use real attack methods to test a system's defenses, pointing out where the security is lacking and suggesting ways to toughen it up. The whole deal involves planning, doing the test, and reporting back to manage risks smartly.</p>
+
+          <p>Take the MOVEit Transfer hack in 2023, where hackers nabbed data through file transfer systems. Proper pentesting might've caught this before it was too late. These tests can involve scanning networks, exploiting known issues, and seeing how far into a system an attacker could go. If standard tests don't cut it, we might switch to digging through code by hand or tricking people to find hidden weak spots.</p>
+
+          <h4>Definition</h4>
+
+          <p>A penetration test is a unique type of security assessment that goes beyond automated scanning and vulnerability identification. It involves to attempt to exploit discovered vulnerabilities and gain unauthorized access, elevate privileges, or extract sensitive data. This approach allows organizations to understand not only what vulnerabilities exist in their infrastructure, but also how they could be leveraged and hardened in a real attack scenario, and what the impact would be.</p>
+
+          <p>Penetration tests are conducted by skilled security professionals, who are specialists in the field. Junior and senior specialists have a deep understanding of systems, networks, and offensive and defensive techniques. Those tests are carried out with the organization's full knowledge and permission, following strict rules of engagement and a defined scope.</p>
+
+          <p>Penetration testing encompasses a wide range of tasks, including:
+          <ul>
+            <li>Reconnaissance</li>
+            <li>Vulnerability Assessment</li>
+            <li>Exploitation</li>
+            <li>Post-exploitation</li>
+            <li>Reporting</li>
+          </ul>
+
+          <p>In a highly simplified illustration, we could imagine a penetration test proceeding in the following manner:
+          <ul>
+            <li>It starts with reconnaissance (also known as information gathering), where testers gather information about the target organization, system or network, like scouting out a building before planning a break-in.</li>
+            <li>Next, in the vulnerability assessment phase, they use tools to spot weak points, similar to checking for unlocked windows or doors.</li>
+            <li>During the exploitation phase, testers try to exploit those weaknesses to gain access or control over the system, just as a thief might test those unlocked doors.</li>
+            <li>After that, in the post-exploitation phase, they explore what else can be accessed, maintain control, and assess the impact of a successful attack, like seeing how far an intruder could roam inside a building.</li>
+            <li>Finally, the reporting phase documents everything: the vulnerabilities found, the risks they pose, and clear steps to fix them, so the system can be secured.</li>
+          </ul>
+
+          <p>In the Penetration Testing Process module, the individual phases and the process are described in detail, but for now, we can focus on this simple illustration. The actual penetration testing process looks like following:
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/295/PT-Process.png">https://academy.hackthebox.com/storage/modules/295/PT-Process.png</a></li>
+          </ul>
+
+          <p>Companies use pentests to find and fix security holes before the bad unethical hackers do. With these tests we check if current defenses are up to the level they need to be in order to keep their systems and secrets safe. With our help, companies can fulfill compliance requirements, demonstrate their commitment to security, and maintain trust with their customers. This often involves adapting their strategies to address emerging threats and new attack methods. The cybersecurity landscape is moving and envolving very fast and this forward-thinking mindset enables organizations to recover more effectively from attacks and reduces the risk of costly data breaches.</p>
+
+          <h4>Goals of Penetration Testing</h4>
+
+          <p>The primary goals of penetration testing can be broken down into three categories:
+          <ul>
+            <li>Evaluation of organization’s cyber security posture</li>
+            <li>Testing organization’s defensive measures</li>
+            <li>Operational & Financial impact risk assessment</li>
+          </ul>
+
+          <p>In detail these categories consist of, but are not limited to:
+          <ul>
+            <li><b>Identifying Security Weaknesses:</b> One of the fundamental goals of a pentest is to uncover vulnerabilities in systems, networks, or applications that could be exploited by attackers. This includes misconfigurations, software flaws, design weaknesses, and human-related vulnerabilities.</li>
+            <li><b>Validating Security Controls:</b> Penetration tests help organizations to assess the effeciency of their existing security measures and secure their digital assets. When we attempt to bypass these controls, we can determine if the security mechanisms in place are actually working as intended.</li>
+            <li><b>Testing Detection and Response Capabilities:</b> A pentest help to identify if an organization has the necessary ability to detect and respond to security incidents. It helps identify gaps in monitoring systems, incident response procedures, and overall security awareness.</li>
+            <li><b>Assessing Real-World Impact:</b> By simulating real-world attack scenarios, we provide with the conducted penetration tests a realistic assessment of the potential impact of a successful breach. This includes understanding the extent of possible data loss, system compromise, or business disruption.</li>
+            <li><b>Prioritizing Remediation Efforts:</b> The results of a pentest can help organizations to prioritize their security efforts and allocate resources more effectively within the company. Critical vulnerabilities that pose the greatest risk can be addressed first.</li>
+            <li><b>Compliance and Due Diligence:</b> Regulatory frameworks require from companies frequent security checks like penetration tests and others. The reason for that is to ensure that organizations are actually safeguarding their critical information, customer data, and their systems. Performing these assessments it helps organizations to proof their commitment to due diligence in cybersecurity.</li>
+            <li><b>Enhancing Security Awareness:</b> Penetration tests often reveal security issues that may not be apparent through other means. They help to get the awareness about security risks among management, IT staff, and end-users.</li>
+            <li><b>Verifying Patch Management:</b> Pentests can verify whether security patches and updates have been properly applied and are effectively mitigating known vulnerabilities.</li>
+            <li><b>Testing New Technologies:</b> When new systems or applications are implemented within their internal or external infrastructure, penetration tests help the comapny to ensure that they are securely configured before being deployed in a production environment.</li>
+            <li><b>Providing a Baseline for Security Improvements:</b> The results of a pentest serve most of the time as a baseline for measuring security improvements over time. Subsequent tests can demonstrate progress in addressing identified issues.</li>
+          </ul>
+
+          <p>Note: Pentesting is a powerful approach and is seen as a great tool for companies for analyzing and improving their overall security. It's important to remember that it provides just a snapshot of an organization's security measures at the specific point in time when the pentest has been conducted. Regular testing is mandatory to ensure a secure infrastructure environment and should be combined with ongoing security practices.</p>
+
+          <p>By achieving these goals, penetration testing enables organizations to take a proactive approach to security, identifying and addressing vulnerabilities before they can be exploited by malicious actors. This process not only enhances an organization's overall security posture but also provides valuable insights that can inform long-term security strategies and investments.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionPenetrationTesting.htm">Introduction to Penetration Testing</a></h4>
+          <ol>
+            <li><a href="introduction.htm"><b><em>~ Introduction</em></b></a></li>
+            <li><a href="typesPenetrationTests.htm">Types of Penetration Tests</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
