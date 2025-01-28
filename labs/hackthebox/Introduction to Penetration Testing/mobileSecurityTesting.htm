@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Penetration Testing</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionPenetrationTesting.htm">Introduction to Penetration Testing</a></h4>
+          <ul>
+            <li><a href="socialEngineering.htm">Social Engineering</a></li>
+            <li><a href="mobileSecurityTesting.htm"><b><em>~ Mobile Security Testing</em></b></a></li>
+            <li><a href="reverseEngineering.htm">Reverse Engineering</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Mobile Security Testing</em></h3>
+
+          <p>Mobile security is essential for businesses today, particularly ones who rely heavily on mobile devices for important work. Mobile devices often handle sensitive company data, customer details, and business systems, making their security a top priority. Let’s take a look at why mobile security is so important:
+          <ul>
+            <li><b>BYOD Policies:</b> - Companies need to secure employee personal devices that access work resources.</li>
+            <li><b>Data Breach Costs:</b> - Security failures lead to fines, legal issues, and reputation damage.</li>
+            <li><b>Remote Work Revolution:</b> - More people working remotely means more mobile devices connecting to company networks.</li>
+            <li><b>Compliance Requirements:</b> - Laws require strict data protection and privacy measures.</li>
+            <li><b>Advanced Threats:</b> - Mobile devices face attacks from malware, phishing, and new security exploits.</li>
+          </ul>
+
+          <p>Companies need strong mobile security plans to stay safe while keeping work efficient. This means using mobile device management tools, creating security rules (such as disabling Bluetooth when it's not in use), and regularly checking mobile apps and systems for problems.</p>
+
+          <p>The mobile attack surface is considerably different from traditional web applications or desktop software. Mobile applications often store sensitive data locally, communicate with multiple backend services, and interact with various hardware components. This creates unique security challenges and potential entry points for attackers.</p>
+
+          <p>Key areas of concern include local data storage, network communication, inter-process communication (IPC), and platform-specific security mechanisms. Understanding these components is essential for effective mobile security testing.</p>
+
+          <h4>Setting Up Your Testing Environment</h4>
+
+          <p>Before diving into mobile security testing, you'll need to set up a proper testing environment. This includes both physical devices and/or emulators/simulators. For Android testing, you'll want to have access to both rooted and non-rooted devices. For iOS, having both jailbroken and non-jailbroken devices is beneficial, though not always necessary. Essential tools for your testing environment include:
+          <ul>
+            <li>Mobile device management tools like Android Debug Bridge (ADB) for Android</li>
+            <li>Reverse engineering tools such as JADX and Ghidra</li>
+            <li>Network analysis tools like Burp Suite Mobile Assistant</li>
+            <li>Platform-specific debugging tools</li>
+            <li>Mobile framework testing tools like Frida and Objection</li>
+          </ul>
+
+          <h4>Android Security Testing</h4>
+
+          <p>Android security testing begins with understanding the application's structure. An Android application is distributed as an APK file, which contains the application's code, resources, and manifest file. The manifest file is particularly important as it declares the application's permissions, components, and security settings.</p>
+
+          <p>Static analysis of Android applications involves decompiling APK and examining the source code for security issues. This type of analysis can reveal hardcoded credentials, insecure data storage practices, and possible bugs in the application's logic. Tools like JADX can help decompile Android applications into readable Java code.</p>
+
+          <h4>Static Analysis using JADX</h4>
+
+          <p>
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/295/jadx-gui.gif">https://academy.hackthebox.com/storage/modules/295/jadx-gui.gif</a></li>
+          </ul>
+
+          <p>Dynamic analysis, on the other hand, consists of running the application and observing its behavior in real-time. This includes monitoring network traffic, analyzing file system operations, and testing the application's runtime behavior. Frida is particularly useful for dynamic analysis, allowing you to hook into application functions and modify their behavior.</p>
+
+          <h4>iOS Security Testing Specifics</h4>
+
+          <p>iOS applications operate in a more restricted environment compared to Android, but this doesn't make them immune to security issues. iOS apps are distributed as IPA files, which are encrypted by default. Consequently, testing often requires decrypting these files first.</p>
+
+          <p>The iOS security model is built around app sandboxing, code signing, and various platform security features - built into both the software and hardware. Understanding these mechanisms is crucial for effective testing, and tools such as Objection and Frida can be used to bypass certain security controls during testing.</p>
+
+          <p>When testing iOS applications, pay special attention to:
+          <ul>
+            <li>Keychain usage and data protection</li>
+            <li>Certificate pinning implementation</li>
+            <li>Local data storage practices</li>
+            <li>URL scheme handling</li>
+            <li>Touch ID/Face ID implementation</li>
+          </ul>
+
+          <h4>Common Mobile Vulnerabilities</h4>
+
+          <p>While mobile applications can suffer from many of the same vulnerabilities as web applications, there are several mobile-specific issues to look out for. Insecure data storage is particularly common, where sensitive information is stored in plaintext or with weak encryption. This can include authentication tokens, personal information, or business data.</p>
+
+          <p>Weak network security is another common issue. Applications might not properly validate SSL/TLS certificates, implement certificate pinning incorrectly, or send sensitive data over insecure channels. Man-in-the-middle attacks are still relevant in mobile testing, though they require special setup due to mobile platforms' security features.</p>
+
+          <p>Client-side injection vulnerabilities, while less common than in web applications, can still exist in mobile apps. This includes SQL injection in local databases, JavaScript injection in WebViews, and other injection points specific to mobile platforms.</p>
+
+          <p>As you become more comfortable with basic mobile security testing, you can move on to more advanced techniques. This includes analyzing native code components, reviewing custom encryption implementations, and testing complex authentication mechanisms. Runtime manipulation using tools like Frida can reveal how an application handles various security controls. This might include bypassing root detection, modifying in-app purchase validation, or understanding anti-debugging measures.</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionPenetrationTesting.htm">Introduction to Penetration Testing</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction</a></li>
+            <li><a href="typesPenetrationTests.htm">Types of Penetration Tests</a></li>
+            <li><a href="areasDomainsTesting.htm">Areas and Domains of Testing</a></li>
+            <li><a href="penetrationTestBenefits.htm">Penetration Test Benefits</a></li>
+            <li><a href="compliancePenetrationTesting.htm">Compliance and Penetration Testing</a></li>
+            <li><a href="ethicsPenetrationTest.htm">Ethics of a Penetration Test</a></li>
+            <li><a href="penetrationTestingVulnerabilityAssessment.htm">Penetration Testing vs. Vulnerability Assessment</a></li>
+            <li><a href="structurePenetrationTest.htm">Structure of a Penetration Test</a></li>
+            <li><a href="prerequisitesPenetrationTest.htm">Prerequisites for a Penetration Test</a></li>
+            <li><a href="requiredSkills.htm">Required Skills</a></li>
+            <li><a href="methodologiesFrameworks.htm">Methodologies & Frameworks</a></li>
+            <li><a href="webApplicationTesting.htm">Web Application Testing</a></li>
+            <li><a href="networkSecurityTesting.htm">Network Security Testing</a></li>
+            <li><a href="cloudSecurityTesting.htm">Cloud Security Testing</a></li>
+            <li><a href="physicalSecurityTesting.htm">Physical Security Testing</a></li>
+            <li><a href="socialEngineering.htm">Social Engineering</a></li>
+            <li><a href="mobileSecurityTesting.htm"><b><em>~ Mobile Security Testing</em></b></a></li>
+            <li><a href="reverseEngineering.htm">Reverse Engineering</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

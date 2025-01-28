@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Penetration Testing</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+
+    </div>
+
+    <div>
+      <div id="writeup">
+        <h3>
+          <a href="../../contents.html">Hack The Box</a>
+        </h3>
+        <hr>
+
+        <div id="labs-table-top">
+          <h4><a href="../introductionPenetrationTesting.htm">Introduction to Penetration Testing</a></h4>
+          <ul>
+            <li><a href="networkSecurityTesting.htm">Network Security Testing</a></li>
+            <li><a href="cloudSecurityTesting.htm"><b><em>~ Cloud Security Testing</em></b></a></li>
+            <li><a href="physicalSecurityTesting.htm">Physical Security Testing</a></li>
+          </ul>
+        </div>
+        <hr>
+
+        <div>
+
+          <h3><em>Cloud Security Testing</em></h3>
+
+          <p>Cloud Security Penetration Testing is a specialized security assessment aimed at uncovering vulnerabilities and weaknesses within cloud-based infrastructures. With more businesses moving to the cloud, securing these environments has become critical. This guide will provide a thorough exploration of cloud penetration testing, including methodologies and best practices.</p>
+
+          <p>Before diving into cloud penetration testing, it's crucial to understand the basic cloud service models:
+          <ul>
+            <li>Infrastructure as a Service (IaaS)</li>
+            <li>Platform as a Service (PaaS)</li>
+            <li>Software as a Service (SaaS)</li>
+          </ul>
+
+          <p>Each model presents unique security challenges and requires different testing approaches. In IaaS, you'll be testing the infrastructure components like virtual machines, networks, and storage. PaaS testing focuses on the platform level, including development frameworks and databases. SaaS testing primarily deals with application-level security and data protection mechanisms.</p>
+
+          <h4>Key Differences from Traditional Penetration Testing</h4>
+
+          <p>Cloud penetration testing differs significantly from traditional network penetration testing. The main distinction lies in the shared responsibility model, where security responsibilities are divided between the cloud service provider and the customer. As a penetration tester, you need to be clear about which components you can test and which ones are off-limits according to the cloud provider's acceptable use policies.</p>
+
+          <p>Another crucial difference is the dynamic nature of cloud environments. Resources can be created, modified, or destroyed automatically, making it essential to adapt your testing approach accordingly. Additionally, cloud environments often implement complex access controls and identity management systems that require specialized testing methodologies.</p>
+
+          <h4>Essential Skills for Cloud Penetration Testing</h4>
+
+          <p>To become proficient in cloud penetration testing, you need to develop expertise in several areas. First, a strong understanding of cloud platforms like AWS, Azure, or Google Cloud Platform is essential. This includes knowledge of their security features, native tools, and common misconfigurations.
+          <ul>
+            <li><a href="https://academy.hackthebox.com/storage/modules/295/aws_gcp_azure.png">https://academy.hackthebox.com/storage/modules/295/aws_gcp_azure.png</a></li>
+          </ul>
+
+          <p>Familiarity with Infrastructure as Code (IaC) and automation tools is also valuable, as many cloud deployments utilize these technologies. Knowledge of containerization technologies like Docker and Kubernetes is increasingly important, as many modern cloud applications are container-based. Understanding API security testing is crucial since most cloud services interact through APIs. Additionally, expertise in web application security testing remains relevant as many cloud-based applications have web interfaces. Let's take a look at the common components of a cloud penetration test.
+          <ul>
+            <li>The assessment typically begins withreconnaissance and enumeration of cloud resources. This phase involves identifying all active services, storage buckets, databases, and other cloud components. Utilizing tools like cloud-specific scanners and enumeration scripts can significantly aid in this process.</li>
+            <li>The next phase is access control testing, where you assess the implementation of Identity and Access Management (IAM) policies. This includes examining for overly permissive roles, misconfigured security groups, and weak authentication mechanisms.</li>
+            <li>Following this, a Configuration Assessment is crucial, where you scrutinize cloud services in search of security misconfigurations. Look out for issues like publicly accessible storage buckets or unencrypted databases.</li>
+            <li>Subsequently, we must not forget network security testing. In cloud environments, this involves reviewing virtual network configurations, security groups, and network access controls to ensure they are set up correctly to mitigate risks.</li>
+            <li>We now come to data security testing. While the previous steps undoubtedly relate to the protection of data, you can always take it a step further. This means evaluating the implementation of encryption, data loss prevention (DLP), and key management practices designed to safeguard sensitive information.</li>
+            <li>Lastly, application security testing examines the security posture of cloud-native applications. This includes checking for vulnerabilities in application code and API's, ensuring that they interact safely and securely with other cloud services.</li>
+          </ul>
+
+          <p>Each of these steps ensures a comprehensive security review of cloud infrastructures. As we have demonstrated, the attack surface of cloud environment is vast, making it all the more important for you to identify the possible vulnerabilities - particularly before before the bad guys do.</p>
+
+          <h4>Common Vulnerabilities in Cloud Environments</h4>
+
+          <p>Cloud environments often suffer from specific types of vulnerabilities. Misconfigured storage buckets that expose sensitive data are a common finding. Excessive permissions and inadequate IAM policies can lead to privilege escalation opportunities. Insecure API implementations might allow unauthorized access or data exposure. Insufficient logging and monitoring can make it difficult to detect and respond to security incidents. Container security issues, such as running containers with root privileges or using outdated base images, are frequently encountered in cloud environments. Inadequate network segmentation and overly permissive security groups can expose services to unauthorized access. Lack of encryption for data at rest and in transit remains a significant concern.</p>
+
+          <h4>Tools and Technologies</h4>
+
+          <p>Cloud penetration testing requires a combination of cloud-native and traditional security tools. Cloud providers offer their own security assessment tools, such as AWS Inspector or Azure Security Center. Third-party tools like CloudSploit, Scout Suite, and Prowler are also available for automated assessments of cloud infrastructure. For container security testing, tools like Clair, Trivy, and Anchore are essential, while API testing tools such as Postman and Burp Suite help evaluate API security. Traditional penetration testing tools like Nmap, Metasploit, and various scripting languages remain relevant, but must be used with carefully to comply with cloud provider policies.</p>
+
+          <h4>Questions</h4>
+
+          <p>What does IAM stands for in terms of cloud infrastructure? (Format: four words)</p>
+
+        </div>
+        <hr>
+
+        <div id="labs-table">
+          <h4><a href="../introductionPenetrationTesting.htm">Introduction to Penetration Testing</a></h4>
+          <ol>
+            <li><a href="introduction.htm">Introduction</a></li>
+            <li><a href="typesPenetrationTests.htm">Types of Penetration Tests</a></li>
+            <li><a href="areasDomainsTesting.htm">Areas and Domains of Testing</a></li>
+            <li><a href="penetrationTestBenefits.htm">Penetration Test Benefits</a></li>
+            <li><a href="compliancePenetrationTesting.htm">Compliance and Penetration Testing</a></li>
+            <li><a href="ethicsPenetrationTest.htm">Ethics of a Penetration Test</a></li>
+            <li><a href="penetrationTestingVulnerabilityAssessment.htm">Penetration Testing vs. Vulnerability Assessment</a></li>
+            <li><a href="structurePenetrationTest.htm">Structure of a Penetration Test</a></li>
+            <li><a href="prerequisitesPenetrationTest.htm">Prerequisites for a Penetration Test</a></li>
+            <li><a href="requiredSkills.htm">Required Skills</a></li>
+            <li><a href="methodologiesFrameworks.htm">Methodologies & Frameworks</a></li>
+            <li><a href="webApplicationTesting.htm">Web Application Testing</a></li>
+            <li><a href="networkSecurityTesting.htm">Network Security Testing</a></li>
+            <li><a href="cloudSecurityTesting.htm"><b><em>~ Cloud Security Testing</em></b></a></li>
+            <li><a href="physicalSecurityTesting.htm">Physical Security Testing</a></li>
+          </ol>
+        </div>
+        <hr>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
