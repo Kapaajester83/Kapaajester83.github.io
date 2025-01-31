@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm"><b><em>~ Logistic Regression</em></b></a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Logistic Regression</em></h3>
+
+        <p>Despite its name, logistic regression is a supervised learning algorithm primarily used for classification, not regression. It predicts a categorical target variable with two possible outcomes (binary classification). These outcomes are typically represented as binary values (e.g., 0 or 1, true or false, yes or no).
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/logistic_regression_classification.png">https://academy.hackthebox.com/storage/modules/290/logistic_regression_classification.png</a></li>
+        </ul>
+
+        <p>For example, logistic regression can predict whether an email is spam or not or whether a customer will click on an ad. The algorithm models the probability of the target variable belonging to a particular class using a logistic function, which maps the input features to a value between 0 and 1.</p>
+
+        <h4>What is Classification?</h4>
+
+        <p>Before we delve deeper into logistic regression, let's clarify what classification means in machine learning. Classification is a type of supervised learning that aims to assign data points to specific categories or classes. Unlike regression, which predicts a continuous value, classification predicts a discrete label.</p>
+
+        <p>Examples of classification problems include:
+        <ul>
+          <li>Identifying fraudulent transactions (fraudulent or not fraudulent)</li>
+          <li>Classifying images of animals (cat, dog, bird, etc.)</li>
+          <li>Diagnosing diseases based on patient symptoms (disease present or not present)</li>
+        </ul>
+
+        <p>In all these cases, the output we're trying to predict is a category or class label.</p>
+
+        <h4>How Logistic Regression Works</h4>
+
+        <p>Unlike linear regression, which outputs a continuous value, logistic regression outputs a probability score between 0 and 1. This score represents the likelihood of the input belonging to the positive class (typically denoted as '1').</p>
+
+        <p>It achieves this by employing a sigmoid function, which maps any input value (a linear combination of features) to a value within the 0 to 1 range. This function introduces non-linearity, allowing the model to capture complex relationships between the features and the probability of the outcome.</p>
+
+        <p>What is a Sigmoid Function?
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/sigmoid.png">https://academy.hackthebox.com/storage/modules/290/sigmoid.png</a></li>
+        </ul>
+
+        <p>The sigmoid function is a mathematical function that takes any input value (ranging from negative to positive infinity) and maps it to an output value between 0 and 1. This makes it particularly useful for modeling probabilities.</p>
+
+        <p>The sigmoid function has a characteristic "S" shape, hence its name. It starts with low values for negative inputs, then rapidly increases around zero, and finally plateaus at high values for positive ones. This smooth, gradual transition between 0 and 1 allows it to represent the probability of an event occurring.</p>
+
+        <p>In logistic regression, the sigmoid function transforms the linear combination of input features into a probability score. This score represents the likelihood of the input belonging to the positive class.</p>
+
+        <h4>The Sigmoid Function</h4>
+
+        <p>The sigmoid function's mathematical representation is:</p>
+
+        <pre>
+          P(x) = 1 / (1 + e^-z)
+
+          Where:
+            P(x) is the predicted probability.
+            e is the base of the natural logarithm (approximately 2.718).
+            z is the linear combination of input features and their weights, similar to the linear regression equation: z = m1x1 + m2x2 + ... + mnxn + c
+        </pre>
+
+        <h4>Spam Detection</h4>
+
+        <p>Let's say we're building a spam filter using logistic regression. The algorithm would analyze various email features, such as the sender's address, the presence of certain keywords, and the email's content, to calculate a probability score. The email will be classified as spam if the score exceeds a predefined threshold (e.g., 0.8).</p>
+
+        <h4>Decision Boundary</h4>
+
+        <p>A crucial aspect of logistic regression is the decision boundary. In a simplified scenario with two features, imagine a line separating the data points into two classes. This separator is the decision boundary, determined by the model's learned parameters and the chosen threshold probability.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/logistic_regression.png">https://academy.hackthebox.com/storage/modules/290/logistic_regression.png</a></li>
+        </ul>
+
+        <p>In higher dimensions with more features, this separator becomes a hyperplane. The decision boundary defines the cutoff point for classifying an instance into one class or another.</p>
+
+        <h4>Understanding Hyperplanes</h4>
+
+        <p>In the context of machine learning, a hyperplane is a subspace whose dimension is one less than that of the ambient space. It's a way to visualize a decision boundary in higher dimensions.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/hyperplane.png">https://academy.hackthebox.com/storage/modules/290/hyperplane.png</a></li>
+        </ul>
+
+        <p>Think of it this way:
+        <ul>
+          <li>A hyperplane is simply a line in a 2-dimensional space (like a sheet of paper) that divides the space into two regions.</li>
+          <li>A hyperplane is a flat plane in a 3-dimensional space (like your room) that divides the space into two halves.</li>
+        </ul>
+
+        <p>Moving to higher dimensions (with more than three features) makes it difficult to visualize, but the concept remains the same. A hyperplane is a "flat" subspace that divides the higher-dimensional space into two regions.</p>
+
+        <p>In logistic regression, the hyperplane is defined by the model's learned parameters (coefficients) and the chosen threshold probability. It acts as the decision boundary, separating data points into classes based on their predicted probabilities.</p>
+
+        <h4>Threshold Probability</h4>
+
+        <p>The threshold probability is often set at 0.5 but can be adjusted depending on the specific problem and the desired balance between true and false positives.
+        <ul>
+          <li>If a given data point's predicted probability P(x) falls above the threshold, the instance is classified as the positive class.</li>
+          <li>If P(x) falls below the threshold, it's classified as the negative class.</li>
+        </ul>
+
+        <p>For example, in spam detection, if the model predicts an email has a 0.8 probability of being spam (and the threshold is 0.5), it's classified as spam. Adjusting the threshold to 0.6 would require a higher probability for the email to be classified as spam.</p>
+
+        <h4>Data Assumptions</h4>
+
+        <p>While not as strict as linear regression, logistic regression does have some underlying assumptions about the data:
+        <ul>
+          <li><b>Binary Outcome:</b> - The target variable must be categorical, with only two possible outcomes.</li>
+          <li><b>Linearity of Log Odds:</b> - It assumes a linear relationship between the predictor variables and the log-odds of the outcome. Log odds are a transformation of probability, representing the logarithm of the odds ratio (the probability of an event occurring divided by the probability of it not occurring).</li>
+          <li><b>No or Little Multicollinearity:</b> - Ideally, there should be little to no multicollinearity among the predictor variables. Multicollinearity occurs when predictor variables are highly correlated, making it difficult to determine their individual effects on the outcome.</li>
+          <li><b>Large Sample Size:</b> - Logistic regression performs better with larger datasets, allowing for more reliable parameter estimation.</li>
+        </ul>
+
+        <p>Assessing these assumptions before applying logistic regression helps ensure the model's accuracy and reliability. Techniques like data exploration, visualization, and statistical tests can be used to evaluate these assumptions.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm"><b><em>~ Logistic Regression</em></b></a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

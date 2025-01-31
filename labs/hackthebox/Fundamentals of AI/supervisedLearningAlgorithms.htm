@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm"><b><em>~ Supervised Learning Algorithms</em></b></a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Supervised Learning Algorithms</em></h3>
+
+        <p>Supervised learning algorithms form the cornerstone of many Machine Learning (ML) applications, enabling systems to learn from labeled data and make accurate predictions. Each data point is associated with a known outcome or label in supervised learning. Think of it as having a set of examples with the correct answers already provided.</p>
+
+        <p>The algorithm aims to learn a mapping function to predict the label for new, unseen data. This process involves identifying patterns and relationships between the features (input variables) and the corresponding labels (output variables), allowing the algorithm to generalize its knowledge to new instances.</p>
+
+        <h4>How Supervised Learning Works</h4>
+
+        <p>Imagine you're teaching a child to identify different fruits. You show them an apple and say, "This is an apple." You then show them an orange and say, "This is an orange." By repeatedly presenting examples with labels, the child learns to distinguish between the fruits based on their characteristics, such as color, shape, and size.</p>
+
+        <p>Supervised learning algorithms work similarly. They are fed with a large dataset of labeled examples, and they use this data to train a model that can predict the labels for new, unseen examples. The training process involves adjusting the model's parameters to minimize the difference between its predictions and the actual labels.</p>
+
+        <p>Supervised learning problems can be broadly categorized into two main types:
+        <ul>
+          <li><b>Classification:</b> - In classification problems, the goal is to predict a categorical label. For example, classifying emails as spam or not or identifying images of cats, dogs, or birds.</li>
+          <li><b>Regression:</b> - In regression problems, the goal is to predict a continuous value. For example, one could predict the price of a house based on its size, location, and other features or forecast the stock market.</li>
+        </ul>
+
+        <h4>Core Concepts in Supervised Learning</h4>
+
+        <p>Understanding supervised learning's core concepts is essential for effectively grasping it. These concepts form the building blocks for comprehending how algorithms learn from labeled data to make accurate predictions.</p>
+
+        <h4>Training Data</h4>
+
+        <p>Training data is the foundation of supervised learning. It is the labeled dataset used to train the ML model. This dataset consists of input features and their corresponding output labels. The quality and quantity of training data significantly impact the model's accuracy and ability to generalize to new, unseen data.</p>
+
+        <p>Think of training data as a set of example problems with their correct solutions. The algorithm learns from these examples to develop a model that can solve similar problems in the future.</p>
+
+        <h4>Features</h4>
+
+        <p>Features are the measurable properties or characteristics of the data that serve as input to the model. They are the variables that the algorithm uses to learn and make predictions. Selecting relevant features is crucial for building an effective model.</p>
+
+        <p>For example, when predicting house prices, features might include:
+        <ul>
+          <li>Size</li>
+          <li>Number of bedrooms</li>
+          <li>Location</li>
+          <li>Age of the house</li>
+        </ul>
+
+        <h4>Labels</h4>
+
+        <p>Labels are the known outcomes or target variables associated with each data point in the training set. They represent the "correct answers" that the model aims to predict.</p>
+
+        <p>In the house price prediction example, the label would be the actual price of the house.</p>
+
+        <h4>Model</h4>
+
+        <p>A model is a mathematical representation of the relationship between the features and the labels. It is learned from the training data and used to predict new, unseen data. The model can be considered a function that takes the features as input and outputs a prediction for the label.</p>
+
+        <h4>Training</h4>
+
+        <p>Training is the process of feeding the training data to the algorithm and adjusting the model's parameters to minimize prediction errors. The algorithm learns from the training data by iteratively adjusting its internal parameters to improve its prediction accuracy.</p>
+
+        <h4>Prediction</h4>
+
+        <p>Once the model is trained, it can be used to predict new, unseen data. This involves providing the model with the features of the new data point, and the model will output a prediction for the label. Prediction is a specific application of inference, focusing on generating actionable outputs such as classifying an email as spam or forecasting stock prices.</p>
+
+        <h4>Inference</h4>
+
+        <p>Inference is a broader concept that encompasses prediction but also includes understanding the underlying structure and patterns in the data. It involves using a trained model to derive insights, estimate parameters, and understand relationships between variables.</p>
+
+        <p>For example, inference might involve determining which features are most important in a decision tree, estimating the coefficients in a linear regression model, or analyzing how different inputs impact the model's predictions. While prediction emphasizes actionable outputs, inference often focuses on explaining and interpreting the results.</p>
+
+        <h4>Evaluation</h4>
+
+        <p>Evaluation is a critical step in supervised learning. It involves assessing the model's performance to determine its accuracy and generalization ability to new data. Common evaluation metrics include:
+        <ul>
+          <li><b>Accuracy:</b> - The proportion of correct predictions made by the model.</li>
+          <li><b>Precision:</b> - The proportion of true positive predictions among all positive predictions.</li>
+          <li><b>Recall:</b> - The proportion of true positive predictions among all actual positive instances.</li>
+          <li><b>F1-score:</b> - A harmonic mean of precision and recall, providing a balanced measure of the model's performance.</li>
+        </ul>
+
+        <h4>Generalization</h4>
+
+        <p>Generalization refers to the model's ability to accurately predict outcomes for new, unseen data not used during training. A model that generalizes well can effectively apply its learned knowledge to real-world scenarios.</p>
+
+        <h4>Overfitting</h4>
+
+        <p>Overfitting occurs when a model learns the training data too well, including noise and outliers. This can lead to poor generalization of new data, as the model has memorized the training set instead of learning the underlying patterns.</p>
+
+        <h4>Underfitting</h4>
+
+        <p>Underfitting occurs when a model is too simple to capture the underlying patterns in the data. This results in poor performance on both the training data and new, unseen data.</p>
+
+        <h4>Cross-Validation</h4>
+
+        <p>Cross-validation is a technique used to assess how well a model will generalize to an independent dataset. It involves splitting the data into multiple subsets (folds) and training the model on different combinations of these folds while validating it on the remaining fold. This helps reduce overfitting and provides a more reliable estimate of the model's performance.</p>
+
+        <h4>Regularization</h4>
+
+        <p>Regularization is a technique used to prevent overfitting by adding a penalty term to the loss function. This penalty discourages the model from learning overly complex patterns that might not generalize well. Common regularization techniques include:
+        <ul>
+          <li><b>L1 Regularization:</b> - Adds a penalty equal to the absolute value of the magnitude of coefficients.</li>
+          <li><b>L2 Regularization:</b> - Adds a penalty equal to the square of the magnitude of coefficients.</li>
+        </ul>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm"><b><em>~ Supervised Learning Algorithms</em></b></a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
