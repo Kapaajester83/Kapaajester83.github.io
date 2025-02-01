@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm"><b><em>~ Naive Bayes</em></b></a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Naive Bayes</em></h3>
+
+        <p>Naive Bayes is a probabilistic algorithm used for classification tasks. It's based on Bayes' theorem, a fundamental concept in probability theory that describes the probability of an event based on prior knowledge and observed evidence. Naive Bayes is a popular choice for tasks like spam filtering and sentiment analysis due to its simplicity, efficiency, and surprisingly good performance in many real-world scenarios.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/bayes_classification.png">https://academy.hackthebox.com/storage/modules/290/bayes_classification.png</a></li>
+        </ul>
+
+        <h4>Bayes' Theorem</h4>
+
+        <p>Before diving into Naive Bayes, let's understand its core concept: Bayes' theorem. This theorem provides a way to update our beliefs about an event based on new evidence. It allows us to calculate the probability of an event, given that another event has already occurred.</p>
+
+        <p>It's mathematically represented as:</p>
+
+        <pre>
+          P(A|B) = [P(B|A) * P(A)] / P(B)
+
+          Where:
+            P(A|B): The posterior probability of event A happening, given that event B has already happened.
+            P(B|A): The likelihood of event B happening given that event A has already happened.
+            P(A): The prior probability of event A happening.
+            P(B): The prior probability of event B happening.
+        </pre>
+
+        <p>Let's say we want to know the probability of someone having a disease (A) given that they tested positive for it (B). Bayes' theorem allows us to calculate this probability using the prior probability of having the disease (P(A)), the likelihood of testing positive given that the person has the disease (P(B|A)), and the overall probability of testing positive (P(B)).</p>
+
+        <p>Suppose we have the following information:
+        <ul>
+          <li>The prevalence of the disease in the population is 1%, so P(A) = 0.01.</li>
+          <li>The test is 95% accurate, meaning if someone has the disease, they will test positive 95% of the time, so P(B|A) = 0.95.</li>
+          <li>The test has a false positive rate of 5%, meaning if someone does not have the disease, they will test positive 5% of the time.</li>
+          <li>The probability of testing positive, P(B), can be calculated using the law of total probability.</li>
+        </ul>
+
+        <p>First, let's calculate P(B):</p>
+
+        <pre>
+          P(B) = P(B|A) * P(A) + P(B|¬A) * P(¬A)
+
+          Where:
+            P(¬A): The probability of not having the disease, which is 1 - P(A) = 0.99.
+            P(B|¬A): The probability of testing positive given that the person does not have the disease, which is the false positive rate, 0.05.
+        </pre>
+
+        <p>Now, substitute the values:</p>
+
+        <pre>
+          P(B) = (0.95 * 0.01) + (0.05 * 0.99)
+               = 0.0095 + 0.0495
+               = 0.059
+        </pre>
+
+        <p>Next, we use Bayes' theorem to find P(A|B):</p>
+
+        <pre>
+          P(A|B) = [P(B|A) * P(A)] / P(B)
+                 = (0.95 * 0.01) / 0.059
+                 = 0.0095 / 0.059
+                 ≈ 0.161
+        </pre>
+
+        <p>So, the probability of someone having the disease, given that they tested positive, is approximately 16.1%.</p>
+
+        <p>This example demonstrates how Bayes' theorem can be used to update our beliefs about the likelihood of an event based on new evidence. In this case, even though the test is quite accurate, the low prevalence of the disease means that a positive test result still has a relatively low probability of indicating the actual presence of the disease.</p>
+
+        <h4>How Naive Bayes Works</h4>
+
+        <p>The Naive Bayes classifier leverages Bayes' theorem to predict the probability of a data point belonging to a particular class given its features. To do this, it makes the "naive" assumption of conditional independence among the features. This means it assumes that the presence or absence of one feature doesn't affect the presence or absence of any other feature, given that we know the class label.</p>
+
+        <p>Let's break down how this works in practice:
+        <ul>
+          <li><b>Calculate Prior Probabilities:</b> - The algorithm first calculates the prior probability of each class. This is the probability of a data point belonging to a particular class before considering its features. For example, in a spam detection scenario, the probability of an email being spam might be 0.2 (20%), while the probability of it being not spam is 0.8 (80%).</li>
+          <li><b>Calculate Likelihoods:</b> - Next, the algorithm calculates the likelihood of observing each feature given each class. This involves determining the probability of seeing a particular feature value given that the data point belongs to a specific class. For instance, what's the likelihood of seeing the word "free" in an email given that it's spam? What's the likelihood of seeing the word "meeting" given that it's not spam?</li>
+          <li><b>Apply Bayes' Theorem:</b> - For a new data point, the algorithm combines the prior probabilities and likelihoods using Bayes' theorem to calculate the posterior probability of the data point belonging to each class. The posterior probability is the updated probability of an event (in this case, the data point belonging to a certain class) after considering new information (the observed features). This represents the revised belief about the class label after considering the observed features.</li>
+          <li><b>Predict the Class:</b> - Finally, the algorithm assigns the data point to the class with the highest posterior probability.</li>
+        </ul>
+
+        <p>While this assumption of feature independence is often violated in real-world data (words like "free" and "viagra" might indeed co-occur more often in spam), Naive Bayes often performs surprisingly well in practice.</p>
+
+        <h4>Types of Naive Bayes Classifiers</h4>
+
+        <p>The specific implementation of Naive Bayes depends on the type of features and their assumed distribution:
+        <ul>
+          <li><b>Gaussian Naive Bayes:</b> - This is used when the features are continuous and assumed to follow a Gaussian distribution (a bell curve). For example, if predicting whether a customer will purchase a product based on their age and income, Gaussian Naive Bayes could be used, assuming age and income are normally distributed.</li>
+          <li><b>Multinomial Naive Bayes:</b> - This is suitable for discrete features and is often used in text classification. For instance, in spam filtering, the frequency of words like "free" or "money" might be the features, and Multinomial Naive Bayes would model the probability of these words appearing in spam and non-spam emails.</li>
+          <li><b>Bernoulli Naive Bayes:</b> - This type is employed for binary features, where the feature is either present or absent. In document classification, a feature could be whether a specific word is present in the document. Bernoulli Naive Bayes would model the probability of this presence or absence for each class.</li>
+        </ul>
+
+        <p>The choice of which type of Naive Bayes to use depends on the nature of the data and the specific problem being addressed.</p>
+
+        <h4>Data Assumptions</h4>
+
+        <p>While Naive Bayes is relatively robust, it's helpful to be aware of some data assumptions:
+        <ul>
+          <li><b>Feature Independence:</b> - As discussed, the core assumption is that features are conditionally independent given the class.</li>
+          <li><b>Data Distribution:</b> - The choice of Naive Bayes classifier (Gaussian, Multinomial, Bernoulli) depends on the assumed distribution of the features.</li>
+          <li><b>Sufficient Training Data:</b> - Although Naive Bayes can work with limited data, it is important to have sufficient data to estimate probabilities accurately.</li>
+        </ul>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm"><b><em>~ Naive Bayes</em></b></a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

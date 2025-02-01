@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="unsupervisedLearningAlgorithms.htm">Unsupervised Learning Algorithms</a></li>
+          <li><a href="k-MeansClustering.htm"><b><em>~ K-Means Clustering</em></b></a></li>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>K-Means Clustering</em></h3>
+
+        <p>K-means clustering is a popular unsupervised learning algorithm for partitioning a dataset into K distinct, non-overlapping clusters. The goal is to group similar data points, where similarity is typically measured by the distance between data points in a multi-dimensional space.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/k_means_clustering.png">https://academy.hackthebox.com/storage/modules/290/k_means_clustering.png</a></li>
+        </ul>
+
+        <p>Imagine you have a dataset of customers with information about their purchase history, demographics, and browsing activity. K-means clustering can group these customers into distinct segments based on their similarities. This can be valuable for targeted marketing, personalized recommendations, and customer relationship management.</p>
+
+        <p>K-means is an iterative algorithm that aims to minimize the variance within each cluster. This means it tries to group data points so that the points within a cluster are as close to each other and as far from data points in other clusters as possible.</p>
+
+        <p>The algorithm follows these steps:
+        <ul>
+          <li><b>Initialization:</b> - Randomly select K data points from the dataset as the initial cluster centers (centroids). These centroids represent the average point within each cluster.</li>
+          <li><b>Assignment:</b> - Assign each data point to the nearest cluster center based on a distance metric, such as Euclidean distance.</li>
+          <li><b>Update:</b> - Recalculate the cluster centers by taking the mean of all data points assigned to each cluster. This updates the centroid to represent the center of the cluster better.</li>
+          <li><b>Iteration:</b> - Repeat steps 2 and 3 until the cluster centers no longer change significantly or a maximum number of iterations is reached. This iterative process refines the clusters until they stabilize.</li>
+        </ul>
+
+        <h4>Euclidean Distance</h4>
+
+        <p>Euclidean distance is a common distance metric used to measure the similarity between data points in K-means clustering. It calculates the straight-line distance between two points in a multi-dimensional space.</p>
+
+        <p>For two data points x and y with n features, the Euclidean distance is calculated as:</p>
+
+        <pre>
+          d(x, y) = sqrt(Σ (xi - yi)^2)
+
+          Where:
+            xi and yi are the values of the i-th feature for data points x and y, respectively.
+        </pre>
+
+        <h4>Choosing the Optimal K</h4>
+
+        <p>Determining the optimal number of clusters (K) is crucial in K-means clustering. The choice of K significantly impacts the clustering results and their interpretability. Selecting too few clusters can lead to overly broad groupings, while selecting too many can result in overly granular and potentially meaningless clusters.</p>
+
+        <p>Unfortunately, there is no one-size-fits-all method for determining the optimal K. It often involves a combination of techniques and domain expertise.</p>
+
+        <h4>Elbow Method</h4>
+
+        <p>The Elbow Method is a graphical technique that helps estimate the optimal K by visualizing the relationship between the number of clusters and the within-cluster sum of squares (WCSS).
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/k_means_elbow.png">https://academy.hackthebox.com/storage/modules/290/k_means_elbow.png</a></li>
+        </ul>
+
+        <p>It follows the following steps:
+        <ul>
+          <li><b>Run K-means for a range of K values:</b> - Perform K-means clustering for different values of K, typically starting from 1 and increasing incrementally.</li>
+          <li><b>Calculate WCSS:</b> - For each value of K, calculate the WCSS. The WCSS measures the total variance within each cluster. Lower WCSS values indicate that the data points within clusters are more similar.</li>
+          <li><b>Plot WCSS vs. K:</b> - Plot the WCSS values against the corresponding K values.</li>
+          <li><b>Identify the Elbow Point:</b> - Look for the "elbow" point in the plot. This is where the WCSS starts to decrease at a slower rate. This point often suggests a good value for K, indicating a balance between minimizing within-cluster variance and avoiding excessive granularity.</li>
+        </ul>
+
+        <p>The elbow point represents a trade-off between model complexity and model fit. Increasing K beyond the elbow point might lead to overfitting, where the model captures noise in the data rather than meaningful patterns.</p>
+
+        <h4>Silhouette Analysis</h4>
+
+        <p>The Elbow Method is a graphical technique that helps estimate the optimal K by visualizing the relationship between the number of clusters and the within-cluster sum of squares (WCSS).</p>
+
+        <p>It follows the following steps:
+        <ul>
+          <li><b>Run K-means for a range of K values:</b> - Perform K-means clustering for different values of K, typically starting from 1 and increasing incrementally.</li>
+          <li><b>Calculate WCSS:</b> - For each value of K, calculate the WCSS. The WCSS measures the total variance within each cluster. Lower WCSS values indicate that the data points within clusters are more similar.</li>
+          <li><b>Plot WCSS vs. K:</b> - Plot the WCSS values against the corresponding K values.</li>
+          <li><b>Identify the Elbow Point:</b> - Look for the "elbow" point in the plot. This is where the WCSS starts to decrease at a slower rate. This point often suggests a good value for K, indicating a balance between minimizing within-cluster variance and avoiding excessive granularity.</li>
+        </ul>
+
+        <p>The elbow point represents a trade-off between model complexity and model fit. Increasing K beyond the elbow point might lead to overfitting, where the model captures noise in the data rather than meaningful patterns.</p>
+
+        <h4>Silhouette Analysis</h4>
+
+        <p>Silhouette analysis provides a more quantitative approach to evaluating different values of K. It measures how similar a data point is to its own cluster compared to others.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/silhouette_analysis.png">https://academy.hackthebox.com/storage/modules/290/silhouette_analysis.png</a></li>
+        </ul>
+
+        <p>The process is broken down into four core steps:
+        <ul>
+          <li><b>Run K-means for a range of K values:</b> - Similar to the elbow method, perform K-means clustering for different values of K.</li>
+          <li><b>Calculate Silhouette Scores:</b> - For each data point, calculate its silhouette score. The silhouette score ranges from -1 to 1, where:
+            <ul>
+              <li>A score close to 1 indicates that the data point is well-matched to its cluster and poorly matched to neighboring clusters.</li>
+              <li>A score close to 0 indicates that the data point is on or very close to the decision boundary between two neighboring clusters.</li>
+              <li>A score close to -1 indicates that the data point is probably assigned to the wrong cluster.</li>
+            </ul>
+          </li>
+          <li><b>Calculate Average Silhouette Score:</b> - For each value of K, calculate the average silhouette score across all data points.</li>
+          <li><b>Choose K with the Highest Score:</b> - Select the value of K that yields the highest average silhouette score. This indicates the clustering solution with the best-defined clusters.</li>
+        </ul>
+
+        <p>Higher silhouette scores generally indicate better-defined clusters, where data points are more similar to their cluster and less similar to others.</p>
+
+        <h4>Domain Expertise and Other Considerations</h4>
+
+        <p>While the elbow method and silhouette analysis provide valuable guidance, domain expertise is often crucial in choosing the optimal K. Consider the problem's specific context and the desired level of granularity in the clusters.</p>
+
+        <p>In some cases, practical considerations might outweigh purely quantitative measures. For instance, if the goal is to segment customers for targeted marketing, you might choose a K that aligns with the number of distinct marketing campaigns you can realistically manage.</p>
+
+        <p>Other factors to consider include:
+        <ul>
+          <li><b>Computational Cost:</b> - Higher values of K generally require more computational resources.</li>
+          <li><b>Interpretability:</b> - The resulting clusters should be meaningful and interpretable in the context of the problem.</li>
+        </ul>
+
+        <p>By combining these techniques and considering the task's specific requirements, you can effectively choose an optimal K for K-means clustering that yields meaningful and insightful results.</p>
+
+        <h4>Data Assumptions</h4>
+
+        <p>K-means clustering makes certain assumptions about the data:
+        <ul>
+          <li><b>Cluster Shape:</b> - It assumes that clusters are spherical and have similar sizes. This means it might not perform well if the clusters have complex shapes or vary significantly in size.</li>
+          <li><b>Feature Scale:</b> - It is sensitive to the scale of the features. Features with larger scales can have a greater influence on the clustering results. Therefore, it's important to standardize or normalize the data before applying K-means.</li>
+          <li><b>Outliers:</b> - K-means can be sensitive to outliers, data points that deviate significantly from the norm. Outliers can distort the cluster centers and affect the clustering results.</li>
+        </ul>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm">Naive Bayes</a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm">Unsupervised Learning Algorithms</a></li>
+          <li><a href="k-MeansClustering.htm"><b><em>~ K-Means Clustering</em></b></a></li>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm"><b><em>~ Unsupervised Learning Algorithms</em></b></a></li>
+          <li><a href="k-MeansClustering.htm">K-Means Clustering</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Unsupervised Learning Algorithms</em></h3>
+
+        <p>Unsupervised learning algorithms explore unlabeled data, where the goal is not to predict a specific outcome but to discover hidden patterns, structures, and relationships within the data. Unlike supervised learning, where the algorithm learns from labeled examples, unsupervised learning operates without the guidance of predefined labels or "correct answers."</p>
+
+        <p>Think of it as exploring a new city without a map. You observe the surroundings, identify landmarks, and notice how different areas are connected. Similarly, unsupervised learning algorithms analyze the inherent characteristics of the data to uncover hidden structures and patterns.</p>
+
+        <h4>How Unsupervised Learning Works</h4>
+
+        <p>Unsupervised learning algorithms identify similarities, differences, and patterns in the data. They can group similar data points together, reduce the number of variables while preserving essential information, or identify unusual data points that deviate from the norm.</p>
+
+        <p>These algorithms are valuable for tasks where labeled data is scarce, expensive, or unavailable. They enable us to gain insights into the data's underlying structure and organization, even without knowing the specific outcomes or labels.</p>
+
+        <p>Unsupervised learning problems can be broadly categorized into:
+        <ul>
+          <li><b>Clustering:</b> - Grouping similar data points together based on their characteristics. This is like organizing a collection of books by genre or grouping customers based on their purchasing behavior.</li>
+          <li><b>Dimensionality Reduction:</b> - Reducing the number of variables (features) in the data while preserving essential information. This is analogous to summarizing a long document into a concise abstract or compressing an image without losing its important details.</li>
+          <li><b>Anomaly Detection:</b> - Identifying unusual data points that deviate significantly from the norm. This is like spotting a counterfeit bill among a stack of genuine ones or detecting fraudulent credit card transactions.</li>
+        </ul>
+
+        <h4>Core Concepts in Unsupervised Learning</h4>
+
+        <p>To effectively understand unsupervised learning, it's crucial to grasp some core concepts.</p>
+
+        <h4>Unlabeled Data</h4>
+
+        <p>The cornerstone of unsupervised learning is unlabeled data. Unlike supervised learning, where data points come with corresponding labels or target variables, unlabeled data lacks these predefined outcomes. The algorithm must rely solely on the data's inherent characteristics and input features to discover patterns and relationships.</p>
+
+        <p>Think of it as analyzing a collection of photographs without any captions or descriptions. Even without knowing the specific context of each photo, you can still group similar photos based on visual features like color, composition, and subject matter.</p>
+
+        <h4>Similarity Measures</h4>
+
+        <p>Many unsupervised learning algorithms rely on quantifying the similarity or dissimilarity between data points. Similarity measures calculate how alike or different two data points are based on their features. Common measures include:
+        <ul>
+          <li><b>Euclidean Distance:</b> - Measures the straight-line distance between two points in a multi-dimensional space.</li>
+          <li><b>Cosine Similarity:</b> - Measures the angle between two vectors, representing data points, with higher values indicating greater similarity.</li>
+          <li><b>Manhattan Distance:</b> - Calculates the distance between two points by summing the absolute differences of their coordinates.</li>
+        </ul>
+
+        <p>The choice of similarity measure depends on the nature of the data and the specific algorithm being used.</p>
+
+        <h4>Clustering Tendency</h4>
+
+        <p>Clustering tendency refers to the data's inherent propensity to form clusters or groups. Before applying clustering algorithms, assessing whether the data exhibits a natural tendency to form clusters is essential. If the data is uniformly distributed without inherent groupings, clustering algorithms might not yield meaningful results.</p>
+
+        <h4>Cluster Validity</h4>
+
+        <p>Evaluating the quality and meaningfulness of the clusters produced by a clustering algorithm is crucial. Cluster validity involves assessing metrics like:
+        <ul>
+          <li><b>Cohesion:</b> - Measures how similar data points are within a cluster. Higher cohesion indicates a more compact and well-defined cluster.</li>
+          <li><b>Separation:</b> - Measures how different clusters are from each other. Higher separation indicates more distinct and well-separated clusters.</li>
+        </ul>
+
+        <p>Various cluster validity indices, such as the silhouette score and Davies-Bouldin index, quantify these aspects and help determine the optimal number of clusters.</p>
+
+        <h4>Dimensionality</h4>
+
+        <p>Dimensionality refers to the number of features or variables in the data. High dimensionality can pose challenges for some unsupervised learning algorithms, increasing computational complexity and potentially leading to the "curse of dimensionality," where data becomes sparse and distances between points become less meaningful.</p>
+
+        <h4>Intrinsic Dimensionality</h4>
+
+        <p>The intrinsic dimensionality of data represents its inherent or underlying dimensionality, which may be lower than the actual number of features. It captures the essential information contained in the data. Dimensionality reduction techniques aim to reduce the number of features while preserving this intrinsic dimensionality.</p>
+
+        <h4>Anomaly</h4>
+
+        <p>An anomaly is a data point that deviates significantly from the norm or expected pattern in the data. Anomalies can represent unusual events, errors, or fraudulent activities. Detecting anomalies is crucial in various applications, such as fraud detection, network security, and system monitoring.</p>
+
+        <h4>Outlier</h4>
+
+        <p>An outlier is a data point that is far away from the majority of other data points. While similar to an anomaly, the term "outlier" is often used in a broader sense. Outliers can indicate errors in data collection, unusual observations, or potentially interesting patterns.</p>
+
+        <h4>Feature Scaling</h4>
+
+        <p>Feature scaling is essential in unsupervised learning to ensure that all features contribute equally to the distance calculations and other computations. Common techniques include:
+        <ul>
+          <li><b>Min-Max Scaling:</b> - Scales features to a fixed range.</li>
+          <li><b>Standardization (Z-score normalization):</b> - Transforms features to have zero mean and unit variance.</li>
+        </ul>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm">Naive Bayes</a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm"><b><em>~ Unsupervised Learning Algorithms</em></b></a></li>
+          <li><a href="k-MeansClustering.htm">K-Means Clustering</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
