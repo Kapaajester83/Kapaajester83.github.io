@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="sARSA.htm">SARSA (State-Action-Reward-State-Action)</a></li>
+          <li><a href="introductionDeepLearning.htm"><b><em>~ Introduction to Deep Learning</em></b></a></li>
+          <li><a href="perceptrons.htm">Perceptrons</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Introduction to Deep Learning</em></h3>
+
+        <p>Deep learning is a subfield of machine learning that has emerged as a powerful force in artificial intelligence. It uses artificial neural networks with multiple layers (hence "deep") to analyze data and learn complex patterns. These networks are inspired by the structure and function of the human brain, enabling them to achieve remarkable performance on various tasks.</p>
+
+        <p>Deep learning can be viewed as a specialized subset of machine learning. While traditional machine learning algorithms often require manual feature engineering, deep learning algorithms can automatically learn relevant features from raw data. This ability to learn hierarchical representations of data sets deep learning apart and enables it to tackle more complex problems.</p>
+
+        <p>In the broader context of AI, deep learning plays a crucial role in achieving the goals of creating intelligent agents and solving complex problems. Deep learning models are now used in various AI applications, including natural language processing, computer vision, robotics, and more.</p>
+
+        <h4>Motivation Behind Deep Learning</h4>
+
+        <p>The motivation behind deep learning stems from two primary goals:
+        <ul>
+          <li><b>Solving Complex Problems:</b> - Deep learning has proven highly effective in solving complex problems that previously challenged traditional AI approaches. Its ability to learn intricate patterns from vast amounts of data has led to breakthroughs in image recognition, speech processing, and natural language understanding.</li>
+          <li><b>Mimicking the Human Brain:</b> - The architecture of deep neural networks is inspired by the interconnected network of neurons in the human brain. This allows deep learning models to process information hierarchically, similar to how humans perceive and understand the world. Deep learning aims to create AI systems that can learn and reason more effectively by mimicking the human brain.</li>
+        </ul>
+
+        <p>Deep learning has emerged as a transformative technology that can revolutionize various fields. Its ability to solve complex problems and mimic the human brain makes it a key driver of progress in artificial intelligence.</p>
+
+        <h4>Important Concepts in Deep Learning</h4>
+
+        <p>To understand deep learning, it's essential to grasp some key concepts that underpin its structure and functionality.</p>
+
+        <h4>Artificial Neural Networks (ANNs)</h4>
+
+        <p>Artificial Neural Networks (ANNs) are computing systems inspired by the biological neural networks that constitute animal brains. An ANN is composed of interconnected nodes or neurons organized in layers. Each connection between neurons has a weight associated with it, representing the strength of the connection.</p>
+
+        <p>The network learns by adjusting these weights based on the input data, enabling it to make predictions or decisions. ANNs are fundamental to deep learning, as they provide the framework for building complex models that can learn from vast amounts of data.</p>
+
+        <h4>Layers</h4>
+
+        <p>Deep learning networks are characterized by their layered structure. There are three main types of layers:
+        <ul>
+          <li><b>Input Layer:</b> - This layer receives the initial data input.</li>
+          <li><b>Hidden Layers:</b> - These intermediate layers perform computations and extract features from the data. Deep learning networks have multiple hidden layers, allowing them to learn complex patterns.</li>
+          <li><b>Output Layer:</b> - This layer produces the network's final output, such as a prediction or classification.</li>
+        </ul>
+
+        <h4>Activation Functions</h4>
+
+        <p>Activation functions introduce non-linearity into the network, enabling it to learn complex patterns. They determine whether a neuron should be activated based on its input. Common activation functions include:
+        <ul>
+          <li><b>Sigmoid:</b> - Squashes the input into a range between 0 and 1.</li>
+          <li><b>ReLU (Rectified Linear Unit):</b> - Returns 0 for negative inputs and the input value for positive inputs.</li>
+          <li><b>Tanh (Hyperbolic Tangent):</b> - Squashes the input into a range between -1 and 1.</li>
+        </ul>
+
+        <h4>Backpropagation</h4>
+
+        <p>Backpropagation is a key algorithm used to train deep learning networks. It involves calculating the gradient of the loss function concerning the network's weights and then updating the weights in the direction that minimizes the loss. This iterative process allows the network to learn from the data and improve its performance over time.</p>
+
+        <h4>Loss Function</h4>
+
+        <p>The loss function measures the error between the network's predictions and the actual target values. The goal of training is to minimize this loss function. Different tasks require different loss functions. For example, mean squared error is commonly used for regression tasks, while cross-entropy loss is used for classification tasks.</p>
+
+        <h4>Optimizer</h4>
+
+        <p>The optimizer determines how the network's weights are updated during training. It uses the gradients calculated by backpropagation to adjust the weights to minimize the loss function. Popular optimizers include:
+        <ul>
+          <li>Stochastic Gradient Descent (SGD)</li>
+          <li>Adam</li>
+          <li>RMSprop</li>
+        </ul>
+
+        <h4>Hyperparameters</h4>
+
+        <p>Hyperparameters are set before training begins and control the learning process. Examples include the learning rate, the number of hidden layers, and the number of neurons in each layer. Tuning hyperparameters is crucial for achieving optimal performance.</p>
+
+        <p>These concepts form the building blocks of deep learning. Understanding them is crucial for comprehending how deep learning models are constructed, trained, and used to solve complex problems.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm">Naive Bayes</a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm">Unsupervised Learning Algorithms</a></li>
+          <li><a href="k-MeansClustering.htm">K-Means Clustering</a></li>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+          <li><a href="anomalyDetection.htm">Anomaly Detection</a></li>
+          <li><a href="reinforcementLearningAlgorithms.htm">Reinforcement Learning Algorithms</a></li>
+          <li><a href="q-Learning.htm">Q-Learning</a></li>
+          <li><a href="sARSA.htm">SARSA (State-Action-Reward-State-Action)</a></li>
+          <li><a href="introductionDeepLearning.htm"><b><em>~ Introduction to Deep Learning</em></b></a></li>
+          <li><a href="perceptrons.htm">Perceptrons</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+          <li><a href="anomalyDetection.htm"><b><em>~ Anomaly Detection</em></b></a></li>
+          <li><a href="reinforcementLearningAlgorithms.htm">Reinforcement Learning Algorithms</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Anomaly Detection</em></h3>
+
+        <p>Anomaly detection, also known as outlier detection, is crucial in unsupervised learning. It identifies data points that deviate significantly from normal behavior within a dataset. These anomalous data points, often called outliers, can indicate critical events, such as fraudulent activities, system failures, or medical emergencies.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/anomaly_detection.png">https://academy.hackthebox.com/storage/modules/290/anomaly_detection.png</a></li>
+        </ul>
+
+        <p>Think of it like a security system that monitors a building. The system learns the normal activity patterns, such as people entering and exiting during business hours. It raises an alarm if it detects something unusual, like someone trying to break in at night. Similarly, anomaly detection algorithms learn the normal patterns in data and flag any deviations as potential anomalies.</p>
+
+        <p>Anomalies can be broadly categorized into three types:
+        <ul>
+          <li><b>Point Anomalies:</b> - Individual data points significantly differ from the rest—for example, a sudden spike in network traffic or an unusually high credit card transaction amount.</li>
+          <li><b>Contextual Anomalies:</b> - Data points considered anomalous within a specific context but not necessarily in isolation. For example, a temperature reading of 30°C might be expected in summer but anomalous in winter.</li>
+          <li><b>Collective Anomalies:</b> - A group of data points that collectively deviate from the normal behavior, even though individual data points might not be considered anomalous. For example, a sudden surge in login attempts from multiple unknown IP addresses could indicate a coordinated attack.</li>
+        </ul>
+
+        <p>Various techniques are employed for anomaly detection, including:
+        <ul>
+          <li><b>Statistical Methods:</b> - These methods assume that normal data points follow a specific statistical distribution (e.g., Gaussian distribution) and identify outliers as data points that deviate significantly from this distribution. Examples include z-score, modified z-score, and boxplots.</li>
+          <li><b>Clustering-Based Methods:</b> - These methods group similar data points together and identify outliers as data points that do not belong to any cluster or belong to small, sparse clusters. K-means clustering and density-based clustering are commonly used for anomaly detection.</li>
+          <li><b>Machine Learning-Based Methods:</b> - These methods utilize machine learning algorithms to learn patterns from normal data and identify outliers as data points that do not conform to these patterns. Examples include One-Class SVM, Isolation Forest, and Local Outlier Factor (LOF).</li>
+        </ul>
+
+        <h4>One-Class SVM</h4>
+
+        <p>One-Class SVM is a machine learning algorithm specifically designed for anomaly detection. It learns a boundary that encloses the normal data points and identifies any data point falling outside this boundary as an outlier. It's like drawing a fence around a sheep pen – any sheep found outside the fence is likely an anomaly. One-Class SVM can handle non-linear relationships using kernel functions, similar to SVMs used for classification.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/one_class_svm.png">https://academy.hackthebox.com/storage/modules/290/one_class_svm.png</a></li>
+        </ul>
+
+        <h4>Isolation Forest</h4>
+
+        <p>Isolation Forest is another popular anomaly detection algorithm that isolates anomalies by randomly partitioning the data and constructing isolation trees. Anomalies, being "few and different," are easier to isolate from the rest of the data and tend to have shorter paths in these trees. It's like playing a game of "20 questions" – if you can identify an object with very few questions, it's likely an anomaly.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/isolation_forest.png">https://academy.hackthebox.com/storage/modules/290/isolation_forest.png</a></li>
+        </ul>
+
+        <p>The algorithm works by recursively partitioning the data until each data point is isolated in its leaf node. A random feature is selected at each step, and a random split value is chosen. This process is repeated until all data points are isolated.</p>
+
+        <p>The anomaly score for a data point is then calculated based on the average path length to isolate that data point in multiple isolation trees. Shorter path lengths indicate a higher likelihood of being an anomaly.</p>
+
+        <p>The anomaly score for a data point x is calculated as:</p>
+
+        <pre>
+          score(x) = 2^(-E(h(x)) / c(n))
+
+          Where:
+            E(h(x)): Average path length of data point x in a collection of isolation trees.
+            c(n): Average path length of unsuccessful search in a Binary Search Tree (BST) with n nodes. This serves as a normalization factor.
+            n: Number of data points.
+        </pre>
+
+        <p>Anomaly scores closer to 1 indicate a higher likelihood of being an anomaly, while scores closer to 0.5 indicate that the data point is likely normal.</p>
+
+        <h4>Local Outlier Factor (LOF)</h4>
+
+        <p>Local Outlier Factor (LOF) is a density-based algorithm designed to identify outliers in datasets by comparing the local density of a data point to that of its neighbors. It is particularly effective in detecting anomalies in regions where the density of points varies significantly.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/local_outlier_factor.png">https://academy.hackthebox.com/storage/modules/290/local_outlier_factor.png</a></li>
+        </ul>
+
+        <p>Think of it like identifying a house in a sparsely populated area compared to a densely populated neighborhood. The isolated house in a region with fewer houses is more likely to be an anomaly. Similarly, in data terms, a point with a lower local density than its neighbors is considered an outlier.</p>
+
+        <p>The LOF score for a data point p is calculated using the following formula:</p>
+
+        <pre>
+          LOF(p) = (Σ lrd(o) / k) / lrd(p)
+
+          Where:
+            lrd(p) : The local reachability density of data point p.
+            lrd(o) : The local reachability density of data point o, one of the k nearest neighbors of p.
+            k : The number of nearest neighbors.
+        </pre>
+
+        <p>Higher LOF scores indicate a higher likelihood of a data point being an outlier.</p>
+
+        <h4>Local Reachability Density</h4>
+
+        <p>The local reachability density (lrd(p)) for a data point p is defined as:</p>
+
+        <pre>
+          lrd(p) = 1 / (Σ reach_dist(p, o) / k)
+
+          Where:
+            reach_dist(p, o): The reachability distance from p to o, which is the maximum of the actual distance between p and o and the k-distance of o.
+        </pre>
+
+        <p>The k-distance of a point o is the distance to its kth nearest neighbor. This ensures that points in dense regions have lower reachability distances, while points in sparse regions have higher reachability distances.</p>
+
+        <h4>Data Assumptions</h4>
+
+        <p>Anomaly detection techniques often make certain assumptions about the data:
+        <ul>
+          <li><b>Normal Data Distribution:</b> - Some methods assume that normal data points, such as Gaussian distribution, follow a specific distribution.</li>
+          <li><b>Feature Relevance:</b> - The choice of features can significantly impact the performance of anomaly detection algorithms.</li>
+          <li><b>Labeled Data (for some methods):</b> - Some machine learning-based methods require labeled data to train the model.</li>
+        </ul>
+
+        <p>Anomaly detection is a critical task in data analysis and machine learning, enabling the identification of unusual patterns and events that can have significant implications. By leveraging various techniques and algorithms, anomaly detection systems can effectively identify outliers and provide valuable insights for decision-making and proactive intervention.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm">Naive Bayes</a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm">Unsupervised Learning Algorithms</a></li>
+          <li><a href="k-MeansClustering.htm">K-Means Clustering</a></li>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+          <li><a href="anomalyDetection.htm"><b><em>~ Anomaly Detection</em></b></a></li>
+          <li><a href="reinforcementLearningAlgorithms.htm">Reinforcement Learning Algorithms</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
