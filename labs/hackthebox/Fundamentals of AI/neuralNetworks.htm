@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="perceptrons.htm">Perceptrons</a></li>
+          <li><a href="neuralNetworks.htm"><b><em>~ Neural Networks</em></b></a></li>
+          <li><a href="convolutionalNeuralNetworks.htm">Convolutional Neural Networks</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Neural Networks</em></h3>
+
+        <p>
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/neural_network.png">https://academy.hackthebox.com/storage/modules/290/neural_network.png</a></li>
+        </ul>
+
+        <p>To overcome the limitations of single-layer perceptrons, we introduce the concept of neural networks with multiple layers. These networks, also known as multi-layer perceptrons (MLPs), are composed of:
+        <ul>
+          <li>An input layer</li>
+          <li>One or more hidden layers</li>
+          <li>An output layer</li>
+        </ul>
+
+        <h4>Neurons</h4>
+
+        <p>A neuron is a fundamental computational unit in neural networks. It receives inputs, processes them using weights and a bias, and applies an activation function to produce an output. Unlike the perceptron, which uses a step function for binary classification, neurons can use various activation functions such as the sigmoid, ReLU, and tanh.</p>
+
+        <p>This flexibility allows neurons to handle non-linear relationships and produce continuous outputs, making them suitable for various tasks.</p>
+
+        <h4>Input Layer</h4>
+
+        <p>The input layer serves as the entry point for the data. Each neuron in the input layer corresponds to a feature or attribute of the input data. The input layer passes the data to the first hidden layer.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_0.png">https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_0.png</a></li>
+        </ul>
+
+        <h4>Hidden Layers</h4>
+
+        <p>
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_1.png">https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_1.png</a></li>
+        </ul>
+
+        <p>Hidden layers are the intermediate layers between the input and output layers. They perform computations and extract features from the data. Each neuron in a hidden layer:
+        <ul>
+          <li>Receives input from all neurons in the previous layer.</li>
+          <li>Performs a weighted sum of the inputs.</li>
+          <li>Adds a bias to the sum.</li>
+          <li>Applies an activation function to the result.</li>
+        </ul>
+
+        <p>The output of each neuron in a hidden layer is then passed as input to the next layer.</p>
+
+        <p>Multiple hidden layers allow the network to learn complex non-linear relationships within the data. Each layer can learn different levels of abstraction, with the initial layers learning simple features and subsequent layers combining those features into more complex representations.</p>
+
+        <h4>Output Layer</h4>
+
+        <p>
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_2.png">https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_2.png</a></li>
+        </ul>
+
+        <p>The output layer produces the network's final result. The number of neurons in the output layer depends on the specific task:
+        <ul>
+          <li>A binary classification task would have one output neuron.</li>
+          <li>A multi-class classification task would have one neuron for each class.</li>
+        </ul>
+
+        <h4>The Power of Multiple Layers</h4>
+
+        <p>Multi-layer perceptrons (MLPs) overcome the limitations of single-layer perceptrons primarily by learning non-linear decision boundaries. By incorporating multiple hidden layers with non-linear activation functions, MLPs can approximate complex functions and capture intricate patterns in data that are not linearly separable.</p>
+
+        <p>This enables them to solve problems like the XOR problem, which single-layer perceptrons cannot address. Additionally, the hierarchical structure of MLPs allows them to learn increasingly complex features at each layer, leading to greater expressiveness and improved performance in a broader range of tasks.</p>
+
+        <h4>Activation Functions</h4>
+
+        <p>Activation functions play a crucial role in neural networks by introducing non-linearity. They determine a neuron's output based on its input. Without activation functions, the network would essentially be a linear model, limiting its ability to learn complex patterns.</p>
+
+        <p>Each neuron in a hidden layer receives a weighted sum of inputs from the previous layer plus a bias term. This sum is then passed through an activation function, determining whether the neuron should be "activated" and to what extent. The output of the activation function is then passed as input to the next layer.</p>
+
+        <h4>Types of Activation Functions</h4>
+
+        <p>There are various activation functions, each with its own characteristics and applications. Some common ones include:
+        <ul>
+          <li><b>Sigmoid:</b> - The sigmoid function squashes the input into a range between 0 and 1. It was historically popular but is now less commonly used due to issues like vanishing gradients.</li>
+          <li><b>ReLU (Rectified Linear Unit):</b> - ReLU is a simple and widely used activation function. It returns 0 for negative inputs and the input value for positive inputs. ReLU often leads to faster training and better performance.</li>
+          <li><b>Tanh (Hyperbolic Tangent):</b> - The tanh function squashes the input into a range between -1 and 1. It is similar to the sigmoid function but centered at 0.</li>
+          <li><b>Softmax:</b> - The softmax function is often used in the output layer for multi-class classification problems. It converts a vector of raw scores into a probability distribution over the classes.</li>
+        </ul>
+
+        <p>The choice of activation function depends on the specific task and network architecture.</p>
+
+        <h4>Training MLPs</h4>
+
+        <p>Training a multi-layer perceptron (MLP) involves adjusting the network's weights and biases to minimize the error between its predictions and target values. This process is achieved through a combination of backpropagation and gradient descent.</p>
+
+        <h4>Backpropagation</h4>
+
+        <p>Backpropagation is an algorithm for calculating the gradient of the loss function concerning the network's weights and biases. It works by propagating the error signal back through the network, layer by layer, starting from the output layer.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_2.png">https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_2.png</a></li>
+        </ul>
+
+        <p>Here's a simplified overview of the backpropagation process:
+        <ul>
+          <li><b>Forward Pass:</b> - The input data is fed through the network, and the output is calculated.</li>
+          <li><b>Calculate Error:</b> - A loss function calculates the difference between the predicted output and the actual target value.</li>
+          <li><b>Backward Pass:</b> - The error signal is propagated back through the network. For each layer, the gradient of the loss function concerning the weights and biases is calculated using the calculus chain rule.</li>
+          <li><b>Update Weights and Biases:</b> - The weights and biases are updated to reduce errors. This is typically done using an optimization algorithm like gradient descent.</li>
+        </ul>
+
+        <h4>Gradient Descent</h4>
+
+        <p>Gradient descent is an iterative optimization algorithm used to find the minimum of a function. In the context of MLPs, the loss function is minimized.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_4.png">https://academy.hackthebox.com/storage/modules/290/03%20-%20Neural%20Networks_4.png</a></li>
+        </ul>
+
+        <p>Gradient descent works by taking steps toward the negative gradient of the loss function. The size of the step is determined by the learning rate, a hyperparameter that controls how quickly the network learns.</p>
+
+        <p>Here's a simplified explanation of gradient descent:
+        <ul>
+          <li><b>Initialize Weights and Biases:</b> - Start with random values for the weights and biases.</li>
+          <li><b>Calculate Gradient:</b> - Use backpropagation to calculate the gradient of the loss function with respect to the weights and biases.</li>
+          <li><b>Update Weights and Biases:</b> - Subtract a fraction of the gradient from the current weights and biases. The learning rate determines the fraction.</li>
+          <li><b>Repeat:</b> - Repeat steps 2 and 3 until the loss function converges to a minimum or a predefined number of iterations is reached.</li>
+        </ul>
+
+        <p>Backpropagation and gradient descent work together to train MLPs. Backpropagation calculates the gradients, while gradient descent uses those gradients to update the network's parameters and minimize the loss function. This iterative process allows the network to learn from the data and improve its performance over time.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm">Naive Bayes</a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm">Unsupervised Learning Algorithms</a></li>
+          <li><a href="k-MeansClustering.htm">K-Means Clustering</a></li>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+          <li><a href="anomalyDetection.htm">Anomaly Detection</a></li>
+          <li><a href="reinforcementLearningAlgorithms.htm">Reinforcement Learning Algorithms</a></li>
+          <li><a href="q-Learning.htm">Q-Learning</a></li>
+          <li><a href="sARSA.htm">SARSA (State-Action-Reward-State-Action)</a></li>
+          <li><a href="introductionDeepLearning.htm">Introduction to Deep Learning</a></li>
+          <li><a href="perceptrons.htm">Perceptrons</a></li>
+          <li><a href="neuralNetworks.htm"><b><em>~ Neural Networks</em></b></a></li>
+          <li><a href="convolutionalNeuralNetworks.htm">Convolutional Neural Networks</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
