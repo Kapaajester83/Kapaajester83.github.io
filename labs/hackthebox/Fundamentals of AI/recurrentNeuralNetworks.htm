@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="convolutionalNeuralNetworks.htm">Convolutional Neural Networks</a></li>
+          <li><a href="recurrentNeuralNetworks.htm"><b><em>~ Recurrent Neural Networks</em></b></a></li>
+          <li><a href="introductionGenerativeAI.htm">Introduction to Generative AI</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Recurrent Neural Networks</em></h3>
+
+        <p>Recurrent Neural Networks (RNNs) are a class of artificial neural networks specifically designed to handle sequential data, where the order of the data points matters. Unlike traditional feedforward neural networks, which process data in a single pass, RNNs have a unique structure that allows them to maintain a "memory" of past inputs. This memory enables them to capture temporal dependencies and patterns within sequences, making them well-suited for tasks like natural language processing, speech recognition, and time series analysis.</p>
+
+        <h4>Handling Sequential Data</h4>
+
+        <p>The key to understanding how RNNs handle sequential data lies in their recurrent connections. These connections create loops within the network, allowing information to persist and be passed from one step to the next. Imagine an RNN processing a sentence word by word. As it encounters each word, it considers the current input and incorporates information from the previous words, effectively "remembering" the context.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/05%20-%20Recurrent%20Neural%20Networks_0.png">https://academy.hackthebox.com/storage/modules/290/05%20-%20Recurrent%20Neural%20Networks_0.png</a></li>
+        </ul>
+
+        <p>This process can be visualized as a chain of repeating modules, each representing a time step in the sequence. At each step, the module takes two inputs:
+        <ul>
+          <li>The current input in the sequence (e.g., a word in a sentence)</li>
+          <li>The hidden state from the previous time step encapsulates the information learned from past inputs.</li>
+        </ul>
+
+        <p>The module then performs calculations and produces two outputs:
+        <ul>
+          <li>Output for the current time step (e.g., a prediction of the next word)</li>
+          <li>An updated hidden state is passed to the next time step in the sequence.</li>
+        </ul>
+
+        <p>This cyclical flow of information allows the RNN to learn patterns and dependencies across the entire sequence, enabling it to understand context and make informed predictions.</p>
+
+        <p>For example, consider the sentence, "The cat sat on the mat." An RNN processing this sentence would:
+        <ul>
+          <li>Start with an initial hidden state (usually set to 0).</li>
+          <li>Process the word "The," and update its hidden state based on this input.</li>
+          <li>Process the word "cat," considering both the word itself and the hidden state now containing information about "The."</li>
+          <li>Continue processing each word this way, accumulating context in the hidden state at each step.</li>
+        </ul>
+
+        <p>By the time the RNN reaches the word "mat," its hidden state would contain information about the entire preceding sentence, allowing it to make a more accurate prediction about what might come next.</p>
+
+        <h4>The Vanishing Gradient Problem</h4>
+
+        <p>While RNNs excel at processing sequential data, they can suffer from a significant challenge known as the vanishing gradient problem. This problem arises during training, specifically when using backpropagation through time (BPTT) to update the network's weights.</p>
+
+        <p>In BPTT, the gradients of the loss function are calculated and propagated back through the network to adjust the weights and improve the model's performance. However, as the gradients travel back through the recurrent connections, they can become increasingly smaller, eventually vanishing to near zero. This vanishing gradient hinders the network's ability to learn long-term dependencies, as the weights associated with earlier inputs receive minimal updates.</p>
+
+        <p>The vanishing gradient problem is particularly pronounced in RNNs due to the repeated multiplication of gradients across time steps. If the gradients are small (less than 1), their product diminishes exponentially as they propagate back through the network. This means that the influence of earlier inputs on the final output becomes negligible, limiting the RNN's ability to capture long-range dependencies.</p>
+
+        <h4>LSTMs and GRUs</h4>
+
+        <p>To address the vanishing gradient problem, researchers have developed specialized RNN architectures, namely Long-Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) networks. These architectures introduce gating mechanisms that control the flow of information through the network, allowing them to better capture long-term dependencies.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/05%20-%20Recurrent%20Neural%20Networks_1.png">https://academy.hackthebox.com/storage/modules/290/05%20-%20Recurrent%20Neural%20Networks_1.png</a></li>
+        </ul>
+
+        <p>LSTMs incorporate memory cells that can store information over extended periods. These cells are equipped with three gates:
+        <ul>
+          <li><b>Input gate:</b> - Regulates the flow of new information into the memory cell.</li>
+          <li><b>Forget gate:</b> - Controls how much of the existing information in the memory cell is retained or discarded.</li>
+          <li><b>Output gate:</b> - Determines what information from the memory cell is output to the next time step.</li>
+        </ul>
+
+        <p>These gates enable LSTMs to selectively remember or forget information, mitigating the vanishing gradient problem and allowing them to learn long-term dependencies.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/05%20-%20Recurrent%20Neural%20Networks_2.png">https://academy.hackthebox.com/storage/modules/290/05%20-%20Recurrent%20Neural%20Networks_2.png</a></li>
+        </ul>
+
+        <p>GRUs offer a simpler alternative to LSTMs, with only two gates:
+        <ul>
+          <li><b>Update gate:</b> - Controls how much of the previous hidden state is retained.</li>
+          <li><b>Reset gate:</b> - Determines how much of the previous hidden state is combined with the current input.</li>
+        </ul>
+
+        <p>GRUs achieve comparable performance to LSTMs in many tasks while being computationally more efficient due to their reduced complexity.</p>
+
+        <p>LSTMs and GRUs have proven highly effective in overcoming the vanishing gradient problem, leading to significant advancements in sequence modeling tasks, including machine translation, speech recognition, and sentiment analysis.</p>
+
+        <h4>Bidirectional RNNs</h4>
+
+        <p>In addition to the standard RNNs that process sequences in a forward direction, there are also bidirectional RNNs. These networks process the sequence in both forward and backward directions simultaneously. This allows them to capture information from past and future contexts, which can be beneficial in tasks where the entire sequence is available, such as natural language processing.</p>
+
+        <p>A bidirectional RNN consists of two RNNs, one processing the sequence from left to right and the other from right to left. The hidden states of both RNNs are combined at each time step to produce the final output. This approach enables the network to consider the entire context surrounding each element in the sequence, leading to improved performance in many tasks.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm">Naive Bayes</a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm">Unsupervised Learning Algorithms</a></li>
+          <li><a href="k-MeansClustering.htm">K-Means Clustering</a></li>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+          <li><a href="anomalyDetection.htm">Anomaly Detection</a></li>
+          <li><a href="reinforcementLearningAlgorithms.htm">Reinforcement Learning Algorithms</a></li>
+          <li><a href="q-Learning.htm">Q-Learning</a></li>
+          <li><a href="sARSA.htm">SARSA (State-Action-Reward-State-Action)</a></li>
+          <li><a href="introductionDeepLearning.htm">Introduction to Deep Learning</a></li>
+          <li><a href="perceptrons.htm">Perceptrons</a></li>
+          <li><a href="neuralNetworks.htm">Neural Networks</a></li>
+          <li><a href="convolutionalNeuralNetworks.htm">Convolutional Neural Networks</a></li>
+          <li><a href="recurrentNeuralNetworks.htm"><b><em>~ Recurrent Neural Networks</em></b></a></li>
+          <li><a href="introductionGenerativeAI.htm">Introduction to Generative AI</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

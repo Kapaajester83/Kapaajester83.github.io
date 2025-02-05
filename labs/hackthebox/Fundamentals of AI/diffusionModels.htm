@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="largeLanguageModels.htm">Large Language Models</a></li>
+          <li><a href="diffusionModels.htm"><b><em>~ Diffusion Models</em></b></a></li>
+          <li><a href="skillsAssessment.htm">Skills Assessment</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Diffusion Models</em></h3>
+
+        <p>Diffusion models are a class of generative models that have gained significant attention for their ability to generate high-quality images. Unlike traditional generative models like Generative Adversarial Networks (GANs) and Variational Autoencoders (VAEs), diffusion models use noise addition and removal steps to learn the data distribution. This approach has proven effective in generating realistic images, audio, and other data types.</p>
+
+        <h4>How Diffusion Models Work</h4>
+
+        <p>Diffusion models function by gradually adding noise to an input image and then learning to reverse this process to generate new images. However, when generating images based on a textual prompt, such as "a cat in a hat," additional steps are required to incorporate the text into the generation process.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/a_cat_in_a_hat.png">https://academy.hackthebox.com/storage/modules/290/a_cat_in_a_hat.png</a></li>
+        </ul>
+
+        <p>To generate an image from a textual prompt, diffusion models typically integrate a text encoder, such as a Transformer or CLIP, to convert the text into a latent representation. This latent representation then conditions the denoising process, ensuring the generated image aligns with the prompt.
+        <ul>
+          <li><b>Text Encoding:</b> - The first step is to encode the textual prompt using a pre-trained text encoder. For example, the prompt "a cat in a hat" is converted into a high-dimensional vector that captures the semantic meaning of the text. This vector serves as a conditioning input for the diffusion model.</li>
+          <li><b>Conditioning the Denoising Process:</b> - The latent representation of the text is used to condition the denoising network. During the reverse process, the denoising network predicts the noise to be removed and ensures that the generated image aligns with the textual prompt. This is achieved by modifying the loss function to include a term that measures the discrepancy between the generated image and the text embedding.</li>
+          <li><b>Sampling Process:</b> - The sampling process begins with pure noise, as in unconditional diffusion models. However, at each step of the reverse process, the denoising network uses both the noisy image and the text embedding to predict the noise. This ensures that the generated image gradually evolves to match the textual description.</li>
+          <li><b>Final Image Generation:</b> - After a sufficient number of denoising steps, the model produces a final image consistent with the given prompt. The iterative process of adding and removing noise, guided by the text embedding, helps the model generate high-quality images that accurately reflect the textual description.</li>
+        </ul>
+
+        <p>By integrating these steps, diffusion models can effectively generate images from textual prompts, making them powerful tools for text-to-image synthesis, creative content generation, and more. The ability to condition the generation process on text allows diffusion models to produce diverse and contextually relevant images, opening up a wide range of applications in fields like art, design, and content creation.</p>
+
+        <h4>Forward Process: Adding Noise</h4>
+
+        <p>
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/diffusion_first_five.png">https://academy.hackthebox.com/storage/modules/290/diffusion_first_five.png</a></li>
+        </ul>
+
+        <p>The forward process in diffusion models involves gradually adding noise to the data until it becomes pure noise. This process is often called the "forward diffusion" or "noising" process. Mathematically, this can be represented as:</p>
+
+        <pre>
+          x_T = q(x_T | x_0)
+
+          Where:
+            x_0 is the original data (e.g., an image).
+            x_T is the pure noise.
+            q(x_T | x_0) is the distribution of the noisy data given the original data.
+        </pre>
+
+        <p>A sequence of intermediate steps typically defines the forward process:</p>
+
+        <pre>
+          x_t = q(x_t | x_{t-1})
+
+          Where:
+            t is the time step, ranging from 0 to T.
+            q(x_t | x_{t-1}) is the transition probability from step t-1 to step t.
+        </pre>
+
+        <h4>Reverse Process: Removing Noise</h4>
+
+        <p>
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/diffusion_final_five.png">https://academy.hackthebox.com/storage/modules/290/diffusion_final_five.png</a></li>
+        </ul>
+
+        <p>The reverse process, known as the "denoising" process, involves learning to remove the noise added during the forward process. The goal is to map the noisy data back to the original data distribution. This is achieved by training a neural network to predict the noise at each step:</p>
+
+        <pre>
+          x_{t-1} = p_θ(x_{t-1} | x_t)
+
+          Where:
+            p_θ(x_{t-1} | x_t) is the learned distribution parameterized by the model's parameters θ.
+        </pre>
+
+        <p>The reverse process is trained to minimize the difference between the predicted and actual noise added in the forward process. This is typically done using a loss function such as the mean squared error (MSE):</p>
+
+        <pre>
+          L = E[||ε - ε_pred||^2]
+
+          Where:
+            ε is the actual noise.
+            ε_pred is the predicted noise.
+        </pre>
+
+        <h4>Noise Schedule</h4>
+
+        <p>The noise schedule determines how much noise is added at each step of the forward process. A common choice is a linear schedule, where the variance of the noise increases linearly over time:</p>
+
+        <pre>
+          β_t = β_min + (t / T) * (β_max - β_min)
+
+          Where:
+
+            β_t is the variance of the noise at step t.
+            β_min and β_max are the minimum and maximum variances, respectively.
+        </pre>
+
+        <p>The choice of the noise schedule can significantly impact the diffusion model's performance. A well-designed schedule ensures the model learns to denoise effectively across all time steps.</p>
+
+        <h4>Denoising Network</h4>
+
+        <p>The denoising network is a neural network that learns to predict the noise at each time step. This network is typically a deep convolutional neural network (CNN) or a transformer, depending on the complexity of the data. The input to the network is the noisy data x_t, and the output is the predicted noise hat{ε}.</p>
+
+        <p>The architecture of the denoising network is crucial for the model's performance. It must be powerful enough to capture the complex patterns in the data and efficient enough to handle large datasets and high-resolution images.</p>
+
+        <h4>Training</h4>
+
+        <p>Training a diffusion model involves minimizing the loss function over multiple time steps. This is done using gradient descent and backpropagation. The training process can be computationally intensive, especially for high-resolution images, but it results in a model that can generate high-quality samples.</p>
+
+        <p>The training process can be summarized as follows:
+        <ul>
+          <li><b>Initialize the Model:</b> - Start with an initial set of parameters θ for the denoising network.</li>
+          <li><b>Forward Process:</b> - Add noise to the original data using the noise schedule.</li>
+          <li><b>Reverse Process:</b> - Train the denoising network to predict the noise at each time step.</li>
+          <li><b>Loss Calculation:</b> - Compute the loss between predicted and actual noise.</li>
+          <li><b>Parameter Update:</b> - To minimize the loss, update the model parameters using gradient descent.</li>
+          <li><b>Iterate:</b> - Repeat the process for multiple epochs until the model converges.</li>
+        </ul>
+
+        <h4>Sampling</h4>
+
+        <p>
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/290/diffusion_full.png">https://academy.hackthebox.com/storage/modules/290/diffusion_full.png</a></li>
+        </ul>
+
+        <p>Once the model is trained, you can generate new images by sampling from the learned distribution. This involves starting with pure noise and iteratively applying the reverse process to remove the noise:</p>
+
+        <pre>
+          x_0 = p_θ(x_0 | x_T)
+
+          Where:
+            x_T is the initial pure noise.
+            p_θ(x_0 | x_T) is the learned distribution.
+        </pre>
+
+        <p>The sampling process can be summarized as follows:
+        <ul>
+          <li><b>Start with Noise:</b> - Initialize the process with pure noise x_T.</li>
+          <li><b>Iterative Denoising:</b> - For each time step t from T to 1, use the denoising network to predict the noise and update the data.</li>
+          <li><b>Final Sample:</b> - After T steps, the resulting data x_0 is the generated image.</li>
+        </ul>
+
+        <h4>Data Assumptions</h4>
+
+        <p>Diffusion models make the following assumptions about the data:
+        <ul>
+          <li><b>Markov Property:</b> - The diffusion process exhibits the Markov property. This means that each step in both the forward (adding noise) and reverse (removing noise) processes depends only on the immediately preceding step, not the entire history of the process.</li>
+          <li><b>Static Data Distribution:</b> - Diffusion models are trained on a fixed dataset, and they learn to represent the underlying distribution of this data. This data distribution is assumed to be static during training.</li>
+          <li><b>Smoothness Assumption:</b> - While not a strict requirement, diffusion models often perform well when the data distribution is smooth. This means that small changes in the input data result in small changes in the output. This assumption helps the model learn the underlying structure of the data and generate realistic samples.</li>
+        </ul>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm">Naive Bayes</a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm">Unsupervised Learning Algorithms</a></li>
+          <li><a href="k-MeansClustering.htm">K-Means Clustering</a></li>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+          <li><a href="anomalyDetection.htm">Anomaly Detection</a></li>
+          <li><a href="reinforcementLearningAlgorithms.htm">Reinforcement Learning Algorithms</a></li>
+          <li><a href="q-Learning.htm">Q-Learning</a></li>
+          <li><a href="sARSA.htm">SARSA (State-Action-Reward-State-Action)</a></li>
+          <li><a href="introductionDeepLearning.htm">Introduction to Deep Learning</a></li>
+          <li><a href="perceptrons.htm">Perceptrons</a></li>
+          <li><a href="neuralNetworks.htm">Neural Networks</a></li>
+          <li><a href="convolutionalNeuralNetworks.htm">Convolutional Neural Networks</a></li>
+          <li><a href="recurrentNeuralNetworks.htm">Recurrent Neural Networks</a></li>
+          <li><a href="introductionGenerativeAI.htm">Introduction to Generative AI</a></li>
+          <li><a href="largeLanguageModels.htm">Large Language Models</a></li>
+          <li><a href="diffusionModels.htm"><b><em>~ Diffusion Models</em></b></a></li>
+          <li><a href="skillsAssessment.htm">Skills Assessment</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

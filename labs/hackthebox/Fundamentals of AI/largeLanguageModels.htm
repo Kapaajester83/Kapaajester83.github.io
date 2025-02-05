@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Fundamentals of AI</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ul>
+          <li><a href="introductionGenerativeAI.htm">Introduction to Generative AI</a></li>
+          <li><a href="largeLanguageModels.htm"><b><em>~ Large Language Models</em></b></a></li>
+          <li><a href="diffusionModels.htm">Diffusion Models</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Large Language Models</em></h3>
+
+        <p>Large language models (LLMs) are a type of artificial intelligence (AI) that has gained significant attention in recent years due to their ability to understand and generate human-like text. These models are trained on massive amounts of text data, allowing them to learn patterns and relationships in language. This knowledge enables them to perform various tasks, including translation, summarization, question answering, and creative writing.</p>
+
+        <p>LLMs are typically based on a deep learning architecture called transformers. Transformers are particularly well-suited for processing sequential data like text because they can capture long-range dependencies between words. This is achieved through self-attention, which allows the model to weigh the importance of different words in a sentence when processing it.</p>
+
+        <p>The training process of an LLM involves feeding it massive amounts of text data and adjusting the model's parameters to minimize the difference between its predictions and the actual text. This process is computationally expensive and requires specialized hardware like GPUs or TPUs.</p>
+
+        <p>LLMs typically demonstrate three characteristics:
+        <ul>
+          <li><b>Massive Scale:</b> - LLMs are characterized by their enormous size, often containing billions or even trillions of parameters. This scale allows them to capture the nuances of human language.</li>
+          <li><b>Few-Shot Learning:</b> - LLMs can perform new tasks with just a few examples, unlike traditional machine learning models that require large labeled datasets.</li>
+          <li><b>Contextual Understanding:</b> - LLMs can understand the context of a conversation or text, allowing them to generate more relevant and coherent responses.</li>
+        </ul>
+
+        <h4>How LLMs Work</h4>
+
+        <p>Large language models represent a significant leap in artificial intelligence, showcasing impressive capabilities in understanding and generating human language. To truly grasp their power and potential, exploring the technical intricacies that drive their functionality is essential.
+        <ul>
+          <li>Transformer Architecture - A neural network design that processes entire sentences in parallel, making it faster and more efficient than traditional RNNs.</li>
+          <li>Tokenization - The process of converting text into smaller units called tokens, which can be words, subwords, or characters.</li>
+          <li>Embeddings - Numerical representations of tokens that capture semantic meaning, with similar words having embeddings closer together in a high-dimensional space.</li>
+          <li>Encoders and Decoders - Components of transformers where encoders process input text to capture its meaning, and decoders generate output text based on the encoder's output.</li>
+          <li>Self-Attention Mechanism - A mechanism that calculates attention scores between words, allowing the model to understand long-range dependencies in text.</li>
+          <li>Training - LLMs are trained using massive amounts of text data and unsupervised learning, adjusting parameters to minimize prediction errors using gradient descent.</li>
+        </ul>
+
+        <h4>The Transformer Architecture</h4>
+
+        <p>At the heart of most LLMs lies the transformer architecture, a neural network design that revolutionized natural language processing. Unlike traditional recurrent neural networks (RNNs) that process text sequentially, transformers can process entire sentences in parallel, making them significantly faster and more efficient.</p>
+
+        <p>The key innovation of transformers is the self-attention mechanism. Self-attention allows the model to weigh the importance of different words in a sentence when processing it. Imagine you're reading a sentence like "The cat sat on the mat." Self-attention would allow the model to understand that "cat" and "sat" are closely related, while "mat" is less important to the meaning of "sat."</p>
+
+        <h4>Tokenization: Breaking Down Text</h4>
+
+        <p>Before an LLM can process text, it needs to be converted into a format the model can understand. This is done through tokenization, where the text is broken down into smaller units called tokens. Tokens can be words, subwords, or even characters, depending on the specific model.</p>
+
+        <p>For example, the sentence "I love artificial intelligence" might be tokenized as:</p>
+
+        <pre>
+          ["I", "love", "artificial", "intelligence"]
+        </pre>
+
+        <h4>Embeddings: Representing Words as Vectors</h4>
+
+        <p>Once the text is tokenized, each token is converted into a numerical representation called an embedding. Embeddings capture the semantic meaning of words, representing them as points in a high-dimensional space. Words with similar meanings will have embeddings that are closer together in this space.</p>
+
+        <p>For instance, the embeddings for "king" and "queen" would be closer together than the embeddings for "king" and "table."</p>
+
+        <h4>Encoders and Decoders: Processing and Generating Text</h4>
+
+        <p>Transformers consist of two main components: encoders and decoders. Encoders process the input text, capturing its meaning and relationships between words. Decoders use this information to generate output text, such as a translation or a summary.</p>
+
+        <p>In the context of LLMs, the encoder and decoder work together to understand and generate human-like text. The encoder processes the input text, and the decoder generates text based on the encoder's output.</p>
+
+        <h4>Attention is All You Need</h4>
+
+        <p>Self-attention is the key mechanism that allows transformers to capture long-range dependencies in text. It works by calculating attention scores between each pair of words in a sentence. These scores indicate how much each word should "pay attention" to other words.</p>
+
+        <p>For example, in the sentence "The cat sat on the mat, which was blue," self-attention would allow the model to understand that "which" refers to "mat," even though they are several words apart.</p>
+
+        <h4>Training LLMs</h4>
+
+        <p>LLMs are trained on massive amounts of text data, often using unsupervised learning. This means the model learns patterns and relationships in the data without explicit labels or instructions.</p>
+
+        <p>The training involves feeding the model text data and adjusting its parameters to minimize the difference between its predictions and the actual text. This is typically done using a variant of gradient descent, an optimization algorithm that iteratively adjusts the model's parameters to minimize a loss function.</p>
+
+        <h4>Example</h4>
+
+        <p>Let's say we want to use an LLM to generate a story about a cat. We would provide the model with a prompt, such as "Once upon a time, there was a cat named Whiskers." The LLM would then use its knowledge of language and storytelling to generate the rest of the story, word by word.</p>
+
+        <p>The model would consider the context of the prompt and its knowledge of grammar, syntax, and semantics to generate coherent and engaging text. It might generate something like:</p>
+
+        <pre>
+          Code: txt
+          Once upon a time, there was a cat named Whiskers. Whiskers was a curious and adventurous cat, always exploring the<br>          world around him. One day, he ventured into the forest and stumbled upon a hidden village of mice...
+        </pre>
+
+        <p>This is just a simplified example, but it illustrates how LLMs can generate creative and engaging text based on a given prompt.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../fundamentalsAI.htm">Fundamentals of AI</a></h4>
+        <ol>
+          <li><a href="introductionMachineLearning.htm">Introduction to Machine Learning</a></li>
+          <li><a href="mathematicsRefresherAI.htm">Mathematics Refresher for AI</a></li>
+          <li><a href="supervisedLearningAlgorithms.htm">Supervised Learning Algorithms</a></li>
+          <li><a href="linearRegression.htm">Linear Regression</a></li>
+          <li><a href="logisticRegression.htm">Logistic Regression</a></li>
+          <li><a href="decisionTrees.htm">Decision Trees</a></li>
+          <li><a href="naiveBayes.htm">Naive Bayes</a></li>
+          <li><a href="supportVectorMachines.htm">Support Vector Machines (SVMs)</a></li>
+          <li><a href="unsupervisedLearningAlgorithms.htm">Unsupervised Learning Algorithms</a></li>
+          <li><a href="k-MeansClustering.htm">K-Means Clustering</a></li>
+          <li><a href="principalComponentAnalysis.htm">Principal Component Analysis (PCA)</a></li>
+          <li><a href="anomalyDetection.htm">Anomaly Detection</a></li>
+          <li><a href="reinforcementLearningAlgorithms.htm">Reinforcement Learning Algorithms</a></li>
+          <li><a href="q-Learning.htm">Q-Learning</a></li>
+          <li><a href="sARSA.htm">SARSA (State-Action-Reward-State-Action)</a></li>
+          <li><a href="introductionDeepLearning.htm">Introduction to Deep Learning</a></li>
+          <li><a href="perceptrons.htm">Perceptrons</a></li>
+          <li><a href="neuralNetworks.htm">Neural Networks</a></li>
+          <li><a href="convolutionalNeuralNetworks.htm">Convolutional Neural Networks</a></li>
+          <li><a href="recurrentNeuralNetworks.htm">Recurrent Neural Networks</a></li>
+          <li><a href="introductionGenerativeAI.htm">Introduction to Generative AI</a></li>
+          <li><a href="largeLanguageModels.htm"><b><em>~ Large Language Models</em></b></a></li>
+          <li><a href="diffusionModels.htm">Diffusion Models</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
