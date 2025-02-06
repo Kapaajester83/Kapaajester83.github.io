@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Using Metasploit Framework</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../usingMetasploitFramework.htm">Using Metasploit Framework</a></h4>
+        <ul>
+          <li><a href="introductionMetasploit.htm">Introduction to Metasploit</a></li>
+          <li><a href="introductionMSFconsole.htm"><b><em>~ Introduction to MSFconsole</em></b></a></li>
+          <li><a href="modules.htm">Modules</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Introduction to MSFconsole</em></h3>
+
+        <p>To start interacting with the Metasploit Framework, we need to type msfconsole in the terminal of our choice. Many security-oriented distributions such as Parrot Security and Kali Linux come with msfconsole preinstalled. We can use several other options when launching the script as with any other command-line tool. These vary from graphical display switches/options to procedural ones.</p>
+
+        <h4>Preparation</h4>
+
+        <p>Upon launching the msfconsole, we are met with their coined splash art and the command line prompt, waiting for our first command.</p>
+
+        <h4>Launching MSFconsole</h4>
+
+        <pre>
+          kappajester83@htb[/htb]$ msfconsole
+                                                  
+                                              `:oDFo:`                            
+                                           ./ymM0dayMmy/.                          
+                                        -+dHJ5aGFyZGVyIQ==+-                    
+                                    `:sm⏣~~Destroy.No.Data~~s:`                
+                                 -+h2~~Maintain.No.Persistence~~h+-              
+                             `:odNo2~~Above.All.Else.Do.No.Harm~~Ndo:`          
+                          ./etc/shadow.0days-Data'%20OR%201=1--.No.0MN8'/.      
+                       -++SecKCoin++e.AMd`       `.-://///+hbove.913.ElsMNh+-    
+                      -~/.ssh/id_rsa.Des-                  `htN01UserWroteMe!-  
+                      :dopeAW.No"nano"o                     :is:TЯiKC.sudo-.A:  
+                      :we're.all.alike'`                     The.PFYroy.No.D7:  
+                      :PLACEDRINKHERE!:                      yxp_cmdshell.Ab0:    
+                      :msf>exploit -j.                       :Ns.BOB&ALICEes7:    
+                      :---srwxrwx:-.`                        `MS146.52.No.Per:    
+                      :"script".Ac816/                        sENbove3101.404:    
+                      :NT_AUTHORITY.Do                        `T:/shSYSTEM-.N:    
+                      :09.14.2011.raid                       /STFU|wall.No.Pr:    
+                      :hevnsntSurb025N.                      dNVRGOING2GIVUUP:    
+                      :#OUTHOUSE-  -s:                       /corykennedyData:    
+                      :$nmap -oS                              SSo.6178306Ence:    
+                      :Awsm.da:                            /shMTl#beats3o.No.:    
+                      :Ring0:                             `dDestRoyREXKC3ta/M:    
+                      :23d:                               sSETEC.ASTRONOMYist:    
+                       /-                        /yo-    .ence.N:(){ :|: & };:    
+                                                 `:Shall.We.Play.A.Game?tron/    
+                                                 ```-ooy.if1ghtf0r+ehUser5`    
+                                               ..th3.H1V3.U2VjRFNN.jMh+.`          
+                                              `MjM~~WE.ARE.se~~MMjMs              
+                                               +~KANSAS.CITY's~-`                  
+                                                J~HAKCERS~./.`                    
+                                                .esc:wq!:`                        
+                                                 +++ATH`                            
+                                                  `
+
+
+                 =[ metasploit v6.1.9-dev                           ]
+          + -- --=[ 2169 exploits - 1149 auxiliary - 398 post       ]
+          + -- --=[ 592 payloads - 45 encoders - 10 nops            ]
+          + -- --=[ 9 evasion                                       ]
+
+          msf6 >
+        </pre>
+
+        <p>Metasploit tip: Use sessions -1 to interact with the last opened session</p>
+
+        <p>Alternatively, we can use the -q option, which does not display the banner.</p>
+
+        <pre>
+          kappajester83@htb[/htb]$ msfconsole -q
+          msf6 >
+        </pre>
+
+        <p>To better look at all the available commands, we can type the help command. First things first, our tools need to be sharp. One of the first things we need to do is make sure the modules that compose the framework are up to date, and any new ones available to the public can be imported.</p>
+
+        <p>The old way would have been to run msfupdate in our OS terminal (outside msfconsole). However, the apt package manager can currently handle the update of modules and features effortlessly.</p>
+
+        <h4>Installing MSF</h4>
+
+        <pre>
+          kappajester83@htb[/htb]$ sudo apt update && sudo apt install metasploit-framework
+          "SNIP"
+          (Reading database ... 414458 files and directories currently installed.)
+          Preparing to unpack .../metasploit-framework_6.0.2-0parrot1_amd64.deb ...
+          Unpacking metasploit-framework (6.0.2-0parrot1) over (5.0.88-0kali1) ...
+          Setting up metasploit-framework (6.0.2-0parrot1) ...
+          Processing triggers for man-db (2.9.1-1) ...
+          Scanning application launchers
+          Removing duplicate launchers from Debian
+          Launchers are updated
+        </pre>
+
+        <p>One of the first steps we will cover in this module is searching for a proper exploit for our target. Nevertheless, we need to have a detailed perspective on the target itself before attempting any exploitation. This involves the Enumeration process, which precedes any type of exploitation attempt.</p>
+
+        <p>During Enumeration, we have to look at our target and identify which public-facing services are running on it. For example, is it an HTTP server? Is it an FTP server? Is it an SQL Database? These different target typologies vary substantially in the real world. We will need to start with a thorough scan of the target's IP address to determine what service is running and what version is installed for each service.</p>
+
+        <p>We will notice as we go along that versions are the key components during the Enumeration process that will allow us to determine if the target is vulnerable or not. Unpatched versions of previously vulnerable services or outdated code in a publicly accessible platform will often be our entry point into the target system.</p>
+
+        <h4>MSF Engagement Structure</h4>
+
+        <p>The MSF engagement structure can be divided into five main categories:
+        <ul>
+          <li>Enumeration</li>
+          <li>Preparation</li>
+          <li>Exploitation</li>
+          <li>Privilege Escalation</li>
+          <li>Post-Exploitation</li>
+        </ul>
+
+        <p>This division makes it easier for us to find and select the appropriate MSF features in a more structured way and to work with them accordingly. Each of these categories has different subcategories that are intended for specific purposes. These include, for example, Service Validation and Vulnerability Research.</p>
+
+        <p>It is therefore crucial that we familiarize ourselves with this structure. Therefore, we will look at this framework's components to better understand how they are related.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/39/S04_SS03.png">https://academy.hackthebox.com/storage/modules/39/S04_SS03.png</a></li>
+        </ul>
+
+        <p>We will go through each of these categories during the module, but we recommend looking at the individual components ourselves and digging deeper. Experimenting with the different functions is an integral part of learning a new tool or skill. Therefore, we should try out everything imaginable here in the following labs and analyze the results independently.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../usingMetasploitFramework.htm">Using Metasploit Framework</a></h4>
+        <ol>
+          <li><a href="preface.htm">Preface</a></li>
+          <li><a href="introductionMetasploit.htm">Introduction to Metasploit</a></li>
+          <li><a href="introductionMSFconsole.htm"><b><em>~ Introduction to MSFconsole</em></b></a></li>
+          <li><a href="modules.htm">Modules</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
