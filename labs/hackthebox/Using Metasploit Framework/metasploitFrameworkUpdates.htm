@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Using Metasploit Framework</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../usingMetasploitFramework.htm">Using Metasploit Framework</a></h4>
+        <ul>
+          <li><a href="firewallIDS-IPSEvasion.htm">Firewall and IDS-IPS Evasion</a></li>
+          <li><a href="metasploitFrameworkUpdates.htm"><b><em>~ Metasploit-Framework Updates</em></b></a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Metasploit-Framework Updates</em></h3>
+
+        <p>Updating to MSF6 will render all previous payload sessions unusable if they were established using MSF5. Moreover, payloads generated using MSF5 will not work with MSF6 communication mechanisms. We have summarized the changes and additions that the August 2020 MSFconsole updates brought below.</p>
+
+        <h4>Generation Features</h4>
+        <p>
+        <ul>
+          <li>End to end encryption across Meterpreter sessions for all five implementations (Windows, Python, Java, Mettle, and PHP)</li>
+          <li>SMBv3 client support to further enable modern exploitation workflows</li>
+          <li>New polymorphic payload generation routine for Windows shellcode that improves evasive capabilities against common antivirus and intrusion detection system (IDS) products</li>
+        </ul>
+
+        <h4>Expanded Encryption</h4>
+        <p>
+        <ul>
+          <li>Increased complexity for creation of signature-based detections for certain network operations and Metasploit’s main payload binaries</li>
+          <li>All Meterpreter payloads will use AES encryption during communication between the attacker and the target system</li>
+          <li>SMBv3 encryption integration will increase complexity for signature-based detections used to identify key operations performed over SMB</li>
+        </ul>
+
+        <h4>Cleaner Payload Artifacts</h4>
+        <p>
+        <ul>
+          <li>DLLs used by the Windows Meterpreter now resolve necessary functions by ordinal instead of name</li>
+          <li>The standard export ReflectiveLoader used by reflectively loadable DLLs is no longer present in the payload binaries as text data</li>
+          <li>Commands that Meterpreter exposes to the Framework are now encoded as integers instead of strings</li>
+        </ul>
+
+        <h4>Plugins</h4>
+
+        <p>The old Mimikatz Meterpreter extension was removed in favor of its successor, Kiwi. Therefore, attempts to load Mimikatz will load Kiwi for the foreseeable future.</p>
+
+        <h4>Payloads</h4>
+
+        <p>Replaced the shellcode static generation routine with a randomization routine that adds polymorphic properties to this critical stub by shuffling instructions around each time. To read more about these changes and see the full changelog, please follow this link.</p>
+
+        <h4>Closing Thoughts</h4>
+
+        <p>As we have seen in this module, Metasploit is a powerful framework. Though often misused and mislabeled, it can be an important part of our penetration testing arsenal when used correctly. It is highly extensible great for tracking data during an assessment, and excellent for post-exploitation and facilitating pivoting. It is worth experimenting with all of the features Metasploit has to offer; you may find a way that it fits nicely into your workflow. If you prefer to avoid it, that's fine too! There are plenty of tools out there, and we should work with what we are most comfortable with. To get more practice with this tool, check out the HTB boxes tagged at the end of this module, or attempt any box or Academy module target using Metasploit. You can also practice with it (especially its power for pivoting) in the Dante Pro Lab.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../usingMetasploitFramework.htm">Using Metasploit Framework</a></h4>
+        <ol>
+          <li><a href="preface.htm">Preface</a></li>
+          <li><a href="introductionMetasploit.htm">Introduction to Metasploit</a></li>
+          <li><a href="introductionMSFconsole.htm">Introduction to MSFconsole</a></li>
+          <li><a href="modules.htm">Modules</a></li>
+          <li><a href="targets.htm">Targets</a></li>
+          <li><a href="payloads.htm">Payloads</a></li>
+          <li><a href="encoders.htm">Encoders</a></li>
+          <li><a href="databases.htm">Databases</a></li>
+          <li><a href="plugins.htm">Plugins</a></li>
+          <li><a href="sessions.htm">Sessions</a></li>
+          <li><a href="meterpreter.htm">Meterpreter</a></li>
+          <li><a href="writingImportingModules.htm">Writing and Importing Modules</a></li>
+          <li><a href="introductionMSFVenom.htm">Introduction to MSFVenom</a></li>
+          <li><a href="firewallIDS-IPSEvasion.htm">Firewall and IDS-IPS Evasion</a></li>
+          <li><a href="metasploitFrameworkUpdates.htm"><b><em>~ Metasploit-Framework Updates</em></b></a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
