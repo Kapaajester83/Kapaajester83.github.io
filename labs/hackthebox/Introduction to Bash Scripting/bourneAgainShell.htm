@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Bash Scripting</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../introductionBashScripting.htm">Introduction to Bash Scripting</a></h4>
+        <ul>
+          <li><a href="bourneAgainShell.htm"><b><em>~ Bourne Again Shell</em></b></a></li>
+          <li><a href="conditionalExecution.htm">Conditional Execution</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Bourne Again Shell</em></h3>
+
+        <p>Bash is the scripting language we use to communicate with Unix-based OS and give commands to the system. Since May 2019, Windows provides a Windows Subsystem for Linux that allows us to use Bash in a Windows environment. It is essential to master the language to work efficiently with it. The main difference between scripting and programming languages is that we don't need to compile the code to execute the scripting language, as opposed to programming languages.</p>
+
+        <p>As penetration testers, we must be able to work with any operating system, whether it is Windows or Unix-based. Efficiency depends mainly on the knowledge of the systems, especially in the privilege escalation field. On Unix-based systems, it is essential to learn how to use the terminal, filter data, and automate these processes. Especially in large Unix-based enterprise networks, we will have to deal with large amounts of data. We have to sort and filter out accordingly to determine potential gaps and information as fast as possible.</p>
+
+        <p>It is also essential to learn how to combine several commands and work with individual results. This is where scripting comes in, increasing our speed and efficiency. Like a programming language, a scripting language has almost the same structure, which can be divided into:
+        <ul>
+          <li>Input & Output</li>
+          <li>Arguments, Variables & Arrays</li>
+          <li>Conditional execution</li>
+          <li>Arithmetic</li>
+          <li>Loops</li>
+          <li>Comparison operators</li>
+          <li>Functions</li>
+        </ul>
+
+        <p>It is often common to automate some processes not to repeat them all the time or process and filter a large amount of information. In general, a script does not create a process, but it is executed by the interpreter that executes the script, in this case, the Bash. To execute a script, we have to specify the interpreter and tell it which script it should process. Such a call looks like this:</p>
+
+        <h4>Script Execution - Examples</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ bash script.sh "optional arguments"
+
+          kalijester68@htb[/htb]$ sh script.sh "optional arguments"
+
+          kalijester68@htb[/htb]$ ./script.sh "optional arguments"
+        </pre>
+
+        <p>Let us look at such a script and see how they can be created to get specific results. If we execute this script and specify a domain, we see what information this script provides.</p>
+
+        <h4>CIDR.sh</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ ./CIDR.sh inlanefreight.com
+
+          Discovered IP address(es):
+          165.22.119.202
+
+          Additional options available:
+            1) Identify the corresponding network range of target domain.
+            2) Ping discovered hosts.
+            3) All checks.
+            *) Exit.
+
+          Select your option: 3
+
+          NetRange for 165.22.119.202:
+          NetRange:       165.22.0.0 - 165.22.255.255
+          CIDR:           165.22.0.0/16
+
+          Pinging host(s):
+          165.22.119.202 is up.
+
+          1 out of 1 hosts are up.
+        </pre>
+
+        <p>Now let us look at that script in detail and read it line by line in the best possible way. In the next sections, we will look at and analyze all the parts of this script.</p>
+
+        <pre>
+          CIDR.sh
+          Code: bash
+
+          #!/bin/bash
+
+          # Check for given arguments
+          if [ $# -eq 0 ]
+          then
+            echo -e "You need to specify the target domain.\n"
+            echo -e "Usage:"
+            echo -e "\t$0 'domain'"
+            exit 1
+          else
+            domain=$1
+          fi
+
+          # Identify Network range for the specified IP address(es)
+          function network_range {
+            for ip in $ipaddr
+            do
+              netrange=$(whois $ip | grep "NetRange\|CIDR" | tee -a CIDR.txt)
+              cidr=$(whois $ip | grep "CIDR" | awk '{print $2}')
+              cidr_ips=$(prips $cidr)
+              echo -e "\nNetRange for $ip:"
+              echo -e "$netrange"
+            done
+          }
+
+          # Ping discovered IP address(es)
+          function ping_host {
+            hosts_up=0
+            hosts_total=0
+            
+            echo -e "\nPinging host(s):"
+            for host in $cidr_ips
+            do
+              stat=1
+              while [ $stat -eq 1 ]
+              do
+                ping -c 2 $host > /dev/null 2>&1
+                if [ $? -eq 0 ]
+                then
+                  echo "$host is up."
+                  ((stat--))
+                  ((hosts_up++))
+                  ((hosts_total++))
+                else
+                  echo "$host is down."
+                  ((stat--))
+                  ((hosts_total++))
+                fi
+              done
+            done
+            
+            echo -e "\n$hosts_up out of $hosts_total hosts are up."
+          }
+
+          # Identify IP address of the specified domain
+          hosts=$(host $domain | grep "has address" | cut -d" " -f4 | tee discovered_hosts.txt)
+
+          echo -e "Discovered IP address:\n$hosts\n"
+          ipaddr=$(host $domain | grep "has address" | cut -d" " -f4 | tr "\n" " ")
+
+          # Available options
+          echo -e "Additional options available:"
+          echo -e "\t1) Identify the corresponding network range of target domain."
+          echo -e "\t2) Ping discovered hosts."
+          echo -e "\t3) All checks."
+          echo -e "\t*) Exit.\n"
+
+          read -p "Select your option: " opt
+
+          case $opt in
+            "1") network_range ;;
+            "2") ping_host ;;
+            "3") network_range && ping_host ;;
+            "*") exit 0 ;;
+          esac
+        </pre>
+
+        <p>As we can see, we have commented here several parts of the script into which we can split it.
+        <ol>
+          <li><b>Check for given arguments</b> - In the first part of the script, we have an if-else statement that checks if we have specified a domain representing the target company.</li>
+          <li><b>Identify network range for the specified IP address(es)</b> - Here we have created a function that makes a "whois" query for each IP address and displays the line for the reserved network range, and stores it in the CIDR.txt.</li>
+          <li><b>Ping discovered IP address(es)</b> - This additional function is used to check if the found hosts are reachable with the respective IP addresses. With the For-Loop, we ping every IP address in the network range and count the results.</li>
+          <li><b>Identify IP address(es) of the specified domain</b> - As the first step in this script, we identify the IPv4 address of the domain returned to us.</li>
+          <li><b>Available Options</b> - Then we decide which functions we want to use to find out more information about the infrastructure.</li>
+        </ol>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../introductionBashScripting.htm">Introduction to Bash Scripting</a></h4>
+        <ol>
+          <li><a href="bourneAgainShell.htm"><b><em>~ Bourne Again Shell</em></b></a></li>
+          <li><a href="conditionalExecution.htm">Conditional Execution</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Bash Scripting</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../introductionBashScripting.htm">Introduction to Bash Scripting</a></h4>
+        <ul>
+          <li><a href="bourneAgainShell.htm">Bourne Again Shell</a></li>
+          <li><a href="conditionalExecution.htm"><b><em>~ Conditional Execution</em></b></a></li>
+          <li><a href="argumentsVariablesArrays.htm">Arguments, Variables, and Arrays</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Conditional Execution</em></h3>
+
+        <p>Conditional execution allows us to control the flow of our script by reaching different conditions. This function is one of the essential components. Otherwise, we could only execute one command after another.</p>
+
+        <p>When defining various conditions, we specify which functions or sections of code should be executed for a specific value. If we reach a specific condition, only the code for that condition is executed, and the others are skipped. As soon as the code section is completed, the following commands will be executed outside the conditional execution. Let us look at the first part of the script again and analyze it.</p>
+
+        <h4>Script.sh</h4>
+
+        <pre>
+          #!/bin/bash
+
+          # Check for given argument
+          if [ $# -eq 0 ]
+          then
+            echo -e "You need to specify the target domain.\n"
+            echo -e "Usage:"
+            echo -e "\t$0 'domain'"
+            exit 1
+          else
+            domain=$1
+          fi
+
+          "SNIP"
+        </pre>
+
+        <p>In summary, this code section works with the following components:
+        <ul>
+          <li><b>#!/bin/bash</b> - Shebang.</li>
+          <li><b>if-else-fi</b> - Conditional execution.</li>
+          <li><b>echo</b> - Prints specific output.</li>
+          <li><b>$# / $0 / $1</b> - Special variables.</li>
+          <li><b>domain</b> - Variables.</li>
+        </ul>
+
+        <p>The conditions of the conditional executions can be defined using variables ($#, $0, $1, domain), values (0), and strings, as we will see in the next examples. These values are compared with the comparison operators (-eq) that we will look at in the next section.</p>
+
+        <h4>Shebang</h4>
+
+        <p>The shebang line is always at the top of each script and always starts with "#!". This line contains the path to the specified interpreter (/bin/bash) with which the script is executed. We can also use Shebang to define other interpreters like Python, Perl, and others.</p>
+
+        <pre>
+          Code: python
+          #!/usr/bin/env python
+
+          Code: perl
+          #!/usr/bin/env perl
+        </pre>
+
+        <h4>If-Else-Fi</h4>
+
+        <p>One of the most fundamental programming tasks is to check different conditions to deal with these. Checking of conditions usually has two different forms in programming and scripting languages, the if-else condition and case statements. In pseudo-code, the if condition means the following:</p>
+
+        <h4>Pseudo-Code</h4>
+
+        <pre>
+          Code: bash
+
+          if [ the number of given arguments equals 0 ]
+          then
+            Print: "You need to specify the target domain."
+            Print: "'empty line'"
+            Print: "Usage:"
+            Print: "   'name of the script' 'domain'"
+            Exit the script with an error
+          else
+            The "domain" variable serves as the alias for the given argument 
+          finish the if-condition
+        </pre>
+
+        <p>By default, an If-Else condition can contain only a single "If", as shown in the next example.</p>
+
+        <h4>If-Only.sh</h4>
+
+        <pre>
+          #!/bin/bash
+
+          value=$1
+
+          if [ $value -gt "10" ]
+          then
+                  echo "Given argument is greater than 10."
+          fi
+        </pre>
+
+        <h4>If-Only.sh - Execution</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ bash if-only.sh 5
+
+          kalijester68@htb[/htb]$ bash if-only.sh 12
+          Given argument is greater than 10.
+        </pre>
+
+        <p>When adding Elif or Else, we add alternatives to treat specific values or statuses. If a particular value does not apply to the first case, it will be caught by others.</p>
+
+        <h4>If-Elif-Else.sh</h4>
+
+        <pre>
+          #!/bin/bash
+
+          value=$1
+
+          if [ $value -gt "10" ]
+          then
+            echo "Given argument is greater than 10."
+          elif [ $value -lt "10" ]
+          then
+            echo "Given argument is less than 10."
+          else
+            echo "Given argument is not a number."
+          fi
+        </pre>
+
+        <h4>If-Elif-Else.sh - Execution</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ bash if-elif-else.sh 5
+          Given argument is less than 10.
+
+          kalijester68@htb[/htb]$ bash if-elif-else.sh 12
+          Given argument is greater than 10.
+
+          kalijester68@htb[/htb]$ bash if-elif-else.sh HTB
+          if-elif-else.sh: line 5: [: HTB: integer expression expected
+          if-elif-else.sh: line 8: [: HTB: integer expression expected
+          Given argument is not a number.
+        </pre>
+
+        <p>We could extend our script and specify several conditions. This could look something like this:</p>
+
+        <h4>Several Conditions - Script.sh</h4>
+
+        <pre>
+          #!/bin/bash
+
+          # Check for given argument
+          if [ $# -eq 0 ]
+          then
+            echo -e "You need to specify the target domain.\n"
+            echo -e "Usage:"
+            echo -e "\t$0 'domain>'"
+            exit 1
+          elif [ $# -eq 1 ]
+          then
+            domain=$1
+          else
+            echo -e "Too many arguments given."
+            exit 1
+          fi
+
+          "SNIP"
+        </pre>
+
+        <p>Here we define another condition (elif ["condition"];then) that prints a line telling us (echo -e "...") that we have given more than one argument and exits the program with an error (exit 1).</p>
+
+        <h4>Exercise Script</h4>
+
+        <pre>
+          #!/bin/bash
+          # Count number of characters in a variable:
+          #     echo $variable | wc -c
+
+          # Variable to encode
+          var="nef892na9s1p9asn2aJs71nIsm"
+
+          for counter in {1..40}
+          do
+                  var=$(echo $var | base64)
+          done
+        </pre>
+
+        <h4>Questions</h4>
+
+        <p>Create an "If-Else" condition in the "For"-Loop of the "Exercise Script" that prints you the number of characters of the 35th generated value of the variable "var". Submit the number as the answer.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../introductionBashScripting.htm">Introduction to Bash Scripting</a></h4>
+        <ol>
+          <li><a href="bourneAgainShell.htm">Bourne Again Shell</a></li>
+          <li><a href="conditionalExecution.htm"><b><em>~ Conditional Execution</em></b></a></li>
+          <li><a href="argumentsVariablesArrays.htm">Arguments, Variables, and Arrays</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

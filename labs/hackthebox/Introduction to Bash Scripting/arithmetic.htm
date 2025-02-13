@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Bash Scripting</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../introductionBashScripting.htm">Introduction to Bash Scripting</a></h4>
+        <ul>
+          <li><a href="comparisonOperators.htm">Comparison Operators</a></li>
+          <li><a href="arithmetic.htm"><b><em>~ Arithmetic</em></b></a></li>
+          <li><a href="inputOutput.htm">Input and Output</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Arithmetic</em></h3>
+
+        <p>In Bash, we have seven different arithmetic operators we can work with. These are used to perform different mathematical operations or to modify certain integers.</p>
+
+        <h4>Arithmetic Operators</h4>
+        
+Operator  Description
++   Addition
+-   Subtraction
+*   Multiplication
+/   Division
+%   Modulus
+variable++  Increase the value of the variable by 1
+variable--  Decrease the value of the variable by 1
+
+We can summarize all these operators in a small script:
+Arithmetic.sh
+Code: bash
+
+#!/bin/bash
+
+increase=1
+decrease=1
+
+echo "Addition: 10 + 10 = $((10 + 10))"
+echo "Subtraction: 10 - 10 = $((10 - 10))"
+echo "Multiplication: 10 * 10 = $((10 * 10))"
+echo "Division: 10 / 10 = $((10 / 10))"
+echo "Modulus: 10 % 4 = $((10 % 4))"
+
+((increase++))
+echo "Increase Variable: $increase"
+
+((decrease--))
+echo "Decrease Variable: $decrease"
+
+The output of this script looks like this:
+Arithmetic.sh - Execution
+Arithmetic
+
+kalijester68@htb[/htb]$ ./Arithmetic.sh
+
+Addition: 10 + 10 = 20
+Subtraction: 10 - 10 = 0
+Multiplication: 10 * 10 = 100
+Division: 10 / 10 = 1
+Modulus: 10 % 4 = 2
+Increase Variable: 2
+Decrease Variable: 0
+
+We can also calculate the length of the variable. Using this function ${#variable}, every character gets counted, and we get the total number of characters in the variable.
+VarLength.sh
+Code: bash
+
+#!/bin/bash
+
+htb="HackTheBox"
+
+echo ${#htb}
+
+VarLength.sh
+Arithmetic
+
+kalijester68@htb[/htb]$ ./VarLength.sh
+
+10
+
+If we look at our CIDR.sh script, we will see that we have used the increase and decrease operators several times. This ensures that the while loop, which we will discuss later, runs and pings the hosts while the variable "stat" has a value of 1. If the ping command ends with code 0 (successful), we get a message that the host is up and the "stat" variable, as well as the variables "hosts_up" and "hosts_total" get changed.
+CIDR.sh
+Code: bash
+
+<SNIP>
+  echo -e "\nPinging host(s):"
+  for host in $cidr_ips
+  do
+    stat=1
+    while [ $stat -eq 1 ]
+    do
+      ping -c 2 $host > /dev/null 2>&1
+      if [ $? -eq 0 ]
+      then
+        echo "$host is up."
+        ((stat--))
+        ((hosts_up++))
+        ((hosts_total++))
+      else
+        echo "$host is down."
+        ((stat--))
+        ((hosts_total++))
+      fi
+    done
+  done
+<SNIP>
+
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../introductionBashScripting.htm">Introduction to Bash Scripting</a></h4>
+        <ol>
+          <li><a href="bourneAgainShell.htm">Bourne Again Shell</a></li>
+          <li><a href="conditionalExecution.htm">Conditional Execution</a></li>
+          <li><a href="argumentsVariablesArrays.htm">Arguments, Variables, and Arrays</a></li>
+          <li><a href="comparisonOperators.htm">Comparison Operators</a></li>
+          <li><a href="arithmetic.htm"><b><em>~ Arithmetic</em></b></a></li>
+          <li><a href="inputOutput.htm">Input and Output</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

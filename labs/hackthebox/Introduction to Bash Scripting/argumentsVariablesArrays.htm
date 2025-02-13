@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Bash Scripting</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../introductionBashScripting.htm">Introduction to Bash Scripting</a></h4>
+        <ul>
+          <li><a href="conditionalExecution.htm">Conditional Execution</a></li>
+          <li><a href="argumentsVariablesArrays.htm"><b><em>~ Arguments, Variables, and Arrays</em></b></a></li>
+          <li><a href="comparisonOperators.htm">Comparison Operators</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Arguments, Variables, and Arrays</em></h3>
+
+        <h4>Arguments</h4>
+
+        <p>The advantage of bash scripts is that we can always pass up to 9 arguments ($0-$9) to the script without assigning them to variables or setting the corresponding requirements for these. 9 arguments because the first argument $0 is reserved for the script. As we can see here, we need the dollar sign ($) before the name of the variable to use it at the specified position. The assignment would look like this in comparison:</p>
+
+        <pre>
+          kalijester68@htb[/htb]$ ./script.sh ARG1 ARG2 ARG3 ... ARG9
+                 ASSIGNMENTS:              $0   $1   $2   $3 ...   $9
+        </pre>
+
+        <p>This means that we have automatically assigned the corresponding arguments to the predefined variables in this place. These variables are called special variables. These special variables serve as placeholders. If we now look at the code section again, we will see where and which arguments have been used.</p>
+
+        <h4>CIDR.sh</h4>
+
+        <pre>
+          #!/bin/bash
+          # Check for given argument
+          if [ $# -eq 0 ]
+          then
+            echo -e "You need to specify the target domain.\n"
+            echo -e "Usage:"
+            echo -e "\t$0 'domain'"
+            exit 1
+          else
+            domain=$1
+          fi
+
+          "SNIP"
+        </pre>
+
+        <p>There are several ways how we can execute our script. However, we must first set the script's execution privileges before executing it with the interpreter defined in it.</p>
+
+        <h4>CIDR.sh - Set Execution Privileges</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ chmod +x cidr.sh
+        </pre>
+
+        <h4>CIDR.sh - Execution without Arguments</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ ./cidr.sh
+
+          You need to specify the target domain.
+          Usage:
+            cidr.sh "domain"
+        </pre>
+
+        <h4>CIDR.sh - Execution without Execution Permissions</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ bash cidr.sh
+
+          You need to specify the target domain.
+          Usage:
+            cidr.sh "domain"
+        </pre>
+
+        <h4>Special Variables</h4>
+
+        <p>Special variables use the Internal Field Separator (IFS) to identify when an argument ends and the next begins. Bash provides various special variables that assist while scripting. Some of these variables are:
+        <ul>
+          <li><b>$#</b> - This variable holds the number of arguments passed to the script.</li>
+          <li><b>$@</b> - This variable can be used to retrieve the list of command-line arguments.
+          <li><b>$n</b> - Each command-line argument can be selectively retrieved using its position. For example, the first argument is found at $1.</li>
+          <li><b>$$</b> - The process ID of the currently executing process.</li>
+          <li><b>$?</b> - The exit status of the script. This variable is useful to determine a command's success. The value 0 represents successful execution, while 1 is a result of a failure.</li>
+        </ul>
+
+        <p>Of the ones shown above, we have 3 such special variables in our if-else condition.
+        <ul>
+          <li><b>$#</b> - In this case, we need just one variable that needs to be assigned to the domain variable. This variable is used to specify the target we want to work with. If we provide just an FQDN as the argument, the $# variable will have a value of 1.</li>
+          <li><b>$0</b> - This special variable is assigned the name of the executed script, which is then shown in the "Usage:" example.</li>
+          <li><b>$1</b> - Separated by a space, the first argument is assigned to that special variable.</li>
+        </ul>
+
+        <h4>Variables</h4>
+
+        <p>We also see at the end of the if-else loop that we assign the value of the first argument to the variable called "domain". The assignment of variables takes place without the dollar sign ($). The dollar sign is only intended to allow this variable's corresponding value to be used in other code sections. When assigning variables, there must be no spaces between the names and values.</p>
+
+        <pre>
+          "SNIP"
+          else
+            domain=$1
+          fi
+          "SNIP"
+        </pre>
+
+        <p>In contrast to other programming languages, there is no direct differentiation and recognition between the types of variables in Bash like "strings," "integers," and "boolean." All contents of the variables are treated as string characters. Bash enables arithmetic functions depending on whether only numbers are assigned or not. It is important to note when declaring variables that they do not contain a space. Otherwise, the actual variable name will be interpreted as an internal function or a command.</p>
+
+        <h4>Declaring a Variable - Error</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ variable = "this will result with an error."
+          command not found: variable
+        </pre>
+
+        <h4>Declaring a Variable - Without an Error</h4>
+
+        <pre>
+          kalijester68@htb[/htb]$ variable="Declared without an error."
+          kalijester68@htb[/htb]$ echo $variable
+          Declared without an error.
+        </pre>
+
+        <h4>Arrays</h4>
+
+        <p>There is also the possibility of assigning several values to a single variable in Bash. This can be beneficial if we want to scan multiple domains or IP addresses. These variables are called arrays that we can use to store and process an ordered sequence of specific type values. Arrays identify each stored entry with an index starting with 0. When we want to assign a value to an array component, we do so in the same way as with standard shell variables. All we do is specify the field index enclosed in square brackets. The declaration for arrays looks like this in Bash:</p>
+
+        <h4>Arrays.sh</h4>
+
+        <pre>
+          #!/bin/bash
+
+          domains=(www.inlanefreight.com ftp.inlanefreight.com vpn.inlanefreight.com www2.inlanefreight.com)
+          echo ${domains[0]}
+        </pre>
+
+        <p>We can also retrieve them individually using the index using the variable with the corresponding index in curly brackets. Curly brackets are used for variable expansion.</p>
+
+        <pre>
+          kalijester68@htb[/htb]$ ./Arrays.sh
+          www.inlanefreight.com
+        </pre>
+
+        <p>It is important to note that single quotes (' ... ') and double quotes (" ... ") prevent the separation by a space of the individual values in the array. This means that all spaces between the single and double quotes are ignored and handled as a single value assigned to the array.</p>
+
+        <h4>Arrays.sh</h4>
+
+        <pre>
+          #!/bin/bash
+
+          domains=("www.inlanefreight.com ftp.inlanefreight.com vpn.inlanefreight.com" www2.inlanefreight.com)
+          echo ${domains[0]}
+
+          kalijester68@htb[/htb]$ ./Arrays.sh
+          www.inlanefreight.com ftp.inlanefreight.com vpn.inlanefreight.com
+        </pre>
+
+        <h4>Questions</h4>
+
+        <p>Submit the echo statement that would print "www2.inlanefreight.com" when running the last "Arrays.sh" script.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../introductionBashScripting.htm">Introduction to Bash Scripting</a></h4>
+        <ol>
+          <li><a href="bourneAgainShell.htm">Bourne Again Shell</a></li>
+          <li><a href="conditionalExecution.htm">Conditional Execution</a></li>
+          <li><a href="argumentsVariablesArrays.htm"><b><em>~ Arguments, Variables, and Arrays</em></b></a></li>
+          <li><a href="comparisonOperators.htm">Comparison Operators</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
