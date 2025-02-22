@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Network Traffic Analysis</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../networkTrafficAnalysis.htm">Introduction to Network Traffic Analysis</a></h4>
+        <ul>
+          <li><a href="tcpdumpPacketFiltering.htm">Tcpdump Packet Filtering</a></li>
+          <li><a href="interrogatingNetworkTrafficCaptureDisplayFilters.htm"><b><em>~ Interrogating Network Traffic With Capture and Display Filters</em></b></a></li>
+          <li><a href="analysisWireshark.htm">Analysis with Wireshark</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Interrogating Network Traffic With Capture and Display Filters</em></h3>
+
+        <p>This lab aims to provide some exposure to interrogating network traffic and give everyone some valuable practice implementing packet filters. We will be utilizing filters like host, port, protocol, and more to change our view while digging through a .PCAP file.</p>
+
+        <p>Now that we have proven capable of capturing network traffic for the Corporation, management has tasked us with performing a quick analysis of the traffic our team has captured while surveying the network. The goal is to determine what servers are answering DNS and HTTP/S requests in our local network.</p>
+
+        <p>If you wish to take a more exploratory approach to this lab, I have posted the overall tasks to accomplish. For a more detailed walkthrough of how to complete each step, look below each task in the solution bubble.</p>
+
+        <p>Utilizing TCPDump-lab-2.zip in the optional resources, perform the lab to the best of your ability. Finding everything on the first shot is not the goal. Our understanding of the concepts is our primary concern. As we perform these actions repeatedly, it will get easier.</p>
+
+        <h4>Task #1</h4>
+
+        <p>Read a capture from a file without filters implemented.</p>
+        <p>To start, let's examine this pcap with no filters applied.</p>
+
+        <h4>Task #2</h4>
+
+        <p>Identify the type of traffic seen.</p>
+        <p>Take note of what types of traffic can be seen. (Ports utilized, protocols, any other information you deem relevant.) What filters can we use to make this task easier?</p>
+        <p>What type of traffic do we see?
+        <ul>
+          <li>Common protocols:</li>
+          <li>Ports utilized:</li>
+        </ul>
+
+        <h4>Task #3</h4>
+
+        <p>Identify conversations.</p>
+        <p>We have examined the basics of this traffic, now determine if you notice any patterns with the traffic.</p>
+        <p>Are you noticing any common connections between a server and host? If so, who?</p>
+        <p>What are the client and server port numbers used in the first full TCP three-way handshake?</p>
+        <p>Who are the servers in these conversations? How do we know?</p>
+        <p>Who are the receiving hosts?</p>
+
+        <h4>Task #4</h4>
+
+        <p>Interpret the capture in depth.</p>
+        <p>Now that we have some familiarity with the pcap file, let's do some analysis. Utilize whatever syntax necessary to accomplish answering the questions below.</p>
+        <p>What is the timestamp of the first established conversation in the pcap file?</p>
+        <p>What is the IP address/s of apache.org from the DNS server responses?</p>
+        <p>What protocol is being utilized in that first conversation? (name/#)</p>
+
+        <h4>Task #5</h4>
+
+        <p>Filter out traffic.</p>
+        <p>It's time to clear some of this data out now. Reload the pcap file and filter out all traffic that is not DNS. What can you see?</p>
+        <p>Who is the DNS server for this segment?</p>
+        <p>What domain name/s were requested in the pcap file?</p>
+        <p>What type of DNS Records could be seen?</p>
+        <p>Now that we are only seeing DNS traffic and have a better grasp on how the packet appears, try to answer the following questions regarding name resolution in the enterprise: Who requests an A record for apache.org? (hostname or IP)</p>
+        <p>What information does an A record provide?</p>
+        <p>Who is the responding DNS server in the pcap? (hostname or IP)</p>
+
+        <h4>Task #6</h4>
+
+        <p>Filter for TCP traffic.</p>
+        <p>Now that we have a clear idea of our DNS server let's look for any webservers present. Filter out the view so that we only see the traffic pertaining to HTTP or HTTPS. What web pages were requested?</p>
+        <p>What are the most common HTTP request methods from this PCAP?</p>
+        <p>What is the most common HTTP response from this PCAP?</p>
+
+        <h4>Task #7</h4>
+
+        <p>What can you determine about the server in the first conversation.</p>
+        <p>Let's take a closer look. What can be determined about the webserver in the first conversation? Does anything stick out? For some clarity, make sure our view includes the Hex and ASCII output for the pcap.</p>
+        <p>Can we determine what application is running the webserver?</p>
+
+        <h4>Summary</h4>
+
+        <p>Through this lab, we expanded our horizons while utilizing TCPDump to analyze PCAP traffic. We learned how to capture and display filters effectively, dissected traffic to determine what protocols were running in the environment, and even gleaned some critical information about our enterprise segments, DNS, and Webservers. Continue to play on your own and see how deep the rabbit hole goes. Can you capture traffic in your home network and answer the same questions?</p>
+
+        <h4>Tips For Analysis</h4>
+
+        <p>Below is a list of questions we can ask ourselves during the analysis process to keep on track.
+        <ul>
+          <li>what type of traffic do you see? (protocol, port, etc.)</li>
+          <li>Is there more than one conversation? (how many?)</li>
+          <li>How many unique hosts?</li>
+          <li>What is the timestamp of the first conversation in the pcap (tcp traffic)</li>
+          <li>What traffic can I filter out to clean up my view?</li>
+          <li>Who are the servers in the PCAP? (answering on well-known ports, 53, 80, etc.)</li>
+          <li>What records were requested or methods used? (GET, POST, DNS A records, etc.)</li>
+        </ul>
+
+        <h4>Questions</h4>
+
+        <p>What are the client and server port numbers used in first full TCP three-way handshake? (low number first then high number)</p>
+        <p>Based on the traffic seen in the pcap file, who is the DNS server in this network segment? (ip address)</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../networkTrafficAnalysis.htm">Introduction to Network Traffic Analysis</a></h4>
+        <ol>
+          <li><a href="networkTrafficAnalysis.htm">Network Traffic Analysis</a></li>
+          <li><a href="networkingPrimerLayers1-4.htm">Networking Primer - Layers 1-4</a></li>
+          <li><a href="networkingPrimerLayers5-7.htm">Networking Primer - Layers 5-7</a></li>
+          <li><a href="analysisProcess.htm">The Analysis Process</a></li>
+          <li><a href="analysisPractice.htm">Analysis in Practice</a></li>
+          <li><a href="tcpdumpFundamentals.htm">Tcpdump Fundamentals</a></li>
+          <li><a href="fundamentalsLab.htm">Fundamentals Lab</a></li>
+          <li><a href="tcpdumpPacketFiltering.htm">Tcpdump Packet Filtering</a></li>
+          <li><a href="interrogatingNetworkTrafficCaptureDisplayFilters.htm"><b><em>~ Interrogating Network Traffic With Capture and Display Filters</em></b></a></li>
+          <li><a href="analysisWireshark.htm">Analysis with Wireshark</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
