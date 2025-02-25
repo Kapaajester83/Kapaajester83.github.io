@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Network Traffic Analysis</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../networkTrafficAnalysis.htm">Introduction to Network Traffic Analysis</a></h4>
+        <ul>
+          <li><a href="labTrafficAnalysisWorkflow.htm">Guided Lab Traffic Analysis Workflow</a></li>
+          <li><a href="decryptingRDPconnections.htm"><b><em>~ Decrypting RDP connections</em></b></a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Decrypting RDP connections</em></h3>
+
+        <p>The purpose of this lab is to give a taste of the power Wireshark has. In this lab, we will be working with RDP traffic. If one has the required key utilized between the two hosts for encrypting the traffic, Wireshark can deobfuscate the traffic for us.</p>
+
+        <p>When performing IR and analysis on Bob's machine, the IR team captured some PCAP of the RDP traffic they noticed from Bob's host to another host in the network. We have been asked to investigate the occurrence by our team lead. While combing his host for further evidence, you found an RDP-key hidden in a folder hive on Bob's host. After some research, we realize that we can utilize that key to decrypt the RDP traffic to inspect it.</p>
+
+        <p>Attempt to utilize the concepts from the Analysis Process sections to complete an analysis of the RDP-analysis.zip provided.</p>
+
+        <h4>Task #1</h4>
+
+        <p>Open the rdp.pcapng file in Wireshark.</p>
+        <p>Unzip the zip file included in the optional resources and open it in Wireshark.</p>
+
+        <h4>Task #2</h4>
+
+        <p>Analyze the traffic included.</p>
+        <p>Take a minute to look at the traffic. Notice there is a lot of information here. We know our focus is on RDP, so let's take a second to filter on rdp and see what it returns.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/enc-rdp.png">https://academy.hackthebox.com/storage/modules/81/enc-rdp.png</a></li>
+        </ul>
+
+        <p>As it stands, not much can be seen, right? This is because RDP, by default, is utilizing TLS to encrypt the data, so we will not be able to see anything that happened with RDP traffic. How can we verify its existence in this file? One way is to filter on the well-known port RDP uses typically.</p>
+
+        <p>Filter on port 3389 to determine if any RDP traffic encrypted or otherwise exists.</p>
+        <p>We can at least verify that a session was established between the two hosts over TCP port 3389.</p>
+
+        <h4>Task #3</h4>
+
+        <p>Provide the RDP-key to Wireshark so it can decrypt the traffic.</p>
+        <p>Now, let's take this a step further and use the key we found to try and decrypt the traffic.</p>
+        <p>To apply the key in Wireshark:
+        <ul>
+          <li>go to Edit → Preferences → Protocols → TLS</li>
+          <li>On the TLS page, select Edit by RSA keys list → a new window will open.</li>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/import-ws.png">https://academy.hackthebox.com/storage/modules/81/import-ws.png</a></li>
+        </ul>
+
+        <p>Follow the steps below to import the RSA server key.
+        <ul>
+          <li>Import An RDP Key</li>
+          <li>Steps</li>
+          <li>Click the + to add a new key</li>
+          <li>Type in the IP address of the RDP server 10.129.43.29</li>
+          <li>Type in the port used 3389</li>
+          <li>Protocol filed equals tpkt or blank.</li>
+          <li>Browse to the server.key file and add it in the key file section.</li>
+          <li>Save and refresh your pcap file.</li>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/import-steps.png">https://academy.hackthebox.com/storage/modules/81/import-steps.png</a></li>
+        </ul>
+
+        <p>When filtering once again on RDP, we should see some traffic in the display.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/rdp-clear.png">https://academy.hackthebox.com/storage/modules/81/rdp-clear.png</a></li>
+        </ul>
+
+        <p>From here, we can perform an analysis of the RDP traffic. We can now follow TCP streams, export any potential objects found, and anything else we feel necessary for our investigation. This works because we acquired the RSA key used for encrypting the RDP session. The steps for acquiring the key were a bit lengthy, but the short of it is that if the RDP certificate is acquired from the server, OpenSSL can pull the private key out of it.</p>
+
+        <h4>Perform Analysis of the Unencrypted Traffic</h4>
+
+        <p>Now that we have broken RDP out of the TLS tunnel, what can we find? Perform the analysis steps and attempt to answer the questions below.</p>
+
+        <h4>Questions:</h4>
+
+        <p>What host initiated the RDP session with our server?</p>
+        <p>Which user account was used to initiate the RDP connection?</p>
+
+        <h4>Summary:</h4>
+
+        <p>This lab was to serve as an example of what Wireshark can do with captured data and its plugins. Wireshark's capability to ingest information and illuminate the obscure is robust. Having the ability to decrypt data after ingestion is a powerful capability. This concept could be applied to any protocol that utilizes encryption as long as we have the key that will be utilized to establish the connections.</p>
+
+        <h4>Questions</h4>
+
+        <p>What user account was used to initiate the RDP connection?</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../networkTrafficAnalysis.htm">Introduction to Network Traffic Analysis</a></h4>
+        <ol>
+          <li><a href="networkTrafficAnalysis.htm">Network Traffic Analysis</a></li>
+          <li><a href="networkingPrimerLayers1-4.htm">Networking Primer - Layers 1-4</a></li>
+          <li><a href="networkingPrimerLayers5-7.htm">Networking Primer - Layers 5-7</a></li>
+          <li><a href="analysisProcess.htm">The Analysis Process</a></li>
+          <li><a href="analysisPractice.htm">Analysis in Practice</a></li>
+          <li><a href="tcpdumpFundamentals.htm">Tcpdump Fundamentals</a></li>
+          <li><a href="fundamentalsLab.htm">Fundamentals Lab</a></li>
+          <li><a href="tcpdumpPacketFiltering.htm">Tcpdump Packet Filtering</a></li>
+          <li><a href="interrogatingNetworkTrafficCaptureDisplayFilters.htm">Interrogating Network Traffic With Capture and Display Filters</a></li>
+          <li><a href="analysisWireshark.htm">Analysis with Wireshark</a></li>
+          <li><a href="familiarityWireshark.htm">Familiarity With Wireshark</a></li>
+          <li><a href="wiresharkAdvancedUsage.htm">Wireshark Advanced Usage</a></li>
+          <li><a href="packetInceptionDissectingTraffic.htm">Packet Inception, Dissecting Network Traffic With Wireshark</a></li>
+          <li><a href="labTrafficAnalysisWorkflow.htm">Guided Lab Traffic Analysis Workflow</a></li>
+          <li><a href="decryptingRDPconnections.htm"><b><em>~ Decrypting RDP connections</em></b></a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
