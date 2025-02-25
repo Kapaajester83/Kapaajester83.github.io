@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Network Traffic Analysis</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../networkTrafficAnalysis.htm">Introduction to Network Traffic Analysis</a></h4>
+        <ul>
+          <li><a href="analysisWireshark.htm">Analysis with Wireshark</a></li>
+          <li><a href="familiarityWireshark.htm"><b><em>~ Familiarity With Wireshark</em></b></a></li>
+          <li><a href="wiresharkAdvancedUsage.htm">Wireshark Advanced Usage</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Familiarity With Wireshark</em></h3>
+
+        <p>This lab aims to give Wireshark a basic familiarity and utilize its graphical interface to perform traffic captures. We will spend time using capture and display filters and getting used to the different outputs shown by the tool.</p>
+
+        <p>A user has brought their laptop to the helpdesk complaining of unusually long load times when they try to surf the web. They said it is almost as if the network is bogged down and the computer is making many different connections. We have been tasked with validating the pc is functioning correctly. To do so, we connect it to the network and start a packet capture while surfing the web. Analyze what can be seen in the output to determine if something is amiss. We only care about the laptop in question at this time, so filter out any traffic not destined to or sourcing from it.</p>
+
+        <p>If you wish to take a more exploratory approach to this lab, I have posted the overall tasks to accomplish. For a more detailed walkthrough of how to complete each step, look below each task in the solution bubble.</p>
+
+        <h4>Task #1</h4>
+
+        <p>Validate Wireshark is installed, then open Wireshark and familiarize yourself with the GUI windows and toolbars.</p>
+        <p>Take a minute and explore the Wireshark GUI. Ensure we know what options reside under which tabs in the command menus. Please pay special attention to the Capture tab and what resides within it.</p>
+
+        <h4>Task #2</h4>
+
+        <p>Select an interface to run a capture on and create a capture filter to show only traffic to and from your host IP.</p>
+        <p>Choose your active interface (eth0, or your Wifi card) to capture from.</p>
+
+        <h4>Task #3</h4>
+
+        <p>Create a capture filter.</p>
+        <p>Next, we want to create a capture filter to only show us traffic sourcing from or destined to our IP address and apply it.</p>
+
+        <h4>Task #4</h4>
+
+        <p>Navigate to a webpage to generate some traffic.</p>
+        <p>Open a web browser and navigate to pepsi.com. Repeat this step for http://apache.org. While the page is loading, switch back to the Wireshark window. We should see traffic flowing through our capture window. Once the page has loaded, stop the capture by clicking on the red square labeled Stop in the action bar.</p>
+
+        <h4>Task #5</h4>
+
+        <p>Use the capture results to answer the following questions.</p>
+        <p>Are multiple sessions being established between the machine and the webserver? How can you tell?</p>
+        <p>What application-level protocols are displayed in the results?</p>
+        <p>Can we discern anything in clear text? What was it?</p>
+
+        <p>Don't stop here. Take some time to familiarize ourselves with the output Wireshark provides and how we can transform our view. We can also utilize the sample PCAP files found at https://wiki.wireshark.org/SampleCaptures to analyze different protocols and even things like ICS SCADA traffic and viruses. If you are connected to the Academy network to perform this lab, take some time to capture traffic on the interface provided. Some interesting network traffic can be found if one looks hard enough.</p>
+
+        <h4>Summary</h4>
+
+        <p>By the end of this lab, we should be familiar with Wireshark and how the GUI looks and operates. We have familiarized ourselves with the command bar and action bar and what resides within each respective tab. One should understand how to select an interface to capture with and successfully start a capture with a filter applied. Experiment with a few filters of your own design to see what different combinations can be used and how it shapes the results.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../networkTrafficAnalysis.htm">Introduction to Network Traffic Analysis</a></h4>
+        <ol>
+          <li><a href="networkTrafficAnalysis.htm">Network Traffic Analysis</a></li>
+          <li><a href="networkingPrimerLayers1-4.htm">Networking Primer - Layers 1-4</a></li>
+          <li><a href="networkingPrimerLayers5-7.htm">Networking Primer - Layers 5-7</a></li>
+          <li><a href="analysisProcess.htm">The Analysis Process</a></li>
+          <li><a href="analysisPractice.htm">Analysis in Practice</a></li>
+          <li><a href="tcpdumpFundamentals.htm">Tcpdump Fundamentals</a></li>
+          <li><a href="fundamentalsLab.htm">Fundamentals Lab</a></li>
+          <li><a href="tcpdumpPacketFiltering.htm">Tcpdump Packet Filtering</a></li>
+          <li><a href="interrogatingNetworkTrafficCaptureDisplayFilters.htm">Interrogating Network Traffic With Capture and Display Filters</a></li>
+          <li><a href="analysisWireshark.htm">Analysis with Wireshark</a></li>
+          <li><a href="familiarityWireshark.htm"><b><em>~ Familiarity With Wireshark</em></b></a></li>
+          <li><a href="wiresharkAdvancedUsage.htm">Wireshark Advanced Usage</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>

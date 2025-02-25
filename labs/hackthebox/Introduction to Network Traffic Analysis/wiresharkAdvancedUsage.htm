@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../favicon.ico">
+  <link rel="shortcut icon" href="../../../favicon.ico">
+  <title>Hack The Box | Introduction to Network Traffic Analysis</title>
+  <meta name="author" content="Kappa">
+  <meta name="description" content="Splash">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../labs.css" type="text/css">
+</head>
+
+<body>
+
+  <!--
+  _  __          _____  _____        
+ | |/ /    /\   |  __ \|  __ \ /\    
+ | ' /    /  \  | |__) | |__) /  \   
+ |  <    / /\ \ |  ___/|  ___/ /\ \  
+ | . \  / ____ \| |    | |  / ____ \ 
+ |_|\_\/_/    \_\_|    |_| /_/    \_\
+ 
+ -->
+
+  <div id="page">
+    <div id="nav">
+      <ul>
+        <li><a href="https://kapaajester83.github.io/">Home</a></li>
+        <li><a href="https://kapaajester83.github.io/labs/contents.html">Labs</a></li>
+        <li><a href="https://duckduckgo.com/" target="_blank">DuckGo</a></li>
+        <li><a href="https://github.com/Kapaajester83?tab=repositories" target="_blank">About</a></li>
+        <li><a href="mailto:kappajester83@gmail.com" target="_blank">Email</a></li>
+      </ul>
+    </div>
+    <div id="logo">
+      <img src="https://kapaajester83.github.io/logo.jpeg" alt="logo">
+      <h1>Kappa</h1>
+
+      <div>
+        <br>
+        <br>
+        <br>
+        <h2>“Great things are not done by impulse, but by a series of small things brought together.”</h2>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div id="writeup">
+      <h3>
+        <a href="../../contents.html">Hack The Box</a>
+      </h3>
+      <hr>
+
+      <div id="labs-table-top">
+
+        <h4><a href="../networkTrafficAnalysis.htm">Introduction to Network Traffic Analysis</a></h4>
+        <ul>
+          <li><a href="familiarityWireshark.htm">Familiarity With Wireshark</a></li>
+          <li><a href="wiresharkAdvancedUsage.htm"><b><em>~ Wireshark Advanced Usage</em></b></a></li>
+          <li><a href="packetInceptionDissectingTraffic.htm">Packet Inception, Dissecting Network Traffic With Wireshark</a></li>
+        </ul>
+      </div>
+      <hr>
+
+      <div>
+
+        <h3><em>Wireshark Advanced Usage</em></h3>
+
+        <p>In this section, we will cover some advanced usage with Wireshark. The project developers have included many different capabilities ranging from tracking TCP conversations to cracking wireless credentials. The inclusion of many different plugins makes Wireshark one of the best traffic analysis tools.</p>
+
+        <h4>Plugins</h4>
+
+        <p>The analyze and statistics radials provide a plethora of plugins to run against the capture. In this section, we will work through a couple of them. We would cover all of which Wireshark offers, but sadly, it is simply not achievable in an introductory module. I urge everyone to experiment and play as we go through this journey.</p>
+
+        <h4>The Statistics and Analyze Tabs</h4>
+
+        <p>The Statistics and Analyze tabs can provide us with great insight into the data we are examining. From these points, we can utilize many of the baked-in plugins Wireshark has to offer.</p>
+
+        <p>The plugins here can give us detailed reports about the network traffic being utilized. It can show us everything from the top talkers in our environment to specific conversations and even breakdown by IP and protocol.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/wireshark-statistics.png">https://academy.hackthebox.com/storage/modules/81/wireshark-statistics.png</a></li>
+        </ul>
+
+        <h4>Analyze</h4>
+
+        <p>From the Analyze tab, we can utilize plugins that allow us to do things such as following TCP streams, filter on conversation types, prepare new packet filters and examine the expert info Wireshark generates about the traffic. Below are a few examples of how to use these plugins.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/analyze.png">https://academy.hackthebox.com/storage/modules/81/analyze.png</a></li>
+        </ul>
+
+        <h4>Following TCP Streams</h4>
+
+        <p>Wireshark can stitch TCP packets back together to recreate the entire stream in a readable format. This ability also allows us to pull data (images, files, etc.) out of the capture. This works for almost any protocol that utilizes TCP as a transport mechanism.</p>
+
+        <p>To utilize this feature:
+        <ul>
+          <li>right-click on a packet from the stream we wish to recreate.</li>
+          <li>select follow → TCP</li>
+          <li>this will open a new window with the stream stitched back together. From here, we can see the entire conversation.</li>
+        </ul>
+
+        <h4>Follow A Stream Via GUI</h4>
+
+        <p>Alternatively, we can utilize the filter tcp.stream eq # to find and track conversations captured in the pcap file.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/follow-tcp.gif">https://academy.hackthebox.com/storage/modules/81/follow-tcp.gif</a></li>
+        </ul>
+
+        <h4>Filter For A Specific TCP Stream</h4>
+
+        <p>Notice that the first three packets in the image have a full TCP handshake. Following those packets, we can see the stream transferring data. We have cleared anything not related out of view by utilizing the filter, and we now can see the conversation in order.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/tcp-stream.gif">https://academy.hackthebox.com/storage/modules/81/tcp-stream.gif</a></li>
+        </ul>
+
+        <h4>Extracting Data and Files From a Capture</h4>
+
+        <p>Wireshark can recover many different types of data from streams. It requires you to have captured the entire conversation. Otherwise, this ability will fail to put an incomplete datagram back together. If we want a more in-depth understanding of how this capability works, check out the Networking 101 Module or research TCP/IP fragmentation.</p>
+
+        <p>To extract files from a stream:
+        <ul>
+          <li>stop your capture.</li>
+          <li>Select the File radial → Export → , then select the protocol format to extract from.</li>
+          <li>(DICOM, HTTP, SMB, etc.)</li>
+        </ul>
+
+        <p>Extract Files From The GUI
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/extract-http.gif">https://academy.hackthebox.com/storage/modules/81/extract-http.gif</a></li>
+        </ul>
+
+        <p>Another exciting way to grab data out of the pcap file comes from FTP. The File Transfer Protocol moves data between a server and host to pull it out of the raw bytes and reconstruct the file. (image, text documents, etc.) FTP utilizes TCP as its transport protocol and uses ports 20 & 21 to function. TCP port 20 is used to transfer data between the server and host, while port 21 is used as the FTP control port. Any commands such as login, listing files, and issuing download or uploads happen over this port. To do so, we need to look at the different FTP display filters in Wireshark. A complete list of these can be found here. For now, we will look at three:</p>
+
+        <p>ftp - Will display anything about the FTP protocol.
+        <ul>
+          <li>We can utilize this to get a feel for what hosts/servers are transferring data over FTP.</li>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/ftp-disector.png">https://academy.hackthebox.com/storage/modules/81/ftp-disector.png</a></li>
+        </ul>
+
+        <p>ftp.request.command - Will show any commands sent across the ftp-control channel ( port 21 )
+          We can look for information like usernames and passwords with this filter. It can also show us filenames for anything requested.
+        <ul>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/ftp-request-command.png">https://academy.hackthebox.com/storage/modules/81/ftp-request-command.png</a></li>
+        </ul>
+
+        <p>ftp-data - Will show any data transferred over the data channel ( port 20 )
+        <ul>
+          <li>If we filter on a conversation and utilize ftp-data, we can capture anything sent during the conversation. We can reconstruct anything transferred by placing the raw data back into a new file and naming it appropriately.</li>
+          <li><a href="https://academy.hackthebox.com/storage/modules/81/ftp-data.png">https://academy.hackthebox.com/storage/modules/81/ftp-data.png</a></li>
+        </ul>
+
+        <p>Since FTP utilizes TCP as its transport mechanism, we can utilize the follow tcp stream function we utilized earlier in the section to group any conversation we wish to explore. The basic steps to dissect FTP data from a pcap are as follows:
+        <ul>
+          <li>Identify any FTP traffic using the ftp display filter.</li>
+          <li>Look at the command controls sent between the server and hosts to determine if anything was transferred and who did so with the ftp.request.command filter.</li>
+          <li>Choose a file, then filter for ftp-data. Select a packet that corresponds with our file of interest and follow the TCP stream that correlates to it.</li>
+          <li>Once done, Change "Show and save data as" to "Raw" and save the content as the original file name.</li>
+          <li>Validate the extraction by checking the file type.</li>
+        </ul>
+
+        <h4>Questions</h4>
+
+        <p>Which plugin tab can provide us with a way to view conversation metadata and even protocol breakdowns for the entire PCAP file?</p>
+        <p>What plugin tab will allow me to accomplish tasks such as applying filters, following streams, and viewing expert info?</p>
+        <p>What stream oriented Transport protocol enables us to follow and rebuild conversations and the included data?</p>
+        <p>True or False: Wireshark can extract files from HTTP traffic.</p>
+        <p>True or False: The ftp-data filter will show us any data sent over TCP port 21.</p>
+
+      </div>
+      <hr>
+
+      <div id="labs-table">
+
+        <h4><a href="../networkTrafficAnalysis.htm">Introduction to Network Traffic Analysis</a></h4>
+        <ol>
+          <li><a href="networkTrafficAnalysis.htm">Network Traffic Analysis</a></li>
+          <li><a href="networkingPrimerLayers1-4.htm">Networking Primer - Layers 1-4</a></li>
+          <li><a href="networkingPrimerLayers5-7.htm">Networking Primer - Layers 5-7</a></li>
+          <li><a href="analysisProcess.htm">The Analysis Process</a></li>
+          <li><a href="analysisPractice.htm">Analysis in Practice</a></li>
+          <li><a href="tcpdumpFundamentals.htm">Tcpdump Fundamentals</a></li>
+          <li><a href="fundamentalsLab.htm">Fundamentals Lab</a></li>
+          <li><a href="tcpdumpPacketFiltering.htm">Tcpdump Packet Filtering</a></li>
+          <li><a href="interrogatingNetworkTrafficCaptureDisplayFilters.htm">Interrogating Network Traffic With Capture and Display Filters</a></li>
+          <li><a href="analysisWireshark.htm">Analysis with Wireshark</a></li>
+          <li><a href="familiarityWireshark.htm">Familiarity With Wireshark</a></li>
+          <li><a href="wiresharkAdvancedUsage.htm"><b><em>~ Wireshark Advanced Usage</em></b></a></li>
+          <li><a href="packetInceptionDissectingTraffic.htm">Packet Inception, Dissecting Network Traffic With Wireshark</a></li>
+        </ol>
+      </div>
+      <hr>
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>
+      Webpage made by <a href="mailto:kappajester83@gmail.com">Kappa </a>
+    </p>
+  </div>
+
+</html>
